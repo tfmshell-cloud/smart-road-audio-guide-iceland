@@ -295,15 +295,35 @@
         </div>
       </div>
 
-      <!-- Live Driving Telemetry HUD -->
-      <div id="telemetry-bar" class="px-4 py-2 bg-gradient-to-r from-slate-900 via-slate-800/90 to-slate-900 border-b border-slate-800 text-[11px] flex items-center justify-between font-mono">
-        <div class="flex items-center space-x-2 truncate">
-          <span class="text-emerald-400 font-bold" id="hud-car-status">🚗 НА МАРШРУТІ:</span>
-          <span class="text-slate-200 truncate" id="hud-current-leg">Траса 1 (Ring Road Loop)</span>
+      <!-- Live Driving Telemetry HUD Card (Compact & Zero Overlap) -->
+      <div id="telemetry-bar" class="mx-3 my-2 p-2.5 rounded-xl bg-gradient-to-b from-slate-900/95 to-slate-950/95 border border-slate-800/90 shadow-lg text-[11px] font-mono select-none">
+        <!-- Top Row: Route & Speed -->
+        <div class="flex items-center justify-between gap-2 pb-2 border-b border-slate-800/70">
+          <div class="flex items-center space-x-1.5 min-w-0">
+            <span class="relative flex h-2 w-2 shrink-0">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span class="text-slate-400 text-[10px] uppercase font-bold tracking-wider shrink-0" id="hud-car-status">НА ТРАСІ:</span>
+            <span class="text-slate-200 font-medium truncate" id="hud-current-leg" title="Траса 1 (Ring Road Loop)">Траса 1 (Ring Road)</span>
+          </div>
+          <div class="flex items-center space-x-1 shrink-0 px-2 py-0.5 rounded-md bg-cyan-950/60 border border-cyan-500/30 text-cyan-300">
+            <span class="text-slate-400 text-[10px]">ШВ:</span>
+            <span class="font-bold text-cyan-400 text-xs" id="hud-speed">85</span>
+            <span class="text-slate-400 text-[9px]">км/год</span>
+          </div>
         </div>
-        <div class="flex items-center space-x-3 shrink-0 text-slate-300">
-          <span><span class="text-slate-400">Шв:</span> <b class="text-cyan-400" id="hud-speed">85</b> км/год</span>
-          <span><span class="text-slate-400">Найближчий:</span> <b class="text-amber-400" id="hud-closest-poi">--</b></span>
+
+        <!-- Bottom Row: Closest Landmark & Distance Pill -->
+        <div class="flex items-center justify-between gap-2 pt-2 min-w-0">
+          <div class="flex items-center space-x-1.5 min-w-0 flex-1">
+            <span class="text-amber-400 shrink-0 text-xs">🎯</span>
+            <span class="text-slate-400 text-[10px] uppercase font-bold tracking-wider shrink-0" id="hud-closest-label">НАЙБЛИЖЧИЙ:</span>
+            <span class="text-amber-300 font-semibold truncate hover:underline cursor-pointer transition" id="hud-closest-name" title="--" onclick="focusClosestPoi()">--</span>
+          </div>
+          <div class="shrink-0 px-2 py-0.5 rounded-md bg-amber-950/60 border border-amber-500/40 text-amber-300 font-bold text-xs shadow-sm" id="hud-closest-dist-badge">
+            -- км
+          </div>
         </div>
       </div>
 
@@ -328,16 +348,16 @@
       <div class="absolute top-4 right-4 z-[10] flex flex-col space-y-1.5 glass-panel p-2 rounded-xl border border-slate-700/80 shadow-2xl">
         <div class="text-[10px] uppercase tracking-wider font-bold text-slate-400 px-1" id="lbl-layers-title">ШАРИ КАРТИ (БЕЗ ВОДЯНИХ ЗНАКІВ)</div>
         <button onclick="setBaseLayer('dark')" id="layer-dark" class="px-2.5 py-1 text-xs rounded-lg font-medium bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 flex items-center justify-between space-x-3 transition">
-          <span>🌃 Vector Dark 3D</span> <span class="text-[10px] text-cyan-400 font-mono">OpenFreeMap</span>
+          <span>🌃 Dark Canvas</span> <span class="text-[10px] text-cyan-400 font-mono">Esri Dark</span>
         </button>
         <button onclick="setBaseLayer('satellite')" id="layer-satellite" class="px-2.5 py-1 text-xs rounded-lg font-medium text-slate-300 hover:bg-slate-800 border border-transparent transition flex items-center justify-between space-x-3">
           <span>🛰️ Satellite HD</span> <span class="text-[10px] text-slate-400 font-mono">Esri Real</span>
         </button>
+        <button onclick="setBaseLayer('osm')" id="layer-osm" class="px-2.5 py-1 text-xs rounded-lg font-medium text-slate-300 hover:bg-slate-800 border border-transparent transition flex items-center justify-between space-x-3">
+          <span>🗺️ OpenStreetMap</span> <span class="text-[10px] text-slate-400 font-mono">OSM Global</span>
+        </button>
         <button onclick="setBaseLayer('liberty')" id="layer-liberty" class="px-2.5 py-1 text-xs rounded-lg font-medium text-slate-300 hover:bg-slate-800 border border-transparent transition flex items-center justify-between space-x-3">
           <span>🏔️ Topo &amp; Relief</span> <span class="text-[10px] text-slate-400 font-mono">Liberty 3D</span>
-        </button>
-        <button onclick="setBaseLayer('esri_dark')" id="layer-esri_dark" class="px-2.5 py-1 text-xs rounded-lg font-medium text-slate-300 hover:bg-slate-800 border border-transparent transition flex items-center justify-between space-x-3">
-          <span>🌌 Clean Dark Gray</span> <span class="text-[10px] text-slate-400 font-mono">Esri Canvas</span>
         </button>
 
         <div class="pt-1.5 border-t border-slate-700/60 flex items-center justify-between">
@@ -606,8 +626,42 @@
     }
 
     const mapStyles = {
-      dark: 'https://tiles.openfreemap.org/styles/dark',
-      liberty: 'https://tiles.openfreemap.org/styles/liberty',
+      dark: {
+        version: 8,
+        sources: {
+          'esri-dark': {
+            type: 'raster',
+            tiles: [
+              'https://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}'
+            ],
+            tileSize: 256,
+            attribution: '&copy; Esri &mdash; World Dark Gray Base (No Watermark)'
+          },
+          'esri-dark-ref': {
+            type: 'raster',
+            tiles: [
+              'https://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}'
+            ],
+            tileSize: 256
+          }
+        },
+        layers: [
+          {
+            id: 'esri-dark-base',
+            type: 'raster',
+            source: 'esri-dark',
+            minzoom: 0,
+            maxzoom: 19
+          },
+          {
+            id: 'esri-dark-labels',
+            type: 'raster',
+            source: 'esri-dark-ref',
+            minzoom: 0,
+            maxzoom: 19
+          }
+        ]
+      },
       satellite: {
         version: 8,
         sources: {
@@ -630,28 +684,29 @@
           }
         ]
       },
-      esri_dark: {
+      osm: {
         version: 8,
         sources: {
-          'esri-dark': {
+          'osm-tiles': {
             type: 'raster',
             tiles: [
-              'https://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}'
+              'https://tile.openstreetmap.org/{z}/{x}/{y}.png'
             ],
             tileSize: 256,
-            attribution: '&copy; Esri Dark Canvas (No Watermark)'
+            attribution: '&copy; OpenStreetMap contributors'
           }
         },
         layers: [
           {
-            id: 'esri-dark-layer',
+            id: 'osm-layer',
             type: 'raster',
-            source: 'esri-dark',
+            source: 'osm-tiles',
             minzoom: 0,
             maxzoom: 19
           }
         ]
-      }
+      },
+      liberty: 'https://tiles.openfreemap.org/styles/liberty'
     };
 
     function initMap() {
@@ -667,15 +722,29 @@
 
       map.addControl(new maplibregl.NavigationControl({ visualizePitch: true }), 'bottom-left');
 
-      // Re-attach vector layers on EVERY style load
-      map.on('style.load', () => {
-        addVectorLayers();
+      map.on('error', (e) => {
+        console.warn('MapLibre runtime notification:', e);
       });
 
+      // Attach vector layers on style.load
+      map.on('style.load', () => {
+        try {
+          addVectorLayers();
+        } catch (err) {
+          console.warn('Style load vector attachment:', err);
+        }
+      });
+
+      // Master load handler
       map.on('load', () => {
-        addPoiMarkers();
-        addCarMarker();
-        handleDeepLink();
+        try {
+          addVectorLayers();
+          addPoiMarkers();
+          addCarMarker();
+          handleDeepLink();
+        } catch (err) {
+          console.error('Error during map on-load initialization:', err);
+        }
       });
 
       // Dynamic auto-tilt on zoom-in
@@ -688,6 +757,8 @@
     }
 
     function addVectorLayers() {
+      if (!map.isStyleLoaded()) return;
+
       // 1. Glaciers (Ice Caps)
       if (!map.getSource('glaciers-src')) {
         map.addSource('glaciers-src', { type: 'geojson', data: GLACIERS_GEOJSON });
@@ -858,7 +929,7 @@
       currentBaseLayer = layerKey;
       map.setStyle(mapStyles[layerKey]);
 
-      ['dark', 'satellite', 'liberty', 'esri_dark'].forEach(k => {
+      ['dark', 'satellite', 'osm', 'liberty'].forEach(k => {
         const btn = document.getElementById('layer-' + k);
         if (!btn) return;
         if (k === layerKey) {
@@ -924,6 +995,8 @@
       document.getElementById('sim-text').textContent = isSimulating ? t.pauseSim : t.startSim;
       document.getElementById('lbl-layers-title').textContent = t.layersTitle;
       document.getElementById('hud-car-status').textContent = t.carStatus;
+      const closestLbl = document.getElementById('hud-closest-label');
+      if (closestLbl) closestLbl.textContent = t.closestPoi;
       document.getElementById('footer-status-text').textContent = t.footerReady;
     }
 
@@ -1183,6 +1256,8 @@
       centerOnCar();
     }
 
+    let currentClosestPoiId = null;
+
     function updateSimulationHUD() {
       let closest = null;
       let minDistance = Infinity;
@@ -1196,11 +1271,29 @@
       });
 
       if (closest) {
-        document.getElementById('hud-closest-poi').textContent = `${closest.name[currentLang]} (${(minDistance/1000).toFixed(1)} km)`;
+        currentClosestPoiId = closest.id;
+        const distKm = (minDistance / 1000).toFixed(1);
+        const nameEl = document.getElementById('hud-closest-name');
+        const distBadge = document.getElementById('hud-closest-dist-badge');
+        const fullName = closest.name[currentLang];
+
+        if (nameEl) {
+          nameEl.textContent = fullName;
+          nameEl.title = fullName;
+        }
+        if (distBadge) {
+          distBadge.textContent = `${distKm} ${currentLang === 'uk' ? 'км' : 'km'}`;
+        }
       }
 
       const currentSpeed = Math.round(82 + Math.sin(simIndex * 0.4) * 8);
       document.getElementById('hud-speed').textContent = currentSpeed;
+    }
+
+    function focusClosestPoi() {
+      if (currentClosestPoiId) {
+        focusPoi(currentClosestPoiId, true);
+      }
     }
 
     function checkGeofenceTriggers() {

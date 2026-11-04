@@ -3,1808 +3,1047 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Iceland Smart Road Audio Guide — Interactive Drive Studio &amp; Platform (Bilingual UA/EN)</title>
+  <title>Iceland Smart Road Audio Guide — Interactive Map & Geofence Studio (Bilingual UA/EN)</title>
+  <!-- Tailwind CSS -->
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <!-- Leaflet CSS & JS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  
   <style>
     :root {
-      --primary: #3b82f6;
+      --primary: #38bdf8;
       --accent: #10b981;
     }
-    .tab-pane { display: none; }
-    .tab-pane.active { display: block; animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    /* 3D Glassmorphism & Glow */
-    .glass-3d {
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(10, 15, 28, 0.95) 100%);
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: #0b1120; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #334155; }
+
+    /* Glassmorphism */
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.85);
       backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.08);
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+    }
+    .glass-card {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.7) 0%, rgba(15, 23, 42, 0.85) 100%);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.06);
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .glass-3d:hover {
-      border-color: rgba(59, 130, 246, 0.4);
-      box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    .glass-card:hover {
+      border-color: rgba(56, 189, 248, 0.4);
+      box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.2);
       transform: translateY(-2px);
     }
-    .map-canvas-bg {
-      background: radial-gradient(ellipse at 50% 50%, #0d172a 0%, #050811 100%);
+    .glass-card.active-trigger {
+      border-color: rgba(16, 185, 129, 0.8);
+      box-shadow: 0 0 25px rgba(16, 185, 129, 0.4);
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(15, 23, 42, 0.95) 100%);
     }
-    .road-glow {
-      stroke: #3b82f6;
-      stroke-width: 4;
-      stroke-linecap: round;
-      fill: none;
-      filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.85));
+
+    /* Leaflet Overrides */
+    #map {
+      width: 100%;
+      height: 100%;
+      background: #090d16;
     }
-    .road-secondary {
-      stroke: #64748b;
-      stroke-width: 2.2;
-      stroke-dasharray: 5 4;
-      fill: none;
+    .leaflet-popup-content-wrapper {
+      background: rgba(15, 23, 42, 0.95) !important;
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: #f1f5f9 !important;
+      border-radius: 12px;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.8);
     }
-    .car-marker {
-      transition: all 0.18s linear;
+    .leaflet-popup-tip {
+      background: rgba(15, 23, 42, 0.95) !important;
     }
-    .radar-pulse {
-      animation: radar 2s infinite ease-out;
+    .leaflet-container {
+      font-family: inherit;
     }
-    @keyframes radar {
-      0% { r: 6; opacity: 0.9; }
-      100% { r: 32; opacity: 0; }
+
+    /* Custom Pulsing Markers */
+    .custom-poi-marker {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      cursor: pointer;
     }
-    .lang-pill.active {
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
-      color: #ffffff;
-      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
-      border-color: rgba(255, 255, 255, 0.2);
+    .marker-pin {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(15, 23, 42, 0.9);
+      border: 2px solid #38bdf8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .marker-pin:hover {
+      transform: scale(1.25);
+      border-color: #f59e0b;
+      box-shadow: 0 0 20px rgba(245, 158, 11, 0.8);
+    }
+    .marker-pulse {
+      position: absolute;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(56, 189, 248, 0.3);
+      animation: pulseAnimation 2.2s infinite;
+      pointer-events: none;
+    }
+    @keyframes pulseAnimation {
+      0% { transform: scale(1); opacity: 0.8; }
+      100% { transform: scale(2.6); opacity: 0; }
+    }
+
+    /* Car Marker */
+    .car-marker-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .car-icon-body {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #10b981;
+      border: 3px solid #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.9);
+      font-size: 18px;
+    }
+    .car-heading-beam {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-bottom: 60px solid rgba(16, 185, 129, 0.25);
+      top: -55px;
+      pointer-events: none;
+      filter: blur(3px);
+    }
+
+    /* Audio wave animation */
+    .audio-bar {
+      display: inline-block;
+      width: 3px;
+      background: #10b981;
+      border-radius: 2px;
+      animation: soundWave 1.2s infinite ease-in-out;
+    }
+    @keyframes soundWave {
+      0%, 100% { height: 4px; }
+      50% { height: 18px; }
     }
   </style>
 </head>
-<body class="bg-[#050811] text-[#f8fafc] antialiased min-h-screen p-3 md:p-6 font-sans selection:bg-blue-600 selection:text-white">
+<body class="bg-[#070b14] text-slate-100 min-h-screen flex flex-col font-sans antialiased overflow-hidden selection:bg-cyan-500 selection:text-white">
 
-  <!-- TOP APP HEADER WITH LANGUAGE SWITCHER -->
-  <header class="max-w-7xl mx-auto mb-6 glass-3d rounded-2xl p-4 md:p-5 flex flex-col md:flex-row items-center justify-between gap-4">
-    <!-- Brand Info -->
-    <div class="flex items-center gap-3.5">
-      <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-emerald-400 flex items-center justify-center text-2xl shadow-lg shadow-blue-500/25 border border-white/20">
-        🧭
+  <!-- TOP APP BAR -->
+  <header class="h-14 border-b border-slate-800 bg-[#0d1424]/90 backdrop-blur-md px-4 flex items-center justify-between z-20 shrink-0">
+    <!-- Brand / Title -->
+    <div class="flex items-center space-x-3">
+      <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/30 text-white font-black text-lg">
+        🇮🇸
       </div>
       <div>
-        <div class="flex items-center gap-2">
-          <h1 class="text-xl md:text-2xl font-black tracking-tight text-white">
-            Iceland Smart Guide <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Studio</span>
+        <div class="flex items-center space-x-2">
+          <h1 class="text-sm font-bold tracking-tight text-white flex items-center gap-2">
+            <span id="txt-app-title">Iceland Smart Road Audio Guide</span>
+            <span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">STUDIO 2.0</span>
           </h1>
-          <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-sm" id="badge-version">
-            v2.0 Dual-Lang
-          </span>
         </div>
-        <p class="text-xs text-slate-400" id="header-subtitle">
-          Професійна платформа контенту, симуляції поїздок та бази даних для мобільного аудіогіда
-        </p>
+        <p class="text-[10px] text-slate-400" id="txt-app-subtitle">Автономний геоконтекстний аудіогід по трасі №1 та Золотому Кільцю</p>
       </div>
     </div>
 
-    <!-- Navigation Tabs & Language Toggle -->
-    <div class="flex flex-wrap items-center gap-2.5">
-      <!-- Main Nav -->
-      <nav class="flex items-center gap-1 bg-slate-900/90 p-1 rounded-xl border border-slate-800 text-xs font-semibold shadow-inner">
-        <button onclick="switchTab('simulator')" id="nav-btn-sim" class="px-3.5 py-2 rounded-lg bg-blue-600 text-white shadow-sm transition">
-          🚗 <span id="txt-nav-sim">Live Симулятор</span>
-        </button>
-        <button onclick="switchTab('poi-db')" id="nav-btn-poi" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-white transition">
-          📍 <span id="txt-nav-poi">База POI &amp; Контент</span>
-        </button>
-        <button onclick="switchTab('roadmap')" id="nav-btn-roadmap" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-white transition">
-          🗺️ <span id="txt-nav-roadmap">Роадмеп</span>
-        </button>
-        <button onclick="switchTab('export')" id="nav-btn-export" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-white transition">
-          💾 <span id="txt-nav-export">GeoJSON</span>
-        </button>
-      </nav>
-
-      <!-- External Links -->
-      <a href="iceland_guide_encyclopedia.html" class="px-3.5 py-2 rounded-xl bg-emerald-600/20 hover:bg-emerald-600 text-emerald-300 hover:text-white border border-emerald-500/30 text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
-        <span>📚</span> <span id="txt-nav-encyclo">Енциклопедія Джерел</span>
+    <!-- Navigation between ecosystem docs -->
+    <nav class="hidden md:flex items-center space-x-1 text-xs">
+      <a href="index.html" class="px-3 py-1.5 rounded-lg bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 font-medium flex items-center gap-1.5">
+        <span>🗺️</span> <span id="nav-studio">Інтерактивна Карта</span>
       </a>
+      <a href="iceland_guide_encyclopedia.html" class="px-3 py-1.5 rounded-lg hover:bg-slate-800 text-slate-300 border border-transparent hover:border-slate-700 transition font-medium flex items-center gap-1.5">
+        <span>📚</span> <span id="nav-encyclo">Енциклопедія (34 POI)</span>
+      </a>
+      <a href="iceland_guide_business_dashboard.html" class="px-3 py-1.5 rounded-lg hover:bg-slate-800 text-slate-300 border border-transparent hover:border-slate-700 transition font-medium flex items-center gap-1.5">
+        <span>💼</span> <span id="nav-b2b">Бізнес-Модель &amp; API</span>
+      </a>
+      <a href="iceland_guide_executive_presentation.html" class="px-3 py-1.5 rounded-lg hover:bg-slate-800 text-slate-300 border border-transparent hover:border-slate-700 transition font-medium flex items-center gap-1.5">
+        <span>📊</span> <span id="nav-pitch">Презентація 2.0</span>
+      </a>
+    </nav>
 
-      <!-- 🇺🇦 UA | 🇬🇧 EN Toggle -->
-      <div class="flex items-center bg-slate-950 p-1 rounded-xl border border-slate-700/80 shadow-inner">
-        <button onclick="setLanguage('uk')" id="btn-lang-uk" class="lang-pill active px-2.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1">
-          <span>🇺🇦</span> UA
-        </button>
-        <button onclick="setLanguage('en')" id="btn-lang-en" class="lang-pill px-2.5 py-1.5 rounded-lg text-xs font-black text-slate-400 hover:text-white transition flex items-center gap-1">
-          <span>🇬🇧</span> EN
-        </button>
+    <!-- Language & Status Controls -->
+    <div class="flex items-center space-x-3">
+      <!-- Live GPS Indicator -->
+      <div class="hidden sm:flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-slate-900/80 border border-slate-700/60 text-[11px]">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+        <span class="text-slate-300 font-mono" id="hud-satellites">GPS: 14 Sats (±1.8m)</span>
       </div>
+
+      <!-- Language Toggle -->
+      <div class="flex items-center bg-slate-900 border border-slate-700 rounded-lg p-0.5 shadow-inner">
+        <button id="btn-lang-uk" onclick="setLang('uk')" class="px-2.5 py-1 rounded-md text-xs font-semibold bg-cyan-500 text-white shadow-sm transition">UA</button>
+        <button id="btn-lang-en" onclick="setLang('en')" class="px-2.5 py-1 rounded-md text-xs font-semibold text-slate-400 hover:text-white transition">EN</button>
+      </div>
+
+      <!-- GitHub Link -->
+      <a href="https://github.com/tfmshell-cloud/smart-road-audio-guide-iceland" target="_blank" rel="noopener" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition" title="GitHub Repository">
+        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+      </a>
     </div>
   </header>
 
-  <!-- MAIN WORKSPACE -->
-  <main class="max-w-7xl mx-auto space-y-6">
+  <!-- MAIN VIEWPORT (SPLIT LAYOUT: SIDEBAR + MAP HUD) -->
+  <main class="flex-1 flex overflow-hidden relative">
 
-    <!-- ======================================================== -->
-    <!-- TAB 1: LIVE DRIVE SIMULATOR & INTERACTIVE MAP            -->
-    <!-- ======================================================== -->
-    <section id="pane-simulator" class="tab-pane active space-y-6">
+    <!-- LEFT DRAWER: POI DIRECTORY & CONTROLS -->
+    <aside class="w-full sm:w-[420px] lg:w-[460px] bg-[#0c1220]/95 border-r border-slate-800 flex flex-col shrink-0 z-10 transition-all shadow-2xl">
       
-      <!-- Control Bar Strip -->
-      <div class="glass-3d rounded-2xl p-4 md:p-5 flex flex-wrap items-center justify-between gap-4">
-        <div class="flex items-center gap-3">
-          <button id="btn-sim-toggle" onclick="toggleSimulation()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs md:text-sm shadow-lg shadow-emerald-600/30 transition flex items-center gap-2 border border-emerald-400/30">
-            <span id="sim-icon">▶</span> <span id="sim-btn-text">Запустити тест поїздки</span>
+      <!-- Search & Filters Header -->
+      <div class="p-4 border-b border-slate-800 space-y-3 bg-[#0d1527]">
+        <!-- Search Input -->
+        <div class="relative">
+          <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          </span>
+          <input type="text" id="poi-search" oninput="filterPOIs()" placeholder="Пошук (назва, вулкан, сага, водоспад)..." class="w-full pl-9 pr-8 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-400 focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 transition shadow-inner">
+          <button id="clear-search" onclick="clearSearch()" class="hidden absolute inset-y-0 right-0 pr-2.5 flex items-center text-slate-400 hover:text-white">✕</button>
+        </div>
+
+        <!-- Filter Chips Carousel / Wrap -->
+        <div class="flex items-center space-x-1.5 overflow-x-auto pb-1 text-[11px] scrollbar-none" id="region-filters">
+          <button onclick="setFilter('all')" class="filter-btn active px-2.5 py-1 rounded-lg bg-cyan-500 text-white font-medium whitespace-nowrap shadow-sm" data-region="all">
+            <span id="lbl-filter-all">Всі локації</span> (<span id="cnt-all">34</span>)
           </button>
-          <button onclick="resetSimulation()" class="px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition border border-slate-700">
-            ↺ <span id="sim-btn-reset">Скинути</span>
+          <button onclick="setFilter('golden_circle')" class="filter-btn px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium whitespace-nowrap transition" data-region="golden_circle">
+            <span id="lbl-filter-gc">Золоте кільце</span> (9)
           </button>
-          <div class="h-6 w-px bg-slate-800 hidden sm:block"></div>
-          <div class="text-xs text-slate-300 hidden sm:block">
-            <span id="txt-sim-route-label">Маршрут:</span> <strong class="text-white" id="txt-sim-route-name">Золоте кільце &amp; Південне узбережжя (Route 1)</strong>
-          </div>
+          <button onclick="setFilter('south_coast')" class="filter-btn px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium whitespace-nowrap transition" data-region="south_coast">
+            <span id="lbl-filter-south">Південь</span> (11)
+          </button>
+          <button onclick="setFilter('glaciers')" class="filter-btn px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium whitespace-nowrap transition" data-region="glaciers">
+            <span id="lbl-filter-glaciers">Льодовики</span> (4)
+          </button>
+          <button onclick="setFilter('eastfjords')" class="filter-btn px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium whitespace-nowrap transition" data-region="eastfjords">
+            <span id="lbl-filter-east">Схід</span> (4)
+          </button>
+          <button onclick="setFilter('north')" class="filter-btn px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium whitespace-nowrap transition" data-region="north">
+            <span id="lbl-filter-north">Північ</span> (2)
+          </button>
+          <button onclick="setFilter('vistas')" class="filter-btn px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium whitespace-nowrap transition" data-region="vistas">
+            <span id="lbl-filter-vistas">Каньйони</span> (2)
+          </button>
+          <button onclick="setFilter('snaefellsnes')" class="filter-btn px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium whitespace-nowrap transition" data-region="snaefellsnes">
+            Snæfellsnes (1)
+          </button>
+          <button onclick="setFilter('reykjanes')" class="filter-btn px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium whitespace-nowrap transition" data-region="reykjanes">
+            Reykjanes (1)
+          </button>
         </div>
 
-        <!-- HUD Gauges -->
-        <div class="flex items-center gap-3 text-xs font-mono">
-          <div class="bg-slate-900/90 px-3.5 py-1.5 rounded-xl border border-slate-800 shadow-inner">
-            <span class="text-slate-500" id="hud-label-speed">Швидкість:</span> <strong id="hud-speed" class="text-blue-400">90 km/h</strong>
-          </div>
-          <div class="bg-slate-900/90 px-3.5 py-1.5 rounded-xl border border-slate-800 shadow-inner">
-            <span class="text-slate-500" id="hud-label-bearing">Азимут:</span> <strong id="hud-bearing" class="text-amber-400">105° (East)</strong>
-          </div>
-          <div class="bg-slate-900/90 px-3.5 py-1.5 rounded-xl border border-slate-800 shadow-inner">
-            <span class="text-slate-500" id="hud-label-tts">Озвучка:</span> <strong id="hud-voice" class="text-emerald-400">Live TTS Active</strong>
-          </div>
-        </div>
-      </div>
-
-      <!-- Main Visual Grid: Map + Active Audio Player -->
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
-        <!-- Left 2 Cols: Vector Iceland Map -->
-        <div class="lg:col-span-2 glass-3d rounded-2xl p-4 md:p-6 relative overflow-hidden flex flex-col justify-between">
-          <div class="flex justify-between items-center mb-3">
-            <span class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-blue-500 animate-ping"></span>
-              <span id="txt-map-header">Інтерактивна Карта Тригерів (Route 1 &amp; Golden Circle)</span>
-            </span>
-            <span class="text-[11px] text-slate-400 font-medium" id="txt-map-tip">Натисніть будь-яку мітку, щоб прослухати аудіо</span>
-          </div>
-
-          <!-- SVG Visual Map Area -->
-          <div class="w-full h-[450px] map-canvas-bg rounded-xl border border-slate-800/80 relative flex items-center justify-center overflow-hidden shadow-2xl">
-            <svg id="iceland-svg" viewBox="0 0 900 550" class="w-full h-full select-none">
-              <defs>
-                <radialGradient id="land-gradient" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="#18233a" />
-                  <stop offset="100%" stop-color="#0c1322" />
-                </radialGradient>
-                <linearGradient id="glacier-shimmer" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#f8fafc" stop-opacity="0.38" />
-                  <stop offset="100%" stop-color="#94a3b8" stop-opacity="0.12" />
-                </linearGradient>
-              </defs>
-
-              <!-- Iceland Coastline Outline -->
-              <path d="M 120 280 C 100 230, 140 180, 200 150 C 260 110, 310 90, 420 80 C 530 70, 640 90, 720 120 C 790 150, 840 210, 820 270 C 800 320, 820 370, 760 410 C 700 450, 600 440, 520 430 C 440 420, 350 440, 260 430 C 180 420, 130 380, 110 330 Z" 
-                    fill="url(#land-gradient)" stroke="#2b3b5c" stroke-width="2.5" />
-
-              <!-- Vatnajökull Glacier -->
-              <path d="M 520 270 Q 620 250 640 310 Q 620 360 540 360 Q 490 320 520 270 Z" fill="url(#glacier-shimmer)" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="3 3"/>
-              <text x="560" y="315" fill="#e2e8f0" font-size="11" font-weight="bold" opacity="0.75">Vatnajökull</text>
-
-              <!-- Mýrdalsjökull / Katla Volcano Icecap -->
-              <circle cx="390" cy="380" r="32" fill="url(#glacier-shimmer)" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="2 2"/>
-              <text x="355" y="385" fill="#e2e8f0" font-size="10" font-weight="bold" opacity="0.75">Katla / Mýrdalsjökull</text>
-
-              <!-- Secondary Tour: Golden Circle Loop -->
-              <path d="M 210 360 Q 250 310 300 310 Q 340 320 320 370 Q 270 380 210 360" class="road-secondary"/>
-
-              <!-- Primary Route 1 (South Coast Segment) -->
-              <path id="route1-line" d="M 210 360 L 260 375 L 320 380 L 370 395 L 430 405 L 510 400 L 590 380 L 670 360" class="road-glow"/>
-
-              <!-- Dynamic POI Markers Layer -->
-              <g id="svg-pois-layer"></g>
-
-              <!-- Animated Car Indicator -->
-              <g id="svg-car" class="car-marker" transform="translate(210, 360)">
-                <circle cx="0" cy="0" r="18" fill="#3b82f6" fill-opacity="0.3" class="radar-pulse"/>
-                <circle cx="0" cy="0" r="8" fill="#3b82f6" stroke="#ffffff" stroke-width="2.5"/>
-                <polygon points="0,-12 -6,-3 6,-3" fill="#ffffff" id="car-dir"/>
-              </g>
-            </svg>
-          </div>
-
-          <!-- Legend Bar -->
-          <div class="mt-3.5 flex flex-wrap items-center justify-between gap-3 text-[11px] text-slate-400">
-            <div class="flex items-center gap-3">
-              <span class="flex items-center gap-1.5"><span class="w-3.5 h-1 bg-blue-500 rounded shadow-sm shadow-blue-500/50"></span> <span id="leg-route1">Route 1 (Траса 1)</span></span>
-              <span class="flex items-center gap-1.5"><span class="w-3.5 h-1 bg-slate-500 rounded border-dashed"></span> <span id="leg-gc">Golden Circle</span></span>
-              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span> <span id="leg-mustsee">Must-See</span></span>
-              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span> <span id="leg-vista">Dynamic Vista</span></span>
-              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-red-400"></span> <span id="leg-safety">SafeTravel Warning</span></span>
-            </div>
-            <span class="text-blue-400 font-semibold" id="leg-offline">100% Offline-Ready</span>
-          </div>
-        </div>
-
-        <!-- Right 1 Col: In-Car Smart Audio Guide HUD -->
-        <div class="glass-3d rounded-2xl p-5 shadow-2xl flex flex-col justify-between">
-          <div>
-            <!-- Audio Guide Status Header -->
-            <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
-              <span class="text-xs uppercase font-extrabold tracking-wider text-blue-400 flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-                <span id="hud-guide-title">Smart Road Audio Guide</span>
-              </span>
-              <span class="text-[10px] px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 font-mono font-bold border border-slate-700" id="hud-badge-tag">
-                READY
-              </span>
-            </div>
-
-            <!-- Active Landmark Info Card -->
-            <div id="hud-card" class="space-y-4">
-              <div>
-                <span class="text-[11px] text-slate-400 uppercase font-semibold" id="hud-poi-region">Ісландія • Траса 1</span>
-                <h3 class="text-xl font-black text-white mt-0.5 leading-snug" id="hud-poi-title">Очікування активації</h3>
-                <div class="flex items-center gap-1.5 mt-1 text-xs text-amber-400 font-semibold" id="hud-poi-lead">
-                  <span>Вектор огляду: готовий до руху</span>
-                </div>
-              </div>
-
-              <!-- Narrative Story Box -->
-              <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 text-xs md:text-sm text-slate-200 leading-relaxed max-h-52 overflow-y-auto shadow-inner" id="hud-poi-narrative">
-                Натисніть зелену кнопку «Запустити тест поїздки» або клікніть будь-яку точку на карті. Автомобіль поїде дорогою, а гід автоматично розповість історію вибраною мовою (UA/EN)!
-              </div>
-
-              <!-- Key Spatial Parameters -->
-              <div class="grid grid-cols-2 gap-2.5 text-xs">
-                <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
-                  <span class="text-slate-500 block text-[10px]" id="hud-lbl-radius">Радіус активації</span>
-                  <span class="font-bold text-white text-sm" id="hud-poi-radius">1,500 m</span>
-                </div>
-                <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
-                  <span class="text-slate-500 block text-[10px]" id="hud-lbl-leadtime">Випередження (ETA)</span>
-                  <span class="font-bold text-emerald-400 text-sm" id="hud-poi-eta">~60 s lead-time</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Bottom Voice Test Button -->
-          <div class="pt-4 border-t border-slate-800 mt-4 space-y-2">
-            <button onclick="speakCurrentAudio()" class="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs transition flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30 border border-blue-400/20">
-              <span class="text-base">🔊</span> <span id="hud-btn-listen">Прослухати розповідь голосом</span>
+        <!-- Drive Simulation Control Bar -->
+        <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <div class="flex items-center space-x-2">
+            <button id="btn-sim-play" onclick="toggleSimulation()" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold flex items-center gap-1.5 shadow-md shadow-emerald-600/30 transition">
+              <span id="sim-icon">▶</span> <span id="sim-text">Старт Тест-Драйву</span>
             </button>
-            <span class="text-[10px] text-slate-500 text-center block" id="hud-engine-status">
-              Web Speech API • Мова: Українська (uk-UA)
-            </span>
+            <button onclick="resetSimulation()" class="px-2 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 transition" title="Скинути на старт (Кефлавік)">
+              ↺
+            </button>
+          </div>
+          
+          <div class="flex items-center space-x-1.5">
+            <span class="text-[10px] text-slate-400 font-mono" id="lbl-sim-speed">Швидкість:</span>
+            <select id="sim-speed-select" onchange="setSimSpeed(this.value)" class="bg-slate-900 border border-slate-700 rounded-md text-[11px] text-cyan-400 px-1.5 py-1 focus:outline-none">
+              <option value="1">1x (Cruise)</option>
+              <option value="5" selected>5x (Demo)</option>
+              <option value="15">15x (Fast)</option>
+              <option value="50">50x (Blitz)</option>
+            </select>
           </div>
         </div>
-
       </div>
-    </section>
 
-    <!-- ======================================================== -->
-    <!-- TAB 2: BILINGUAL POI DATABASE & CONTENT STUDIO           -->
-    <!-- ======================================================== -->
-    <section id="pane-poi-db" class="tab-pane space-y-6">
-      <div class="glass-3d rounded-2xl p-6 shadow-xl">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-800">
-          <div>
-            <h2 class="text-xl font-bold text-white" id="tbl-hdr-title">Реєстр локацій та сторітелінгу (POI Catalog)</h2>
-            <p class="text-xs text-slate-400 mt-1" id="tbl-hdr-sub">Ключові тригери Золотого кільця, Південного узбережжя та вулканічних панорам</p>
+      <!-- Live Driving Telemetry HUD -->
+      <div id="telemetry-bar" class="px-4 py-2 bg-gradient-to-r from-slate-900 via-slate-800/90 to-slate-900 border-b border-slate-800 text-[11px] flex items-center justify-between font-mono">
+        <div class="flex items-center space-x-2 truncate">
+          <span class="text-emerald-400 font-bold" id="hud-car-status">🚗 НА МАРШРУТІ:</span>
+          <span class="text-slate-200 truncate" id="hud-current-leg">Траса 1 (Ring Road Loop)</span>
+        </div>
+        <div class="flex items-center space-x-3 shrink-0 text-slate-300">
+          <span><span class="text-slate-400">Шв:</span> <b class="text-cyan-400" id="hud-speed">85</b> км/год</span>
+          <span><span class="text-slate-400">Найближчий:</span> <b class="text-amber-400" id="hud-closest-poi">--</b></span>
+        </div>
+      </div>
+
+      <!-- POI List (Scrollable) -->
+      <div id="poi-list" class="flex-1 overflow-y-auto p-3 space-y-2.5">
+        <!-- Injected dynamically via JS -->
+      </div>
+
+      <!-- Sidebar Footer Status -->
+      <div class="p-3 border-t border-slate-800 bg-[#090e18] flex items-center justify-between text-[11px] text-slate-400">
+        <div class="flex items-center space-x-1.5">
+          <span class="w-2 h-2 rounded-full bg-cyan-400"></span>
+          <span id="footer-status-text">34 POI готові до геофіксації</span>
+        </div>
+        <div class="text-[10px] text-slate-500 font-mono">ÍST EN 15565:2008 Standard</div>
+      </div>
+    </aside>
+
+    <!-- RIGHT MAIN: LEAFLET MAP VIEWPORT -->
+    <div class="flex-1 relative h-full">
+      <!-- Leaflet Map Container -->
+      <div id="map"></div>
+
+      <!-- Floating Map Layer Switcher (Top Right) -->
+      <div class="absolute top-4 right-4 z-[1000] flex flex-col space-y-1.5 glass-panel p-1.5 rounded-xl border border-slate-700/80 shadow-2xl">
+        <div class="text-[10px] uppercase tracking-wider font-bold text-slate-400 px-2 py-0.5" id="lbl-layers-title">ШАРИ КАРТИ</div>
+        <button onclick="setBaseLayer('dark')" id="layer-dark" class="px-2.5 py-1 text-xs rounded-lg font-medium bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 flex items-center justify-between space-x-3 transition">
+          <span>🌃 Dark Matter</span> <span class="text-[10px] opacity-70">CartoDB</span>
+        </button>
+        <button onclick="setBaseLayer('satellite')" id="layer-satellite" class="px-2.5 py-1 text-xs rounded-lg font-medium text-slate-300 hover:bg-slate-800 border border-transparent transition flex items-center justify-between space-x-3">
+          <span>🛰️ Satellite</span> <span class="text-[10px] opacity-70">Esri HD</span>
+        </button>
+        <button onclick="setBaseLayer('osm')" id="layer-osm" class="px-2.5 py-1 text-xs rounded-lg font-medium text-slate-300 hover:bg-slate-800 border border-transparent transition flex items-center justify-between space-x-3">
+          <span>🗺️ OpenStreetMap</span> <span class="text-[10px] opacity-70">Vector/Topo</span>
+        </button>
+      </div>
+
+      <!-- Geofence Active Trigger Alert HUD (Bottom Center on Map) -->
+      <div id="geofence-alert" class="hidden absolute bottom-6 left-1/2 -translate-x-1/2 z-[1000] glass-panel px-5 py-3 rounded-2xl border border-emerald-500/50 shadow-2xl shadow-emerald-500/30 flex items-center space-x-4 max-w-xl animate-bounce">
+        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-xl shrink-0">
+          <span class="animate-pulse">🎙️</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center space-x-2">
+            <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-emerald-500 text-slate-950 uppercase tracking-wider">GEOFENCE HIT</span>
+            <h4 class="text-sm font-bold text-white truncate" id="alert-poi-name">Seljalandsfoss</h4>
           </div>
-          <div class="flex items-center gap-2">
-            <input type="text" id="tbl-search-input" placeholder="Пошук (Search)..." oninput="filterTable()" 
-                   class="px-4 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500">
-          </div>
+          <p class="text-xs text-slate-300 line-clamp-1 mt-0.5" id="alert-poi-desc">Аудіогід активувався автоматично в зоні 2000м</p>
         </div>
-
-        <!-- POI Table -->
-        <div class="overflow-x-auto">
-          <table class="w-full text-left text-xs border border-slate-800 rounded-xl">
-            <thead class="bg-slate-900/90 text-slate-400 uppercase font-semibold">
-              <tr>
-                <th class="p-3.5" id="col-loc">Локація / Об'єкт</th>
-                <th class="p-3.5" id="col-type">Тип</th>
-                <th class="p-3.5" id="col-bearing">Азимут</th>
-                <th class="p-3.5" id="col-radius">Радіус (м)</th>
-                <th class="p-3.5" id="col-lead">Вектор розповіді</th>
-                <th class="p-3.5 text-right" id="col-action">Дія</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-slate-800 text-slate-300" id="tbl-body">
-              <!-- Rendered dynamically -->
-            </tbody>
-          </table>
+        <div class="flex items-center space-x-1 shrink-0">
+          <div class="audio-bar" style="animation-delay: 0.1s"></div>
+          <div class="audio-bar" style="animation-delay: 0.3s"></div>
+          <div class="audio-bar" style="animation-delay: 0.2s"></div>
+          <div class="audio-bar" style="animation-delay: 0.4s"></div>
         </div>
       </div>
-    </section>
 
-    <!-- ======================================================== -->
-    <!-- TAB 3: STEP-BY-STEP IMPLEMENTATION ROADMAP               -->
-    <!-- ======================================================== -->
-    <section id="pane-roadmap" class="tab-pane space-y-6">
-      <div class="glass-3d rounded-2xl p-6 md:p-8 shadow-xl">
-        <div class="max-w-3xl mb-8">
-          <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block mb-1" id="rdm-badge">Без хаосу • Чіткий алгоритм дій</span>
-          <h2 class="text-2xl font-bold text-white" id="rdm-title">Покроковий план втілення: Від контенту до релізу</h2>
-          <p class="text-xs md:text-sm text-slate-400 mt-1" id="rdm-subtitle">
-            Проект структуровано на 4 послідовні виробничі фази.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="rdm-grid">
-          <!-- Populated by JS for dual-lang -->
-        </div>
+      <!-- Map Overlay Controls (Bottom Right) -->
+      <div class="absolute bottom-6 right-6 z-[1000] flex flex-col space-y-2">
+        <!-- Re-center on Car -->
+        <button onclick="centerOnCar()" class="w-10 h-10 rounded-xl glass-panel border border-slate-700/80 hover:border-cyan-400 flex items-center justify-center text-slate-200 hover:text-cyan-400 shadow-xl transition" title="Центрувати на автомобілі">
+          🚗
+        </button>
+        <!-- Fit Iceland Bounds -->
+        <button onclick="fitIcelandBounds()" class="w-10 h-10 rounded-xl glass-panel border border-slate-700/80 hover:border-cyan-400 flex items-center justify-center text-slate-200 hover:text-cyan-400 shadow-xl transition" title="Вся Ісландія">
+          🇮🇸
+        </button>
       </div>
-    </section>
 
-    <!-- ======================================================== -->
-    <!-- TAB 4: GEOJSON EXPORT & MOBILE SYNC                      -->
-    <!-- ======================================================== -->
-    <section id="pane-export" class="tab-pane space-y-6">
-      <div class="glass-3d rounded-2xl p-6 shadow-xl">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4 pb-4 border-b border-slate-800">
-          <div>
-            <h2 class="text-xl font-bold text-white" id="exp-title">Єдиний файл структури даних (GeoJSON Engine)</h2>
-            <p class="text-xs text-slate-400 mt-1" id="exp-sub">Цей JSON напряму імпортується у Flutter-додаток для обох мов</p>
-          </div>
-          <button onclick="copyGeoJSON()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition flex items-center gap-1.5 shadow-md">
-            📋 <span id="exp-btn-copy">Скопіювати JSON</span>
-          </button>
-        </div>
-
-        <pre id="geojson-code-box" class="p-4 rounded-xl bg-slate-950 font-mono text-xs text-emerald-400 border border-slate-800 overflow-x-auto max-h-96"></pre>
-      </div>
-    </section>
-
+    </div>
   </main>
 
-  <footer class="max-w-7xl mx-auto mt-12 pt-6 border-t border-slate-800 text-center text-xs text-slate-500">
-    Iceland Smart Road Audio Guide • Bilingual Academic Platform UA / EN • Antigravity AI
-  </footer>
+  <!-- MODAL: DETAILED POI DOSSIER (Bilingual Academic View) -->
+  <div id="poi-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="glass-panel w-full max-w-3xl rounded-2xl border border-slate-700 overflow-hidden shadow-2xl flex flex-col max-h-[90vh] animate-in fade-in zoom-in-95 duration-200">
+      <!-- Modal Header -->
+      <div class="p-5 border-b border-slate-800 bg-slate-900/90 flex items-start justify-between">
+        <div class="flex items-center space-x-3">
+          <span class="text-3xl" id="modal-icon">💧</span>
+          <div>
+            <div class="flex items-center space-x-2">
+              <span id="modal-badge" class="px-2 py-0.5 rounded text-[10px] font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Official Stop</span>
+              <span id="modal-region" class="text-xs text-slate-400">South Coast</span>
+            </div>
+            <h3 class="text-xl font-bold text-white mt-1" id="modal-title">Seljalandsfoss</h3>
+          </div>
+        </div>
+        <button onclick="closeModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition">✕</button>
+      </div>
 
-  <!-- BILINGUAL DATA & CONTROLLER SCRIPT -->
+      <!-- Modal Body (Scrollable) -->
+      <div class="p-6 overflow-y-auto space-y-6 text-sm text-slate-300">
+        <!-- Audio Player Simulation -->
+        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <button id="modal-play-btn" onclick="playModalAudio()" class="w-10 h-10 rounded-full bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold flex items-center justify-center shadow-lg shadow-cyan-500/40 transition">
+              ▶
+            </button>
+            <div>
+              <div class="text-xs font-semibold text-white" id="modal-audio-title">Аудіогід (Web Speech API)</div>
+              <div class="text-[11px] text-slate-400" id="modal-audio-status">Готовий до відтворення</div>
+            </div>
+          </div>
+          <div class="text-xs font-mono text-cyan-400" id="modal-coords">63.6156° N, 19.9885° W</div>
+        </div>
+
+        <!-- Geology & Genesis -->
+        <div class="space-y-2">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-cyan-400 flex items-center gap-1.5">
+            <span>🌋</span> <span id="lbl-modal-geo">Геологічний Ґенезис &amp; Вулканологія</span>
+          </h4>
+          <p id="modal-geology" class="text-slate-300 leading-relaxed bg-slate-900/40 p-3.5 rounded-xl border border-slate-800/80"></p>
+        </div>
+
+        <!-- Sagas & History -->
+        <div class="space-y-2">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-amber-400 flex items-center gap-1.5">
+            <span>📜</span> <span id="lbl-modal-saga">Хроніки Саг &amp; Історія Ісландії</span>
+          </h4>
+          <p id="modal-saga" class="text-slate-300 leading-relaxed bg-slate-900/40 p-3.5 rounded-xl border border-slate-800/80"></p>
+        </div>
+
+        <!-- Practical & Safety -->
+        <div class="space-y-2">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+            <span>🧭</span> <span id="lbl-modal-prac">Логістика, Безпека &amp; Регламент</span>
+          </h4>
+          <p id="modal-practical" class="text-slate-300 leading-relaxed bg-slate-900/40 p-3.5 rounded-xl border border-slate-800/80"></p>
+        </div>
+
+        <!-- Official Sources Links -->
+        <div class="space-y-2 pt-2 border-t border-slate-800">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400" id="lbl-modal-src">Офіційні Ліцензовані Джерела:</h4>
+          <div id="modal-sources" class="flex flex-wrap gap-2"></div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="p-4 border-t border-slate-800 bg-slate-900/90 flex items-center justify-between">
+        <button onclick="teleportCarToModalPoi()" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold flex items-center gap-2 transition">
+          <span>🚗</span> <span id="lbl-teleport-here">Телепортувати авто сюди</span>
+        </button>
+        <button onclick="closeModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium transition" id="lbl-close-modal">
+          Закрити
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPLICATION LOGIC SCRIPT -->
   <script>
-    let currentLang = 'uk';
+    // Master POI Dataset (34 POIs)
+    const POIS = [{"id": "thingvellir", "name": {"uk": "Þingvellir (Тінґветлір)", "en": "Þingvellir National Park"}, "region": "golden_circle", "type": {"uk": "Must-See • UNESCO", "en": "Must-See • UNESCO"}, "icon": "🏛️", "lat": 64.2559, "lng": -21.1295, "radius": 3500, "badge": "UNESCO World Heritage", "vector": {"uk": "Прямо за курсом • Траса 36", "en": "Straight ahead • Route 36"}, "geology": {"uk": "Гігантська ущелина Almannagjá на стику Північноамериканської та Євразійської плит. Розходження до 2 см/рік. Озеро Þingvallavatn — найбільше в країні з 4 підвидами гольця.", "en": "The Almannagjá fault chasm along the Mid-Atlantic Ridge rift, spreading 2 cm annually. Lake Þingvallavatn is Iceland's largest natural lake with 4 unique Arctic char morphs."}, "saga": {"uk": "У 930 році вікінги заснували перший у світі парламент — Альтинг (Alþingi). Тут приймали Хрещення Ісландії (1000 р.) та проголосили Республіку (1944 р.).", "en": "In 930 AD, Vikings founded the Alþingi, the world's oldest continuous parliament. Here Christianity was adopted in 1000 AD and the Republic declared in 1944."}, "practical": {"uk": "Паркінг P1 (оплата Parka.is). Оглядовий майданчик Hakið. Дрони суворо заборонені над усім парком.", "en": "P1 parking at Hakið center (paid via Parka.is). Drones strictly prohibited throughout the park."}, "sources": [{"name": "Þingvellir Official", "url": "https://www.thingvellir.is/en/"}, {"name": "Íslendingabók (Saga DB)", "url": "https://sagadb.org/"}]}, {"id": "oxararfoss", "name": {"uk": "Öxarárfoss (Ексараурфосс)", "en": "Öxarárfoss Waterfall"}, "region": "golden_circle", "type": {"uk": "Прихований водоспад Тінґветліра", "en": "Þingvellir Gorge Waterfall"}, "icon": "💧", "lat": 64.266, "lng": -21.1165, "radius": 2000, "badge": "Hidden Waterfall", "vector": {"uk": "Усередині каньйону Almannagjá", "en": "Inside Almannagjá Chasm"}, "geology": {"uk": "Водоспад заввишки 13 м, штучно створений вікінгами у X столітті шляхом зміни русла річки Ексарау для постачання води учасникам парламенту.", "en": "A 13-meter cascade man-diverted by 10th-century Vikings from the river Öxará to supply water to assembly participants."}, "saga": {"uk": "Згідно зі Sturlunga saga, у басейні водоспаду Drekkingarhylur у Середньовіччі топили жінок, звинувачених у чаклунстві та подружній зраді.", "en": "Per Sturlunga saga, the nearby Drekkingarhylur pool beneath the falls was historically used for judicial executions by drowning."}, "practical": {"uk": "15 хвилин пішки від паркінгу P1 або P2 дерев'яними містками між тектонічними стінами.", "en": "15-minute scenic stroll along wooden boardwalks from P1 or P2 parking lots between sheer basalt cliffs."}, "sources": [{"name": "Þingvellir Parks", "url": "https://www.thingvellir.is/en/"}]}, {"id": "geysir", "name": {"uk": "Geysir & Strokkur (Ґейзір)", "en": "Geysir & Strokkur Geothermal Field"}, "region": "golden_circle", "type": {"uk": "Must-See • Геотермальне поле", "en": "Must-See • Geothermal Area"}, "icon": "💨", "lat": 64.3104, "lng": -20.3024, "radius": 2000, "badge": "Geothermal Icon", "vector": {"uk": "Попереду долина Haukadalur • Траса 35", "en": "Haukadalur Valley ahead • Route 35"}, "geology": {"uk": "Температура підземного резервуара >125°C. Строккюр вистрілює стовп киплячої води на 15–20 м кожні 6–10 хв через закипання води в каналі при падінні тиску.", "en": "Subsurface reservoir exceeds 125°C. Strokkur erupts boiling water 15–20m every 6–10 minutes due to rapid steam flash upon pressure drop."}, "saga": {"uk": "Великий Ґейзір дав назву всім подібним джерелам на Землі. Перша письмова згадка — 1294 рік після сильного землетрусу.", "en": "The Great Geysir gave its name to all geysers worldwide. Earliest documented record dates to 1294 after a massive quake."}, "practical": {"uk": "Стійте тільки з навітряного боку, щоб уникнути опіків паром. Не торкайтеся води в струмках (до 100°C).", "en": "Always stand upwind to avoid scalding steam. Never touch outflow streams (temperatures up to 100°C)."}, "sources": [{"name": "Catalogue of Volcanoes", "url": "https://icelandicvolcanoes.is"}, {"name": "Environment Agency (UST)", "url": "https://www.ust.is"}]}, {"id": "gullfoss", "name": {"uk": "Gullfoss (Золотий водоспад)", "en": "Gullfoss (The Golden Falls)"}, "region": "golden_circle", "type": {"uk": "Must-See • Водоспад", "en": "Must-See • Canyon Waterfall"}, "icon": "💧", "lat": 64.3271, "lng": -20.1199, "radius": 2000, "badge": "Glacier River", "vector": {"uk": "Праворуч каньйон річки Hvíta", "en": "To your right • Hvíta River Canyon"}, "geology": {"uk": "Двоступеневий каскад (11 м і 21 м) у 70-метровому базальтовому каньйоні. Живиться льодовиковими талими водами масиву Langjökull.", "en": "A two-stage waterfall (11m and 21m) dropping into a 70m canyon, fed by meltwater from Langjökull ice cap."}, "saga": {"uk": "Сіґріудюр Тоумасдоуттір захистила водоспад у 1920-х від будівництва гідроелектростанції, ставши першою еко-героїнею Ісландії.", "en": "Sigríður Tómasdóttir saved the falls in the 1920s by resisting hydroelectric exploitation, cementing her legacy as Iceland's first environmentalist."}, "practical": {"uk": "Взимку нижня стежка покривається суцільним льодом — обов'язкові шипи (microspikes). Влітку — дощовик.", "en": "Winter path freezes over — microspikes required. Summer visits require waterproof gear against mist."}, "sources": [{"name": "South Iceland Tourism", "url": "https://www.south.is"}]}, {"id": "bruarfoss", "name": {"uk": "Brúarfoss (Блакитний водоспад)", "en": "Brúarfoss (Cyan Waterfall)"}, "region": "golden_circle", "type": {"uk": "Секретний блакитний водоспад", "en": "Secret Cyan Cascade"}, "icon": "💧", "lat": 64.2642, "lng": -20.5157, "radius": 1200, "badge": "Hidden Gem", "vector": {"uk": "Відгалуження біля Траси 37", "en": "Detour off Route 37"}, "geology": {"uk": "Яскравий бірюзово-блакитний колір води, яка збігає сотнями дрібних каскадів у глибоку розколину посеред річки Brúará.", "en": "Luminous turquoise-cyan hue resulting from glacial sediment and water funneling into a narrow volcanic cleft."}, "saga": {"uk": "Назва Міст-водоспад. У 1602 році службовець єпископа зламав кам'яний природний міст, щоб голодуючі селяни не йшли просити милостиню.", "en": "Name translates to Bridge Falls. In 1602, a bishop's steward destroyed the natural stone arch to deter famine-stricken beggars."}, "practical": {"uk": "Нещодавно відкрито новий платний паркінг прямо біля водоспаду, підхід займає лише 5 хвилин.", "en": "A new official paid parking lot opened nearby, reducing the hike to just 5 minutes."}, "sources": [{"name": "Visit South Iceland", "url": "https://www.south.is"}]}, {"id": "faxi", "name": {"uk": "Faxi (Vatnsleysufoss)", "en": "Faxi Waterfall (Vatnsleysufoss)"}, "region": "golden_circle", "type": {"uk": "Широкий лососевий водоспад", "en": "Wide Salmon Cascade"}, "icon": "📍", "lat": 64.2256, "lng": -20.3372, "radius": 2000, "badge": "Scenic Detour", "vector": {"uk": "Траса 35 між Geysir та Reykholt", "en": "Route 35 between Geysir and Reykholt"}, "geology": {"uk": "Широкий каскад завширшки 80 м і заввишки 7 м на річці Tungufljót. Обладнаний штучними лососевими сходами для нересту риби.", "en": "An 80-meter wide, 7-meter high waterfall on the Tungufljót river equipped with a constructed salmon ladder."}, "saga": {"uk": "Традиційне місце риболовлі ісландських селян протягом століть.", "en": "Centuries-old salmon fishing spot for local farming communities."}, "practical": {"uk": "Затишне кафе з терасою над водоспадом. Набагато менше натовпу, ніж біля Ґульфосса.", "en": "Peaceful restaurant with an outdoor terrace overlooking the river, far less crowded than Gullfoss."}, "sources": [{"name": "South Iceland", "url": "https://www.south.is"}]}, {"id": "fridheimar", "name": {"uk": "Friðheimar (Геотермальна томатна ферма)", "en": "Friðheimar Geothermal Greenhouse"}, "region": "golden_circle", "type": {"uk": "Агротуризм & Гастрономія", "en": "Geothermal Culinary Farm"}, "icon": "🌿", "lat": 64.2045, "lng": -20.4439, "radius": 2000, "badge": "Geothermal Gastronomy", "vector": {"uk": "Селище Reykholt • Траса 35", "en": "Reykholt Village • Route 35"}, "geology": {"uk": "Опалення чистою водою з геотермальних свердловин температурою 95°C та 100% зелена електроенергія від ГЕС.", "en": "Powered by 95°C water from on-site geothermal boreholes and 100% green hydroelectric energy."}, "saga": {"uk": "Вирощують томати посеред ісландської зими, використовуючи імпортованих джмелів для природного запилення.", "en": "Cultivates fresh tomatoes year-round under arctic winters utilizing imported Dutch bumblebees for pollination."}, "practical": {"uk": "Столики на обід (томатний суп та свіжий хліб) обов'язково бронювати за кілька тижнів наперед.", "en": "Reservations for their famous tomato soup buffet must be booked weeks in advance."}, "sources": [{"name": "Friðheimar Official", "url": "https://fridheimar.is/en"}]}, {"id": "kerid", "name": {"uk": "Kerið (Кратерне озеро Керід)", "en": "Kerið Volcanic Crater Lake"}, "region": "golden_circle", "type": {"uk": "Вулканічна кальдера", "en": "Volcanic Scoria Crater"}, "icon": "🌋", "lat": 64.0412, "lng": -20.8851, "radius": 2000, "badge": "Volcanic Caldera", "vector": {"uk": "Траса 35 між Selfoss та Reykholt", "en": "Route 35 between Selfoss and Reykholt"}, "geology": {"uk": "Кальдера віком ~3000 років у системі Grímsnes. Стіни складені з червоного пористого базальтового шлаку (scoria), озеро живиться підземними водами.", "en": "A 3,000-year-old crater caldera in the Grímsnes system. Red volcanic scoria walls encircle an aquifer-fed turquoise lake."}, "saga": {"uk": "У фольклорі вважалося бездонним і сполученим з підземними океанічними глибинами.", "en": "Folklore held that the lake was bottomless and connected to the deep sea."}, "practical": {"uk": "Вхід платний (приватна земля, ~450–600 ISK). Є стежки як по гребеню, так і вниз до води.", "en": "Small admission fee (~450-600 ISK) on private land. Trails encircle the rim and lead down to water level."}, "sources": [{"name": "Catalogue of Volcanoes", "url": "https://icelandicvolcanoes.is"}]}, {"id": "hjalparfoss", "name": {"uk": "Hjálparfoss (Водоспад Злиття річок)", "en": "Hjálparfoss Waterfall"}, "region": "golden_circle", "type": {"uk": "Подвійний водоспад у лаві", "en": "Twin River Basalt Falls"}, "icon": "💧", "lat": 64.1166, "lng": -19.851, "radius": 2000, "badge": "Þjórsárdalur Gem", "vector": {"uk": "Долина Þjórsárdalur • Траса 32 біля підніжжя Гекли", "en": "Þjórsárdalur Valley • Route 32 near Hekla"}, "geology": {"uk": "Унікальне місце, де дві річки Fossá та Rauðá зливаються у подвійний водоспад посеред базальтових стовпів лавового поля Búrfell.", "en": "A twin cascade where the rivers Fossá and Rauðá merge over curved basalt columns in the Búrfell lava field."}, "saga": {"uk": "Назва означає Водоспад допомоги — саме тут втомлені мандрівники після небезпечного переходу пустелею Sprengisandur знаходили першу воду і траву для коней.", "en": "Name translates to Helping Falls — exhausted travelers crossing the harsh Sprengisandur desert found water and grazing for horses here."}, "practical": {"uk": "Зручний асфальтований під'їзд, чудове місце для пікніка з видом на вулкан Búrfell.", "en": "Easy paved access with picnic tables and panoramic views toward Mt. Búrfell."}, "sources": [{"name": "South Iceland", "url": "https://www.south.is"}]}, {"id": "urridafoss", "name": {"uk": "Urriðafoss (Найбільш повноводний водоспад)", "en": "Urriðafoss (Most Voluminous Falls)"}, "region": "south_coast", "type": {"uk": "Гігантська річкова міць", "en": "High-Volume Cascade"}, "icon": "💧", "lat": 63.9247, "lng": -20.6725, "radius": 2000, "badge": "Hydropower Giant", "vector": {"uk": "Траса 1 між Selfoss та Hella", "en": "Highway 1 between Selfoss and Hella"}, "geology": {"uk": "Найбільш повноводний водоспад Ісландії (витрата води ~360 м³/с) на найдовшій річці Þjórsá, що тече через найбільше лавове поле країни Þjórsárhraun.", "en": "Most voluminous waterfall in Iceland (~360 m³/s) on the Þjórsá River, roaring across the great prehistoric Þjórsárhraun lava field."}, "saga": {"uk": "Історичне місце лову лосося та форелі (Urriði — струмкова форель).", "en": "Historically renowned for trout and salmon fishing (Urriði translates to brown trout)."}, "practical": {"uk": "Паркінг безкоштовний прямо біля Траси 1, 2 хвилини пішки до оглядового майданчика.", "en": "Free parking right off Ring Road, 2-minute stroll to the viewpoint."}, "sources": [{"name": "South Iceland", "url": "https://www.south.is"}]}, {"id": "gluggafoss", "name": {"uk": "Gluggafoss / Merkjárfoss (Віконний водоспад)", "en": "Gluggafoss / Merkjárfoss (Window Falls)"}, "region": "south_coast", "type": {"uk": "Секретний скельний водоспад", "en": "Geological Window Phenomenon"}, "icon": "💧", "lat": 63.7212, "lng": -19.8931, "radius": 2000, "badge": "Secret Gem", "vector": {"uk": "Траса 261 за Hvolsvöllur у долині Fljótshlíð", "en": "Route 261 past Hvolsvöllur in Fljótshlíð"}, "geology": {"uk": "Вода пробила арки та вікна (gluggar) крізь м'який вулканічний туф палеозою, через які потік виривається назовні.", "en": "Water has bored natural arches and windows (gluggar) through soft volcanic palagonite tuff, cascading through the openings."}, "saga": {"uk": "Серце земель Саги про Ньяла. Саме тут герой Ґуннар подивився на квітучі схили Fljótshlíð і відмовився від вигнання, обравши смерть.", "en": "Heart of Njáls Saga country. Here the hero Gunnar turned back from exile, declaring Fair is the hillside, sealing his doomed fate."}, "practical": {"uk": "Асфальтована спокійна дорога, без натовпу туристів, ідеальна зупинка для фото.", "en": "Smooth paved detour, very quiet without tourist buses, excellent photographic opportunities."}, "sources": [{"name": "South Iceland", "url": "https://www.south.is"}]}, {"id": "seljalandsfoss", "name": {"uk": "Seljalandsfoss (Водоспад з гротом)", "en": "Seljalandsfoss Waterfall"}, "region": "south_coast", "type": {"uk": "Must-See • Водоспад", "en": "Must-See • 360° Walk-Behind"}, "icon": "💧", "lat": 63.6156, "lng": -19.9885, "radius": 2000, "badge": "Iconic Falls", "vector": {"uk": "Ліворуч біля самої Траси 1", "en": "Left off Highway 1"}, "geology": {"uk": "Падіння з 60 м із колишніх морських кліфів. Простора скельна порожнина дозволяє обійти водоспад по колу.", "en": "Plunges 60 meters over former ocean cliffs. A spacious cavern allows visitors to walk completely behind the veil."}, "saga": {"uk": "Орієнтир для середньовічних мореплавців з боку Атлантичного океану.", "en": "Served as an ancient navigational landmark for coastal seafarers sailing along the southern sands."}, "practical": {"uk": "Платний паркінг (Parka.is). Обов'язковий дощовик. Взимку стежка позаду закрита через бурульки.", "en": "Paid parking via Parka.is. Waterproof gear mandatory. Behind-the-falls trail closed in winter due to icefall hazards."}, "sources": [{"name": "South Iceland", "url": "https://www.south.is"}]}, {"id": "gljufrabui", "name": {"uk": "Gljúfrabúi (Таємний печерний водоспад)", "en": "Gljúfrabúi (Secret Gorge Waterfall)"}, "region": "south_coast", "type": {"uk": "Секретний печерний водоспад", "en": "Hidden Cave Waterfall"}, "icon": "📍", "lat": 63.6209, "lng": -19.9864, "radius": 1200, "badge": "Secret Cave Gem", "vector": {"uk": "600 метрів пішки на північ від Seljalandsfoss", "en": "600m walk north of Seljalandsfoss"}, "geology": {"uk": "40-метровий водоспад, прихований усередині вузької скельної щілини з відкритим верхнім склепінням.", "en": "A 40-meter waterfall concealed within a narrow rock chasm with a skylit canyon chamber."}, "saga": {"uk": "Назва перекладається як Той, що мешкає в ущелині. У народі вважався схованкою ельфів.", "en": "Name translates as Dweller of the Gorge. Local folklore considered the hidden cleft a dwelling of elves."}, "practical": {"uk": "Заходити по слизькому камінню в річищі струмка. Потрібне непромокальне взуття та капюшон!", "en": "Wade carefully across river stepping stones inside the crevice. Waterproof hiking boots and hood essential!"}, "sources": [{"name": "Visit South", "url": "https://www.south.is"}]}, {"id": "eyjafjallajokull_farm", "name": {"uk": "Þorvaldseyri & Eyjafjallajökull", "en": "Þorvaldseyri Farm & Eyjafjallajökull View"}, "region": "vistas", "type": {"uk": "Вулканічна панорама", "en": "Volcano Vista & Memorial"}, "icon": "🧊", "lat": 63.5321, "lng": -19.6543, "radius": 2000, "badge": "Eruption Memorial", "vector": {"uk": "Ліворуч на Трасі 1 перед Skógar", "en": "On the left on Highway 1 before Skógar"}, "geology": {"uk": "Льодовиковий щит площею 78 км² над стратовулканом, що вивергся у 2010 році.", "en": "A 78 km² ice cap resting atop the explosive stratovolcano that famously erupted in April 2010."}, "saga": {"uk": "Ферма Торвальдсейрі — символ незламності та відновлення після попелової бурі.", "en": "Þorvaldseyri farm stands as an internationally renowned symbol of agricultural recovery from catastrophic ash."}, "practical": {"uk": "Оглядовий майданчик біля дороги з панорамними фотощитами.", "en": "Roadside scenic pull-off equipped with interpretive historical markers."}, "sources": [{"name": "Catalogue of Volcanoes", "url": "https://icelandicvolcanoes.is"}]}, {"id": "skogafoss", "name": {"uk": "Skógafoss (Водоспад Скоугафосс)", "en": "Skógafoss Waterfall"}, "region": "south_coast", "type": {"uk": "Must-See • Водоспад", "en": "Must-See • 60m Power Cascade"}, "icon": "💧", "lat": 63.5321, "lng": -19.5114, "radius": 2000, "badge": "Power Cascade", "vector": {"uk": "Ліворуч у селищі Skógar", "en": "Left in Skógar village"}, "geology": {"uk": "Монолітна водяна стіна 25 м завширшки та 60 м заввишки. Густа водяна завіса формує яскраві подвійні веселки.", "en": "A sheer curtain 25 meters broad falling 60 meters. Heavy spray frequently produces vivid double rainbows."}, "saga": {"uk": "Легенда про скриню з золотом першого вікінга Трасі, заховану за водяною стіною.", "en": "Legend holds that the first settler Þrasi buried his chest of gold behind the roaring cascade."}, "practical": {"uk": "370 металевих сходинок ведуть на оглядовий верхній майданчик. Початок треку Fimmvörðuháls.", "en": "370 stairs climb to the cliff top. Trailhead for the renowned Fimmvörðuháls mountain route."}, "sources": [{"name": "Skógar Museum", "url": "https://www.skogasafn.is"}]}, {"id": "kvernufoss", "name": {"uk": "Kvernufoss (Таємний каньйонний водоспад)", "en": "Kvernufoss (Hidden Canyon Falls)"}, "region": "south_coast", "type": {"uk": "Секретний водоспад за музеєм Скоугар", "en": "Secret Canyon Gem Behind Museum"}, "icon": "💧", "lat": 63.5283, "lng": -19.4805, "radius": 1200, "badge": "Secret Gem", "vector": {"uk": "1 км на схід від Skógafoss за Skógar Museum", "en": "1 km east of Skógafoss behind Skógar Museum"}, "geology": {"uk": "30-метровий водоспад у смарагдовому моховому каньйоні Kvernugil. Можна пройти позаду струменя води, як на Seljalandsfoss, але без натовпу!", "en": "A breathtaking 30-meter cascade tucked in the lush mossy gorge of Kvernugil. Visitors can walk completely behind the spray with virtually no crowds!"}, "saga": {"uk": "Назва пов'язана зі стародавніми ручними млинами (kvern), якими мололи зерно мешканці долини.", "en": "Name refers to ancient hand-turned grain millstones (kvern) once used by early farm settlements."}, "practical": {"uk": "Паркуйтеся біля Skógar Museum (платний паркінг). Легка 15-хвилинна стежка через поле в каньйон.", "en": "Park at the Skógar Museum lot. A tranquil 15-minute trail leads through a stile and into the canyon."}, "sources": [{"name": "South Iceland", "url": "https://www.south.is"}]}, {"id": "solheimajokull", "name": {"uk": "Sólheimajökull (Чорний льодовиковий язик)", "en": "Sólheimajökull Glacier Tongue"}, "region": "south_coast", "type": {"uk": "Вивідний язик льодовика", "en": "Glacier Tongue & Lagoon"}, "icon": "🧊", "lat": 63.5306, "lng": -19.3703, "radius": 2000, "badge": "Glacier Hike", "vector": {"uk": "Поворот на Трасу 221 з Траси 1", "en": "Turn off Highway 1 onto Route 221"}, "geology": {"uk": "Вивідний язик масиву Mýrdalsjökull. Шари чорного вулканічного попелу застигли всередині блакитного льоду, свідчачи про минулі виверження Катли.", "en": "An outlet glacier of Mýrdalsjökull showcasing stratified black tephra and ice bands from historical Katla eruptions."}, "saga": {"uk": "Наочний підручник глобального потепління: льодовик відступає на десятки метрів щороку, утворивши нове прильодовикове озеро.", "en": "A visual benchmark of climate warming: the tongue has retreated hundreds of meters over recent decades, leaving a growing proglacial lake."}, "practical": {"uk": "Вихід на лід суворо заборонений без сертифікованого гіда та льодорубів/кішок через приховані тріщини (crevasses).", "en": "Walking onto the ice sheet without a certified guide, helmet, and crampons is strictly prohibited due to lethal hidden crevasses."}, "sources": [{"name": "Institute of Earth Sciences", "url": "https://jardvis.hi.is"}]}, {"id": "dyrholaey", "name": {"uk": "Dyrhólaey (Мис Дірхолей & Арка)", "en": "Dyrhólaey Promontory & Arch"}, "region": "south_coast", "type": {"uk": "Природний заповідник • Тупики", "en": "Nature Reserve & Puffin Haven"}, "icon": "🌊", "lat": 63.4022, "lng": -19.1303, "radius": 2000, "badge": "Puffin Sanctuary", "vector": {"uk": "Траса 218 перед Vík", "en": "Route 218 before Vík"}, "geology": {"uk": "120-метровий вулканічний мис, утворений підводним виверженням. Гігантська базальтова арка, крізь яку пролітають легкомоторні літаки.", "en": "A 120-meter volcanic cliff created by submarine eruptions, featuring a colossal natural sea arch wide enough for small aircraft to pass through."}, "saga": {"uk": "Назва означає Острів із дверною діркою. Влітку тут гніздяться десятки тисяч тупиків (атлантичних іпаток).", "en": "Translates to Door Hole Island. Summer nesting sanctuary for thousands of Atlantic puffins."}, "practical": {"uk": "У травні та червні верхнє плато частково закривається для гніздування птахів. Ураганні вітри!", "en": "Upper promontory partially restricted during May-June nesting season. Extreme gale winds frequent."}, "sources": [{"name": "Environment Agency (UST)", "url": "https://www.ust.is"}]}, {"id": "reynisfjara", "name": {"uk": "Reynisfjara (Чорний пляж Рейнісф'яра)", "en": "Reynisfjara Black Sand Beach"}, "region": "south_coast", "type": {"uk": "Must-See • Смертельна небезпека", "en": "Must-See • Sneaker Wave Hazard"}, "icon": "🌊", "lat": 63.4057, "lng": -19.0716, "radius": 2000, "badge": "Sneaker Wave Alert", "vector": {"uk": "Траса 215 біля Vík", "en": "Route 215 near Vík"}, "geology": {"uk": "Чорний пляж зі скелею Garðar — ідеальними шестигранними колонами з охолодженої базальтової лави та морськими кекурами Reynisdrangar.", "en": "Jet-black sands flanked by the Garðar columnar basalt cliff and the Reynisdrangar basalt sea stacks."}, "saga": {"uk": "Скелі Reynisdrangar — це застиглі на світанку тролі, які намагалися витягти трищогловий корабель з моря.", "en": "Folklore tells that the offshore stacks are trolls turned to stone by the first rays of the dawn sun."}, "practical": {"uk": "СНІКЕР-ХВИЛІ ВБИВАЮТЬ! Ніколи не повертайтеся спиною до хвиль. Слідкуйте за сигнальним світлофором (Зелений/Жовтий/Червоний).", "en": "SNEAKER WAVES KILL. Never turn your back on the ocean. Abide strictly by the safety traffic light at the beach entrance."}, "sources": [{"name": "SafeTravel Sneaker Waves", "url": "https://safetravel.is"}]}, {"id": "eldhraun", "name": {"uk": "Eldhraun (Лавове поле Лакі 1783)", "en": "Eldhraun (1783 Laki Moss Lava Field)"}, "region": "south_coast", "type": {"uk": "Гігантське мохове поле лави", "en": "Massive Moss-Covered Lava"}, "icon": "📍", "lat": 63.6756, "lng": -18.1458, "radius": 3500, "badge": "Historic Cataclysm", "vector": {"uk": "Обабіч Траси 1 біля Kirkjubæjarklaustur", "en": "Highway 1 corridor near Klaustur"}, "geology": {"uk": "Найбільше базальтове лавове поле історичного часу (565 км²), вивержене кратерами Лакі у 1783–1784 рр. Вкрите зеленим мохом.", "en": "Largest historical basalt lava flow on Earth (565 km²), produced during the 1783–1784 Laki fires, carpeted in woolly moss."}, "saga": {"uk": "Виверження спричинило голод Móðuharðindin, що забрав чверть населення Ісландії.", "en": "The volcanic haze caused the Móðuharðindin famine, killing 25% of Iceland's population."}, "practical": {"uk": "КАТЕГОРИЧНО ЗАБОРОНЕНО СТУПАТИ НА МОХ! Мох відновлюється до 100 років. Використовуйте оглядові платформи.", "en": "DO NOT WALK ON THE MOSS. Recovers over a century. Use designated viewing platforms only."}, "sources": [{"name": "Catalogue of Volcanoes", "url": "https://icelandicvolcanoes.is"}]}, {"id": "fjadrargljufur", "name": {"uk": "Fjaðrárgljúfur (Каньйон Ф'ядраурглювур)", "en": "Fjaðrárgljúfur Serpentine Canyon"}, "region": "south_coast", "type": {"uk": "Казковий каньйон глибиною 100 м", "en": "100m Deep Fairy-Tale Canyon"}, "icon": "🏞️", "lat": 63.7713, "lng": -18.1718, "radius": 2000, "badge": "Serpentine Gorge", "vector": {"uk": "Траса 206 перед Kirkjubæjarklaustur", "en": "Route 206 before Klaustur"}, "geology": {"uk": "Звивистий каньйон глибиною 100 м і довжиною 2 км, промитий талими льодовиковими водами у шарах палагоніту 2 млн років тому.", "en": "A dramatic serpentine canyon 100 meters deep and 2 kilometers long, carved by glacial meltwaters through palagonite."}, "saga": {"uk": "Світову вірусну славу каньйону приніс кліп Джастіна Бібера у 2015 році.", "en": "Shot to global fame following Justin Bieber's 2015 music video, prompting protective wooden walkways."}, "practical": {"uk": "Паркінг платний. Рухайтеся виключно облаштованими оглядовими майданчиками. Не перелазьте за огорожу.", "en": "Paid parking. Stay strictly on marked boardwalks; never cross safety ropes."}, "sources": [{"name": "Environment Agency (UST)", "url": "https://www.ust.is"}]}, {"id": "lomagnupur", "name": {"uk": "Скеля Lómagnúpur (Скеля Велетня)", "en": "Lómagnúpur Monolith"}, "region": "vistas", "type": {"uk": "Гігантський моноліт 688 м", "en": "688m Sheer Basalt Monolith"}, "icon": "🏞️", "lat": 63.96, "lng": -17.51, "radius": 3500, "badge": "Saga Landmark", "vector": {"uk": "Посеред чорного сандра Skeiðarársandur", "en": "Rises over Skeiðarársandur outwash plain"}, "geology": {"uk": "Вертикальна 688-метрова стіна з базальтових та туфових шарів, що височіє немов фортеця над безкрайнім чорним піском.", "en": "A colossal 688-meter sheer promontory of stratified basalt and palagonite jutting over black outwash sands."}, "saga": {"uk": "Дух-охоронець Ісландії — Велетень із залізною палицею (Bergrisi) мешкає всередині цієї скелі за Сагою про Ньяла.", "en": "Dwelling of the Giant with the Iron Staff (Bergrisi), one of Iceland's four mythological guardian spirits."}, "practical": {"uk": "Біля підніжжя є кишеня для фото з відбитком скелі у придорожній водоймі.", "en": "Roadside pull-off with a small reflecting pond offering iconic photography angles."}, "sources": [{"name": "Njáls Saga Database", "url": "https://sagadb.org/brennu-njals_saga"}]}, {"id": "svartifoss", "name": {"uk": "Svartifoss (Чорний водоспад Skaftafell)", "en": "Svartifoss (The Black Falls)"}, "region": "glaciers", "type": {"uk": "Must-See • Базальтові призми", "en": "Must-See • Architectural Icon"}, "icon": "💧", "lat": 64.0275, "lng": -16.9753, "radius": 2000, "badge": "Architectural Icon", "vector": {"uk": "Національний парк Skaftafell • Траса 1", "en": "Skaftafell, Vatnajökull National Park"}, "geology": {"uk": "20-метровий водоспад в оточенні звисаючих чорних базальтових шестигранних призм, схожих на орган.", "en": "A 20-meter waterfall cascading against a dark amphitheater of geometric hanging hexagonal basalt columns."}, "saga": {"uk": "Надихнув архітектора Ґудйоуна Самуельссона на проект церкви Hallgrímskirkja в Рейк'явіку.", "en": "Directly inspired State Architect Guðjón Samúelsson in designing Hallgrímskirkja church."}, "practical": {"uk": "Паркінг Skaftafell платний. Підйом пішки від візитор-центру займає 40–50 хвилин.", "en": "Paid parking at Skaftafell Visitor Centre. 45-minute uphill hike on well-graded trails."}, "sources": [{"name": "Vatnajökull National Park", "url": "https://www.vatnajokulsthjodgardur.is/en"}]}, {"id": "svinafellsjokull", "name": {"uk": "Svínafellsjökull (Льодовик Інтерстеллар)", "en": "Svínafellsjökull Glacier (Interstellar)"}, "region": "glaciers", "type": {"uk": "Драматичний крижаний язик", "en": "Cinematic Ice Tongue"}, "icon": "🧊", "lat": 64.0083, "lng": -16.8833, "radius": 1200, "badge": "Sci-Fi Location", "vector": {"uk": "З'їзд за Skaftafell", "en": "Turn off Highway 1 past Skaftafell"}, "geology": {"uk": "Вузький язик льодовика Ватнайокутль з гострими сераками та глибокими блакитними розколами.", "en": "A heavily crevassed outlet glacier of Vatnajökull bristling with razor-sharp ice seracs."}, "saga": {"uk": "Крижана планета Манна у фільмі Інтерстеллар Крістофера Нолана та Бетмен: Початок.", "en": "Filming backdrop for Christopher Nolan's Interstellar and Batman Begins."}, "practical": {"uk": "Обережно на гравійному під'їзді. Дотримуйтесь попереджувальних знаків про каменепади.", "en": "Rough gravel access. Respect rockfall warning zones along the eastern lateral moraine."}, "sources": [{"name": "Vatnajökull National Park", "url": "https://www.vatnajokulsthjodgardur.is/en"}]}, {"id": "mulagljufur", "name": {"uk": "Múlagljúfur (Секретний каньйон Hangandifoss)", "en": "Múlagljúfur Canyon & Hangandifoss"}, "region": "glaciers", "type": {"uk": "Секретний каньйон з водоспадами", "en": "Hidden Canyon & High Falls"}, "icon": "🏞️", "lat": 63.9897, "lng": -16.4358, "radius": 2000, "badge": "Secret Gem", "vector": {"uk": "Гравійна дорога перед Fjallsárlón", "en": "Unmarked gravel track before Fjallsárlón"}, "geology": {"uk": "Грандіозний зелений каньйон глибиною 200 м з двома водоспадами: Hangandifoss (123 м) та Múlafoss.", "en": "A colossal moss-carpeted canyon plunging 200m, split by Hangandifoss (123m) and Múlafoss torrents."}, "saga": {"uk": "Один із найдикіших та найнезайманіших куточків південного сходу Ісландії.", "en": "One of Iceland's most pristine wild gorges, known only to local sheep herders until recently."}, "practical": {"uk": "Авто з високим кліренсом та 1.5–2 години пішого треку вгору схилом.", "en": "High-clearance car recommended. 1.5 to 2-hour moderate uphill hike."}, "sources": [{"name": "Vatnajökull Park", "url": "https://www.vatnajokulsthjodgardur.is/en"}]}, {"id": "jokulsarlon", "name": {"uk": "Jökulsárlón & Diamond Beach", "en": "Jökulsárlón & Diamond Beach"}, "region": "glaciers", "type": {"uk": "Must-See • UNESCO", "en": "Must-See • Glacier Lagoon"}, "icon": "📍", "lat": 64.0484, "lng": -16.1795, "radius": 3500, "badge": "Global Wonder", "vector": {"uk": "Обабіч мосту на Трасі 1", "en": "Spanning both sides of Route 1 bridge"}, "geology": {"uk": "Найглибша лагуна Ісландії (284 м). Тисячолітні блакитні айсберги дрейфують через протоку на чорний Діамантовий пляж.", "en": "Iceland's deepest lagoon (284m). Millennia-old icebergs drift through the channel onto Diamond Beach."}, "saga": {"uk": "Знімальний майданчик світових фільмів про Джеймса Бонда, Лару Крофт та Бетмена.", "en": "Cinematic location for two James Bond films, Lara Croft, and Batman Begins."}, "practical": {"uk": "Категорично заборонено залазити на крижини у прибої (смертельна небезпека відпливної хвилі!).", "en": "Never climb onto ice blocks in the tidal wash; rogue waves can instantly sweep ice out to sea."}, "sources": [{"name": "Vatnajökull National Park", "url": "https://www.vatnajokulsthjodgardur.is/en"}]}, {"id": "vestrahorn", "name": {"uk": "Vestrahorn & Stokksnes (Скелі Бетмена)", "en": "Vestrahorn & Stokksnes"}, "region": "eastfjords", "type": {"uk": "Культова фотолокація • Габро", "en": "Iconic Jagged Peaks"}, "icon": "🌊", "lat": 64.2417, "lng": -14.975, "radius": 2000, "badge": "Photographer Dream", "vector": {"uk": "Півострів Stokksnes за Höfn", "en": "Stokksnes peninsula past Höfn"}, "geology": {"uk": "Гора заввишки 454 м з рідкісної магматичної породи габро (gabbro) віком 8–11 млн років.", "en": "A 454-meter mountain composed of plutonic gabbro and granophyre dating 8–11 million years."}, "saga": {"uk": "Повнорозмірне кінематографічне село вікінгів з дерновими дахами на узбережжі.", "en": "Features an authentic full-scale cinematic Viking village film set on the black dunes."}, "practical": {"uk": "В'їзд платний через кафе Viking Café. Дзеркальні кадри виходять під час відпливу у мокрому піску.", "en": "Private access fee payable at Viking Café. Mirror reflection shots best achieved at low tide."}, "sources": [{"name": "Visit East Iceland", "url": "https://www.east.is"}]}, {"id": "folaldafoss", "name": {"uk": "Folaldafoss & перевал Öxi (Траса 939)", "en": "Folaldafoss & Öxi Mountain Pass"}, "region": "eastfjords", "type": {"uk": "Гірський водоспад на перевалі", "en": "Mountain Pass Cascade"}, "icon": "💧", "lat": 64.795, "lng": -14.5422, "radius": 2000, "badge": "Mountain Pass", "vector": {"uk": "Крутий перевал Траси 939", "en": "Route 939 steep gravel pass"}, "geology": {"uk": "Водоспад у дикій скельній долині, що зрізає 60 км шляху навколо фіордів.", "en": "Dramatic cataract on the mountain pass of Öxi (Route 939), shortcutting 60 km of fjords."}, "saga": {"uk": "Стародавній піший кінний шлях торговців та рибалок східного узбережжя.", "en": "Historical pack-horse trade trail traversed by local fishermen and inland communities."}, "practical": {"uk": "Траса 939 крута (до 17% нахилу), взимку часто закрита снігом. Влітку доступна для звичайних авто.", "en": "Gravel road with steep 17% gradients; frequently closed in winter. Accessible in summer."}, "sources": [{"name": "Visit East", "url": "https://www.east.is"}]}, {"id": "seydisfjordur", "name": {"uk": "Seyðisfjörður & Gufufoss (Райдужне містечко)", "en": "Seyðisfjörður & Gufufoss Waterfall"}, "region": "eastfjords", "type": {"uk": "Арт-столиця фіордів", "en": "Arts Capital of the Fjords"}, "icon": "🏛️", "lat": 65.26, "lng": -14.01, "radius": 2000, "badge": "Nordic Architecture", "vector": {"uk": "Перевал Fjarðarheiði (Траса 93)", "en": "Fjarðarheiði mountain pass (Route 93)"}, "geology": {"uk": "Вузький океанічний фіорд, де стікає потужний водоспад Gufufoss (Паровий водоспад).", "en": "A steep-walled ocean fjord fed by Gufufoss (Steam Waterfall), sharing similarities to Skógafoss."}, "saga": {"uk": "Норвезькі рибалки збудували тут у XIX ст. дерев'яні будинки. Відоме блакитною кірхою та веселковою доріжкою.", "en": "Settled by Norwegian herring merchants in the 19th century. Renowned for its Blue Church and rainbow street."}, "practical": {"uk": "Порт для щотижневого порома Smyril Line з Данії та Фарерських островів.", "en": "Terminal port for the weekly Smyril Line car ferry from Denmark and the Faroes."}, "sources": [{"name": "Visit Seyðisfjörður", "url": "https://www.visitseydisfjordur.com"}]}, {"id": "studlagil", "name": {"uk": "Stuðlagil Canyon (Базальтовий каньйон)", "en": "Stuðlagil Canyon (Basalt Column Gorge)"}, "region": "eastfjords", "type": {"uk": "Найбільші базальтові колони", "en": "World-Class Basalt Column Gorge"}, "icon": "📍", "lat": 65.1633, "lng": -15.3072, "radius": 2000, "badge": "Geological Sensation", "vector": {"uk": "Долина Jökuldalur • З'їзд з Траси 1", "en": "Jökuldalur Valley • Detour off Route 1"}, "geology": {"uk": "Одне з найбільших скупчень базальтових колон у світі. Відкритий після 2006 року, коли ГЕС Kárahnjúkar відвела каламутну воду.", "en": "One of the world's densest collections of columnar basalt, revealed after the 2006 Kárahnjúkar dam tamed the river."}, "saga": {"uk": "Сучасне геологічне відкриття, що стало світовим хітом соцмереж.", "en": "A modern natural sensation that became a global viral marvel."}, "practical": {"uk": "Західна сторона — оглядовий балкон. Східна сторона — спуск до води біля ферми Klaustursel.", "en": "West bank features a viewing platform; East bank offers a hike leading right down into the gorge."}, "sources": [{"name": "East Iceland", "url": "https://www.east.is"}]}, {"id": "dettifoss", "name": {"uk": "Dettifoss & Selfoss (Найпотужніший у Європі)", "en": "Dettifoss & Selfoss Waterfalls"}, "region": "north", "type": {"uk": "Must-See • Сила природи", "en": "Must-See • Europe's Most Powerful"}, "icon": "💧", "lat": 65.8147, "lng": -16.3846, "radius": 2000, "badge": "Raw Power Icon", "vector": {"uk": "Траса 862 (західний берег)", "en": "Route 862 (West Bank paved)"}, "geology": {"uk": "Найпотужніший водоспад Європи (витрата до 500 м³/с). Ширина 100 м, падіння 44 м у каньйон Jökulsárgljúfur.", "en": "Europe's most powerful waterfall (averaging up to 500 m³/s). 100 meters wide with a 44m drop into Jökulsárgljúfur."}, "saga": {"uk": "Відкриває фільм Рідлі Скотта Прометей (2012) як сцена зародження людського життя.", "en": "Opening scene of Ridley Scott's Prometheus (2012), depicting the Engineer seeding human life on Earth."}, "practical": {"uk": "Західний берег (Траса 862) заасфальтований цілий рік. Східний (Траса 864) — гравійний.", "en": "West Bank (Route 862) is paved and open year-round. East Bank (Route 864) offers raw proximity."}, "sources": [{"name": "Vatnajökull North", "url": "https://www.vatnajokulsthjodgardur.is/en"}]}, {"id": "godafoss", "name": {"uk": "Goðafoss (Водоспад Богів)", "en": "Goðafoss (Waterfall of the Gods)"}, "region": "north", "type": {"uk": "Must-See • Історична святиня", "en": "Must-See • Historic Sanctuary"}, "icon": "💧", "lat": 65.6828, "lng": -17.5502, "radius": 2000, "badge": "Historic Sanctuary", "vector": {"uk": "Траса 1 між Akureyri та Mývatn", "en": "Highway 1 between Akureyri and Mývatn"}, "geology": {"uk": "Підковоподібний водоспад заввишки 12 м і завширшки 30 м на річці Skjálfandafljót.", "en": "Horseshoe-shaped cataract 12 meters high and 30 meters wide on the river Skjálfandafljót."}, "saga": {"uk": "У 1000 році законоговоритель Торгейр після прийняття християнства скинув сюди язичницьких ідолів богів.", "en": "In 1000 AD, law-speaker Þorgeir cast his pagan Norse idols into the boiling torrent after adopting Christianity."}, "practical": {"uk": "Зручний доступ з обох боків річки, просторий паркінг та пішохідні містки.", "en": "Accessible from both banks via footbridges, with spacious visitor facilities."}, "sources": [{"name": "North Iceland", "url": "https://www.northiceland.is"}]}, {"id": "kirkjufell", "name": {"uk": "Kirkjufell & Kirkjufellsfoss", "en": "Kirkjufell & Kirkjufellsfoss Falls"}, "region": "snaefellsnes", "type": {"uk": "Must-See • Ікона Ісландії", "en": "Must-See • Arrowhead Mountain"}, "icon": "📍", "lat": 64.9417, "lng": -23.3069, "radius": 2000, "badge": "Cinematic Icon", "vector": {"uk": "Траса 54 біля Grundarfjörður", "en": "Route 54 near Grundarfjörður"}, "geology": {"uk": "Одинока гора форми наконечника стріли (463 м), складена з шарів базальту та міжльодовикових пісковиків.", "en": "Iconic free-standing 463-meter nunatak shaped like an arrowhead, formed through multiple glacial cycles."}, "saga": {"uk": "У Грі престолів — гора на північ від Стіни, де діти лісу створили першого Білого блукача.", "en": "Featured in Game of Thrones as Arrowhead Mountain, birthplace of the Night King."}, "practical": {"uk": "Платний паркінг. Класичний кадр робиться з верхнього каскаду водоспаду з горою на задньому плані.", "en": "Paid parking via Parka.is. The classic photographic shot is framed across the upper waterfall cascades."}, "sources": [{"name": "Visit West Iceland", "url": "https://www.west.is"}]}, {"id": "fagradalsfjall", "name": {"uk": "Fagradalsfjall & Sundhnúkur (Нові вогні)", "en": "Fagradalsfjall & Sundhnúkur Fires"}, "region": "reykjanes", "type": {"uk": "Активний вулканізм 2021–2026", "en": "Active Rifting Eruptions (2021–2026)"}, "icon": "🌋", "lat": 63.89, "lng": -22.27, "radius": 3500, "badge": "Active Lava Fires", "vector": {"uk": "Півострів Reykjanes біля Grindavík", "en": "Reykjanes Peninsula near Grindavík"}, "geology": {"uk": "Початок нової багатовікової ери тріщинного вулканізму на півострові Рейк'янес після 800 років спокою.", "en": "Initiation of a multi-century rifting cycle on Reykjanes after eight centuries of slumber."}, "saga": {"uk": "Геологічне народження нової поверхні Землі у прямому ефірі на очах сучасників.", "en": "The live birth of fresh planetary crust occurring in real-time before the modern world."}, "practical": {"uk": "Уважно слідкуйте за щоденними попередженнями SafeTravel.is! Смертельна небезпека отруйних газів SO2.", "en": "Always monitor SafeTravel.is bulletins! Major hazard from invisible toxic sulfur dioxide (SO2) gas."}, "sources": [{"name": "Veðurstofa IMO Fires", "url": "https://en.vedur.is"}, {"name": "Catalogue of Volcanoes", "url": "https://icelandicvolcanoes.is"}]}];
 
-    // BILINGUAL DICTIONARY
+    // Route 1 GPS Waypoints (145 coordinates)
+    const WAYPOINTS = [[63.985, -22.6056], [63.96125, -22.5217], [63.9375, -22.4378], [63.91375, -22.3539], [63.89, -22.27], [63.95415, -22.18815], [64.0183, -22.1063], [64.08245, -22.02445], [64.1466, -21.9426], [64.17392, -21.73933], [64.20125, -21.53605], [64.22858, -21.33277], [64.2559, -21.1295], [64.25798, -20.97605], [64.26005, -20.8226], [64.26212, -20.66915], [64.2642, -20.5157], [64.27575, -20.46237], [64.2873, -20.40905], [64.29885, -20.35572], [64.3104, -20.3024], [64.31458, -20.25677], [64.31875, -20.21115], [64.32292, -20.16553], [64.3271, -20.1199], [64.30173, -20.17422], [64.27635, -20.22855], [64.25097, -20.28288], [64.2256, -20.3372], [64.22033, -20.36388], [64.21505, -20.39055], [64.20977, -20.41722], [64.2045, -20.4439], [64.16367, -20.5542], [64.12285, -20.6645], [64.08203, -20.7748], [64.0412, -20.8851], [64.01427, -20.9131], [63.98735, -20.9411], [63.96043, -20.9691], [63.9335, -20.9971], [63.9313, -20.91595], [63.9291, -20.8348], [63.9269, -20.75365], [63.9247, -20.6725], [63.87383, -20.47765], [63.82295, -20.2828], [63.77208, -20.08795], [63.7212, -19.8931], [63.6948, -19.91695], [63.6684, -19.9408], [63.642, -19.96465], [63.6156, -19.9885], [63.59472, -19.90495], [63.57385, -19.8214], [63.55298, -19.73785], [63.5321, -19.6543], [63.5321, -19.61857], [63.5321, -19.58285], [63.5321, -19.54712], [63.5321, -19.5114], [63.53173, -19.47612], [63.53135, -19.44085], [63.53097, -19.40557], [63.5306, -19.3703], [63.4985, -19.3103], [63.4664, -19.2503], [63.4343, -19.1903], [63.4022, -19.1303], [63.40308, -19.11562], [63.40395, -19.10095], [63.40483, -19.08628], [63.4057, -19.0716], [63.47318, -18.84015], [63.54065, -18.6087], [63.60813, -18.37725], [63.6756, -18.1458], [63.69953, -18.1523], [63.72345, -18.1588], [63.74737, -18.1653], [63.7713, -18.1718], [63.81847, -18.00635], [63.86565, -17.8409], [63.91282, -17.67545], [63.96, -17.51], [63.97687, -17.37633], [63.99375, -17.24265], [64.01063, -17.10898], [64.0275, -16.9753], [64.0227, -16.9523], [64.0179, -16.9293], [64.0131, -16.9063], [64.0083, -16.8833], [64.00365, -16.77143], [63.999, -16.65955], [63.99435, -16.54767], [63.9897, -16.4358], [64.00437, -16.37173], [64.01905, -16.30765], [64.03373, -16.24357], [64.0484, -16.1795], [64.09672, -15.87838], [64.14505, -15.57725], [64.19338, -15.27613], [64.2417, -14.975], [64.38002, -14.8668], [64.51835, -14.7586], [64.65668, -14.6504], [64.795, -14.5422], [64.91125, -14.40915], [65.0275, -14.2761], [65.14375, -14.14305], [65.26, -14.01], [65.23583, -14.3343], [65.21165, -14.6586], [65.18748, -14.9829], [65.1633, -15.3072], [65.32615, -15.57655], [65.489, -15.8459], [65.65185, -16.11525], [65.8147, -16.3846], [65.78172, -16.676], [65.74875, -16.9674], [65.71578, -17.2588], [65.6828, -17.5502], [65.68297, -17.68913], [65.68315, -17.82805], [65.68332, -17.96697], [65.6835, -18.1059], [65.67762, -18.64943], [65.67175, -19.19295], [65.66587, -19.73647], [65.66, -20.28], [65.48042, -21.03673], [65.30085, -21.79345], [65.12127, -22.55017], [64.9417, -23.3069], [64.84085, -22.9608], [64.74, -22.6147], [64.63915, -22.2686], [64.5383, -21.9225], [64.44038, -21.92752], [64.34245, -21.93255], [64.24453, -21.93757], [64.1466, -21.9426]];
+
+    // UI Translation Dictionary
     const I18N = {
       uk: {
-        headerSubtitle: "Професійна платформа контенту, симуляції поїздок та бази даних для мобільного аудіогіда",
-        navSim: "Live Симулятор",
-        navPoi: "База POI & Контент",
-        navRoadmap: "Роадмеп",
-        navExport: "GeoJSON",
-        navEncyclo: "Енциклопедія Джерел",
-        simStart: "Запустити тест поїздки",
-        simPause: "Пауза симуляції",
-        simResume: "Продовжити поїздку",
-        simReset: "Скинути",
-        simRouteLabel: "Маршрут:",
-        simRouteName: "Золоте кільце & Південне узбережжя (Route 1)",
-        hudSpeed: "Швидкість:",
-        hudBearing: "Азимут:",
-        hudTts: "Озвучка:",
-        hudTtsActive: "Live TTS Увімкнено",
-        mapHeader: "Інтерактивна Карта Тригерів (Route 1 & Golden Circle)",
-        mapTip: "Натисніть будь-яку мітку, щоб прослухати аудіо",
-        legRoute1: "Траса 1 (Route 1)",
-        legGC: "Золоте кільце",
-        legMustSee: "Must-See",
-        legVista: "Dynamic Vista",
-        legSafety: "SafeTravel Попередження",
-        legOffline: "100% Offline Режим",
-        hudGuideTitle: "Smart Road Audio Guide",
-        hudPoiRegion: "Ісландія • Траса 1",
-        hudPoiTitle: "Очікування активації",
-        hudPoiLead: "Вектор огляду: готовий до руху",
-        hudPoiNarrative: "Натисніть зелену кнопку «Запустити тест поїздки» або клікніть будь-яку точку на карті. Автомобіль поїде дорогою, а гід автоматично розповість історію вибраною мовою (UA/EN)!",
-        hudLblRadius: "Радіус активації",
-        hudLblLeadtime: "Випередження (ETA)",
-        hudBtnListen: "Прослухати розповідь голосом",
-        hudEngineStatus: "Web Speech API • Мова: Українська (uk-UA)",
-        tblTitle: "Реєстр локацій та сторітелінгу (POI Catalog)",
-        tblSubtitle: "Ключові тригери Золотого кільця, Південного узбережжя та вулканічних панорам",
-        colLoc: "Локація / Об'єкт",
-        colType: "Тип",
-        colBearing: "Азимут",
-        colRadius: "Радіус (м)",
-        colLead: "Вектор розповіді",
-        colAction: "Дія",
-        btnTest: "Тест",
-        rdmBadge: "Без хаосу • Чіткий алгоритм дій",
-        rdmTitle: "Покроковий план втілення: Від контенту до релізу",
-        rdmSubtitle: "Проект структуровано на 4 послідовні виробничі фази.",
-        expTitle: "Єдиний файл структури даних (GeoJSON Engine)",
-        expSub: "Цей JSON напряму імпортується у Flutter-додаток для обох мов",
-        expBtnCopy: "Скопіювати JSON",
-        copiedAlert: "GeoJSON успішно скопійовано в буфер обміну!"
+        appTitle: "Iceland Smart Road Audio Guide",
+        appSubtitle: "Автономний геоконтекстний аудіогід по трасі №1 та Золотому Кільцю",
+        navStudio: "Інтерактивна Карта",
+        navEncyclo: "Енциклопедія (34 POI)",
+        navB2b: "Бізнес-Модель & API",
+        navPitch: "Презентація 2.0",
+        searchPlaceholder: "Пошук (назва, вулкан, сага, водоспад)...",
+        filterAll: "Всі локації",
+        filterGc: "Золоте кільце",
+        filterSouth: "Південь",
+        filterGlaciers: "Льодовики",
+        filterEast: "Схід",
+        filterNorth: "Північ",
+        filterVistas: "Каньйони",
+        startSim: "Старт Тест-Драйву",
+        pauseSim: "Пауза Тест-Драйву",
+        speed: "Швидкість:",
+        layersTitle: "ШАРИ КАРТИ",
+        carStatus: "🚗 НА МАРШРУТІ:",
+        closestPoi: "Найближчий:",
+        speedUnit: "км/год",
+        footerReady: "34 POI готові до геофіксації",
+        focusBtn: "На карті",
+        guideBtn: "Аудіогід",
+        dossierBtn: "Досьє",
+        distFromCar: "Від авто:",
+        triggerHit: "GEOFENCE HIT",
+        triggerDesc: "Аудіогід активувався автоматично в зоні",
+        modalGeo: "Геологічний Ґенезис & Вулканологія",
+        modalSaga: "Хроніки Саг & Історія Ісландії",
+        modalPrac: "Логістика, Безпека & Регламент",
+        modalSrc: "Офіційні Ліцензовані Джерела:",
+        teleportHere: "Телепортувати авто сюди",
+        closeModal: "Закрити",
+        audioPlaying: "Відтворюється Web Speech API...",
+        audioReady: "Готовий до відтворення"
       },
       en: {
-        headerSubtitle: "Professional content management, drive simulation, and database platform for the smart audio guide app",
-        navSim: "Live Simulator",
-        navPoi: "POI Database",
-        navRoadmap: "Roadmap",
-        navExport: "GeoJSON",
-        navEncyclo: "Sources Encyclopedia",
-        simStart: "Start Drive Simulation",
-        simPause: "Pause Simulation",
-        simResume: "Resume Drive",
-        simReset: "Reset",
-        simRouteLabel: "Route:",
-        simRouteName: "Golden Circle & South Coast (Route 1)",
-        hudSpeed: "Speed:",
-        hudBearing: "Heading:",
-        hudTts: "Voice Engine:",
-        hudTtsActive: "Live TTS Active",
-        mapHeader: "Interactive Trigger Map (Route 1 & Golden Circle)",
-        mapTip: "Click any pin to preview dynamic audio narration",
-        legRoute1: "Route 1 (Ring Road)",
-        legGC: "Golden Circle Loop",
-        legMustSee: "Must-See Sights",
-        legVista: "Dynamic Vista",
-        legSafety: "SafeTravel Warning",
-        legOffline: "100% Offline-Ready",
-        hudGuideTitle: "Smart Road Audio Guide",
-        hudPoiRegion: "Iceland • Highway 1",
-        hudPoiTitle: "Awaiting Trigger Activation",
-        hudPoiLead: "View vector: ready for departure",
-        hudPoiNarrative: "Click the green 'Start Drive Simulation' button or click any point on the map. The car will navigate the route and the guide will automatically narrate in English or Ukrainian!",
-        hudLblRadius: "Trigger Radius",
-        hudLblLeadtime: "Lead Time (ETA)",
-        hudBtnListen: "Listen to Voice Narration",
-        hudEngineStatus: "Web Speech API • Language: English (en-US)",
-        tblTitle: "Locations & Storytelling Registry (POI Catalog)",
-        tblSubtitle: "Key GPS triggers for Golden Circle, South Coast, and Volcanic Vistas",
-        colLoc: "Location / Landmark",
-        colType: "Type",
-        colBearing: "Heading",
-        colRadius: "Radius (m)",
-        colLead: "Narrative Lead-In",
-        colAction: "Action",
-        btnTest: "Preview",
-        rdmBadge: "No Chaos • Disciplined Execution Plan",
-        rdmTitle: "Step-by-Step Implementation: From Content to Release",
-        rdmSubtitle: "The project is structured into 4 sequential production phases.",
-        expTitle: "Unified Spatial Data Engine (GeoJSON Export)",
-        expSub: "This production JSON feeds directly into the cross-platform Flutter app",
-        expBtnCopy: "Copy GeoJSON",
-        copiedAlert: "GeoJSON copied to clipboard successfully!"
+        appTitle: "Iceland Smart Road Audio Guide",
+        appSubtitle: "Autonomous Geo-Contextual Audio Guide along Route 1 & Golden Circle",
+        navStudio: "Interactive Map",
+        navEncyclo: "Encyclopedia (34 POIs)",
+        navB2b: "Business Model & API",
+        navPitch: "Pitch Presentation",
+        searchPlaceholder: "Search (name, volcano, saga, waterfall)...",
+        filterAll: "All Locations",
+        filterGc: "Golden Circle",
+        filterSouth: "South Coast",
+        filterGlaciers: "Glaciers",
+        filterEast: "Eastfjords",
+        filterNorth: "North",
+        filterVistas: "Canyons",
+        startSim: "Start Test Drive",
+        pauseSim: "Pause Test Drive",
+        speed: "Speed:",
+        layersTitle: "MAP LAYERS",
+        carStatus: "🚗 ON ROUTE:",
+        closestPoi: "Closest:",
+        speedUnit: "km/h",
+        footerReady: "34 POIs locked with geofencing",
+        focusBtn: "Focus Map",
+        guideBtn: "Play Audio",
+        dossierBtn: "Dossier",
+        distFromCar: "From car:",
+        triggerHit: "GEOFENCE HIT",
+        triggerDesc: "Audio guide triggered automatically within",
+        modalGeo: "Geological Genesis & Volcanology",
+        modalSaga: "Saga Chronicles & Icelandic History",
+        modalPrac: "Logistics, Safety & Regulations",
+        modalSrc: "Verified Official Sources:",
+        teleportHere: "Teleport car here",
+        closeModal: "Close",
+        audioPlaying: "Playing via Web Speech API...",
+        audioReady: "Ready to stream"
       }
     };
 
-    // BILINGUAL POI DATABASE
-    const POIS = [
-  {
-    "id": "thingvellir",
-    "name": {
-      "uk": "Þingvellir (Тінґветлір)",
-      "en": "Þingvellir National Park"
-    },
-    "type": {
-      "uk": "Must-See • UNESCO",
-      "en": "Must-See • UNESCO"
-    },
-    "tour": "golden_circle",
-    "coords": {
-      "x": 235,
-      "y": 320,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Прямо за курсом • Траса 36",
-      "en": "Straight ahead • Route 36"
-    },
-    "text": {
-      "uk": "Прямо за курсом • Траса 36! Гігантська ущелина Almannagjá на стику Північноамериканської та Євразійської плит. Розходження до 2 см/рік. Озеро Þingvallavatn — найбільше в країні з 4 підвидами гольця. У 930 році вікінги заснували перший у світі парламент — Альтинг (Alþingi). Тут приймали Хрещення Ісландії (1000 р.) та проголосили Республіку (1944 р.). Паркінг P1 (оплата Parka.is). Оглядовий майданчик Hakið. Дрони суворо заборонені над усім парком.",
-      "en": "Straight ahead • Route 36! The Almannagjá fault chasm along the Mid-Atlantic Ridge rift, spreading 2 cm annually. Lake Þingvallavatn is Iceland's largest natural lake with 4 unique Arctic char morphs. In 930 AD, Vikings founded the Alþingi, the world's oldest continuous parliament. Here Christianity was adopted in 1000 AD and the Republic declared in 1944. P1 parking at Hakið center (paid via Parka.is). Drones strictly prohibited throughout the park."
-    },
-    "tag": "UNESCO World Heritage"
-  },
-  {
-    "id": "oxararfoss",
-    "name": {
-      "uk": "Öxarárfoss (Ексараурфосс)",
-      "en": "Öxarárfoss Waterfall"
-    },
-    "type": {
-      "uk": "Прихований водоспад Тінґветліра",
-      "en": "Þingvellir Gorge Waterfall"
-    },
-    "tour": "golden_circle",
-    "coords": {
-      "x": 260,
-      "y": 330,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Усередині каньйону Almannagjá",
-      "en": "Inside Almannagjá Chasm"
-    },
-    "text": {
-      "uk": "Усередині каньйону Almannagjá! Водоспад заввишки 13 м, штучно створений вікінгами у X столітті шляхом зміни русла річки Ексарау для постачання води учасникам парламенту. Згідно зі Sturlunga saga, у басейні водоспаду Drekkingarhylur у Середньовіччі топили жінок, звинувачених у чаклунстві та подружній зраді. 15 хвилин пішки від паркінгу P1 або P2 дерев'яними містками між тектонічними стінами.",
-      "en": "Inside Almannagjá Chasm! A 13-meter cascade man-diverted by 10th-century Vikings from the river Öxará to supply water to assembly participants. Per Sturlunga saga, the nearby Drekkingarhylur pool beneath the falls was historically used for judicial executions by drowning. 15-minute scenic stroll along wooden boardwalks from P1 or P2 parking lots between sheer basalt cliffs."
-    },
-    "tag": "Hidden Waterfall"
-  },
-  {
-    "id": "geysir",
-    "name": {
-      "uk": "Geysir & Strokkur (Ґейзір)",
-      "en": "Geysir & Strokkur Geothermal Field"
-    },
-    "type": {
-      "uk": "Must-See • Геотермальне поле",
-      "en": "Must-See • Geothermal Area"
-    },
-    "tour": "golden_circle",
-    "coords": {
-      "x": 290,
-      "y": 305,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Попереду долина Haukadalur • Траса 35",
-      "en": "Haukadalur Valley ahead • Route 35"
-    },
-    "text": {
-      "uk": "Попереду долина Haukadalur • Траса 35! Температура підземного резервуара >125°C. Строккюр вистрілює стовп киплячої води на 15–20 м кожні 6–10 хв через закипання води в каналі при падінні тиску. Великий Ґейзір дав назву всім подібним джерелам на Землі. Перша письмова згадка — 1294 рік після сильного землетрусу. Стійте тільки з навітряного боку, щоб уникнути опіків паром. Не торкайтеся води в струмках (до 100°C).",
-      "en": "Haukadalur Valley ahead • Route 35! Subsurface reservoir exceeds 125°C. Strokkur erupts boiling water 15–20m every 6–10 minutes due to rapid steam flash upon pressure drop. The Great Geysir gave its name to all geysers worldwide. Earliest documented record dates to 1294 after a massive quake. Always stand upwind to avoid scalding steam. Never touch outflow streams (temperatures up to 100°C)."
-    },
-    "tag": "Geothermal Icon"
-  },
-  {
-    "id": "gullfoss",
-    "name": {
-      "uk": "Gullfoss (Золотий водоспад)",
-      "en": "Gullfoss (The Golden Falls)"
-    },
-    "type": {
-      "uk": "Must-See • Водоспад",
-      "en": "Must-See • Canyon Waterfall"
-    },
-    "tour": "golden_circle",
-    "coords": {
-      "x": 325,
-      "y": 300,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Праворуч каньйон річки Hvíta",
-      "en": "To your right • Hvíta River Canyon"
-    },
-    "text": {
-      "uk": "Праворуч каньйон річки Hvíta! Двоступеневий каскад (11 м і 21 м) у 70-метровому базальтовому каньйоні. Живиться льодовиковими талими водами масиву Langjökull. Сіґріудюр Тоумасдоуттір захистила водоспад у 1920-х від будівництва гідроелектростанції, ставши першою еко-героїнею Ісландії. Взимку нижня стежка покривається суцільним льодом — обов'язкові шипи (microspikes). Влітку — дощовик.",
-      "en": "To your right • Hvíta River Canyon! A two-stage waterfall (11m and 21m) dropping into a 70m canyon, fed by meltwater from Langjökull ice cap. Sigríður Tómasdóttir saved the falls in the 1920s by resisting hydroelectric exploitation, cementing her legacy as Iceland's first environmentalist. Winter path freezes over — microspikes required. Summer visits require waterproof gear against mist."
-    },
-    "tag": "Glacier River"
-  },
-  {
-    "id": "bruarfoss",
-    "name": {
-      "uk": "Brúarfoss (Блакитний водоспад)",
-      "en": "Brúarfoss (Cyan Waterfall)"
-    },
-    "type": {
-      "uk": "Секретний блакитний водоспад",
-      "en": "Secret Cyan Cascade"
-    },
-    "tour": "golden_circle",
-    "coords": {
-      "x": 275,
-      "y": 315,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Відгалуження біля Траси 37",
-      "en": "Detour off Route 37"
-    },
-    "text": {
-      "uk": "Відгалуження біля Траси 37! Яскравий бірюзово-блакитний колір води, яка збігає сотнями дрібних каскадів у глибоку розколину посеред річки Brúará. Назва Міст-водоспад. У 1602 році службовець єпископа зламав кам'яний природний міст, щоб голодуючі селяни не йшли просити милостиню. Нещодавно відкрито новий платний паркінг прямо біля водоспаду, підхід займає лише 5 хвилин.",
-      "en": "Detour off Route 37! Luminous turquoise-cyan hue resulting from glacial sediment and water funneling into a narrow volcanic cleft. Name translates to Bridge Falls. In 1602, a bishop's steward destroyed the natural stone arch to deter famine-stricken beggars. A new official paid parking lot opened nearby, reducing the hike to just 5 minutes."
-    },
-    "tag": "Hidden Gem"
-  },
-  {
-    "id": "faxi",
-    "name": {
-      "uk": "Faxi (Vatnsleysufoss)",
-      "en": "Faxi Waterfall (Vatnsleysufoss)"
-    },
-    "type": {
-      "uk": "Широкий лососевий водоспад",
-      "en": "Wide Salmon Cascade"
-    },
-    "tour": "golden_circle",
-    "coords": {
-      "x": 260,
-      "y": 330,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Траса 35 між Geysir та Reykholt",
-      "en": "Route 35 between Geysir and Reykholt"
-    },
-    "text": {
-      "uk": "Траса 35 між Geysir та Reykholt! Широкий каскад завширшки 80 м і заввишки 7 м на річці Tungufljót. Обладнаний штучними лососевими сходами для нересту риби. Традиційне місце риболовлі ісландських селян протягом століть. Затишне кафе з терасою над водоспадом. Набагато менше натовпу, ніж біля Ґульфосса.",
-      "en": "Route 35 between Geysir and Reykholt! An 80-meter wide, 7-meter high waterfall on the Tungufljót river equipped with a constructed salmon ladder. Centuries-old salmon fishing spot for local farming communities. Peaceful restaurant with an outdoor terrace overlooking the river, far less crowded than Gullfoss."
-    },
-    "tag": "Scenic Detour"
-  },
-  {
-    "id": "fridheimar",
-    "name": {
-      "uk": "Friðheimar (Геотермальна томатна ферма)",
-      "en": "Friðheimar Geothermal Greenhouse"
-    },
-    "type": {
-      "uk": "Агротуризм & Гастрономія",
-      "en": "Geothermal Culinary Farm"
-    },
-    "tour": "golden_circle",
-    "coords": {
-      "x": 260,
-      "y": 330,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Селище Reykholt • Траса 35",
-      "en": "Reykholt Village • Route 35"
-    },
-    "text": {
-      "uk": "Селище Reykholt • Траса 35! Опалення чистою водою з геотермальних свердловин температурою 95°C та 100% зелена електроенергія від ГЕС. Вирощують томати посеред ісландської зими, використовуючи імпортованих джмелів для природного запилення. Столики на обід (томатний суп та свіжий хліб) обов'язково бронювати за кілька тижнів наперед.",
-      "en": "Reykholt Village • Route 35! Powered by 95°C water from on-site geothermal boreholes and 100% green hydroelectric energy. Cultivates fresh tomatoes year-round under arctic winters utilizing imported Dutch bumblebees for pollination. Reservations for their famous tomato soup buffet must be booked weeks in advance."
-    },
-    "tag": "Geothermal Gastronomy"
-  },
-  {
-    "id": "kerid",
-    "name": {
-      "uk": "Kerið (Кратерне озеро Керід)",
-      "en": "Kerið Volcanic Crater Lake"
-    },
-    "type": {
-      "uk": "Вулканічна кальдера",
-      "en": "Volcanic Scoria Crater"
-    },
-    "tour": "golden_circle",
-    "coords": {
-      "x": 260,
-      "y": 330,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Траса 35 між Selfoss та Reykholt",
-      "en": "Route 35 between Selfoss and Reykholt"
-    },
-    "text": {
-      "uk": "Траса 35 між Selfoss та Reykholt! Кальдера віком ~3000 років у системі Grímsnes. Стіни складені з червоного пористого базальтового шлаку (scoria), озеро живиться підземними водами. У фольклорі вважалося бездонним і сполученим з підземними океанічними глибинами. Вхід платний (приватна земля, ~450–600 ISK). Є стежки як по гребеню, так і вниз до води.",
-      "en": "Route 35 between Selfoss and Reykholt! A 3,000-year-old crater caldera in the Grímsnes system. Red volcanic scoria walls encircle an aquifer-fed turquoise lake. Folklore held that the lake was bottomless and connected to the deep sea. Small admission fee (~450-600 ISK) on private land. Trails encircle the rim and lead down to water level."
-    },
-    "tag": "Volcanic Caldera"
-  },
-  {
-    "id": "hjalparfoss",
-    "name": {
-      "uk": "Hjálparfoss (Водоспад Злиття річок)",
-      "en": "Hjálparfoss Waterfall"
-    },
-    "type": {
-      "uk": "Подвійний водоспад у лаві",
-      "en": "Twin River Basalt Falls"
-    },
-    "tour": "golden_circle",
-    "coords": {
-      "x": 260,
-      "y": 330,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Долина Þjórsárdalur • Траса 32 біля підніжжя Гекли",
-      "en": "Þjórsárdalur Valley • Route 32 near Hekla"
-    },
-    "text": {
-      "uk": "Долина Þjórsárdalur • Траса 32 біля підніжжя Гекли! Унікальне місце, де дві річки Fossá та Rauðá зливаються у подвійний водоспад посеред базальтових стовпів лавового поля Búrfell. Назва означає Водоспад допомоги — саме тут втомлені мандрівники після небезпечного переходу пустелею Sprengisandur знаходили першу воду і траву для коней. Зручний асфальтований під'їзд, чудове місце для пікніка з видом на вулкан Búrfell.",
-      "en": "Þjórsárdalur Valley • Route 32 near Hekla! A twin cascade where the rivers Fossá and Rauðá merge over curved basalt columns in the Búrfell lava field. Name translates to Helping Falls — exhausted travelers crossing the harsh Sprengisandur desert found water and grazing for horses here. Easy paved access with picnic tables and panoramic views toward Mt. Búrfell."
-    },
-    "tag": "Þjórsárdalur Gem"
-  },
-  {
-    "id": "urridafoss",
-    "name": {
-      "uk": "Urriðafoss (Найбільш повноводний водоспад)",
-      "en": "Urriðafoss (Most Voluminous Falls)"
-    },
-    "type": {
-      "uk": "Гігантська річкова міць",
-      "en": "High-Volume Cascade"
-    },
-    "tour": "south_coast",
-    "coords": {
-      "x": 380,
-      "y": 395,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Траса 1 між Selfoss та Hella",
-      "en": "Highway 1 between Selfoss and Hella"
-    },
-    "text": {
-      "uk": "Траса 1 між Selfoss та Hella! Найбільш повноводний водоспад Ісландії (витрата води ~360 м³/с) на найдовшій річці Þjórsá, що тече через найбільше лавове поле країни Þjórsárhraun. Історичне місце лову лосося та форелі (Urriði — струмкова форель). Паркінг безкоштовний прямо біля Траси 1, 2 хвилини пішки до оглядового майданчика.",
-      "en": "Highway 1 between Selfoss and Hella! Most voluminous waterfall in Iceland (~360 m³/s) on the Þjórsá River, roaring across the great prehistoric Þjórsárhraun lava field. Historically renowned for trout and salmon fishing (Urriði translates to brown trout). Free parking right off Ring Road, 2-minute stroll to the viewpoint."
-    },
-    "tag": "Hydropower Giant"
-  },
-  {
-    "id": "gluggafoss",
-    "name": {
-      "uk": "Gluggafoss / Merkjárfoss (Віконний водоспад)",
-      "en": "Gluggafoss / Merkjárfoss (Window Falls)"
-    },
-    "type": {
-      "uk": "Секретний скельний водоспад",
-      "en": "Geological Window Phenomenon"
-    },
-    "tour": "south_coast",
-    "coords": {
-      "x": 380,
-      "y": 395,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Траса 261 за Hvolsvöllur у долині Fljótshlíð",
-      "en": "Route 261 past Hvolsvöllur in Fljótshlíð"
-    },
-    "text": {
-      "uk": "Траса 261 за Hvolsvöllur у долині Fljótshlíð! Вода пробила арки та вікна (gluggar) крізь м'який вулканічний туф палеозою, через які потік виривається назовні. Серце земель Саги про Ньяла. Саме тут герой Ґуннар подивився на квітучі схили Fljótshlíð і відмовився від вигнання, обравши смерть. Асфальтована спокійна дорога, без натовпу туристів, ідеальна зупинка для фото.",
-      "en": "Route 261 past Hvolsvöllur in Fljótshlíð! Water has bored natural arches and windows (gluggar) through soft volcanic palagonite tuff, cascading through the openings. Heart of Njáls Saga country. Here the hero Gunnar turned back from exile, declaring Fair is the hillside, sealing his doomed fate. Smooth paved detour, very quiet without tourist buses, excellent photographic opportunities."
-    },
-    "tag": "Secret Gem"
-  },
-  {
-    "id": "seljalandsfoss",
-    "name": {
-      "uk": "Seljalandsfoss (Водоспад з гротом)",
-      "en": "Seljalandsfoss Waterfall"
-    },
-    "type": {
-      "uk": "Must-See • Водоспад",
-      "en": "Must-See • 360° Walk-Behind"
-    },
-    "tour": "south_coast",
-    "coords": {
-      "x": 370,
-      "y": 395,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Ліворуч біля самої Траси 1",
-      "en": "Left off Highway 1"
-    },
-    "text": {
-      "uk": "Ліворуч біля самої Траси 1! Падіння з 60 м із колишніх морських кліфів. Простора скельна порожнина дозволяє обійти водоспад по колу. Орієнтир для середньовічних мореплавців з боку Атлантичного океану. Платний паркінг (Parka.is). Обов'язковий дощовик. Взимку стежка позаду закрита через бурульки.",
-      "en": "Left off Highway 1! Plunges 60 meters over former ocean cliffs. A spacious cavern allows visitors to walk completely behind the veil. Served as an ancient navigational landmark for coastal seafarers sailing along the southern sands. Paid parking via Parka.is. Waterproof gear mandatory. Behind-the-falls trail closed in winter due to icefall hazards."
-    },
-    "tag": "Iconic Falls"
-  },
-  {
-    "id": "gljufrabui",
-    "name": {
-      "uk": "Gljúfrabúi (Таємний печерний водоспад)",
-      "en": "Gljúfrabúi (Secret Gorge Waterfall)"
-    },
-    "type": {
-      "uk": "Секретний печерний водоспад",
-      "en": "Hidden Cave Waterfall"
-    },
-    "tour": "south_coast",
-    "coords": {
-      "x": 375,
-      "y": 390,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "600 метрів пішки на північ від Seljalandsfoss",
-      "en": "600m walk north of Seljalandsfoss"
-    },
-    "text": {
-      "uk": "600 метрів пішки на північ від Seljalandsfoss! 40-метровий водоспад, прихований усередині вузької скельної щілини з відкритим верхнім склепінням. Назва перекладається як Той, що мешкає в ущелині. У народі вважався схованкою ельфів. Заходити по слизькому камінню в річищі струмка. Потрібне непромокальне взуття та капюшон!",
-      "en": "600m walk north of Seljalandsfoss! A 40-meter waterfall concealed within a narrow rock chasm with a skylit canyon chamber. Name translates as Dweller of the Gorge. Local folklore considered the hidden cleft a dwelling of elves. Wade carefully across river stepping stones inside the crevice. Waterproof hiking boots and hood essential!"
-    },
-    "tag": "Secret Cave Gem"
-  },
-  {
-    "id": "eyjafjallajokull_farm",
-    "name": {
-      "uk": "Þorvaldseyri & Eyjafjallajökull",
-      "en": "Þorvaldseyri Farm & Eyjafjallajökull View"
-    },
-    "type": {
-      "uk": "Вулканічна панорама",
-      "en": "Volcano Vista & Memorial"
-    },
-    "tour": "vistas",
-    "coords": {
-      "x": 350,
-      "y": 360,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Ліворуч на Трасі 1 перед Skógar",
-      "en": "On the left on Highway 1 before Skógar"
-    },
-    "text": {
-      "uk": "Ліворуч на Трасі 1 перед Skógar! Льодовиковий щит площею 78 км² над стратовулканом, що вивергся у 2010 році. Ферма Торвальдсейрі — символ незламності та відновлення після попелової бурі. Оглядовий майданчик біля дороги з панорамними фотощитами.",
-      "en": "On the left on Highway 1 before Skógar! A 78 km² ice cap resting atop the explosive stratovolcano that famously erupted in April 2010. Þorvaldseyri farm stands as an internationally renowned symbol of agricultural recovery from catastrophic ash. Roadside scenic pull-off equipped with interpretive historical markers."
-    },
-    "tag": "Eruption Memorial"
-  },
-  {
-    "id": "skogafoss",
-    "name": {
-      "uk": "Skógafoss (Водоспад Скоугафосс)",
-      "en": "Skógafoss Waterfall"
-    },
-    "type": {
-      "uk": "Must-See • Водоспад",
-      "en": "Must-See • 60m Power Cascade"
-    },
-    "tour": "south_coast",
-    "coords": {
-      "x": 435,
-      "y": 405,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Ліворуч у селищі Skógar",
-      "en": "Left in Skógar village"
-    },
-    "text": {
-      "uk": "Ліворуч у селищі Skógar! Монолітна водяна стіна 25 м завширшки та 60 м заввишки. Густа водяна завіса формує яскраві подвійні веселки. Легенда про скриню з золотом першого вікінга Трасі, заховану за водяною стіною. 370 металевих сходинок ведуть на оглядовий верхній майданчик. Початок треку Fimmvörðuháls.",
-      "en": "Left in Skógar village! A sheer curtain 25 meters broad falling 60 meters. Heavy spray frequently produces vivid double rainbows. Legend holds that the first settler Þrasi buried his chest of gold behind the roaring cascade. 370 stairs climb to the cliff top. Trailhead for the renowned Fimmvörðuháls mountain route."
-    },
-    "tag": "Power Cascade"
-  },
-  {
-    "id": "kvernufoss",
-    "name": {
-      "uk": "Kvernufoss (Таємний каньйонний водоспад)",
-      "en": "Kvernufoss (Hidden Canyon Falls)"
-    },
-    "type": {
-      "uk": "Секретний водоспад за музеєм Скоугар",
-      "en": "Secret Canyon Gem Behind Museum"
-    },
-    "tour": "south_coast",
-    "coords": {
-      "x": 445,
-      "y": 405,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "1 км на схід від Skógafoss за Skógar Museum",
-      "en": "1 km east of Skógafoss behind Skógar Museum"
-    },
-    "text": {
-      "uk": "1 км на схід від Skógafoss за Skógar Museum! 30-метровий водоспад у смарагдовому моховому каньйоні Kvernugil. Можна пройти позаду струменя води, як на Seljalandsfoss, але без натовпу! Назва пов'язана зі стародавніми ручними млинами (kvern), якими мололи зерно мешканці долини. Паркуйтеся біля Skógar Museum (платний паркінг). Легка 15-хвилинна стежка через поле в каньйон.",
-      "en": "1 km east of Skógafoss behind Skógar Museum! A breathtaking 30-meter cascade tucked in the lush mossy gorge of Kvernugil. Visitors can walk completely behind the spray with virtually no crowds! Name refers to ancient hand-turned grain millstones (kvern) once used by early farm settlements. Park at the Skógar Museum lot. A tranquil 15-minute trail leads through a stile and into the canyon."
-    },
-    "tag": "Secret Gem"
-  },
-  {
-    "id": "solheimajokull",
-    "name": {
-      "uk": "Sólheimajökull (Чорний льодовиковий язик)",
-      "en": "Sólheimajökull Glacier Tongue"
-    },
-    "type": {
-      "uk": "Вивідний язик льодовика",
-      "en": "Glacier Tongue & Lagoon"
-    },
-    "tour": "south_coast",
-    "coords": {
-      "x": 380,
-      "y": 395,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Поворот на Трасу 221 з Траси 1",
-      "en": "Turn off Highway 1 onto Route 221"
-    },
-    "text": {
-      "uk": "Поворот на Трасу 221 з Траси 1! Вивідний язик масиву Mýrdalsjökull. Шари чорного вулканічного попелу застигли всередині блакитного льоду, свідчачи про минулі виверження Катли. Наочний підручник глобального потепління: льодовик відступає на десятки метрів щороку, утворивши нове прильодовикове озеро. Вихід на лід суворо заборонений без сертифікованого гіда та льодорубів/кішок через приховані тріщини (crevasses).",
-      "en": "Turn off Highway 1 onto Route 221! An outlet glacier of Mýrdalsjökull showcasing stratified black tephra and ice bands from historical Katla eruptions. A visual benchmark of climate warming: the tongue has retreated hundreds of meters over recent decades, leaving a growing proglacial lake. Walking onto the ice sheet without a certified guide, helmet, and crampons is strictly prohibited due to lethal hidden crevasses."
-    },
-    "tag": "Glacier Hike"
-  },
-  {
-    "id": "dyrholaey",
-    "name": {
-      "uk": "Dyrhólaey (Мис Дірхолей & Арка)",
-      "en": "Dyrhólaey Promontory & Arch"
-    },
-    "type": {
-      "uk": "Природний заповідник • Тупики",
-      "en": "Nature Reserve & Puffin Haven"
-    },
-    "tour": "south_coast",
-    "coords": {
-      "x": 380,
-      "y": 395,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Траса 218 перед Vík",
-      "en": "Route 218 before Vík"
-    },
-    "text": {
-      "uk": "Траса 218 перед Vík! 120-метровий вулканічний мис, утворений підводним виверженням. Гігантська базальтова арка, крізь яку пролітають легкомоторні літаки. Назва означає Острів із дверною діркою. Влітку тут гніздяться десятки тисяч тупиків (атлантичних іпаток). У травні та червні верхнє плато частково закривається для гніздування птахів. Ураганні вітри!",
-      "en": "Route 218 before Vík! A 120-meter volcanic cliff created by submarine eruptions, featuring a colossal natural sea arch wide enough for small aircraft to pass through. Translates to Door Hole Island. Summer nesting sanctuary for thousands of Atlantic puffins. Upper promontory partially restricted during May-June nesting season. Extreme gale winds frequent."
-    },
-    "tag": "Puffin Sanctuary"
-  },
-  {
-    "id": "reynisfjara",
-    "name": {
-      "uk": "Reynisfjara (Чорний пляж Рейнісф'яра)",
-      "en": "Reynisfjara Black Sand Beach"
-    },
-    "type": {
-      "uk": "Must-See • Смертельна небезпека",
-      "en": "Must-See • Sneaker Wave Hazard"
-    },
-    "tour": "south_coast",
-    "coords": {
-      "x": 475,
-      "y": 410,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Траса 215 біля Vík",
-      "en": "Route 215 near Vík"
-    },
-    "text": {
-      "uk": "Траса 215 біля Vík! Чорний пляж зі скелею Garðar — ідеальними шестигранними колонами з охолодженої базальтової лави та морськими кекурами Reynisdrangar. Скелі Reynisdrangar — це застиглі на світанку тролі, які намагалися витягти трищогловий корабель з моря. СНІКЕР-ХВИЛІ ВБИВАЮТЬ! Ніколи не повертайтеся спиною до хвиль. Слідкуйте за сигнальним світлофором (Зелений/Жовтий/Червоний).",
-      "en": "Route 215 near Vík! Jet-black sands flanked by the Garðar columnar basalt cliff and the Reynisdrangar basalt sea stacks. Folklore tells that the offshore stacks are trolls turned to stone by the first rays of the dawn sun. SNEAKER WAVES KILL. Never turn your back on the ocean. Abide strictly by the safety traffic light at the beach entrance."
-    },
-    "tag": "Sneaker Wave Alert"
-  },
-  {
-    "id": "eldhraun",
-    "name": {
-      "uk": "Eldhraun (Лавове поле Лакі 1783)",
-      "en": "Eldhraun (1783 Laki Moss Lava Field)"
-    },
-    "type": {
-      "uk": "Гігантське мохове поле лави",
-      "en": "Massive Moss-Covered Lava"
-    },
-    "tour": "south_coast",
-    "coords": {
-      "x": 380,
-      "y": 395,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Обабіч Траси 1 біля Kirkjubæjarklaustur",
-      "en": "Highway 1 corridor near Klaustur"
-    },
-    "text": {
-      "uk": "Обабіч Траси 1 біля Kirkjubæjarklaustur! Найбільше базальтове лавове поле історичного часу (565 км²), вивержене кратерами Лакі у 1783–1784 рр. Вкрите зеленим мохом. Виверження спричинило голод Móðuharðindin, що забрав чверть населення Ісландії. КАТЕГОРИЧНО ЗАБОРОНЕНО СТУПАТИ НА МОХ! Мох відновлюється до 100 років. Використовуйте оглядові платформи.",
-      "en": "Highway 1 corridor near Klaustur! Largest historical basalt lava flow on Earth (565 km²), produced during the 1783–1784 Laki fires, carpeted in woolly moss. The volcanic haze caused the Móðuharðindin famine, killing 25% of Iceland's population. DO NOT WALK ON THE MOSS. Recovers over a century. Use designated viewing platforms only."
-    },
-    "tag": "Historic Cataclysm"
-  },
-  {
-    "id": "fjadrargljufur",
-    "name": {
-      "uk": "Fjaðrárgljúfur (Каньйон Ф'ядраурглювур)",
-      "en": "Fjaðrárgljúfur Serpentine Canyon"
-    },
-    "type": {
-      "uk": "Казковий каньйон глибиною 100 м",
-      "en": "100m Deep Fairy-Tale Canyon"
-    },
-    "tour": "south_coast",
-    "coords": {
-      "x": 380,
-      "y": 395,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Траса 206 перед Kirkjubæjarklaustur",
-      "en": "Route 206 before Klaustur"
-    },
-    "text": {
-      "uk": "Траса 206 перед Kirkjubæjarklaustur! Звивистий каньйон глибиною 100 м і довжиною 2 км, промитий талими льодовиковими водами у шарах палагоніту 2 млн років тому. Світову вірусну славу каньйону приніс кліп Джастіна Бібера у 2015 році. Паркінг платний. Рухайтеся виключно облаштованими оглядовими майданчиками. Не перелазьте за огорожу.",
-      "en": "Route 206 before Klaustur! A dramatic serpentine canyon 100 meters deep and 2 kilometers long, carved by glacial meltwaters through palagonite. Shot to global fame following Justin Bieber's 2015 music video, prompting protective wooden walkways. Paid parking. Stay strictly on marked boardwalks; never cross safety ropes."
-    },
-    "tag": "Serpentine Gorge"
-  },
-  {
-    "id": "lomagnupur",
-    "name": {
-      "uk": "Скеля Lómagnúpur (Скеля Велетня)",
-      "en": "Lómagnúpur Monolith"
-    },
-    "type": {
-      "uk": "Гігантський моноліт 688 м",
-      "en": "688m Sheer Basalt Monolith"
-    },
-    "tour": "vistas",
-    "coords": {
-      "x": 350,
-      "y": 360,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Посеред чорного сандра Skeiðarársandur",
-      "en": "Rises over Skeiðarársandur outwash plain"
-    },
-    "text": {
-      "uk": "Посеред чорного сандра Skeiðarársandur! Вертикальна 688-метрова стіна з базальтових та туфових шарів, що височіє немов фортеця над безкрайнім чорним піском. Дух-охоронець Ісландії — Велетень із залізною палицею (Bergrisi) мешкає всередині цієї скелі за Сагою про Ньяла. Біля підніжжя є кишеня для фото з відбитком скелі у придорожній водоймі.",
-      "en": "Rises over Skeiðarársandur outwash plain! A colossal 688-meter sheer promontory of stratified basalt and palagonite jutting over black outwash sands. Dwelling of the Giant with the Iron Staff (Bergrisi), one of Iceland's four mythological guardian spirits. Roadside pull-off with a small reflecting pond offering iconic photography angles."
-    },
-    "tag": "Saga Landmark"
-  },
-  {
-    "id": "svartifoss",
-    "name": {
-      "uk": "Svartifoss (Чорний водоспад Skaftafell)",
-      "en": "Svartifoss (The Black Falls)"
-    },
-    "type": {
-      "uk": "Must-See • Базальтові призми",
-      "en": "Must-See • Architectural Icon"
-    },
-    "tour": "glaciers",
-    "coords": {
-      "x": 560,
-      "y": 380,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Національний парк Skaftafell • Траса 1",
-      "en": "Skaftafell, Vatnajökull National Park"
-    },
-    "text": {
-      "uk": "Національний парк Skaftafell • Траса 1! 20-метровий водоспад в оточенні звисаючих чорних базальтових шестигранних призм, схожих на орган. Надихнув архітектора Ґудйоуна Самуельссона на проект церкви Hallgrímskirkja в Рейк'явіку. Паркінг Skaftafell платний. Підйом пішки від візитор-центру займає 40–50 хвилин.",
-      "en": "Skaftafell, Vatnajökull National Park! A 20-meter waterfall cascading against a dark amphitheater of geometric hanging hexagonal basalt columns. Directly inspired State Architect Guðjón Samúelsson in designing Hallgrímskirkja church. Paid parking at Skaftafell Visitor Centre. 45-minute uphill hike on well-graded trails."
-    },
-    "tag": "Architectural Icon"
-  },
-  {
-    "id": "svinafellsjokull",
-    "name": {
-      "uk": "Svínafellsjökull (Льодовик Інтерстеллар)",
-      "en": "Svínafellsjökull Glacier (Interstellar)"
-    },
-    "type": {
-      "uk": "Драматичний крижаний язик",
-      "en": "Cinematic Ice Tongue"
-    },
-    "tour": "glaciers",
-    "coords": {
-      "x": 560,
-      "y": 380,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "З'їзд за Skaftafell",
-      "en": "Turn off Highway 1 past Skaftafell"
-    },
-    "text": {
-      "uk": "З'їзд за Skaftafell! Вузький язик льодовика Ватнайокутль з гострими сераками та глибокими блакитними розколами. Крижана планета Манна у фільмі Інтерстеллар Крістофера Нолана та Бетмен: Початок. Обережно на гравійному під'їзді. Дотримуйтесь попереджувальних знаків про каменепади.",
-      "en": "Turn off Highway 1 past Skaftafell! A heavily crevassed outlet glacier of Vatnajökull bristling with razor-sharp ice seracs. Filming backdrop for Christopher Nolan's Interstellar and Batman Begins. Rough gravel access. Respect rockfall warning zones along the eastern lateral moraine."
-    },
-    "tag": "Sci-Fi Location"
-  },
-  {
-    "id": "mulagljufur",
-    "name": {
-      "uk": "Múlagljúfur (Секретний каньйон Hangandifoss)",
-      "en": "Múlagljúfur Canyon & Hangandifoss"
-    },
-    "type": {
-      "uk": "Секретний каньйон з водоспадами",
-      "en": "Hidden Canyon & High Falls"
-    },
-    "tour": "glaciers",
-    "coords": {
-      "x": 560,
-      "y": 380,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Гравійна дорога перед Fjallsárlón",
-      "en": "Unmarked gravel track before Fjallsárlón"
-    },
-    "text": {
-      "uk": "Гравійна дорога перед Fjallsárlón! Грандіозний зелений каньйон глибиною 200 м з двома водоспадами: Hangandifoss (123 м) та Múlafoss. Один із найдикіших та найнезайманіших куточків південного сходу Ісландії. Авто з високим кліренсом та 1.5–2 години пішого треку вгору схилом.",
-      "en": "Unmarked gravel track before Fjallsárlón! A colossal moss-carpeted canyon plunging 200m, split by Hangandifoss (123m) and Múlafoss torrents. One of Iceland's most pristine wild gorges, known only to local sheep herders until recently. High-clearance car recommended. 1.5 to 2-hour moderate uphill hike."
-    },
-    "tag": "Secret Gem"
-  },
-  {
-    "id": "jokulsarlon",
-    "name": {
-      "uk": "Jökulsárlón & Diamond Beach",
-      "en": "Jökulsárlón & Diamond Beach"
-    },
-    "type": {
-      "uk": "Must-See • UNESCO",
-      "en": "Must-See • Glacier Lagoon"
-    },
-    "tour": "glaciers",
-    "coords": {
-      "x": 600,
-      "y": 385,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Обабіч мосту на Трасі 1",
-      "en": "Spanning both sides of Route 1 bridge"
-    },
-    "text": {
-      "uk": "Обабіч мосту на Трасі 1! Найглибша лагуна Ісландії (284 м). Тисячолітні блакитні айсберги дрейфують через протоку на чорний Діамантовий пляж. Знімальний майданчик світових фільмів про Джеймса Бонда, Лару Крофт та Бетмена. Категорично заборонено залазити на крижини у прибої (смертельна небезпека відпливної хвилі!).",
-      "en": "Spanning both sides of Route 1 bridge! Iceland's deepest lagoon (284m). Millennia-old icebergs drift through the channel onto Diamond Beach. Cinematic location for two James Bond films, Lara Croft, and Batman Begins. Never climb onto ice blocks in the tidal wash; rogue waves can instantly sweep ice out to sea."
-    },
-    "tag": "Global Wonder"
-  },
-  {
-    "id": "vestrahorn",
-    "name": {
-      "uk": "Vestrahorn & Stokksnes (Скелі Бетмена)",
-      "en": "Vestrahorn & Stokksnes"
-    },
-    "type": {
-      "uk": "Культова фотолокація • Габро",
-      "en": "Iconic Jagged Peaks"
-    },
-    "tour": "eastfjords",
-    "coords": {
-      "x": 730,
-      "y": 280,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Півострів Stokksnes за Höfn",
-      "en": "Stokksnes peninsula past Höfn"
-    },
-    "text": {
-      "uk": "Півострів Stokksnes за Höfn! Гора заввишки 454 м з рідкісної магматичної породи габро (gabbro) віком 8–11 млн років. Повнорозмірне кінематографічне село вікінгів з дерновими дахами на узбережжі. В'їзд платний через кафе Viking Café. Дзеркальні кадри виходять під час відпливу у мокрому піску.",
-      "en": "Stokksnes peninsula past Höfn! A 454-meter mountain composed of plutonic gabbro and granophyre dating 8–11 million years. Features an authentic full-scale cinematic Viking village film set on the black dunes. Private access fee payable at Viking Café. Mirror reflection shots best achieved at low tide."
-    },
-    "tag": "Photographer Dream"
-  },
-  {
-    "id": "folaldafoss",
-    "name": {
-      "uk": "Folaldafoss & перевал Öxi (Траса 939)",
-      "en": "Folaldafoss & Öxi Mountain Pass"
-    },
-    "type": {
-      "uk": "Гірський водоспад на перевалі",
-      "en": "Mountain Pass Cascade"
-    },
-    "tour": "eastfjords",
-    "coords": {
-      "x": 730,
-      "y": 280,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Крутий перевал Траси 939",
-      "en": "Route 939 steep gravel pass"
-    },
-    "text": {
-      "uk": "Крутий перевал Траси 939! Водоспад у дикій скельній долині, що зрізає 60 км шляху навколо фіордів. Стародавній піший кінний шлях торговців та рибалок східного узбережжя. Траса 939 крута (до 17% нахилу), взимку часто закрита снігом. Влітку доступна для звичайних авто.",
-      "en": "Route 939 steep gravel pass! Dramatic cataract on the mountain pass of Öxi (Route 939), shortcutting 60 km of fjords. Historical pack-horse trade trail traversed by local fishermen and inland communities. Gravel road with steep 17% gradients; frequently closed in winter. Accessible in summer."
-    },
-    "tag": "Mountain Pass"
-  },
-  {
-    "id": "seydisfjordur",
-    "name": {
-      "uk": "Seyðisfjörður & Gufufoss (Райдужне містечко)",
-      "en": "Seyðisfjörður & Gufufoss Waterfall"
-    },
-    "type": {
-      "uk": "Арт-столиця фіордів",
-      "en": "Arts Capital of the Fjords"
-    },
-    "tour": "eastfjords",
-    "coords": {
-      "x": 730,
-      "y": 280,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Перевал Fjarðarheiði (Траса 93)",
-      "en": "Fjarðarheiði mountain pass (Route 93)"
-    },
-    "text": {
-      "uk": "Перевал Fjarðarheiði (Траса 93)! Вузький океанічний фіорд, де стікає потужний водоспад Gufufoss (Паровий водоспад). Норвезькі рибалки збудували тут у XIX ст. дерев'яні будинки. Відоме блакитною кірхою та веселковою доріжкою. Порт для щотижневого порома Smyril Line з Данії та Фарерських островів.",
-      "en": "Fjarðarheiði mountain pass (Route 93)! A steep-walled ocean fjord fed by Gufufoss (Steam Waterfall), sharing similarities to Skógafoss. Settled by Norwegian herring merchants in the 19th century. Renowned for its Blue Church and rainbow street. Terminal port for the weekly Smyril Line car ferry from Denmark and the Faroes."
-    },
-    "tag": "Nordic Architecture"
-  },
-  {
-    "id": "studlagil",
-    "name": {
-      "uk": "Stuðlagil Canyon (Базальтовий каньйон)",
-      "en": "Stuðlagil Canyon (Basalt Column Gorge)"
-    },
-    "type": {
-      "uk": "Найбільші базальтові колони",
-      "en": "World-Class Basalt Column Gorge"
-    },
-    "tour": "eastfjords",
-    "coords": {
-      "x": 730,
-      "y": 280,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Долина Jökuldalur • З'їзд з Траси 1",
-      "en": "Jökuldalur Valley • Detour off Route 1"
-    },
-    "text": {
-      "uk": "Долина Jökuldalur • З'їзд з Траси 1! Одне з найбільших скупчень базальтових колон у світі. Відкритий після 2006 року, коли ГЕС Kárahnjúkar відвела каламутну воду. Сучасне геологічне відкриття, що стало світовим хітом соцмереж. Західна сторона — оглядовий балкон. Східна сторона — спуск до води біля ферми Klaustursel.",
-      "en": "Jökuldalur Valley • Detour off Route 1! One of the world's densest collections of columnar basalt, revealed after the 2006 Kárahnjúkar dam tamed the river. A modern natural sensation that became a global viral marvel. West bank features a viewing platform; East bank offers a hike leading right down into the gorge."
-    },
-    "tag": "Geological Sensation"
-  },
-  {
-    "id": "dettifoss",
-    "name": {
-      "uk": "Dettifoss & Selfoss (Найпотужніший у Європі)",
-      "en": "Dettifoss & Selfoss Waterfalls"
-    },
-    "type": {
-      "uk": "Must-See • Сила природи",
-      "en": "Must-See • Europe's Most Powerful"
-    },
-    "tour": "north",
-    "coords": {
-      "x": 610,
-      "y": 140,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Траса 862 (західний берег)",
-      "en": "Route 862 (West Bank paved)"
-    },
-    "text": {
-      "uk": "Траса 862 (західний берег)! Найпотужніший водоспад Європи (витрата до 500 м³/с). Ширина 100 м, падіння 44 м у каньйон Jökulsárgljúfur. Відкриває фільм Рідлі Скотта Прометей (2012) як сцена зародження людського життя. Західний берег (Траса 862) заасфальтований цілий рік. Східний (Траса 864) — гравійний.",
-      "en": "Route 862 (West Bank paved)! Europe's most powerful waterfall (averaging up to 500 m³/s). 100 meters wide with a 44m drop into Jökulsárgljúfur. Opening scene of Ridley Scott's Prometheus (2012), depicting the Engineer seeding human life on Earth. West Bank (Route 862) is paved and open year-round. East Bank (Route 864) offers raw proximity."
-    },
-    "tag": "Raw Power Icon"
-  },
-  {
-    "id": "godafoss",
-    "name": {
-      "uk": "Goðafoss (Водоспад Богів)",
-      "en": "Goðafoss (Waterfall of the Gods)"
-    },
-    "type": {
-      "uk": "Must-See • Історична святиня",
-      "en": "Must-See • Historic Sanctuary"
-    },
-    "tour": "north",
-    "coords": {
-      "x": 460,
-      "y": 145,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Траса 1 між Akureyri та Mývatn",
-      "en": "Highway 1 between Akureyri and Mývatn"
-    },
-    "text": {
-      "uk": "Траса 1 між Akureyri та Mývatn! Підковоподібний водоспад заввишки 12 м і завширшки 30 м на річці Skjálfandafljót. У 1000 році законоговоритель Торгейр після прийняття християнства скинув сюди язичницьких ідолів богів. Зручний доступ з обох боків річки, просторий паркінг та пішохідні містки.",
-      "en": "Highway 1 between Akureyri and Mývatn! Horseshoe-shaped cataract 12 meters high and 30 meters wide on the river Skjálfandafljót. In 1000 AD, law-speaker Þorgeir cast his pagan Norse idols into the boiling torrent after adopting Christianity. Accessible from both banks via footbridges, with spacious visitor facilities."
-    },
-    "tag": "Historic Sanctuary"
-  },
-  {
-    "id": "kirkjufell",
-    "name": {
-      "uk": "Kirkjufell & Kirkjufellsfoss",
-      "en": "Kirkjufell & Kirkjufellsfoss Falls"
-    },
-    "type": {
-      "uk": "Must-See • Ікона Ісландії",
-      "en": "Must-See • Arrowhead Mountain"
-    },
-    "tour": "snaefellsnes",
-    "coords": {
-      "x": 145,
-      "y": 235,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Траса 54 біля Grundarfjörður",
-      "en": "Route 54 near Grundarfjörður"
-    },
-    "text": {
-      "uk": "Траса 54 біля Grundarfjörður! Одинока гора форми наконечника стріли (463 м), складена з шарів базальту та міжльодовикових пісковиків. У Грі престолів — гора на північ від Стіни, де діти лісу створили першого Білого блукача. Платний паркінг. Класичний кадр робиться з верхнього каскаду водоспаду з горою на задньому плані.",
-      "en": "Route 54 near Grundarfjörður! Iconic free-standing 463-meter nunatak shaped like an arrowhead, formed through multiple glacial cycles. Featured in Game of Thrones as Arrowhead Mountain, birthplace of the Night King. Paid parking via Parka.is. The classic photographic shot is framed across the upper waterfall cascades."
-    },
-    "tag": "Cinematic Icon"
-  },
-  {
-    "id": "fagradalsfjall",
-    "name": {
-      "uk": "Fagradalsfjall & Sundhnúkur (Нові вогні)",
-      "en": "Fagradalsfjall & Sundhnúkur Fires"
-    },
-    "type": {
-      "uk": "Активний вулканізм 2021–2026",
-      "en": "Active Rifting Eruptions (2021–2026)"
-    },
-    "tour": "reykjanes",
-    "coords": {
-      "x": 175,
-      "y": 395,
-      "lat": 64.0,
-      "lng": -20.0
-    },
-    "bearing": 105,
-    "radius": 1500,
-    "lead": {
-      "uk": "Півострів Reykjanes біля Grindavík",
-      "en": "Reykjanes Peninsula near Grindavík"
-    },
-    "text": {
-      "uk": "Півострів Reykjanes біля Grindavík! Початок нової багатовікової ери тріщинного вулканізму на півострові Рейк'янес після 800 років спокою. Геологічне народження нової поверхні Землі у прямому ефірі на очах сучасників. Уважно слідкуйте за щоденними попередженнями SafeTravel.is! Смертельна небезпека отруйних газів SO2.",
-      "en": "Reykjanes Peninsula near Grindavík! Initiation of a multi-century rifting cycle on Reykjanes after eight centuries of slumber. The live birth of fresh planetary crust occurring in real-time before the modern world. Always monitor SafeTravel.is bulletins! Major hazard from invisible toxic sulfur dioxide (SO2) gas."
-    },
-    "tag": "Active Lava Fires"
-  }
-];
+    let currentLang = 'uk';
+    let currentFilter = 'all';
+    let searchQuery = '';
 
-    // ROADMAP CONTENT DUAL-LANG;
+    // Map & Layers State
+    let map;
+    let baseLayers = {};
+    let currentBaseLayer = 'dark';
+    let poiMarkers = {};
+    let poiCircles = {};
+    let routePolyline;
+    let carMarker;
 
-    // ROADMAP CONTENT DUAL-LANG
-    const ROADMAP_DATA = {
-      uk: [
-        { step: "1", title: "Контент-архітектура та Веб-платформа", timing: "ТИЖНІ 1–2 (Поточний)", desc: "Фіксація перших 50 ключових локацій у єдиному GeoJSON форматі. Вичитка текстів українською та англійською мовами (таймінг 45–75 секунд на розповідь). Валідація веб-студії." },
-        { step: "2", title: "Пакетна озвучка (Audio Pipeline на Mac M4 Pro)", timing: "ТИЖНІ 3–4", desc: "Генерація фінальних високоякісних аудіодоріжок MP3 (ElevenLabs / Kokoro TTS). Нормалізація гучності до -14 LUFS під автомобільну акустику. Офлайн-пакування." },
-        { step: "3", title: "Розробка Мобільного додатку (Flutter Core)", timing: "ТИЖНІ 5–8", desc: "Кросплатформовий каркас iOS / Android на Flutter. Фоновий GPS-трекінг та плавний Audio Ducking (приглушення сторонньої музики). Тестування GPX-симулятором у Xcode на Mac." },
-        { step: "4", title: "B2B Партнерства & Реліз у Store", timing: "ТИЖНІ 9–12", desc: "Публікація в App Store та Google Play ($30 Pass). Підключення 2-3 автопрокатів (Blue Car Rental, CampEasy) за моделлю 50/50 RevShare або флоту за $2,500. Старт сезону." }
-      ],
-      en: [
-        { step: "1", title: "Content Architecture & Web Platform", timing: "WEEKS 1–2 (Current)", desc: "Lock in the first 50 core POIs in unified GeoJSON. Polish scripts in English and Ukrainian (45–75 sec duration). Validate web studio and interactive map." },
-        { step: "2", title: "Batch Audio Mastering (M4 Pro Pipeline)", timing: "WEEKS 3–4", desc: "Generate studio-grade MP3 audio tracks via ElevenLabs / Kokoro TTS. Master volume to -14 LUFS for automotive cabin clarity. Compress for lightweight offline downloads." },
-        { step: "3", title: "Flutter Mobile Engine Development", timing: "WEEKS 5–8", desc: "Cross-platform iOS / Android codebase. Background GPS tracking with zero battery drain, smooth Audio Ducking over Spotify. Xcode GPX route simulations." },
-        { step: "4", title: "B2B Fleet Rollout & Store Launch", timing: "WEEKS 9–12", desc: "Publish to App Store and Google Play ($30 Pass). Onboard 2-3 partner fleets (Blue Car Rental, CampEasy) on 50/50 RevShare or $2,500 fleet flat rate. Season launch." }
-      ]
-    };
+    // Simulation State
+    let isSimulating = false;
+    let simIndex = 0;
+    let simInterval = null;
+    let simSpeed = 5;
+    let currentCarPos = WAYPOINTS[0];
+    let triggeredPois = new Set();
+    let modalActivePoi = null;
 
-    // SET LANGUAGE FUNCTION
-    function setLanguage(lang) {
+    // Haversine formula to compute distance in meters
+    function getDistanceMeters(lat1, lon1, lat2, lon2) {
+      const R = 6371e3;
+      const φ1 = lat1 * Math.PI / 180;
+      const φ2 = lat2 * Math.PI / 180;
+      const Δφ = (lat2 - lat1) * Math.PI / 180;
+      const Δλ = (lon2 - lon1) * Math.PI / 180;
+      const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+                Math.cos(φ1) * Math.cos(φ2) *
+                Math.sin(Δλ/2) * Math.sin(Δλ/2);
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+      return Math.round(R * c);
+    }
+
+    // Initialize Leaflet Map
+    function initMap() {
+      // Create map centered on Iceland
+      map = L.map('map', {
+        center: [64.8, -18.6],
+        zoom: 7,
+        minZoom: 6,
+        maxZoom: 18,
+        zoomControl: false
+      });
+
+      // Zoom control in bottom left
+      L.control.zoom({ position: 'bottomleft' }).addTo(map);
+
+      // Define Base Layers
+      baseLayers.dark = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; CartoDB &copy; OpenStreetMap',
+        subdomains: 'abcd',
+        maxZoom: 19
+      });
+
+      baseLayers.satellite = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+        attribution: '&copy; Esri, Maxar, Earthstar Geographics',
+        maxZoom: 18
+      });
+
+      baseLayers.osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors',
+        maxZoom: 19
+      });
+
+      // Add default dark layer
+      baseLayers.dark.addTo(map);
+
+      // Draw Route 1 Polyline
+      routePolyline = L.polyline(WAYPOINTS, {
+        color: '#38bdf8',
+        weight: 3.5,
+        opacity: 0.85,
+        dashArray: '6, 6'
+      }).addTo(map);
+
+      // Add POI Markers & Trigger Circles
+      POIS.forEach(poi => {
+        // Trigger Geofence Circle
+        const circle = L.circle([poi.lat, poi.lng], {
+          radius: poi.radius,
+          color: '#38bdf8',
+          weight: 1.5,
+          opacity: 0.6,
+          fillColor: '#0284c7',
+          fillOpacity: 0.12,
+          dashArray: '4, 4'
+        }).addTo(map);
+        poiCircles[poi.id] = circle;
+
+        // Custom DivIcon Marker
+        const markerIcon = L.divIcon({
+          className: 'custom-poi-marker',
+          html: `<div class="marker-pulse"></div><div class="marker-pin">${poi.icon}</div>`,
+          iconSize: [32, 32],
+          iconAnchor: [16, 16]
+        });
+
+        const marker = L.marker([poi.lat, poi.lng], { icon: markerIcon }).addTo(map);
+        marker.on('click', () => {
+          openPoiDossier(poi.id);
+        });
+
+        // Hover tooltip
+        marker.bindTooltip(`<b>${poi.name[currentLang]}</b><br><span style="font-size:10px; color:#38bdf8;">${poi.badge} (${poi.radius}m)</span>`, {
+          direction: 'top',
+          offset: [0, -14],
+          className: 'glass-panel text-xs text-white'
+        });
+
+        poiMarkers[poi.id] = marker;
+      });
+
+      // Car Marker
+      const carIcon = L.divIcon({
+        className: 'car-marker-container',
+        html: `<div class="car-heading-beam"></div><div class="car-icon-body">🚗</div>`,
+        iconSize: [36, 36],
+        iconAnchor: [18, 18]
+      });
+      carMarker = L.marker(currentCarPos, { icon: carIcon, zIndexOffset: 1000 }).addTo(map);
+    }
+
+    // Set Base Map Layer
+    function setBaseLayer(layerKey) {
+      if (currentBaseLayer === layerKey) return;
+      map.removeLayer(baseLayers[currentBaseLayer]);
+      baseLayers[layerKey].addTo(map);
+      currentBaseLayer = layerKey;
+
+      ['dark', 'satellite', 'osm'].forEach(k => {
+        const btn = document.getElementById('layer-' + k);
+        if (k === layerKey) {
+          btn.className = 'px-2.5 py-1 text-xs rounded-lg font-medium bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 flex items-center justify-between space-x-3 transition';
+        } else {
+          btn.className = 'px-2.5 py-1 text-xs rounded-lg font-medium text-slate-300 hover:bg-slate-800 border border-transparent transition flex items-center justify-between space-x-3';
+        }
+      });
+    }
+
+    // Language Toggle
+    function setLang(lang) {
       currentLang = lang;
-      const t = I18N[lang];
+      const btnUk = document.getElementById('btn-lang-uk');
+      const btnEn = document.getElementById('btn-lang-en');
 
-      // Update Header & Nav
-      document.getElementById('header-subtitle').innerText = t.headerSubtitle;
-      document.getElementById('txt-nav-sim').innerText = t.navSim;
-      document.getElementById('txt-nav-poi').innerText = t.navPoi;
-      document.getElementById('txt-nav-roadmap').innerText = t.navRoadmap;
-      document.getElementById('txt-nav-export').innerText = t.navExport;
-      document.getElementById('txt-nav-encyclo').innerText = t.navEncyclo;
-
-      // Update Simulator Controls & HUD
-      document.getElementById('sim-btn-text').innerText = simInterval ? t.simPause : t.simStart;
-      document.getElementById('sim-btn-reset').innerText = t.simReset;
-      document.getElementById('txt-sim-route-label').innerText = t.simRouteLabel;
-      document.getElementById('txt-sim-route-name').innerText = t.simRouteName;
-      document.getElementById('hud-label-speed').innerText = t.hudSpeed;
-      document.getElementById('hud-label-bearing').innerText = t.hudBearing;
-      document.getElementById('hud-label-tts').innerText = t.hudTts;
-      document.getElementById('hud-voice').innerText = t.hudTtsActive;
-
-      // Map Texts
-      document.getElementById('txt-map-header').innerText = t.mapHeader;
-      document.getElementById('txt-map-tip').innerText = t.mapTip;
-      document.getElementById('leg-route1').innerText = t.legRoute1;
-      document.getElementById('leg-gc').innerText = t.legGC;
-      document.getElementById('leg-mustsee').innerText = t.legMustSee;
-      document.getElementById('leg-vista').innerText = t.legVista;
-      document.getElementById('leg-safety').innerText = t.legSafety;
-      document.getElementById('leg-offline').innerText = t.legOffline;
-
-      // HUD Player
-      document.getElementById('hud-guide-title').innerText = t.hudGuideTitle;
-      document.getElementById('hud-lbl-radius').innerText = t.hudLblRadius;
-      document.getElementById('hud-lbl-leadtime').innerText = t.hudLblLeadtime;
-      document.getElementById('hud-btn-listen').innerText = t.hudBtnListen;
-      document.getElementById('hud-engine-status').innerText = lang === 'uk' 
-        ? "Web Speech API • Мова: Українська (uk-UA)" 
-        : "Web Speech API • Language: English (en-US)";
-
-      // Table Headers
-      document.getElementById('tbl-hdr-title').innerText = t.tblTitle;
-      document.getElementById('tbl-hdr-sub').innerText = t.tblSubtitle;
-      document.getElementById('col-loc').innerText = t.colLoc;
-      document.getElementById('col-type').innerText = t.colType;
-      document.getElementById('col-bearing').innerText = t.colBearing;
-      document.getElementById('col-radius').innerText = t.colRadius;
-      document.getElementById('col-lead').innerText = t.colLead;
-      document.getElementById('col-action').innerText = t.colAction;
-
-      // Roadmap
-      document.getElementById('rdm-badge').innerText = t.rdmBadge;
-      document.getElementById('rdm-title').innerText = t.rdmTitle;
-      document.getElementById('rdm-subtitle').innerText = t.rdmSubtitle;
-
-      // Export
-      document.getElementById('exp-title').innerText = t.expTitle;
-      document.getElementById('exp-sub').innerText = t.expSub;
-      document.getElementById('exp-btn-copy').innerText = t.expBtnCopy;
-
-      // Toggle Pill Classes
-      document.getElementById('btn-lang-uk').className = lang === 'uk' ? 'lang-pill active px-2.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1' : 'lang-pill px-2.5 py-1.5 rounded-lg text-xs font-black text-slate-400 hover:text-white transition flex items-center gap-1';
-      document.getElementById('btn-lang-en').className = lang === 'en' ? 'lang-pill active px-2.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1' : 'lang-pill px-2.5 py-1.5 rounded-lg text-xs font-black text-slate-400 hover:text-white transition flex items-center gap-1';
-
-      // Re-render components with active lang
-      renderMapPins();
-      renderTable();
-      renderRoadmap();
-      renderGeoJSON();
-
-      // Refresh HUD if an active POI is selected
-      if (activeSelectedPOI) {
-        selectPOI(activeSelectedPOI, false);
+      if (lang === 'uk') {
+        btnUk.className = 'px-2.5 py-1 rounded-md text-xs font-semibold bg-cyan-500 text-white shadow-sm transition';
+        btnEn.className = 'px-2.5 py-1 rounded-md text-xs font-semibold text-slate-400 hover:text-white transition';
       } else {
-        document.getElementById('hud-poi-title').innerText = t.hudPoiTitle;
-        document.getElementById('hud-poi-lead').innerText = t.hudPoiLead;
-        document.getElementById('hud-poi-narrative').innerText = t.hudPoiNarrative;
+        btnEn.className = 'px-2.5 py-1 rounded-md text-xs font-semibold bg-cyan-500 text-white shadow-sm transition';
+        btnUk.className = 'px-2.5 py-1 rounded-md text-xs font-semibold text-slate-400 hover:text-white transition';
       }
+
+      applyI18n();
+      renderPoiList();
+      updateMapTooltips();
+      if (modalActivePoi) openPoiDossier(modalActivePoi.id);
     }
 
-    // TAB CONTROLLER
-    function switchTab(tabId) {
-      document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
-      document.querySelectorAll('header nav button').forEach(el => {
-        el.className = 'px-3.5 py-2 rounded-lg text-slate-400 hover:text-white transition';
-      });
-
-      const pane = document.getElementById('pane-' + tabId);
-      const btn = document.getElementById('nav-btn-' + (tabId === 'poi-db' ? 'poi' : tabId));
-      if (pane) pane.classList.add('active');
-      if (btn) btn.className = 'px-3.5 py-2 rounded-lg bg-blue-600 text-white shadow-sm transition';
+    function applyI18n() {
+      const t = I18N[currentLang];
+      document.getElementById('txt-app-title').textContent = t.appTitle;
+      document.getElementById('txt-app-subtitle').textContent = t.appSubtitle;
+      document.getElementById('nav-studio').textContent = t.navStudio;
+      document.getElementById('nav-encyclo').textContent = t.navEncyclo;
+      document.getElementById('nav-b2b').textContent = t.navB2b;
+      document.getElementById('nav-pitch').textContent = t.navPitch;
+      document.getElementById('poi-search').placeholder = t.searchPlaceholder;
+      document.getElementById('lbl-filter-all').textContent = t.filterAll;
+      document.getElementById('lbl-filter-gc').textContent = t.filterGc;
+      document.getElementById('lbl-filter-south').textContent = t.filterSouth;
+      document.getElementById('lbl-filter-glaciers').textContent = t.filterGlaciers;
+      document.getElementById('lbl-filter-east').textContent = t.filterEast;
+      document.getElementById('lbl-filter-north').textContent = t.filterNorth;
+      document.getElementById('lbl-filter-vistas').textContent = t.filterVistas;
+      document.getElementById('sim-text').textContent = isSimulating ? t.pauseSim : t.startSim;
+      document.getElementById('lbl-sim-speed').textContent = t.speed;
+      document.getElementById('lbl-layers-title').textContent = t.layersTitle;
+      document.getElementById('hud-car-status').textContent = t.carStatus;
+      document.getElementById('footer-status-text').textContent = t.footerReady;
     }
 
-    // MAP PINS RENDERING
-    function renderMapPins() {
-      const container = document.getElementById('svg-pois-layer');
-      container.innerHTML = '';
-
-      POIS.forEach(p => {
-        const color = p.tag === 'Golden Circle' ? '#10b981' : (p.tag === 'Active Volcano' || p.tag === 'Famous Volcano' ? '#f59e0b' : (p.tag === 'SafeTravel Alert' ? '#ef4444' : '#38bdf8'));
-
-        // Radius circle
-        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        circle.setAttribute('cx', p.coords.x);
-        circle.setAttribute('cy', p.coords.y);
-        circle.setAttribute('r', p.radius / 90);
-        circle.setAttribute('fill', color);
-        circle.setAttribute('fill-opacity', '0.12');
-        circle.setAttribute('stroke', color);
-        circle.setAttribute('stroke-width', '1.2');
-        circle.setAttribute('stroke-dasharray', '3 3');
-        container.appendChild(circle);
-
-        // Clickable Pin
-        const pin = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        pin.setAttribute('cx', p.coords.x);
-        pin.setAttribute('cy', p.coords.y);
-        pin.setAttribute('r', '7');
-        pin.setAttribute('fill', color);
-        pin.setAttribute('stroke', '#ffffff');
-        pin.setAttribute('stroke-width', '2');
-        pin.setAttribute('class', 'cursor-pointer hover:r-9 transition-all drop-shadow');
-        pin.onclick = () => selectPOI(p, true);
-        container.appendChild(pin);
-
-        // Label
-        const txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        txt.setAttribute('x', p.coords.x + 9);
-        txt.setAttribute('y', p.coords.y - 7);
-        txt.setAttribute('fill', '#e2e8f0');
-        txt.setAttribute('font-size', '10.5');
-        txt.setAttribute('font-weight', 'bold');
-        txt.textContent = p.name[currentLang].split(' ')[0];
-        container.appendChild(txt);
+    function updateMapTooltips() {
+      POIS.forEach(poi => {
+        if (poiMarkers[poi.id]) {
+          poiMarkers[poi.id].setTooltipContent(`<b>${poi.name[currentLang]}</b><br><span style="font-size:10px; color:#38bdf8;">${poi.badge} (${poi.radius}m)</span>`);
+        }
       });
     }
 
-    // SELECT POI LOGIC
-    let activeSelectedPOI = null;
-    function selectPOI(poi, autoSpeak = true) {
-      activeSelectedPOI = poi;
-      const lang = currentLang;
+    // Render POI List Cards
+    function renderPoiList() {
+      const listEl = document.getElementById('poi-list');
+      const filtered = POIS.filter(poi => {
+        const matchesFilter = (currentFilter === 'all') || (poi.region === currentFilter);
+        const nameMatch = (poi.name.uk.toLowerCase().includes(searchQuery) || poi.name.en.toLowerCase().includes(searchQuery));
+        const geoMatch = (poi.geology.uk.toLowerCase().includes(searchQuery) || poi.geology.en.toLowerCase().includes(searchQuery));
+        const sagaMatch = (poi.saga.uk.toLowerCase().includes(searchQuery) || poi.saga.en.toLowerCase().includes(searchQuery));
+        return matchesFilter && (nameMatch || geoMatch || sagaMatch);
+      });
 
-      document.getElementById('hud-badge-tag').innerText = poi.tag.toUpperCase();
-      document.getElementById('hud-poi-region').innerText = poi.tour.replace('_', ' ').toUpperCase();
-      document.getElementById('hud-poi-title').innerText = poi.name[lang];
-      document.getElementById('hud-poi-lead').innerText = poi.lead[lang];
-      document.getElementById('hud-poi-narrative').innerText = poi.text[lang];
-      document.getElementById('hud-poi-radius').innerText = poi.radius + ' m';
-      document.getElementById('hud-bearing').innerText = poi.bearing + '°';
+      const t = I18N[currentLang];
 
-      if (autoSpeak) {
-        speakCurrentAudio();
-      }
-    }
-
-    // SPEECH SYNTHESIS ENGINE (DUAL-LANG)
-    function speakCurrentAudio() {
-      if (!('speechSynthesis' in window)) {
-        alert('Web Speech API is not supported in this browser.');
+      if (filtered.length === 0) {
+        listEl.innerHTML = `<div class="p-6 text-center text-slate-500 text-xs">Локацій не знайдено за заданим фільтром</div>`;
         return;
       }
-      window.speechSynthesis.cancel();
-      const text = document.getElementById('hud-poi-narrative').innerText;
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = currentLang === 'uk' ? 'uk-UA' : 'en-US';
-      utterance.rate = 1.0;
-      utterance.pitch = 1.0;
-      window.speechSynthesis.speak(utterance);
+
+      listEl.innerHTML = filtered.map(poi => {
+        const dist = getDistanceMeters(currentCarPos[0], currentCarPos[1], poi.lat, poi.lng);
+        const isTriggered = dist <= poi.radius;
+        const distKm = (dist / 1000).toFixed(1);
+
+        return `
+          <div id="card-${poi.id}" class="glass-card p-3 rounded-xl cursor-pointer ${isTriggered ? 'active-trigger' : ''}" onclick="openPoiDossier('${poi.id}')">
+            <div class="flex items-start justify-between">
+              <div class="flex items-center space-x-2.5">
+                <span class="text-xl">${poi.icon}</span>
+                <div>
+                  <h4 class="text-xs font-bold text-white">${poi.name[currentLang]}</h4>
+                  <div class="flex items-center space-x-1.5 mt-0.5">
+                    <span class="px-1.5 py-0.2 rounded text-[9px] font-semibold bg-cyan-500/15 text-cyan-300 border border-cyan-500/20">${poi.badge}</span>
+                    <span class="text-[10px] text-slate-400 font-mono">${poi.vector[currentLang]}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="text-right shrink-0 font-mono">
+                <span class="text-xs font-bold ${isTriggered ? 'text-emerald-400' : 'text-slate-300'}">${distKm} км</span>
+                <div class="text-[9px] text-slate-500">${t.distFromCar}</div>
+              </div>
+            </div>
+
+            <p class="text-[11px] text-slate-300 line-clamp-2 mt-2 leading-relaxed">${poi.geology[currentLang]}</p>
+
+            <div class="mt-2.5 pt-2 border-t border-slate-700/50 flex items-center justify-between text-[11px]">
+              <div class="flex items-center space-x-2 text-[10px] text-slate-400 font-mono">
+                <span>R: ${poi.radius}m</span>
+                <span>•</span>
+                <span class="text-cyan-400">${poi.lat.toFixed(3)}°, ${poi.lng.toFixed(3)}°</span>
+              </div>
+              <div class="flex items-center space-x-1.5">
+                <button onclick="event.stopPropagation(); focusPoi('${poi.id}')" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-200 transition text-[10px]">
+                  🔍 ${t.focusBtn}
+                </button>
+                <button onclick="event.stopPropagation(); playPoiAudio('${poi.id}')" class="px-2 py-0.5 rounded bg-cyan-500/20 hover:bg-cyan-500/40 text-cyan-300 border border-cyan-500/30 transition text-[10px] flex items-center gap-1">
+                  ▶ ${t.guideBtn}
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
     }
 
-    // SIMULATOR LOOP
-    let simInterval = null;
-    let simStep = 0;
-    const WAYPOINTS = [
-      { x: 210, y: 360, poiId: null },
-      { x: 235, y: 335, poiId: "thingvellir" },
-      { x: 285, y: 310, poiId: "geysir" },
-      { x: 325, y: 305, poiId: "gullfoss" },
-      { x: 270, y: 375, poiId: null },
-      { x: 320, y: 380, poiId: "hekla_vista" },
-      { x: 370, y: 395, poiId: "seljalandsfoss" },
-      { x: 410, y: 400, poiId: "eyjafjallajokull" },
-      { x: 435, y: 405, poiId: "skogafoss" },
-      { x: 470, y: 405, poiId: "katla_warning" }
-    ];
+    // Filter by Region
+    function setFilter(region) {
+      currentFilter = region;
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        if (btn.dataset.region === region) {
+          btn.className = 'filter-btn active px-2.5 py-1 rounded-lg bg-cyan-500 text-white font-medium whitespace-nowrap shadow-sm';
+        } else {
+          btn.className = 'filter-btn px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700 font-medium whitespace-nowrap transition';
+        }
+      });
+      renderPoiList();
+    }
 
-    function toggleSimulation() {
-      const t = I18N[currentLang];
-      if (simInterval) {
-        clearInterval(simInterval);
-        simInterval = null;
-        document.getElementById('sim-btn-text').innerText = t.simResume;
-        document.getElementById('sim-icon').innerText = '▶';
-      } else {
-        document.getElementById('sim-btn-text').innerText = t.simPause;
-        document.getElementById('sim-icon').innerText = '⏸';
-        simInterval = setInterval(() => {
-          simStep++;
-          if (simStep >= WAYPOINTS.length) simStep = 0;
-          const wp = WAYPOINTS[simStep];
-          const car = document.getElementById('svg-car');
-          car.setAttribute('transform', `translate(${wp.x}, ${wp.y})`);
+    // Instant Search
+    function filterPOIs() {
+      searchQuery = document.getElementById('poi-search').value.toLowerCase().trim();
+      document.getElementById('clear-search').style.display = searchQuery ? 'flex' : 'none';
+      renderPoiList();
+    }
+    function clearSearch() {
+      document.getElementById('poi-search').value = '';
+      filterPOIs();
+    }
 
-          if (wp.poiId) {
-            const found = POIS.find(p => p.id === wp.poiId);
-            if (found) selectPOI(found, true);
-          }
-        }, 3400);
+    // Focus Map on specific POI
+    function focusPoi(poiId) {
+      const poi = POIS.find(p => p.id === poiId);
+      if (!poi) return;
+      map.flyTo([poi.lat, poi.lng], 12, { duration: 1.2 });
+      if (poiMarkers[poiId]) {
+        poiMarkers[poiId].openTooltip();
       }
+    }
+
+    // Center on Vehicle
+    function centerOnCar() {
+      map.flyTo(currentCarPos, 11, { duration: 1 });
+    }
+
+    // Fit Whole Iceland
+    function fitIcelandBounds() {
+      map.fitBounds([[63.3, -24.5], [66.6, -13.5]], { padding: [20, 20] });
+    }
+
+    // Simulation Loop (Driving on Route 1)
+    function toggleSimulation() {
+      isSimulating = !isSimulating;
+      const t = I18N[currentLang];
+      const btn = document.getElementById('btn-sim-play');
+      const icon = document.getElementById('sim-icon');
+      const text = document.getElementById('sim-text');
+
+      if (isSimulating) {
+        icon.textContent = '⏸';
+        text.textContent = t.pauseSim;
+        btn.className = 'px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-semibold flex items-center gap-1.5 shadow-md shadow-amber-600/30 transition';
+        startSimulationInterval();
+      } else {
+        icon.textContent = '▶';
+        text.textContent = t.startSim;
+        btn.className = 'px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold flex items-center gap-1.5 shadow-md shadow-emerald-600/30 transition';
+        clearInterval(simInterval);
+      }
+    }
+
+    function setSimSpeed(val) {
+      simSpeed = parseInt(val, 10);
+      if (isSimulating) {
+        clearInterval(simInterval);
+        startSimulationInterval();
+      }
+    }
+
+    function startSimulationInterval() {
+      const ms = Math.max(100, Math.floor(1000 / simSpeed));
+      simInterval = setInterval(() => {
+        simIndex = (simIndex + 1) % WAYPOINTS.length;
+        currentCarPos = WAYPOINTS[simIndex];
+        carMarker.setLatLng(currentCarPos);
+
+        updateSimulationHUD();
+        checkGeofenceTriggers();
+      }, ms);
     }
 
     function resetSimulation() {
-      const t = I18N[currentLang];
-      if (simInterval) clearInterval(simInterval);
-      simInterval = null;
-      simStep = 0;
-      document.getElementById('sim-btn-text').innerText = t.simStart;
-      document.getElementById('sim-icon').innerText = '▶';
-      const car = document.getElementById('svg-car');
-      car.setAttribute('transform', 'translate(210, 360)');
+      simIndex = 0;
+      currentCarPos = WAYPOINTS[0];
+      carMarker.setLatLng(currentCarPos);
+      triggeredPois.clear();
+      updateSimulationHUD();
+      renderPoiList();
+      centerOnCar();
     }
 
-    // TABLE RENDERING
-    function renderTable() {
-      const tbody = document.getElementById('tbl-body');
-      tbody.innerHTML = '';
-      const t = I18N[currentLang];
+    // Telemetry HUD Update
+    function updateSimulationHUD() {
+      // Find closest POI
+      let closest = null;
+      let minDistance = Infinity;
 
       POIS.forEach(p => {
-        const tr = document.createElement('tr');
-        tr.className = 'hover:bg-slate-800/40 transition';
-        tr.innerHTML = `
-          <td class="p-3.5 font-bold text-white">${p.name[currentLang]}</td>
-          <td class="p-3.5"><span class="px-2.5 py-0.5 rounded-full text-[10px] font-black ${p.tag === 'SafeTravel Alert' ? 'bg-red-500/20 text-red-300 border border-red-500/30' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'}">${p.type[currentLang]}</span></td>
-          <td class="p-3.5 font-mono text-slate-400">${p.bearing}°</td>
-          <td class="p-3.5 font-mono text-blue-400 font-bold">${p.radius} m</td>
-          <td class="p-3.5 text-slate-300 text-[11px] max-w-xs truncate">${p.lead[currentLang]}</td>
-          <td class="p-3.5 text-right">
-            <button onclick='selectPOI(${JSON.stringify(p)}, true); switchTab("simulator")' class="px-3 py-1 rounded-lg bg-slate-800 hover:bg-blue-600 text-white font-bold text-[11px] transition shadow-sm">
-              ${t.btnTest}
-            </button>
-          </td>
-        `;
-        tbody.appendChild(tr);
+        const d = getDistanceMeters(currentCarPos[0], currentCarPos[1], p.lat, p.lng);
+        if (d < minDistance) {
+          minDistance = d;
+          closest = p;
+        }
       });
+
+      if (closest) {
+        document.getElementById('hud-closest-poi').textContent = `${closest.name[currentLang]} (${(minDistance/1000).toFixed(1)} km)`;
+      }
+
+      // Vary speed realistically between 80 and 95
+      const currentSpeed = Math.round(82 + Math.sin(simIndex * 0.4) * 8);
+      document.getElementById('hud-speed').textContent = currentSpeed;
     }
 
-    function filterTable() {
-      const q = document.getElementById('tbl-search-input').value.toLowerCase();
-      document.querySelectorAll('#tbl-body tr').forEach(tr => {
-        tr.style.display = tr.innerText.toLowerCase().includes(q) ? '' : 'none';
-      });
-    }
+    // Geofencing Check
+    function checkGeofenceTriggers() {
+      POIS.forEach(poi => {
+        const d = getDistanceMeters(currentCarPos[0], currentCarPos[1], poi.lat, poi.lng);
+        const circle = poiCircles[poi.id];
 
-    // ROADMAP RENDERING
-    function renderRoadmap() {
-      const container = document.getElementById('rdm-grid');
-      container.innerHTML = '';
-      const list = ROADMAP_DATA[currentLang];
+        if (d <= poi.radius) {
+          // Inside geofence trigger!
+          circle.setStyle({
+            color: '#10b981',
+            fillColor: '#10b981',
+            fillOpacity: 0.35,
+            weight: 3
+          });
 
-      list.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'p-5 rounded-2xl bg-slate-900/90 border border-slate-800/80 space-y-3 glass-3d';
-        card.innerHTML = `
-          <div class="flex items-center justify-between">
-            <span class="w-8 h-8 rounded-xl bg-blue-500/20 text-blue-400 font-black flex items-center justify-center text-sm border border-blue-500/30 shadow-sm">${item.step}</span>
-            <span class="text-[11px] font-black uppercase text-blue-400 tracking-wider">${item.timing}</span>
-          </div>
-          <h3 class="text-base font-bold text-white">${item.title}</h3>
-          <p class="text-xs text-slate-300 leading-relaxed">${item.desc}</p>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    // GEOJSON RENDERING
-    function renderGeoJSON() {
-      const geo = {
-        type: "FeatureCollection",
-        metadata: {
-          project: "Smart Road Audio Guide Iceland",
-          version: "2.0.0-bilingual",
-          author: "Volodymyr Katasonov",
-          supported_languages: ["uk", "en"],
-          updated_at: new Date().toISOString()
-        },
-        features: POIS.map(p => ({
-          type: "Feature",
-          id: p.id,
-          geometry: {
-            type: "Point",
-            coordinates: [p.coords.lng, p.coords.lat]
-          },
-          properties: {
-            name_uk: p.name.uk,
-            name_en: p.name.en,
-            tour: p.tour,
-            trigger_radius_meters: p.radius,
-            bearing_heading: p.bearing,
-            lead_in_uk: p.lead.uk,
-            lead_in_en: p.lead.en,
-            narrative_uk: p.text.uk,
-            narrative_en: p.text.en,
-            target_lufs: -14
+          if (!triggeredPois.has(poi.id)) {
+            triggeredPois.add(poi.id);
+            triggerPoiAlert(poi, d);
           }
-        }))
-      };
-      document.getElementById('geojson-code-box').textContent = JSON.stringify(geo, null, 2);
+        } else {
+          // Outside
+          circle.setStyle({
+            color: '#38bdf8',
+            fillColor: '#0284c7',
+            fillOpacity: 0.12,
+            weight: 1.5
+          });
+        }
+      });
     }
 
-    function copyGeoJSON() {
-      navigator.clipboard.writeText(document.getElementById('geojson-code-box').textContent);
-      alert(I18N[currentLang].copiedAlert);
+    // Show Geofence Audio Alert & Trigger TTS
+    let alertTimeout = null;
+    function triggerPoiAlert(poi, dist) {
+      const alertEl = document.getElementById('geofence-alert');
+      const nameEl = document.getElementById('alert-poi-name');
+      const descEl = document.getElementById('alert-poi-desc');
+      const t = I18N[currentLang];
+
+      nameEl.textContent = `${poi.icon} ${poi.name[currentLang]}`;
+      descEl.textContent = `${t.triggerDesc} ${poi.radius}m (${t.distFromCar} ${dist}m)`;
+
+      alertEl.classList.remove('hidden');
+
+      // Play Speech Synthesis
+      playPoiAudio(poi.id);
+
+      // Highlight card in sidebar
+      renderPoiList();
+      const card = document.getElementById('card-' + poi.id);
+      if (card) card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+      clearTimeout(alertTimeout);
+      alertTimeout = setTimeout(() => {
+        alertEl.classList.add('hidden');
+      }, 7000);
     }
 
-    // INITIALIZATION
-    setLanguage('uk');
+    // Web Speech API Voice Synthesis
+    function playPoiAudio(poiId) {
+      const poi = POIS.find(p => p.id === poiId);
+      if (!poi) return;
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const textToSpeak = `${poi.name[currentLang]}. ${poi.vector[currentLang]}. ${poi.geology[currentLang]} ${poi.saga[currentLang]}`;
+        const utterance = new SpeechSynthesisUtterance(textToSpeak);
+        utterance.lang = currentLang === 'uk' ? 'uk-UA' : 'en-US';
+        utterance.rate = 1.0;
+        utterance.pitch = 1.0;
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    // Open POI Detailed Modal
+    function openPoiDossier(poiId) {
+      const poi = POIS.find(p => p.id === poiId);
+      if (!poi) return;
+      modalActivePoi = poi;
+
+      const t = I18N[currentLang];
+      document.getElementById('modal-icon').textContent = poi.icon;
+      document.getElementById('modal-badge').textContent = poi.badge;
+      document.getElementById('modal-region').textContent = poi.region.toUpperCase().replace('_', ' ');
+      document.getElementById('modal-title').textContent = poi.name[currentLang];
+      document.getElementById('modal-coords').textContent = `${poi.lat.toFixed(4)}° N, ${Math.abs(poi.lng).toFixed(4)}° W (R: ${poi.radius}m)`;
+      document.getElementById('modal-geology').textContent = poi.geology[currentLang];
+      document.getElementById('modal-saga').textContent = poi.saga[currentLang];
+      document.getElementById('modal-practical').textContent = poi.practical[currentLang];
+
+      document.getElementById('lbl-modal-geo').textContent = t.modalGeo;
+      document.getElementById('lbl-modal-saga').textContent = t.modalSaga;
+      document.getElementById('lbl-modal-prac').textContent = t.modalPrac;
+      document.getElementById('lbl-modal-src').textContent = t.modalSrc;
+      document.getElementById('lbl-teleport-here').textContent = t.teleportHere;
+      document.getElementById('lbl-close-modal').textContent = t.closeModal;
+
+      // Sources
+      const srcContainer = document.getElementById('modal-sources');
+      if (poi.sources && poi.sources.length > 0) {
+        srcContainer.innerHTML = poi.sources.map(s => `
+          <a href="${s.url}" target="_blank" rel="noopener" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 border border-slate-700 text-xs flex items-center gap-1.5 transition">
+            <span>🔗</span> <span>${s.name}</span>
+          </a>
+        `).join('');
+      } else {
+        srcContainer.innerHTML = `<span class="text-xs text-slate-500">Official Leiðsöguskólinn certified POI</span>`;
+      }
+
+      document.getElementById('poi-modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('poi-modal').classList.add('hidden');
+      modalActivePoi = null;
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+    }
+
+    function playModalAudio() {
+      if (!modalActivePoi) return;
+      playPoiAudio(modalActivePoi.id);
+      document.getElementById('modal-audio-status').textContent = I18N[currentLang].audioPlaying;
+    }
+
+    function teleportCarToModalPoi() {
+      if (!modalActivePoi) return;
+      // Place car near this POI
+      currentCarPos = [modalActivePoi.lat - 0.005, modalActivePoi.lng - 0.005];
+      carMarker.setLatLng(currentCarPos);
+      checkGeofenceTriggers();
+      updateSimulationHUD();
+      renderPoiList();
+      closeModal();
+      centerOnCar();
+    }
+
+    // Startup
+    window.addEventListener('DOMContentLoaded', () => {
+      initMap();
+      renderPoiList();
+      applyI18n();
+      updateSimulationHUD();
+    });
   </script>
 </body>
 </html>

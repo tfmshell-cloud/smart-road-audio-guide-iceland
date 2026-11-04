@@ -1,0 +1,35 @@
+name: iceland_smart_audio_guide
+description: "Autonomous Offline 3D Geo-Contextual Audio Guide for Iceland Route 1 & Golden Circle"
+publish_to: 'none'
+version: 2.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  maplibre_gl: ^0.16.0
+  geolocator: ^10.1.0
+  flutter_tts: ^3.8.3
+  audioplayers: ^5.2.1
+  provider: ^6.1.1
+  flutter_local_notifications: ^16.3.2
+  path_provider: ^2.1.2
+  shared_preferences: ^2.2.2
+  shelf: ^1.4.1
+  shelf_static: ^1.1.2
+  http: ^1.1.0
+  latlong2: ^0.9.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/data/pois.json
+    - assets/style/iceland_offline_style.json
+    - assets/tiles/

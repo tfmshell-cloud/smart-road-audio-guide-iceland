@@ -1,0 +1,38 @@
+{
+  "version": 8,
+  "name": "Iceland Offline Vector Style (Dark 3D)",
+  "sources": {
+    "openmaptiles": {
+      "type": "vector",
+      "url": "http://127.0.0.1:8088/iceland.json"
+    }
+  },
+  "layers": [
+    {
+      "id": "background",
+      "type": "background",
+      "paint": {
+        "background-color": "#070b14"
+      }
+    },
+    {
+      "id": "water",
+      "type": "fill",
+      "source": "openmaptiles",
+      "source-layer": "water",
+      "paint": {
+        "fill-color": "#0a192f"
+      }
+    },
+    {
+      "id": "roads",
+      "type": "line",
+      "source": "openmaptiles",
+      "source-layer": "transportation",
+      "paint": {
+        "line-color": "#38bdf8",
+        "line-width": 2
+      }
+    }
+  ]
+}

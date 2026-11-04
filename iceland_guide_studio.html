@@ -23,7 +23,7 @@
     ::-webkit-scrollbar-thumb:hover { background: #334155; }
 
     .glass-panel {
-      background: rgba(15, 23, 42, 0.88);
+      background: rgba(15, 23, 42, 0.90);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -49,7 +49,7 @@
     #map {
       width: 100%;
       height: 100%;
-      background: #070a13;
+      background: #080d1a;
     }
 
     /* Custom MapLibre Popup Overrides */
@@ -65,27 +65,27 @@
     .maplibregl-popup-anchor-top .maplibregl-popup-tip { border-bottom-color: rgba(15, 23, 42, 0.95) !important; }
     .maplibregl-popup-anchor-bottom .maplibregl-popup-tip { border-top-color: rgba(15, 23, 42, 0.95) !important; }
 
-    /* Markers */
+    /* Custom POI Markers */
     .custom-poi-marker {
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
       cursor: pointer;
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
     }
     .marker-pin {
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
-      background: rgba(15, 23, 42, 0.9);
+      background: rgba(15, 23, 42, 0.92);
       border: 2px solid #38bdf8;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 15px;
-      box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+      font-size: 16px;
+      box-shadow: 0 0 16px rgba(56, 189, 248, 0.65);
       transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .marker-pin:hover {
@@ -95,8 +95,8 @@
     }
     .marker-pulse {
       position: absolute;
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       background: rgba(56, 189, 248, 0.35);
       animation: pulseAnimation 2.2s infinite;
@@ -113,13 +113,13 @@
       align-items: center;
       justify-content: center;
       position: relative;
-      width: 40px;
-      height: 40px;
-      transition: transform 0.15s linear;
+      width: 42px;
+      height: 42px;
+      transition: transform 0.12s linear;
     }
     .car-icon-body {
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       background: #10b981;
       border: 3px solid #ffffff;
@@ -127,7 +127,7 @@
       align-items: center;
       justify-content: center;
       box-shadow: 0 0 25px rgba(16, 185, 129, 0.95);
-      font-size: 19px;
+      font-size: 20px;
     }
     .car-heading-beam {
       position: absolute;
@@ -135,8 +135,8 @@
       height: 0;
       border-left: 24px solid transparent;
       border-right: 24px solid transparent;
-      border-bottom: 75px solid rgba(16, 185, 129, 0.35);
-      top: -70px;
+      border-bottom: 80px solid rgba(16, 185, 129, 0.35);
+      top: -75px;
       pointer-events: none;
       filter: blur(4px);
     }
@@ -166,17 +166,17 @@
         <div class="flex items-center space-x-2">
           <h1 class="text-sm font-bold tracking-tight text-white flex items-center gap-2">
             <span id="txt-app-title">Iceland Smart Road Audio Guide</span>
-            <span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-cyan-500/20 text-cyan-400 border border-cyan-500/30">MAPLIBRE 3D</span>
+            <span class="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">OPENFREEMAP 3D</span>
           </h1>
         </div>
-        <p class="text-[10px] text-slate-400" id="txt-app-subtitle">MapLibre GL JS • 3D рельєф, векторні лавові поля, льодовики та геозони</p>
+        <p class="text-[10px] text-slate-400" id="txt-app-subtitle">100% безкоштовні векторні карти без водяних знаків та API-ключів</p>
       </div>
     </div>
 
     <!-- Navigation between ecosystem docs -->
     <nav class="hidden md:flex items-center space-x-1 text-xs">
       <a href="index.html" class="px-3 py-1.5 rounded-lg bg-cyan-500/15 text-cyan-300 border border-cyan-500/30 font-medium flex items-center gap-1.5">
-        <span>🗺️</span> <span id="nav-studio">3D Карта (MapLibre)</span>
+        <span>🗺️</span> <span id="nav-studio">3D Карта (Vector)</span>
       </a>
       <a href="iceland_guide_encyclopedia.html" class="px-3 py-1.5 rounded-lg hover:bg-slate-800 text-slate-300 border border-transparent hover:border-slate-700 transition font-medium flex items-center gap-1.5">
         <span>📚</span> <span id="nav-encyclo">Енциклопедія (34 POI)</span>
@@ -193,7 +193,7 @@
     <div class="flex items-center space-x-3">
       <div class="hidden sm:flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-slate-900/80 border border-slate-700/60 text-[11px]">
         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-        <span class="text-slate-300 font-mono">FOSS MapLibre GL 4.7</span>
+        <span class="text-slate-300 font-mono">Zero Watermark • Clean</span>
       </div>
 
       <!-- Language Toggle -->
@@ -295,9 +295,7 @@
       </div>
 
       <!-- POI List (Scrollable) -->
-      <div id="poi-list" class="flex-1 overflow-y-auto p-3 space-y-2.5">
-        <!-- Injected dynamically via JS -->
-      </div>
+      <div id="poi-list" class="flex-1 overflow-y-auto p-3 space-y-2.5"></div>
 
       <!-- Sidebar Footer Status -->
       <div class="p-3 border-t border-slate-800 bg-[#090e18] flex items-center justify-between text-[11px] text-slate-400">
@@ -315,21 +313,24 @@
 
       <!-- Floating Map Layer & 3D Pitch Switcher (Top Right) -->
       <div class="absolute top-4 right-4 z-[10] flex flex-col space-y-1.5 glass-panel p-2 rounded-xl border border-slate-700/80 shadow-2xl">
-        <div class="text-[10px] uppercase tracking-wider font-bold text-slate-400 px-1" id="lbl-layers-title">ШАРИ КАРТИ</div>
+        <div class="text-[10px] uppercase tracking-wider font-bold text-slate-400 px-1" id="lbl-layers-title">ШАРИ КАРТИ (БЕЗ ВОДЯНИХ ЗНАКІВ)</div>
         <button onclick="setBaseLayer('dark')" id="layer-dark" class="px-2.5 py-1 text-xs rounded-lg font-medium bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 flex items-center justify-between space-x-3 transition">
-          <span>🌃 Dark Matter</span> <span class="text-[10px] opacity-70">CartoDB</span>
+          <span>🌃 Vector Dark 3D</span> <span class="text-[10px] text-cyan-400 font-mono">OpenFreeMap</span>
         </button>
         <button onclick="setBaseLayer('satellite')" id="layer-satellite" class="px-2.5 py-1 text-xs rounded-lg font-medium text-slate-300 hover:bg-slate-800 border border-transparent transition flex items-center justify-between space-x-3">
-          <span>🛰️ Satellite HD</span> <span class="text-[10px] opacity-70">Esri</span>
+          <span>🛰️ Satellite HD</span> <span class="text-[10px] text-slate-400 font-mono">Esri Real</span>
         </button>
-        <button onclick="setBaseLayer('osm')" id="layer-osm" class="px-2.5 py-1 text-xs rounded-lg font-medium text-slate-300 hover:bg-slate-800 border border-transparent transition flex items-center justify-between space-x-3">
-          <span>🗺️ OpenStreetMap</span> <span class="text-[10px] opacity-70">OSM</span>
+        <button onclick="setBaseLayer('liberty')" id="layer-liberty" class="px-2.5 py-1 text-xs rounded-lg font-medium text-slate-300 hover:bg-slate-800 border border-transparent transition flex items-center justify-between space-x-3">
+          <span>🏔️ Topo &amp; Relief</span> <span class="text-[10px] text-slate-400 font-mono">Liberty 3D</span>
+        </button>
+        <button onclick="setBaseLayer('esri_dark')" id="layer-esri_dark" class="px-2.5 py-1 text-xs rounded-lg font-medium text-slate-300 hover:bg-slate-800 border border-transparent transition flex items-center justify-between space-x-3">
+          <span>🌌 Clean Dark Gray</span> <span class="text-[10px] text-slate-400 font-mono">Esri Canvas</span>
         </button>
 
         <div class="pt-1.5 border-t border-slate-700/60 flex items-center justify-between">
           <span class="text-[10px] text-slate-400 font-bold">3D НАХИЛ:</span>
           <button onclick="toggle3DPitch()" id="btn-pitch-toggle" class="px-2 py-0.5 rounded text-[10px] font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
-            55° 3D
+            52° 3D
           </button>
         </div>
       </div>
@@ -384,7 +385,7 @@
     </div>
   </main>
 
-  <!-- MODAL: DETAILED POI DOSSIER (Bilingual Academic View) -->
+  <!-- MODAL: DETAILED POI DOSSIER -->
   <div id="poi-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
     <div class="glass-panel w-full max-w-3xl rounded-2xl border border-slate-700 overflow-hidden shadow-2xl flex flex-col max-h-[90vh]">
       <div class="p-5 border-b border-slate-800 bg-slate-900/90 flex items-start justify-between">
@@ -464,8 +465,8 @@
     const I18N = {
       uk: {
         appTitle: "Iceland Smart Road Audio Guide",
-        appSubtitle: "MapLibre GL JS • 3D рельєф, векторні лавові поля, льодовики та геозони",
-        navStudio: "3D Карта (MapLibre)",
+        appSubtitle: "100% безкоштовні карти без водяних знаків та API-ключів",
+        navStudio: "3D Карта (Vector)",
         navEncyclo: "Енциклопедія (34 POI)",
         navB2b: "Бізнес-Модель & API",
         navPitch: "Презентація 2.0",
@@ -479,7 +480,7 @@
         filterVistas: "Каньйони",
         startSim: "Старт Тест-Драйву",
         pauseSim: "Пауза Тест-Драйву",
-        layersTitle: "ШАРИ КАРТИ",
+        layersTitle: "ШАРИ КАРТИ (БЕЗ ВОДЯНИХ ЗНАКІВ)",
         carStatus: "🚗 НА МАРШРУТІ:",
         closestPoi: "Найближчий:",
         speedUnit: "км/год",
@@ -501,8 +502,8 @@
       },
       en: {
         appTitle: "Iceland Smart Road Audio Guide",
-        appSubtitle: "MapLibre GL JS • 3D terrain, vector lava fields, glaciers and geofences",
-        navStudio: "3D Map (MapLibre)",
+        appSubtitle: "100% free vector maps with zero watermarks & zero API keys",
+        navStudio: "3D Map (Vector)",
         navEncyclo: "Encyclopedia (34 POIs)",
         navB2b: "Business Model & API",
         navPitch: "Pitch Presentation",
@@ -516,7 +517,7 @@
         filterVistas: "Canyons",
         startSim: "Start Test Drive",
         pauseSim: "Pause Test Drive",
-        layersTitle: "MAP LAYERS",
+        layersTitle: "MAP LAYERS (WATERMARK-FREE)",
         carStatus: "🚗 ON ROUTE:",
         closestPoi: "Closest:",
         speedUnit: "km/h",
@@ -581,30 +582,10 @@
       return (brng + 360) % 360;
     }
 
+    // Watermark-Free & API-Key-Free Styles
     const mapStyles = {
-      dark: {
-        version: 8,
-        sources: {
-          'carto-dark': {
-            type: 'raster',
-            tiles: [
-              'https://a.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png',
-              'https://b.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}@2x.png'
-            ],
-            tileSize: 256,
-            attribution: '&copy; CartoDB &copy; OpenStreetMap'
-          }
-        },
-        layers: [
-          {
-            id: 'carto-dark-layer',
-            type: 'raster',
-            source: 'carto-dark',
-            minzoom: 0,
-            maxzoom: 20
-          }
-        ]
-      },
+      dark: 'https://tiles.openfreemap.org/styles/dark',
+      liberty: 'https://tiles.openfreemap.org/styles/liberty',
       satellite: {
         version: 8,
         sources: {
@@ -614,7 +595,7 @@
               'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
             ],
             tileSize: 256,
-            attribution: '&copy; Esri World Imagery'
+            attribution: '&copy; Esri World Imagery (No Watermark)'
           }
         },
         layers: [
@@ -627,21 +608,23 @@
           }
         ]
       },
-      osm: {
+      esri_dark: {
         version: 8,
         sources: {
-          'osm-tiles': {
+          'esri-dark': {
             type: 'raster',
-            tiles: ['https://tile.openstreetmap.org/{z}/{x}/{y}.png'],
+            tiles: [
+              'https://services.arcgisonline.com/arcgis/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}'
+            ],
             tileSize: 256,
-            attribution: '&copy; OpenStreetMap contributors'
+            attribution: '&copy; Esri Dark Canvas (No Watermark)'
           }
         },
         layers: [
           {
-            id: 'osm-layer',
+            id: 'esri-dark-layer',
             type: 'raster',
-            source: 'osm-tiles',
+            source: 'esri-dark',
             minzoom: 0,
             maxzoom: 19
           }
@@ -671,94 +654,102 @@
 
     function addVectorLayers() {
       // 1. Glaciers (Ice Caps)
-      map.addSource('glaciers-src', { type: 'geojson', data: GLACIERS_GEOJSON });
-      map.addLayer({
-        id: 'glaciers-fill',
-        type: 'fill',
-        source: 'glaciers-src',
-        paint: {
-          'fill-color': '#38bdf8',
-          'fill-opacity': 0.28
-        }
-      });
-      map.addLayer({
-        id: 'glaciers-line',
-        type: 'line',
-        source: 'glaciers-src',
-        paint: {
-          'line-color': '#bae6fd',
-          'line-width': 2,
-          'line-opacity': 0.8
-        }
-      });
+      if (!map.getSource('glaciers-src')) {
+        map.addSource('glaciers-src', { type: 'geojson', data: GLACIERS_GEOJSON });
+        map.addLayer({
+          id: 'glaciers-fill',
+          type: 'fill',
+          source: 'glaciers-src',
+          paint: {
+            'fill-color': '#38bdf8',
+            'fill-opacity': 0.28
+          }
+        });
+        map.addLayer({
+          id: 'glaciers-line',
+          type: 'line',
+          source: 'glaciers-src',
+          paint: {
+            'line-color': '#bae6fd',
+            'line-width': 2,
+            'line-opacity': 0.8
+          }
+        });
+      }
 
       // 2. Lava Fields (Eldhraun, Fagradalsfjall, etc.)
-      map.addSource('lava-src', { type: 'geojson', data: LAVA_GEOJSON });
-      map.addLayer({
-        id: 'lava-fill',
-        type: 'fill',
-        source: 'lava-src',
-        paint: {
-          'fill-color': '#ea580c',
-          'fill-opacity': 0.35
-        }
-      });
-      map.addLayer({
-        id: 'lava-line',
-        type: 'line',
-        source: 'lava-src',
-        paint: {
-          'line-color': '#fb923c',
-          'line-width': 2,
-          'line-dasharray': [3, 2]
-        }
-      });
+      if (!map.getSource('lava-src')) {
+        map.addSource('lava-src', { type: 'geojson', data: LAVA_GEOJSON });
+        map.addLayer({
+          id: 'lava-fill',
+          type: 'fill',
+          source: 'lava-src',
+          paint: {
+            'fill-color': '#ea580c',
+            'fill-opacity': 0.35
+          }
+        });
+        map.addLayer({
+          id: 'lava-line',
+          type: 'line',
+          source: 'lava-src',
+          paint: {
+            'line-color': '#fb923c',
+            'line-width': 2,
+            'line-dasharray': [3, 2]
+          }
+        });
+      }
 
       // 3. Geofence Trigger Circles (Vector Polygons)
-      map.addSource('geofences-src', { type: 'geojson', data: GEOFENCES_GEOJSON });
-      map.addLayer({
-        id: 'geofences-fill',
-        type: 'fill',
-        source: 'geofences-src',
-        paint: {
-          'fill-color': '#0284c7',
-          'fill-opacity': 0.14
-        }
-      });
-      map.addLayer({
-        id: 'geofences-line',
-        type: 'line',
-        source: 'geofences-src',
-        paint: {
-          'line-color': '#38bdf8',
-          'line-width': 1.5,
-          'line-dasharray': [4, 4]
-        }
-      });
+      if (!map.getSource('geofences-src')) {
+        map.addSource('geofences-src', { type: 'geojson', data: GEOFENCES_GEOJSON });
+        map.addLayer({
+          id: 'geofences-fill',
+          type: 'fill',
+          source: 'geofences-src',
+          paint: {
+            'fill-color': '#0284c7',
+            'fill-opacity': 0.14
+          }
+        });
+        map.addLayer({
+          id: 'geofences-line',
+          type: 'line',
+          source: 'geofences-src',
+          paint: {
+            'line-color': '#38bdf8',
+            'line-width': 1.5,
+            'line-dasharray': [4, 4]
+          }
+        });
+      }
 
       // 4. Route 1 Ring Road with Neon Glow
-      map.addSource('route-src', { type: 'geojson', data: ROUTE_GEOJSON });
-      map.addLayer({
-        id: 'route-glow',
-        type: 'line',
-        source: 'route-src',
-        paint: {
-          'line-color': '#0284c7',
-          'line-width': 7,
-          'line-blur': 4,
-          'line-opacity': 0.7
-        }
-      });
-      map.addLayer({
-        id: 'route-main',
-        type: 'line',
-        source: 'route-src',
-        paint: {
-          'line-color': '#38bdf8',
-          'line-width': 3,
-          'line-dasharray': [3, 2]
-        }
-      });
+      if (!map.getSource('route-src')) {
+        map.addSource('route-src', { type: 'geojson', data: ROUTE_GEOJSON });
+        map.addLayer({
+          id: 'route-glow',
+          type: 'line',
+          source: 'route-src',
+          paint: {
+            'line-color': '#0284c7',
+            'line-width': 7,
+            'line-blur': 4,
+            'line-opacity': 0.7
+          }
+        });
+        map.addLayer({
+          id: 'route-main',
+          type: 'line',
+          source: 'route-src',
+          paint: {
+            'line-color': '#38bdf8',
+            'line-width': 3,
+            'line-dasharray': [3, 2]
+          }
+        });
+      }
     }
 
     function addPoiMarkers() {
@@ -807,8 +798,9 @@
         addVectorLayers();
       });
 
-      ['dark', 'satellite', 'osm'].forEach(k => {
+      ['dark', 'satellite', 'liberty', 'esri_dark'].forEach(k => {
         const btn = document.getElementById('layer-' + k);
+        if (!btn) return;
         if (k === layerKey) {
           btn.className = 'px-2.5 py-1 text-xs rounded-lg font-medium bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 flex items-center justify-between space-x-3 transition';
         } else {
@@ -819,9 +811,9 @@
 
     function toggle3DPitch() {
       is3DPitch = !is3DPitch;
-      const targetPitch = is3DPitch ? 55 : 0;
+      const targetPitch = is3DPitch ? 52 : 0;
       map.easeTo({ pitch: targetPitch, duration: 1000 });
-      document.getElementById('btn-pitch-toggle').textContent = is3DPitch ? '55° 3D' : '0° Flat';
+      document.getElementById('btn-pitch-toggle').textContent = is3DPitch ? '52° 3D' : '0° Flat';
     }
 
     function toggleChaseCam() {
@@ -1018,16 +1010,13 @@
         simIndex = (simIndex + 1) % WAYPOINTS.length;
         currentCarPos = WAYPOINTS[simIndex];
 
-        // Move Car Marker
         carMarker.setLngLat([currentCarPos[1], currentCarPos[0]]);
 
-        // Calculate heading and rotate car beam
         const bearing = calculateBearing(prevPos[0], prevPos[1], currentCarPos[0], currentCarPos[1]);
         if (carMarkerElement) {
           carMarkerElement.style.transform = `rotate(${bearing}deg)`;
         }
 
-        // Chase Camera follows the vehicle in 3D!
         if (isChaseCam) {
           map.easeTo({
             center: [currentCarPos[1], currentCarPos[0]],

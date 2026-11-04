@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Audio Guide Iceland — Institutional Business Plan & Strategic Presentation 2.0</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    .slide-section {
+      display: none;
+      animation: slideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .slide-section.active {
+      display: block;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .glass-card {
+      background: rgba(19, 27, 46, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card:hover {
+      border-color: rgba(59, 130, 246, 0.35);
+    }
+    input[type=range] {
+      accent-color: #3b82f6;
+    }
+    .pill-nav.active {
+      background-color: rgba(59, 130, 246, 0.2);
+      border-color: rgba(59, 130, 246, 0.6);
+      color: #93c5fd;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body class="bg-[#080c14] text-[#f1f5f9] antialiased min-h-screen p-3 md:p-8 font-sans selection:bg-blue-500 selection:text-white">
+
+  <!-- TOP EXECUTIVE CONTROL BAR -->
+  <header class="max-w-7xl mx-auto mb-6 bg-[#101726]/90 border border-slate-800/80 rounded-2xl p-4 md:p-6 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+    <div>
+      <div class="flex items-center gap-2 mb-1.5">
+        <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-extrabold uppercase tracking-widest bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          Institutional Grade 2.0 • Verified Data
+        </span>
+        <span class="text-xs text-slate-500">|</span>
+        <span class="text-xs text-slate-400">Ferðamálastofa &amp; Samgöngustofa Benchmarked</span>
+      </div>
+      <h1 class="text-xl md:text-3xl font-black tracking-tight text-white">
+        Smart Road Audio Guide <span class="text-blue-500">Iceland</span>
+      </h1>
+      <p class="text-xs md:text-sm text-slate-400 mt-1">
+        Стратегічний бізнес-план, гнучка B2B/B2C інфраструктура, фінансове моделювання та податковий контур
+      </p>
+    </div>
+
+    <!-- Slide Control Hub -->
+    <div class="flex items-center gap-3">
+      <div class="hidden sm:flex flex-col text-right">
+        <span class="text-[11px] text-slate-400 uppercase font-bold tracking-wider">Навігація презентацією</span>
+        <span class="text-xs text-slate-300">Клавіші ← / → на клавіатурі</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="prevSlide()" class="p-2.5 md:px-4 md:py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-sm font-semibold transition">
+          ← <span class="hidden md:inline">Попередній</span>
+        </button>
+        <div class="px-3 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs font-mono font-bold text-blue-400">
+          <span id="current-slide-num">1</span> / 7
+        </div>
+        <button onclick="nextSlide()" class="p-2.5 md:px-4 md:py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-bold transition shadow-lg shadow-blue-600/25">
+          <span class="hidden md:inline">Наступний</span> →
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- QUICK NAVIGATION TABS -->
+  <nav class="max-w-7xl mx-auto mb-8 flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none text-xs">
+    <button onclick="jumpToSlide(1)" id="pill-1" class="pill-nav active px-3.5 py-2 rounded-xl border border-slate-800 bg-slate-900/60 text-slate-400 whitespace-nowrap transition">
+      1. Ринковий фундамент &amp; Дані
+    </button>
+    <button onclick="jumpToSlide(2)" id="pill-2" class="pill-nav px-3.5 py-2 rounded-xl border border-slate-800 bg-slate-900/60 text-slate-400 whitespace-nowrap transition">
+      2. 360° Аналіз 4 Стейкхолдерів
+    </button>
+    <button onclick="jumpToSlide(3)" id="pill-3" class="pill-nav px-3.5 py-2 rounded-xl border border-slate-800 bg-slate-900/60 text-slate-400 whitespace-nowrap transition">
+      3. Гнучка матриця B2B Ліцензій
+    </button>
+    <button onclick="jumpToSlide(4)" id="pill-4" class="pill-nav px-3.5 py-2 rounded-xl border border-slate-800 bg-slate-900/60 text-slate-400 whitespace-nowrap transition">
+      4. Інтерактивний B2B ROI Симулятор
+    </button>
+    <button onclick="jumpToSlide(5)" id="pill-5" class="pill-nav px-3.5 py-2 rounded-xl border border-slate-800 bg-slate-900/60 text-slate-400 whitespace-nowrap transition">
+      5. Сезонність, Cash Flow &amp; Податки
+    </button>
+    <button onclick="jumpToSlide(6)" id="pill-6" class="pill-nav px-3.5 py-2 rounded-xl border border-slate-800 bg-slate-900/60 text-slate-400 whitespace-nowrap transition">
+      6. P&amp;L за 3 Сценаріями (3 Роки)
+    </button>
+    <button onclick="jumpToSlide(7)" id="pill-7" class="pill-nav px-3.5 py-2 rounded-xl border border-slate-800 bg-slate-900/60 text-slate-400 whitespace-nowrap transition">
+      7. SafeTravel &amp; План впровадження
+    </button>
+  </nav>
+
+  <!-- PRESENTATION BODY -->
+  <main class="max-w-7xl mx-auto space-y-6">
+
+    <!-- ======================================================== -->
+    <!-- SLIDE 1: VERIFIED MARKET RESEARCH & MACRO DATA           -->
+    <!-- ======================================================== -->
+    <section id="slide-1" class="slide-section active space-y-6">
+      <!-- Big Stats Strip -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="glass-card rounded-2xl p-5 border border-slate-800">
+          <span class="text-[11px] text-slate-400 uppercase font-bold tracking-wider block">Зареєстровано автопрокатів</span>
+          <div class="text-2xl md:text-3xl font-black text-white mt-1">25,000 – 33,200</div>
+          <span class="text-[11px] text-emerald-400 mt-1 block">~10.5% усього автопарку країни</span>
+        </div>
+        <div class="glass-card rounded-2xl p-5 border border-slate-800">
+          <span class="text-[11px] text-slate-400 uppercase font-bold tracking-wider block">Частка Self-Drive туристів</span>
+          <div class="text-2xl md:text-3xl font-black text-white mt-1">60% – 78%</div>
+          <span class="text-[11px] text-blue-400 mt-1 block">Офіційне опитування Ferðamálastofa</span>
+        </div>
+        <div class="glass-card rounded-2xl p-5 border border-slate-800">
+          <span class="text-[11px] text-slate-400 uppercase font-bold tracking-wider block">Оренда застарілого GPS</span>
+          <div class="text-2xl md:text-3xl font-black text-amber-400 mt-1">1,700 ISK/добу</div>
+          <span class="text-[11px] text-slate-400 mt-1 block">~$12.50/день = ~$87.50 за тиждень!</span>
+        </div>
+        <div class="glass-card rounded-2xl p-5 border border-slate-800">
+          <span class="text-[11px] text-slate-400 uppercase font-bold tracking-wider block">Ціна нашого Smart Pass</span>
+          <div class="text-2xl md:text-3xl font-black text-emerald-400 mt-1">$30 / 7 днів</div>
+          <span class="text-[11px] text-emerald-400 mt-1 block">Втричі дешевше за старий Garmin!</span>
+        </div>
+      </div>
+
+      <!-- Deep Dive Market Realities -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Market Structural Breakdown -->
+        <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+            Офіційні дані туризму Ісландії (Ferðamálastofa)
+          </h3>
+          <p class="text-xs md:text-sm text-slate-300 leading-relaxed">
+            Ісландія щороку приймає <strong>2.3 – 2.5 мільйони міжнародних мандрівників</strong> (з яких понад 30% — туристи зі США, далі Великобританія, Німеччина, Франція та Канада). Середня тривалість перебування влітку становить <strong>7.4 – 9.2 діб</strong>.
+          </p>
+          <div class="space-y-2.5 text-xs text-slate-300">
+            <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+              <strong class="text-white block mb-0.5">Структура пересування:</strong>
+              Тільки 15–20% обирають великі автобусні екскурсії. Переважна більшість мандрує самостійно на орендованих 4x4 або кемперах по Route 1 та Golden Circle.
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+              <strong class="text-white block mb-0.5">Економічний бар'єр GuideAlong ($84.99):</strong>
+              Найближчий американський аналог *GuideAlong* продає повний пакет за ~$85. Для туриста, який приїхав на 1 тиждень, це психологічний стоп-фактор. Наш прайсинг **$30 за 7 днів** є імпульсивною покупкою, що підвищує конверсію в 3-4 рази.
+            </div>
+          </div>
+        </div>
+
+        <!-- The Hardware Replacement Moat -->
+        <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+            Чому прокатні компанії жадають цього рішення
+          </h3>
+          <p class="text-xs md:text-sm text-slate-300 leading-relaxed">
+            Провідні оператори (*Blue Car Rental, Lotus, Höldur/Europcar, CampEasy*) щодня здають в оренду навігатори Garmin та 4G-модеми за **1,700 ISK на добу (~$87 за 7 днів)**.
+          </p>
+          <div class="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-200 space-y-2">
+            <span class="font-bold text-amber-400 block text-sm">Проблема фізичного «заліза» для автопрокату:</span>
+            <p>• Пристрої б'ються, губляться кабелі, туристи забувають їх у машині або ламають присоски на склі.</p>
+            <p>• Вимагає обліку на складі, зарядки, дезінфекції та заміни акумуляторів.</p>
+            <p>• <strong>Наше SaaS-рішення:</strong> Нульова логістика, нульові витрати на залізо, 100% софт на смартфоні або CarPlay туриста з моментальною маржею.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SLIDE 2: 360° MULTI-STAKEHOLDER MATRIX                   -->
+    <!-- ======================================================== -->
+    <section id="slide-2" class="slide-section space-y-6">
+      <div class="glass-card rounded-2xl p-6 border border-slate-800">
+        <h2 class="text-xl md:text-2xl font-bold text-white mb-2">360° Матриця Стейкхолдерів: Синхронізація інтересів</h2>
+        <p class="text-xs md:text-sm text-slate-400 mb-6">
+          Бізнес-модель життєздатна лише тоді, коли кожен учасник екосистеми отримує кращу цінність за менші гроші.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+          <!-- 1. Car Rental Owner -->
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-amber-500/30 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-2xl">🚘</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300 uppercase">Власник прокату</span>
+            </div>
+            <h4 class="font-bold text-white text-sm">Директор автопрокату</h4>
+            <div class="text-slate-300 space-y-2">
+              <p><strong>Біль:</strong> Ціновий демпінг на оренду авто. Зниження прибутку через конкуренцію.</p>
+              <p><strong>Рішення:</strong> Пакетна флотова ліцензія (маркетингова фішка «Гід у кожному авто») або допродаж опції з комісією 50% ($12.50 чистого кешу на кожній оренді).</p>
+              <p><strong>Бонус:</strong> Зменшення страхових збитків від ураганів завдяки гео-попередженням.</p>
+            </div>
+          </div>
+
+          <!-- 2. Tour Operator -->
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-blue-500/30 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-2xl">🏔️</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-500/20 text-blue-300 uppercase">Туроператор</span>
+            </div>
+            <h4 class="font-bold text-white text-sm">Intrepid / Nordic Visitor</h4>
+            <div class="text-slate-300 space-y-2">
+              <p><strong>Біль:</strong> У преміальних self-drive турах за $3,000 туристи отримують лише паперовий буклет (дослідження Nordic Visitor це підтвердило!).</p>
+              <p><strong>Рішення:</strong> White-Label додаток із фірмовою символікою оператора, який автоматично веде туриста за його персональним ваучером.</p>
+              <p><strong>Бонус:</strong> Підвищення NPS туру до 95%+ без найму живого супроводжуючого.</p>
+            </div>
+          </div>
+
+          <!-- 3. Driver / Tourist -->
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-emerald-500/30 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-2xl">🎧</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 uppercase">Мандрівник</span>
+            </div>
+            <h4 class="font-bold text-white text-sm">Турист за кермом</h4>
+            <div class="text-slate-300 space-y-2">
+              <p><strong>Біль:</strong> Водій не може читати путівник за кермом. Пасажири сперечаються куди їхати. Автобусні тури дорогі ($150/день) і прив'язують до натовпу.</p>
+              <p><strong>Рішення:</strong> Додаток вмикається сам через Bluetooth/CarPlay за 1 км до водоспаду або вулкана, розповідає живі факти і не відволікає від дороги.</p>
+              <p><strong>Ціна:</strong> Всього $30 на тиждень за всю компанію в машині.</p>
+            </div>
+          </div>
+
+          <!-- 4. Project Founder -->
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-purple-500/30 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-2xl">💼</span>
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-500/20 text-purple-300 uppercase">Засновник</span>
+            </div>
+            <h4 class="font-bold text-white text-sm">Власник платформи</h4>
+            <div class="text-slate-300 space-y-2">
+              <p><strong>Економіка:</strong> Нульова собівартість додаткової копії цифрового контенту. Маржинальність 75–85%.</p>
+              <p><strong>Масштаб:</strong> B2B контракти забезпечують оптовий фіксований грошовий потік до початку сезону, B2C реклама генерує високомаржинальний роздріб.</p>
+              <p><strong>Експансія:</strong> Готовий софт за 1 місяць адаптується під Норвегію, Шотландію та Фарери.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SLIDE 3: B2B LICENSING MATRIX (FLEET VS METERED VS REV)  -->
+    <!-- ======================================================== -->
+    <section id="slide-3" class="slide-section space-y-6">
+      <div class="glass-card rounded-2xl p-6 border border-slate-800">
+        <div class="max-w-3xl mb-6">
+          <span class="text-xs font-bold text-blue-400 uppercase tracking-wider block mb-1">Гнучкість як основа продажів</span>
+          <h2 class="text-xl md:text-2xl font-bold text-white">4 Моделі B2B Співпраці для Автопрокатів та Агенцій</h2>
+          <p class="text-xs md:text-sm text-slate-400 mt-1">
+            Кожен бізнес має свої особливості. Ми розробили пропозицію для кожного типу партнерів: від малого прокату на 30 машин до національних мереж на 3,000 авто.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Model 1: Flat Fleet -->
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-blue-500/40 flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-blue-500 text-white mb-2 inline-block">Модель 1</span>
+              <h3 class="text-base font-bold text-white mb-1">Флотова підписка (Flat Fleet)</h3>
+              <p class="text-xs text-blue-400 font-semibold mb-3">«Все включено на 1 рік»</p>
+              <p class="text-xs text-slate-300 mb-4 leading-relaxed">
+                Єдиний щорічний платіж за весь парк. Прокат рекламує «Безкоштовний Smart Guide у кожному авто».
+              </p>
+              <div class="space-y-1.5 text-xs text-slate-200 border-t border-slate-800 pt-3 mb-4">
+                <div class="flex justify-between"><span>До 50 машин:</span> <strong class="text-white">$1,000 / рік</strong></div>
+                <div class="flex justify-between"><span>100–200 машин:</span> <strong class="text-white">$2,500 – $3,500 / рік</strong></div>
+                <div class="flex justify-between"><span>500+ машин:</span> <strong class="text-white">$6,000 / рік</strong></div>
+              </div>
+            </div>
+            <div class="p-2.5 rounded-xl bg-blue-500/10 text-[11px] text-blue-300 border border-blue-500/20">
+              Ідеально для швидкого укладання угоди без щомісячної бухгалтерії.
+            </div>
+          </div>
+
+          <!-- Model 2: Metered Pay-per-Day -->
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-slate-800 flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-slate-700 text-slate-200 mb-2 inline-block">Модель 2</span>
+              <h3 class="text-base font-bold text-white mb-1">Попоїздковий облік (Metered)</h3>
+              <p class="text-xs text-emerald-400 font-semibold mb-3">«Оплата за фактом запуску»</p>
+              <p class="text-xs text-slate-300 mb-4 leading-relaxed">
+                Баланс поповнюється депозитом ($500). Кошти списуються тільки тоді, коли турист активував додаток в дорозі.
+              </p>
+              <div class="space-y-1.5 text-xs text-slate-200 border-t border-slate-800 pt-3 mb-4">
+                <div class="flex justify-between"><span>За 1 активний день:</span> <strong class="text-emerald-400">$0.80</strong></div>
+                <div class="flex justify-between"><span>За 7-денну поїздку:</span> <strong class="text-emerald-400">$4.50</strong></div>
+                <div class="flex justify-between"><span>Простій машини:</span> <strong class="text-white">$0.00</strong></div>
+              </div>
+            </div>
+            <div class="p-2.5 rounded-xl bg-emerald-500/10 text-[11px] text-emerald-300 border border-emerald-500/20">
+              Ідеально для обережних директорів, які бояться переплатити в міжсезоння.
+            </div>
+          </div>
+
+          <!-- Model 3: RevShare 50/50 -->
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-purple-500/40 flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-purple-600 text-white mb-2 inline-block">Модель 3</span>
+              <h3 class="text-base font-bold text-white mb-1">Партнерський RevShare (Upsell)</h3>
+              <p class="text-xs text-purple-400 font-semibold mb-3">«Нульовий ризик для прокату»</p>
+              <p class="text-xs text-slate-300 mb-4 leading-relaxed">
+                Чекбокс при бронюванні на сайті прокату: «Додати Smart Guide за $25». Виручка ділиться 50 / 50.
+              </p>
+              <div class="space-y-1.5 text-xs text-slate-200 border-t border-slate-800 pt-3 mb-4">
+                <div class="flex justify-between"><span>Ціна опції:</span> <strong class="text-white">$25.00</strong></div>
+                <div class="flex justify-between"><span>Частка автопрокату:</span> <strong class="text-purple-400">$12.50</strong></div>
+                <div class="flex justify-between"><span>Наша частка:</span> <strong class="text-blue-400">$12.50</strong></div>
+              </div>
+            </div>
+            <div class="p-2.5 rounded-xl bg-purple-500/10 text-[11px] text-purple-300 border border-purple-500/20">
+              Генерує чистий маржинальний прибуток для прокату з нульовим початковим внеском.
+            </div>
+          </div>
+
+          <!-- Model 4: White-Label OEM -->
+          <div class="p-5 rounded-2xl bg-slate-900/90 border border-amber-500/40 flex flex-col justify-between">
+            <div>
+              <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded bg-amber-600 text-white mb-2 inline-block">Модель 4</span>
+              <h3 class="text-base font-bold text-white mb-1">White-Label &amp; Pre-install</h3>
+              <p class="text-xs text-amber-400 font-semibold mb-3">«Преміум брендінг»</p>
+              <p class="text-xs text-slate-300 mb-4 leading-relaxed">
+                Для великих кемпер-парків (*CampEasy, Happy Campers*), які вже мають планшети в торпеді авто. Наш додаток стає їхнім фірмовим бортовим інтерфейсом.
+              </p>
+              <div class="space-y-1.5 text-xs text-slate-200 border-t border-slate-800 pt-3 mb-4">
+                <div class="flex justify-between"><span>Встановлення:</span> <strong class="text-white">Pre-installed APK</strong></div>
+                <div class="flex justify-between"><span>Тариф:</span> <strong class="text-amber-400">$1.20 / добу оренди</strong></div>
+              </div>
+            </div>
+            <div class="p-2.5 rounded-xl bg-amber-500/10 text-[11px] text-amber-300 border border-amber-500/20">
+              Найглибша інтеграція, 100% конверсія всіх водіїв кемпера.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SLIDE 4: INTERACTIVE B2B FINANCIAL SIMULATOR             -->
+    <!-- ======================================================== -->
+    <section id="slide-4" class="slide-section space-y-6">
+      <div class="glass-card rounded-2xl p-6 md:p-8 border border-slate-800">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-800">
+          <div>
+            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block mb-1">Інтерактивна модель окупності</span>
+            <h2 class="text-xl md:text-2xl font-bold text-white">B2B Симулятор прибутку для автопрокату</h2>
+          </div>
+          <div class="text-xs text-slate-400 bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-800">
+            Змінюйте параметри для демонстрації партнерам
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <!-- Slider Controls -->
+          <div class="space-y-5 bg-slate-900/70 p-5 rounded-2xl border border-slate-800">
+            <div>
+              <div class="flex justify-between text-xs font-semibold text-slate-300 mb-2">
+                <span>Розмір парку автомобілів:</span>
+                <span id="sim-fleet-val" class="text-blue-400 font-bold">200 авто</span>
+              </div>
+              <input type="range" id="sim-fleet" min="20" max="1000" step="10" value="200" class="w-full h-2 bg-slate-800 rounded-lg cursor-pointer" oninput="runSim()">
+              <div class="flex justify-between text-[10px] text-slate-500 mt-1">
+                <span>Малий (20)</span>
+                <span>Середній (200)</span>
+                <span>Великий флот (1000)</span>
+              </div>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-xs font-semibold text-slate-300 mb-2">
+                <span>Кількість оренд на 1 авто на рік:</span>
+                <span id="sim-rentals-val" class="text-slate-200 font-bold">26 оренд (по 7 днів)</span>
+              </div>
+              <input type="range" id="sim-rentals" min="12" max="42" step="1" value="26" class="w-full h-2 bg-slate-800 rounded-lg cursor-pointer" oninput="runSim()">
+              <span class="text-[10px] text-slate-500">Завантаженість флоту: ~50% днів у році</span>
+            </div>
+
+            <div>
+              <div class="flex justify-between text-xs font-semibold text-slate-300 mb-2">
+                <span>Конверсія туристів в опцію Smart Guide ($25):</span>
+                <span id="sim-conv-val" class="text-emerald-400 font-bold">35%</span>
+              </div>
+              <input type="range" id="sim-conv" min="5" max="75" step="5" value="35" class="w-full h-2 bg-slate-800 rounded-lg cursor-pointer" oninput="runSim()">
+            </div>
+          </div>
+
+          <!-- Output Results Box -->
+          <div class="bg-gradient-to-br from-slate-900 to-[#0c1220] p-6 rounded-2xl border border-blue-500/30 shadow-2xl space-y-4">
+            <div>
+              <span class="text-xs uppercase font-bold text-slate-400 tracking-wider">Прибуток автопрокату на вибір:</span>
+              <div class="mt-2 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div class="p-3.5 rounded-xl bg-purple-950/20 border border-purple-500/30">
+                  <span class="text-[11px] text-purple-300 block mb-1">При RevShare (50/50):</span>
+                  <div class="text-2xl font-black text-purple-400" id="sim-revshare-profit">+$22,750</div>
+                  <span class="text-[10px] text-slate-400">Нульові початкові вкладення</span>
+                </div>
+                <div class="p-3.5 rounded-xl bg-blue-950/20 border border-blue-500/30">
+                  <span class="text-[11px] text-blue-300 block mb-1">При Fleet License ($3,000):</span>
+                  <div class="text-2xl font-black text-emerald-400" id="sim-fleet-profit">+$42,500</div>
+                  <span class="text-[10px] text-slate-400">Всі доходи залишаються прокату!</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-2 text-xs pt-2 border-t border-slate-800 text-center">
+              <div class="p-2 rounded-lg bg-slate-800/40">
+                <span class="text-slate-500 block text-[10px]">Всього поїздок</span>
+                <span class="font-bold text-white text-xs" id="sim-total-trips">5,200</span>
+              </div>
+              <div class="p-2 rounded-lg bg-slate-800/40">
+                <span class="text-slate-500 block text-[10px]">Платних гідів</span>
+                <span class="font-bold text-blue-400 text-xs" id="sim-paid-guides">1,820</span>
+              </div>
+              <div class="p-2 rounded-lg bg-slate-800/40">
+                <span class="text-slate-500 block text-[10px]">Валовий чек</span>
+                <span class="font-bold text-emerald-400 text-xs" id="sim-gross-volume">$45,500</span>
+              </div>
+            </div>
+
+            <div class="p-3 rounded-xl bg-slate-800/60 border border-slate-700/60 text-[11px] text-slate-300 leading-relaxed">
+              💬 <strong>Залізний аргумент на переговорах:</strong> «Шановний партнер, якщо ви підключаєте опцію аудіогіда при чекауті авто, ваш прибуток зростає на <strong>$20,000–$40,000</strong> без покупки жодного GPS-пристрою і без жодного ризику!»
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SLIDE 5: ICELANDIC CASH FLOW & TAX STRUCTURING          -->
+    <!-- ======================================================== -->
+    <section id="slide-5" class="slide-section space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Seasonal Cash Flow Curve -->
+        <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <span class="text-amber-400">📊</span>
+            Сезонний графік грошових надходжень (Cash Flow)
+          </h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Туристичний ринок Ісландії має високу амплітуду. Архітектура наших фінансів розроблена так, щоб літній пік створював 12-місячну подушку безпеки:
+          </p>
+
+          <div class="space-y-3 text-xs">
+            <!-- Summer Peak -->
+            <div class="p-3.5 rounded-xl bg-emerald-950/20 border border-emerald-500/30">
+              <div class="flex justify-between items-center mb-1">
+                <strong class="text-emerald-400 text-sm">Червень – Серпень (High Season, 56% виручки)</strong>
+                <span class="font-mono font-bold text-white">$32k – $55k / міс</span>
+              </div>
+              <p class="text-slate-300">
+                100% завантаження автопрокатів, цілодобове сонце (Midnight Sun), пікові продажі 7-Day Pass.
+              </p>
+            </div>
+
+            <!-- Shoulder Months -->
+            <div class="p-3.5 rounded-xl bg-blue-950/20 border border-blue-500/30">
+              <div class="flex justify-between items-center mb-1">
+                <strong class="text-blue-400 text-sm">Травень, Вересень – Жовтень (Shoulder, 28% виручки)</strong>
+                <span class="font-mono font-bold text-white">$14k – $22k / міс</span>
+              </div>
+              <p class="text-slate-300">
+                Комфортні подорожі без заторів на паркінгах, перші прояви Аврори, стабільні корпоративні виплати.
+              </p>
+            </div>
+
+            <!-- Winter Aurora -->
+            <div class="p-3.5 rounded-xl bg-purple-950/20 border border-purple-500/30">
+              <div class="flex justify-between items-center mb-1">
+                <strong class="text-purple-400 text-sm">Листопад – Квітень (Winter / Aurora, 16% виручки)</strong>
+                <span class="font-mono font-bold text-white">$5k – $9k / міс</span>
+              </div>
+              <p class="text-slate-300">
+                Спеціальний зимовий режим «Aurora Alert &amp; Ice Cave Guide» — щоденні рекомендації точок з мінімальною хмарністю.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tax Structuring & Legal Setup -->
+        <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+          <h3 class="text-lg font-bold text-white flex items-center gap-2">
+            <span class="text-blue-400">⚖️</span>
+            Податкова архітектура та Юрисдикція (ЄС/Естонія)
+          </h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Як повністю легально оптимізувати податкове навантаження за міжнародними стандартами:
+          </p>
+
+          <div class="space-y-3 text-xs">
+            <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800">
+              <div class="flex justify-between items-center mb-1">
+                <strong class="text-white">Естонська e-Residency OÜ</strong>
+                <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-bold">0% Corporate Tax</span>
+              </div>
+              <p class="text-slate-300">
+                Увесь операційний прибуток, який реінвестується в розробку, ліцензії, серверний стек та маркетинг, оподатковується за ставкою **0%**. 20% сплачується тільки при виведенні дивідендів.
+              </p>
+            </div>
+
+            <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800">
+              <div class="flex justify-between items-center mb-1">
+                <strong class="text-white">ПДВ (VAT / MOSS) для B2C та B2B</strong>
+                <span class="text-blue-400 font-bold">Автоматичний кліринг</span>
+              </div>
+              <p class="text-slate-300">
+                • <strong>B2C роздріб (App Store / Google Play):</strong> Apple та Google є податковими посередниками (Merchant of Record). Вони самі утримують та перераховують локальний ПДВ.<br>
+                • <strong>B2B з ісландськими юрособами:</strong> Механізм зворотного нарахування (Reverse-Charge VAT B2B всередині ЄЕЗ/ЄС) — податок за інвойсом становить <strong>0%</strong>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SLIDE 6: 3-YEAR P&L SCENARIOS (BEAR, BASE, BULL)        -->
+    <!-- ======================================================== -->
+    <section id="slide-6" class="slide-section space-y-6">
+      <div class="glass-card rounded-2xl p-6 border border-slate-800">
+        <h2 class="text-xl md:text-2xl font-bold text-white mb-2">Фінансовий прогноз P&amp;L на 3 роки (3 Сценарії)</h2>
+        <p class="text-xs md:text-sm text-slate-400 mb-6">
+          Розрахунок базується на поступовому проникненні в ринок 650,000 щорічних орендованих автомобілів в Ісландії:
+        </p>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs border border-slate-800 rounded-xl">
+            <thead class="bg-slate-900 text-slate-400 uppercase font-semibold">
+              <tr>
+                <th class="p-3.5">Фінансовий показник</th>
+                <th class="p-3.5 text-slate-300">Консервативний (Песимістичний)</th>
+                <th class="p-3.5 text-blue-400">Базовий (Цільовий план)</th>
+                <th class="p-3.5 text-emerald-400">Оптимістичний (Bull Run)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-800 text-slate-300">
+              <tr class="hover:bg-slate-800/40">
+                <td class="p-3.5 font-semibold text-white">B2C Абонементи ($30)</td>
+                <td class="p-3.5">2,200 ($66,000)</td>
+                <td class="p-3.5 text-blue-300 font-semibold">6,500 ($195,000)</td>
+                <td class="p-3.5 text-emerald-300 font-semibold">16,000 ($480,000)</td>
+              </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="p-3.5 font-semibold text-white">B2B Ліцензії / Партнерства</td>
+                <td class="p-3.5">1 прокат на 100 авто ($2,500)</td>
+                <td class="p-3.5 text-blue-300 font-semibold">3 прокати (~600 авто = $42,000)</td>
+                <td class="p-3.5 text-emerald-300 font-semibold">Мережа (~2,500 авто = $160,000)</td>
+              </tr>
+              <tr class="bg-slate-900/60 font-bold">
+                <td class="p-3.5 text-white">Валова виручка (Gross Revenue)</td>
+                <td class="p-3.5 text-white">$68,500</td>
+                <td class="p-3.5 text-blue-400">$237,000</td>
+                <td class="p-3.5 text-emerald-400">$640,000+</td>
+              </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="p-3.5 text-slate-400">Комісії магазинів (App Store 15%)</td>
+                <td class="p-3.5 text-red-400">-$9,900</td>
+                <td class="p-3.5 text-red-400">-$29,250</td>
+                <td class="p-3.5 text-red-400">-$72,000</td>
+              </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="p-3.5 text-slate-400">Маркетинговий бюджет (CAC $7-9)</td>
+                <td class="p-3.5 text-red-400">-$15,000</td>
+                <td class="p-3.5 text-red-400">-$35,000</td>
+                <td class="p-3.5 text-red-400">-$75,000</td>
+              </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="p-3.5 text-slate-400">Сервери, кеш аудіо, карти MapLibre</td>
+                <td class="p-3.5 text-red-400">-$3,800</td>
+                <td class="p-3.5 text-red-400">-$6,200</td>
+                <td class="p-3.5 text-red-400">-$12,500</td>
+              </tr>
+              <tr class="bg-emerald-950/30 font-black">
+                <td class="p-3.5 text-emerald-400 text-sm">Чистий операційний прибуток (EBITDA)</td>
+                <td class="p-3.5 text-emerald-300 font-bold text-sm">$39,800</td>
+                <td class="p-3.5 text-emerald-400 font-black text-base">$166,550</td>
+                <td class="p-3.5 text-emerald-400 font-black text-lg">$480,500</td>
+              </tr>
+              <tr class="hover:bg-slate-800/40">
+                <td class="p-3.5 font-semibold text-white">Окупність початкових інвестицій ($25k)</td>
+                <td class="p-3.5 text-amber-400 font-bold">~7 місяців</td>
+                <td class="p-3.5 text-emerald-400 font-bold">~3.5 місяці</td>
+                <td class="p-3.5 text-emerald-400 font-bold">&lt; 2 місяців</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- SLIDE 7: SAFETRAVEL MOAT & 120-DAY EXECUTION PLAYBOOK    -->
+    <!-- ======================================================== -->
+    <section id="slide-7" class="slide-section space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- SafeTravel Strategic Advantage -->
+        <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4">
+          <div class="flex items-center gap-2">
+            <span class="w-3 h-3 rounded-full bg-red-500 animate-ping"></span>
+            <span class="text-xs uppercase font-extrabold text-red-400 tracking-wider">Стратегічна монополія на безпеку</span>
+          </div>
+          <h3 class="text-lg font-bold text-white">Інтеграція SafeTravel.is: Рятівник дверей та страховок</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            В Ісландії <strong>вітер, гравій та лавовий попіл</strong> є причиною понад 45% усіх страхових випадків в автопрокатах. Вітер понад 25 м/с зриває відкриті двері, завдаючи збитків на €3,000–€5,000.
+          </p>
+          <div class="space-y-2.5 text-xs">
+            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+              <strong class="text-white block mb-0.5">Динамічне штормове попередження:</strong>
+              «Увага! На під'їзді до Віка біля мису Дірхолей швидкість вітру перевищує 26 м/с. При зупинці паркуйтеся носом проти вітру і міцно тримайте двері обома руками».
+            </div>
+            <div class="p-3 rounded-xl bg-slate-900 border border-slate-800">
+              <strong class="text-white block mb-0.5">Захист від нелегальних F-доріг:</strong>
+              Автоматичне попередження, якщо автомобіль 2WD наближається до заборонених гірських трас, що рятує підвіску від руйнування.
+            </div>
+          </div>
+        </div>
+
+        <!-- 120-Day Action Playbook -->
+        <div class="glass-card rounded-2xl p-6 border border-slate-800 space-y-4 flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block mb-1">Готовність до сезону 2027</span>
+            <h3 class="text-lg font-bold text-white mb-3">120-Денний план дій від сьогодні</h3>
+            
+            <div class="space-y-3 text-xs text-slate-300">
+              <div class="flex items-start gap-3">
+                <span class="w-6 h-6 rounded-lg bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center shrink-0 border border-blue-500/30">1</span>
+                <div>
+                  <strong class="text-white">Дні 1–30: Контент &amp; Аудіо-генерація</strong>
+                  <p class="text-slate-400">Формування реєстру 150 POI (Golden Circle + South Coast) та пакетна генерація аудіо на вашому Mac M4 Pro.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <span class="w-6 h-6 rounded-lg bg-blue-500/20 text-blue-400 font-bold flex items-center justify-center shrink-0 border border-blue-500/30">2</span>
+                <div>
+                  <strong class="text-white">Дні 31–60: MVP Flutter Engine &amp; GPX Тести</strong>
+                  <p class="text-slate-400">Прогін реальних треків Route 1 в симуляторі Xcode на Mac. Відпрацювання фонового GPS і Ducking.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <span class="w-6 h-6 rounded-lg bg-emerald-500/20 text-emerald-400 font-bold flex items-center justify-center shrink-0 border border-emerald-500/30">3</span>
+                <div>
+                  <strong class="text-white">Дні 61–90: B2B Пітчинг в Ісландії</strong>
+                  <p class="text-slate-400">Зв'язок із директорами з маркетингу Blue Car Rental, Lotus та CampEasy. Пропозиція моделі RevShare 50/50 або флоту за $2,500.</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3">
+                <span class="w-6 h-6 rounded-lg bg-purple-500/20 text-purple-400 font-bold flex items-center justify-center shrink-0 border border-purple-500/30">4</span>
+                <div>
+                  <strong class="text-white">Дні 91–120: Публікація в App Store &amp; Старт сезону</strong>
+                  <p class="text-slate-400">Реліз у сторах, розміщення QR-стійок в аеропорту KEF та запуск таргетованої реклами на травень-червень.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-4 border-t border-slate-800 text-center">
+            <span class="text-xs text-emerald-400 font-bold block mb-1">Проект повністю готовий до початку реалізації</span>
+            <span class="text-[11px] text-slate-500">Використовуйте цей дашборд як офіційний інвестиційний меморандум</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="max-w-7xl mx-auto mt-12 pt-6 border-t border-slate-800 text-center text-xs text-slate-500">
+    Smart Road Audio Guide Iceland • Institutional Business Plan &amp; Strategic Model 2.0 • Antigravity AI
+  </footer>
+
+  <!-- SCRIPT ENGINE -->
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 7;
+
+    function jumpToSlide(n) {
+      if (n < 1 || n > totalSlides) return;
+      currentSlide = n;
+
+      for (let i = 1; i <= totalSlides; i++) {
+        const slide = document.getElementById('slide-' + i);
+        const pill = document.getElementById('pill-' + i);
+        if (slide) {
+          if (i === currentSlide) {
+            slide.classList.add('active');
+          } else {
+            slide.classList.remove('active');
+          }
+        }
+        if (pill) {
+          if (i === currentSlide) {
+            pill.classList.add('active');
+          } else {
+            pill.classList.remove('active');
+          }
+        }
+      }
+
+      document.getElementById('current-slide-num').innerText = currentSlide;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) jumpToSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) jumpToSlide(currentSlide - 1);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    // Dynamic Simulator Logic
+    function runSim() {
+      const fleet = parseInt(document.getElementById('sim-fleet').value);
+      const rentals = parseInt(document.getElementById('sim-rentals').value);
+      const conv = parseInt(document.getElementById('sim-conv').value) / 100;
+
+      document.getElementById('sim-fleet-val').innerText = fleet + ' авто';
+      document.getElementById('sim-rentals-val').innerText = rentals + ' оренд на авто';
+      document.getElementById('sim-conv-val').innerText = Math.round(conv * 100) + '%';
+
+      const totalTrips = fleet * rentals;
+      const paidGuides = Math.round(totalTrips * conv);
+      const grossVolume = paidGuides * 25; // $25 per guide upsell
+      const revshareProfit = Math.round(grossVolume * 0.50);
+
+      // Fleet flat rate assumptions: base $1,000 up to 50 cars, ~$15/car beyond
+      let fleetFlatFee = 3000;
+      if (fleet <= 50) fleetFlatFee = 1000;
+      else if (fleet <= 100) fleetFlatFee = 2000;
+      else if (fleet <= 250) fleetFlatFee = 3500;
+      else fleetFlatFee = 6000;
+
+      const fleetProfit = grossVolume - fleetFlatFee;
+
+      document.getElementById('sim-total-trips').innerText = totalTrips.toLocaleString();
+      document.getElementById('sim-paid-guides').innerText = paidGuides.toLocaleString();
+      document.getElementById('sim-gross-volume').innerText = '$' + grossVolume.toLocaleString();
+      document.getElementById('sim-revshare-profit').innerText = '+$' + revshareProfit.toLocaleString();
+      document.getElementById('sim-fleet-profit').innerText = '+$' + Math.max(0, fleetProfit).toLocaleString();
+    }
+
+    runSim();
+  </script>
+</body>
+</html>

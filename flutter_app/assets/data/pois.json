@@ -6,14 +6,20 @@
       "en": "Þingvellir National Park"
     },
     "region": "golden_circle",
+    "category": "history",
+    "category_name": {
+      "uk": "Історія & Саги",
+      "en": "History & Sagas"
+    },
+    "icon": "🏛️",
+    "color": "#f59e0b",
+    "lat": 64.2559,
+    "lng": -21.1295,
+    "radius": 3500,
     "type": {
       "uk": "Must-See • UNESCO",
       "en": "Must-See • UNESCO"
     },
-    "icon": "🏛️",
-    "lat": 64.2559,
-    "lng": -21.1295,
-    "radius": 3500,
     "badge": "UNESCO World Heritage",
     "vector": {
       "uk": "Прямо за курсом • Траса 36",
@@ -49,14 +55,20 @@
       "en": "Öxarárfoss Waterfall"
     },
     "region": "golden_circle",
+    "category": "waterfall",
+    "category_name": {
+      "uk": "Водоспад",
+      "en": "Waterfall"
+    },
+    "icon": "💧",
+    "color": "#00f0ff",
+    "lat": 64.266,
+    "lng": -21.1165,
+    "radius": 2000,
     "type": {
       "uk": "Прихований водоспад Тінґветліра",
       "en": "Þingvellir Gorge Waterfall"
     },
-    "icon": "💧",
-    "lat": 64.266,
-    "lng": -21.1165,
-    "radius": 2000,
     "badge": "Hidden Waterfall",
     "vector": {
       "uk": "Усередині каньйону Almannagjá",
@@ -88,14 +100,20 @@
       "en": "Geysir & Strokkur Geothermal Field"
     },
     "region": "golden_circle",
+    "category": "geothermal",
+    "category_name": {
+      "uk": "Геотермальна зона",
+      "en": "Geothermal Area"
+    },
+    "icon": "💨",
+    "color": "#c084fc",
+    "lat": 64.3104,
+    "lng": -20.3024,
+    "radius": 2000,
     "type": {
       "uk": "Must-See • Геотермальне поле",
       "en": "Must-See • Geothermal Area"
     },
-    "icon": "💨",
-    "lat": 64.3104,
-    "lng": -20.3024,
-    "radius": 2000,
     "badge": "Geothermal Icon",
     "vector": {
       "uk": "Попереду долина Haukadalur • Траса 35",
@@ -131,14 +149,20 @@
       "en": "Gullfoss (The Golden Falls)"
     },
     "region": "golden_circle",
+    "category": "waterfall",
+    "category_name": {
+      "uk": "Водоспад",
+      "en": "Waterfall"
+    },
+    "icon": "💧",
+    "color": "#00f0ff",
+    "lat": 64.3271,
+    "lng": -20.1199,
+    "radius": 2000,
     "type": {
       "uk": "Must-See • Водоспад",
       "en": "Must-See • Canyon Waterfall"
     },
-    "icon": "💧",
-    "lat": 64.3271,
-    "lng": -20.1199,
-    "radius": 2000,
     "badge": "Glacier River",
     "vector": {
       "uk": "Праворуч каньйон річки Hvíta",
@@ -170,14 +194,20 @@
       "en": "Brúarfoss (Cyan Waterfall)"
     },
     "region": "golden_circle",
+    "category": "waterfall",
+    "category_name": {
+      "uk": "Водоспад",
+      "en": "Waterfall"
+    },
+    "icon": "💧",
+    "color": "#00f0ff",
+    "lat": 64.2642,
+    "lng": -20.5157,
+    "radius": 1200,
     "type": {
       "uk": "Секретний блакитний водоспад",
       "en": "Secret Cyan Cascade"
     },
-    "icon": "💧",
-    "lat": 64.2642,
-    "lng": -20.5157,
-    "radius": 1200,
     "badge": "Hidden Gem",
     "vector": {
       "uk": "Відгалуження біля Траси 37",
@@ -209,14 +239,20 @@
       "en": "Faxi Waterfall (Vatnsleysufoss)"
     },
     "region": "golden_circle",
+    "category": "waterfall",
+    "category_name": {
+      "uk": "Водоспад",
+      "en": "Waterfall"
+    },
+    "icon": "💧",
+    "color": "#00f0ff",
+    "lat": 64.2256,
+    "lng": -20.3372,
+    "radius": 2000,
     "type": {
       "uk": "Широкий лососевий водоспад",
       "en": "Wide Salmon Cascade"
     },
-    "icon": "📍",
-    "lat": 64.2256,
-    "lng": -20.3372,
-    "radius": 2000,
     "badge": "Scenic Detour",
     "vector": {
       "uk": "Траса 35 між Geysir та Reykholt",
@@ -248,14 +284,20 @@
       "en": "Friðheimar Geothermal Greenhouse"
     },
     "region": "golden_circle",
+    "category": "greenhouse",
+    "category_name": {
+      "uk": "Еко-ферма / Теплиця",
+      "en": "Greenhouse Culture"
+    },
+    "icon": "🌿",
+    "color": "#84cc16",
+    "lat": 64.2045,
+    "lng": -20.4439,
+    "radius": 2000,
     "type": {
       "uk": "Агротуризм & Гастрономія",
       "en": "Geothermal Culinary Farm"
     },
-    "icon": "🌿",
-    "lat": 64.2045,
-    "lng": -20.4439,
-    "radius": 2000,
     "badge": "Geothermal Gastronomy",
     "vector": {
       "uk": "Селище Reykholt • Траса 35",
@@ -287,14 +329,20 @@
       "en": "Kerið Volcanic Crater Lake"
     },
     "region": "golden_circle",
+    "category": "volcano",
+    "category_name": {
+      "uk": "Вулкан / Лава",
+      "en": "Volcano / Lava"
+    },
+    "icon": "🌋",
+    "color": "#ff5722",
+    "lat": 64.0412,
+    "lng": -20.8851,
+    "radius": 2000,
     "type": {
       "uk": "Вулканічна кальдера",
       "en": "Volcanic Scoria Crater"
     },
-    "icon": "🌋",
-    "lat": 64.0412,
-    "lng": -20.8851,
-    "radius": 2000,
     "badge": "Volcanic Caldera",
     "vector": {
       "uk": "Траса 35 між Selfoss та Reykholt",
@@ -326,14 +374,20 @@
       "en": "Hjálparfoss Waterfall"
     },
     "region": "golden_circle",
+    "category": "waterfall",
+    "category_name": {
+      "uk": "Водоспад",
+      "en": "Waterfall"
+    },
+    "icon": "💧",
+    "color": "#00f0ff",
+    "lat": 64.1166,
+    "lng": -19.851,
+    "radius": 2000,
     "type": {
       "uk": "Подвійний водоспад у лаві",
       "en": "Twin River Basalt Falls"
     },
-    "icon": "💧",
-    "lat": 64.1166,
-    "lng": -19.851,
-    "radius": 2000,
     "badge": "Þjórsárdalur Gem",
     "vector": {
       "uk": "Долина Þjórsárdalur • Траса 32 біля підніжжя Гекли",
@@ -365,14 +419,20 @@
       "en": "Urriðafoss (Most Voluminous Falls)"
     },
     "region": "south_coast",
+    "category": "waterfall",
+    "category_name": {
+      "uk": "Водоспад",
+      "en": "Waterfall"
+    },
+    "icon": "💧",
+    "color": "#00f0ff",
+    "lat": 63.9247,
+    "lng": -20.6725,
+    "radius": 2000,
     "type": {
       "uk": "Гігантська річкова міць",
       "en": "High-Volume Cascade"
     },
-    "icon": "💧",
-    "lat": 63.9247,
-    "lng": -20.6725,
-    "radius": 2000,
     "badge": "Hydropower Giant",
     "vector": {
       "uk": "Траса 1 між Selfoss та Hella",
@@ -404,14 +464,20 @@
       "en": "Gluggafoss / Merkjárfoss (Window Falls)"
     },
     "region": "south_coast",
+    "category": "waterfall",
+    "category_name": {
+      "uk": "Водоспад",
+      "en": "Waterfall"
+    },
+    "icon": "💧",
+    "color": "#00f0ff",
+    "lat": 63.7212,
+    "lng": -19.8931,
+    "radius": 2000,
     "type": {
       "uk": "Секретний скельний водоспад",
       "en": "Geological Window Phenomenon"
     },
-    "icon": "💧",
-    "lat": 63.7212,
-    "lng": -19.8931,
-    "radius": 2000,
     "badge": "Secret Gem",
     "vector": {
       "uk": "Траса 261 за Hvolsvöllur у долині Fljótshlíð",
@@ -443,14 +509,20 @@
       "en": "Seljalandsfoss Waterfall"
     },
     "region": "south_coast",
+    "category": "waterfall",
+    "category_name": {
+      "uk": "Водоспад",
+      "en": "Waterfall"
+    },
+    "icon": "💧",
+    "color": "#00f0ff",
+    "lat": 63.6156,
+    "lng": -19.9885,
+    "radius": 2000,
     "type": {
       "uk": "Must-See • Водоспад",
       "en": "Must-See • 360° Walk-Behind"
     },
-    "icon": "💧",
-    "lat": 63.6156,
-    "lng": -19.9885,
-    "radius": 2000,
     "badge": "Iconic Falls",
     "vector": {
       "uk": "Ліворуч біля самої Траси 1",
@@ -482,14 +554,20 @@
       "en": "Gljúfrabúi (Secret Gorge Waterfall)"
     },
     "region": "south_coast",
+    "category": "waterfall",
+    "category_name": {
+      "uk": "Водоспад",
+      "en": "Waterfall"
+    },
+    "icon": "💧",
+    "color": "#00f0ff",
+    "lat": 63.6209,
+    "lng": -19.9864,
+    "radius": 1200,
     "type": {
       "uk": "Секретний печерний водоспад",
       "en": "Hidden Cave Waterfall"
     },
-    "icon": "📍",
-    "lat": 63.6209,
-    "lng": -19.9864,
-    "radius": 1200,
     "badge": "Secret Cave Gem",
     "vector": {
       "uk": "600 метрів пішки на північ від Seljalandsfoss",
@@ -521,14 +599,20 @@
       "en": "Þorvaldseyri Farm & Eyjafjallajökull View"
     },
     "region": "vistas",
+    "category": "glacier",
+    "category_name": {
+      "uk": "Льодовик / Лагуна",
+      "en": "Glacier / Lagoon"
+    },
+    "icon": "🧊",
+    "color": "#bae6fd",
+    "lat": 63.5321,
+    "lng": -19.6543,
+    "radius": 2000,
     "type": {
       "uk": "Вулканічна панорама",
       "en": "Volcano Vista & Memorial"
     },
-    "icon": "🧊",
-    "lat": 63.5321,
-    "lng": -19.6543,
-    "radius": 2000,
     "badge": "Eruption Memorial",
     "vector": {
       "uk": "Ліворуч на Трасі 1 перед Skógar",
@@ -560,14 +644,20 @@
       "en": "Skógafoss Waterfall"
     },
     "region": "south_coast",
+    "category": "waterfall",
+    "category_name": {
+      "uk": "Водоспад",
+      "en": "Waterfall"
+    },
+    "icon": "💧",
+    "color": "#00f0ff",
+    "lat": 63.5321,
+    "lng": -19.5114,
+    "radius": 2000,
     "type": {
       "uk": "Must-See • Водоспад",
       "en": "Must-See • 60m Power Cascade"
     },
-    "icon": "💧",
-    "lat": 63.5321,
-    "lng": -19.5114,
-    "radius": 2000,
     "badge": "Power Cascade",
     "vector": {
       "uk": "Ліворуч у селищі Skógar",
@@ -599,14 +689,20 @@
       "en": "Kvernufoss (Hidden Canyon Falls)"
     },
     "region": "south_coast",
+    "category": "waterfall",
+    "category_name": {
+      "uk": "Водоспад",
+      "en": "Waterfall"
+    },
+    "icon": "💧",
+    "color": "#00f0ff",
+    "lat": 63.5283,
+    "lng": -19.4805,
+    "radius": 1200,
     "type": {
       "uk": "Секретний водоспад за музеєм Скоугар",
       "en": "Secret Canyon Gem Behind Museum"
     },
-    "icon": "💧",
-    "lat": 63.5283,
-    "lng": -19.4805,
-    "radius": 1200,
     "badge": "Secret Gem",
     "vector": {
       "uk": "1 км на схід від Skógafoss за Skógar Museum",
@@ -638,14 +734,20 @@
       "en": "Sólheimajökull Glacier Tongue"
     },
     "region": "south_coast",
+    "category": "glacier",
+    "category_name": {
+      "uk": "Льодовик / Лагуна",
+      "en": "Glacier / Lagoon"
+    },
+    "icon": "🧊",
+    "color": "#bae6fd",
+    "lat": 63.5306,
+    "lng": -19.3703,
+    "radius": 2000,
     "type": {
       "uk": "Вивідний язик льодовика",
       "en": "Glacier Tongue & Lagoon"
     },
-    "icon": "🧊",
-    "lat": 63.5306,
-    "lng": -19.3703,
-    "radius": 2000,
     "badge": "Glacier Hike",
     "vector": {
       "uk": "Поворот на Трасу 221 з Траси 1",
@@ -677,14 +779,20 @@
       "en": "Dyrhólaey Promontory & Arch"
     },
     "region": "south_coast",
+    "category": "coastal",
+    "category_name": {
+      "uk": "Океанічне узбережжя",
+      "en": "Oceanic Coast"
+    },
+    "icon": "🌊",
+    "color": "#06b6d4",
+    "lat": 63.4022,
+    "lng": -19.1303,
+    "radius": 2000,
     "type": {
       "uk": "Природний заповідник • Тупики",
       "en": "Nature Reserve & Puffin Haven"
     },
-    "icon": "🌊",
-    "lat": 63.4022,
-    "lng": -19.1303,
-    "radius": 2000,
     "badge": "Puffin Sanctuary",
     "vector": {
       "uk": "Траса 218 перед Vík",
@@ -716,14 +824,20 @@
       "en": "Reynisfjara Black Sand Beach"
     },
     "region": "south_coast",
+    "category": "coastal",
+    "category_name": {
+      "uk": "Океанічне узбережжя",
+      "en": "Oceanic Coast"
+    },
+    "icon": "🌊",
+    "color": "#06b6d4",
+    "lat": 63.4057,
+    "lng": -19.0716,
+    "radius": 2000,
     "type": {
       "uk": "Must-See • Смертельна небезпека",
       "en": "Must-See • Sneaker Wave Hazard"
     },
-    "icon": "🌊",
-    "lat": 63.4057,
-    "lng": -19.0716,
-    "radius": 2000,
     "badge": "Sneaker Wave Alert",
     "vector": {
       "uk": "Траса 215 біля Vík",
@@ -755,14 +869,20 @@
       "en": "Eldhraun (1783 Laki Moss Lava Field)"
     },
     "region": "south_coast",
+    "category": "volcano",
+    "category_name": {
+      "uk": "Вулкан / Лава",
+      "en": "Volcano / Lava"
+    },
+    "icon": "🌋",
+    "color": "#ff5722",
+    "lat": 63.6756,
+    "lng": -18.1458,
+    "radius": 3500,
     "type": {
       "uk": "Гігантське мохове поле лави",
       "en": "Massive Moss-Covered Lava"
     },
-    "icon": "📍",
-    "lat": 63.6756,
-    "lng": -18.1458,
-    "radius": 3500,
     "badge": "Historic Cataclysm",
     "vector": {
       "uk": "Обабіч Траси 1 біля Kirkjubæjarklaustur",
@@ -794,14 +914,20 @@
       "en": "Fjaðrárgljúfur Serpentine Canyon"
     },
     "region": "south_coast",
+    "category": "canyon",
+    "category_name": {
+      "uk": "Каньйон / Скеля",
+      "en": "Canyon / Cliff"
+    },
+    "icon": "🏞️",
+    "color": "#10b981",
+    "lat": 63.7713,
+    "lng": -18.1718,
+    "radius": 2000,
     "type": {
       "uk": "Казковий каньйон глибиною 100 м",
       "en": "100m Deep Fairy-Tale Canyon"
     },
-    "icon": "🏞️",
-    "lat": 63.7713,
-    "lng": -18.1718,
-    "radius": 2000,
     "badge": "Serpentine Gorge",
     "vector": {
       "uk": "Траса 206 перед Kirkjubæjarklaustur",
@@ -833,14 +959,20 @@
       "en": "Lómagnúpur Monolith"
     },
     "region": "vistas",
+    "category": "canyon",
+    "category_name": {
+      "uk": "Каньйон / Скеля",
+      "en": "Canyon / Cliff"
+    },
+    "icon": "🏞️",
+    "color": "#10b981",
+    "lat": 63.96,
+    "lng": -17.51,
+    "radius": 3500,
     "type": {
       "uk": "Гігантський моноліт 688 м",
       "en": "688m Sheer Basalt Monolith"
     },
-    "icon": "🏞️",
-    "lat": 63.96,
-    "lng": -17.51,
-    "radius": 3500,
     "badge": "Saga Landmark",
     "vector": {
       "uk": "Посеред чорного сандра Skeiðarársandur",
@@ -872,14 +1004,20 @@
       "en": "Svartifoss (The Black Falls)"
     },
     "region": "glaciers",
+    "category": "waterfall",
+    "category_name": {
+      "uk": "Водоспад",
+      "en": "Waterfall"
+    },
+    "icon": "💧",
+    "color": "#00f0ff",
+    "lat": 64.0275,
+    "lng": -16.9753,
+    "radius": 2000,
     "type": {
       "uk": "Must-See • Базальтові призми",
       "en": "Must-See • Architectural Icon"
     },
-    "icon": "💧",
-    "lat": 64.0275,
-    "lng": -16.9753,
-    "radius": 2000,
     "badge": "Architectural Icon",
     "vector": {
       "uk": "Національний парк Skaftafell • Траса 1",
@@ -911,14 +1049,20 @@
       "en": "Svínafellsjökull Glacier (Interstellar)"
     },
     "region": "glaciers",
+    "category": "glacier",
+    "category_name": {
+      "uk": "Льодовик / Лагуна",
+      "en": "Glacier / Lagoon"
+    },
+    "icon": "🧊",
+    "color": "#bae6fd",
+    "lat": 64.0083,
+    "lng": -16.8833,
+    "radius": 1200,
     "type": {
       "uk": "Драматичний крижаний язик",
       "en": "Cinematic Ice Tongue"
     },
-    "icon": "🧊",
-    "lat": 64.0083,
-    "lng": -16.8833,
-    "radius": 1200,
     "badge": "Sci-Fi Location",
     "vector": {
       "uk": "З'їзд за Skaftafell",
@@ -950,14 +1094,20 @@
       "en": "Múlagljúfur Canyon & Hangandifoss"
     },
     "region": "glaciers",
+    "category": "waterfall",
+    "category_name": {
+      "uk": "Водоспад",
+      "en": "Waterfall"
+    },
+    "icon": "💧",
+    "color": "#00f0ff",
+    "lat": 63.9897,
+    "lng": -16.4358,
+    "radius": 2000,
     "type": {
       "uk": "Секретний каньйон з водоспадами",
       "en": "Hidden Canyon & High Falls"
     },
-    "icon": "🏞️",
-    "lat": 63.9897,
-    "lng": -16.4358,
-    "radius": 2000,
     "badge": "Secret Gem",
     "vector": {
       "uk": "Гравійна дорога перед Fjallsárlón",
@@ -989,14 +1139,20 @@
       "en": "Jökulsárlón & Diamond Beach"
     },
     "region": "glaciers",
+    "category": "glacier",
+    "category_name": {
+      "uk": "Льодовик / Лагуна",
+      "en": "Glacier / Lagoon"
+    },
+    "icon": "🧊",
+    "color": "#bae6fd",
+    "lat": 64.0484,
+    "lng": -16.1795,
+    "radius": 3500,
     "type": {
       "uk": "Must-See • UNESCO",
       "en": "Must-See • Glacier Lagoon"
     },
-    "icon": "📍",
-    "lat": 64.0484,
-    "lng": -16.1795,
-    "radius": 3500,
     "badge": "Global Wonder",
     "vector": {
       "uk": "Обабіч мосту на Трасі 1",
@@ -1028,14 +1184,20 @@
       "en": "Vestrahorn & Stokksnes"
     },
     "region": "eastfjords",
+    "category": "coastal",
+    "category_name": {
+      "uk": "Океанічне узбережжя",
+      "en": "Oceanic Coast"
+    },
+    "icon": "🌊",
+    "color": "#06b6d4",
+    "lat": 64.2417,
+    "lng": -14.975,
+    "radius": 3500,
     "type": {
       "uk": "Культова фотолокація • Габро",
       "en": "Iconic Jagged Peaks"
     },
-    "icon": "🌊",
-    "lat": 64.2417,
-    "lng": -14.975,
-    "radius": 2000,
     "badge": "Photographer Dream",
     "vector": {
       "uk": "Півострів Stokksnes за Höfn",
@@ -1067,14 +1229,20 @@
       "en": "Folaldafoss & Öxi Mountain Pass"
     },
     "region": "eastfjords",
+    "category": "waterfall",
+    "category_name": {
+      "uk": "Водоспад",
+      "en": "Waterfall"
+    },
+    "icon": "💧",
+    "color": "#00f0ff",
+    "lat": 64.795,
+    "lng": -14.5422,
+    "radius": 2000,
     "type": {
       "uk": "Гірський водоспад на перевалі",
       "en": "Mountain Pass Cascade"
     },
-    "icon": "💧",
-    "lat": 64.795,
-    "lng": -14.5422,
-    "radius": 2000,
     "badge": "Mountain Pass",
     "vector": {
       "uk": "Крутий перевал Траси 939",
@@ -1106,14 +1274,20 @@
       "en": "Seyðisfjörður & Gufufoss Waterfall"
     },
     "region": "eastfjords",
+    "category": "waterfall",
+    "category_name": {
+      "uk": "Водоспад",
+      "en": "Waterfall"
+    },
+    "icon": "💧",
+    "color": "#00f0ff",
+    "lat": 65.26,
+    "lng": -14.01,
+    "radius": 2000,
     "type": {
       "uk": "Арт-столиця фіордів",
       "en": "Arts Capital of the Fjords"
     },
-    "icon": "🏛️",
-    "lat": 65.26,
-    "lng": -14.01,
-    "radius": 2000,
     "badge": "Nordic Architecture",
     "vector": {
       "uk": "Перевал Fjarðarheiði (Траса 93)",
@@ -1145,14 +1319,20 @@
       "en": "Stuðlagil Canyon (Basalt Column Gorge)"
     },
     "region": "eastfjords",
+    "category": "canyon",
+    "category_name": {
+      "uk": "Каньйон / Скеля",
+      "en": "Canyon / Cliff"
+    },
+    "icon": "🏞️",
+    "color": "#10b981",
+    "lat": 65.1633,
+    "lng": -15.3072,
+    "radius": 2000,
     "type": {
       "uk": "Найбільші базальтові колони",
       "en": "World-Class Basalt Column Gorge"
     },
-    "icon": "📍",
-    "lat": 65.1633,
-    "lng": -15.3072,
-    "radius": 2000,
     "badge": "Geological Sensation",
     "vector": {
       "uk": "Долина Jökuldalur • З'їзд з Траси 1",
@@ -1184,14 +1364,20 @@
       "en": "Dettifoss & Selfoss Waterfalls"
     },
     "region": "north",
+    "category": "waterfall",
+    "category_name": {
+      "uk": "Водоспад",
+      "en": "Waterfall"
+    },
+    "icon": "💧",
+    "color": "#00f0ff",
+    "lat": 65.8147,
+    "lng": -16.3846,
+    "radius": 2000,
     "type": {
       "uk": "Must-See • Сила природи",
       "en": "Must-See • Europe's Most Powerful"
     },
-    "icon": "💧",
-    "lat": 65.8147,
-    "lng": -16.3846,
-    "radius": 2000,
     "badge": "Raw Power Icon",
     "vector": {
       "uk": "Траса 862 (західний берег)",
@@ -1223,14 +1409,20 @@
       "en": "Goðafoss (Waterfall of the Gods)"
     },
     "region": "north",
+    "category": "waterfall",
+    "category_name": {
+      "uk": "Водоспад",
+      "en": "Waterfall"
+    },
+    "icon": "💧",
+    "color": "#00f0ff",
+    "lat": 65.6828,
+    "lng": -17.5502,
+    "radius": 2000,
     "type": {
       "uk": "Must-See • Історична святиня",
       "en": "Must-See • Historic Sanctuary"
     },
-    "icon": "💧",
-    "lat": 65.6828,
-    "lng": -17.5502,
-    "radius": 2000,
     "badge": "Historic Sanctuary",
     "vector": {
       "uk": "Траса 1 між Akureyri та Mývatn",
@@ -1262,14 +1454,20 @@
       "en": "Kirkjufell & Kirkjufellsfoss Falls"
     },
     "region": "snaefellsnes",
+    "category": "waterfall",
+    "category_name": {
+      "uk": "Водоспад",
+      "en": "Waterfall"
+    },
+    "icon": "💧",
+    "color": "#00f0ff",
+    "lat": 64.9417,
+    "lng": -23.3069,
+    "radius": 2000,
     "type": {
       "uk": "Must-See • Ікона Ісландії",
       "en": "Must-See • Arrowhead Mountain"
     },
-    "icon": "📍",
-    "lat": 64.9417,
-    "lng": -23.3069,
-    "radius": 2000,
     "badge": "Cinematic Icon",
     "vector": {
       "uk": "Траса 54 біля Grundarfjörður",
@@ -1301,14 +1499,20 @@
       "en": "Fagradalsfjall & Sundhnúkur Fires"
     },
     "region": "reykjanes",
+    "category": "volcano",
+    "category_name": {
+      "uk": "Вулкан / Лава",
+      "en": "Volcano / Lava"
+    },
+    "icon": "🌋",
+    "color": "#ff5722",
+    "lat": 63.89,
+    "lng": -22.27,
+    "radius": 3500,
     "type": {
       "uk": "Активний вулканізм 2021–2026",
       "en": "Active Rifting Eruptions (2021–2026)"
     },
-    "icon": "🌋",
-    "lat": 63.89,
-    "lng": -22.27,
-    "radius": 3500,
     "badge": "Active Lava Fires",
     "vector": {
       "uk": "Півострів Reykjanes біля Grindavík",
@@ -1334,6 +1538,251 @@
       {
         "name": "Catalogue of Volcanoes",
         "url": "https://icelandicvolcanoes.is"
+      }
+    ]
+  },
+  {
+    "id": "haifoss",
+    "name": {
+      "uk": "Háifoss & Granni (Високий водоспад)",
+      "en": "Háifoss & Granni Waterfalls"
+    },
+    "region": "golden_circle",
+    "category": "waterfall",
+    "category_name": {
+      "uk": "Водоспад",
+      "en": "Waterfall"
+    },
+    "icon": "💧",
+    "color": "#00f0ff",
+    "lat": 64.2081,
+    "lng": -19.6875,
+    "radius": 2000,
+    "type": {
+      "uk": "Гігантський водоспад • 122м",
+      "en": "Giant Waterfall • 122m"
+    },
+    "badge": "122m Drop • 3rd Highest",
+    "vector": {
+      "uk": "Дорога 332 • Долина Fossárdalur біля вулкана Hekla",
+      "en": "Road 332 • Fossárdalur valley near Hekla volcano"
+    },
+    "geology": {
+      "uk": "Один із найвищих водоспадів острова (122 метри). Річка Fossá падає у глибокий вулканічний каньйон зі стінами з численних шарів лави та туфу. Поруч спадає його водоспад-побратим Granni («Сусід»).",
+      "en": "One of Iceland's tallest waterfalls (122 m). The river Fossá plunges into a sheer volcanic canyon showcasing exposed basalt layers and palagonite tuff, flanked by twin falls Granni."
+    },
+    "saga": {
+      "uk": "Згідно з місцевими переказами, у печері біля водоспаду жила велетка-людожерка Оліна (Ófreskja), яка ловила форель у річці та стерегла каньйон від чужинців.",
+      "en": "Local folk legends say the ogress Ófreskja inhabited a cave near the falls, catching Arctic char and guarding the canyon against trespassing travellers."
+    },
+    "practical": {
+      "uk": "Дорога 332 гравійна, рекомендовано повнопривідне авто (4x4). Оглядовий майданчик обладнаний безпечними поручнями. Дрони дозволені з дотриманням дистанції.",
+      "en": "Gravel road 332, 4x4 vehicle recommended. Observation rim has safety railings. Drones permitted subject to national wildlife regulations."
+    },
+    "sources": [
+      {
+        "name": "South Iceland Official",
+        "url": "https://www.south.is/en/"
+      },
+      {
+        "name": "Icelandic Volcanoes & Valleys",
+        "url": "https://icelandicvolcanoes.is/"
+      }
+    ]
+  },
+  {
+    "id": "hraunfossar",
+    "name": {
+      "uk": "Hraunfossar & Barnafoss (Лавові водоспади)",
+      "en": "Hraunfossar & Barnafoss Waterfalls"
+    },
+    "region": "snaefellsnes",
+    "category": "waterfall",
+    "category_name": {
+      "uk": "Водоспад",
+      "en": "Waterfall"
+    },
+    "icon": "💧",
+    "color": "#00f0ff",
+    "lat": 64.7029,
+    "lng": -20.9781,
+    "radius": 2000,
+    "type": {
+      "uk": "Лавовий водоспад • 900м фронт",
+      "en": "Lava Spring Falls • 900m Width"
+    },
+    "badge": "Lava Spring • Natural Monument",
+    "vector": {
+      "uk": "Траса 518 (Боргарфіордюр) • Траса 1 -> 50 -> 518",
+      "en": "Route 518 (Borgarfjörður) • Route 1 -> 50 -> 518"
+    },
+    "geology": {
+      "uk": "Унікальне гідрогеологічне явище: тисячі струмків крижаної джерельної води вириваються прямо з-під пористого лавового поля Hallmundarhraun (виверження бл. 930 р.) на фронті шириною понад 900 метрів і спадають у річку Hvítá.",
+      "en": "A rare hydrogeological phenomenon: cold subterranean springs cascade directly out of the porous Hallmundarhraun basalt flow (c. 930 AD) along a 900 m cliff face into the milky turquoise Hvítá glacial river."
+    },
+    "saga": {
+      "uk": "Поруч розташований бурхливий Barnafoss («Водоспад дітей»). За легендою, двоє дітей із садиби Hraunsás впали з природного кам'яного мосту, після чого їхня скорботна мати зруйнувала міст закляттям.",
+      "en": "Neighboring Barnafoss ('Children's Falls') carries a tragic legend of two boys who slipped from a natural rock arch, leading their grieving mother to destroy the stone span with a curse."
+    },
+    "practical": {
+      "uk": "Облаштовані дерев'яні доріжки та оглядові платформи. Зручний паркінг з кав'ярнею. Доступно цілий рік, взимку льодові бурульки створюють казковий вигляд.",
+      "en": "Paved wooden boardwalks and panoramic viewpoints. Parking with bistro. Accessible year-round; winter ice formations are spectacular."
+    },
+    "sources": [
+      {
+        "name": "West Iceland Official",
+        "url": "https://www.west.is/en/"
+      },
+      {
+        "name": "Landnámabók (Settlement Sagas)",
+        "url": "https://sagadb.org/"
+      }
+    ]
+  },
+  {
+    "id": "hengifoss",
+    "name": {
+      "uk": "Hengifoss & Litlanesfoss (Базальтовий велетень)",
+      "en": "Hengifoss & Litlanesfoss Waterfalls"
+    },
+    "region": "eastfjords",
+    "category": "waterfall",
+    "category_name": {
+      "uk": "Водоспад",
+      "en": "Waterfall"
+    },
+    "icon": "💧",
+    "color": "#00f0ff",
+    "lat": 65.0957,
+    "lng": -14.8894,
+    "radius": 2000,
+    "type": {
+      "uk": "128м водоспад • Червоні шари глин",
+      "en": "128m Falls • Red Strata Layers"
+    },
+    "badge": "128m Drop • Red Strata",
+    "vector": {
+      "uk": "Дорога 931 біля озера Lagarfljót • 35 км від Egilsstaðir",
+      "en": "Route 931 near Lake Lagarfljót • 35 km from Egilsstaðir"
+    },
+    "geology": {
+      "uk": "Другий за висотою водоспад Сходу (128 м). Скеля славиться яскравими червоними прошарками палеоґрунтів і глини між шарами древніх базальтових лав третинного періоду. Нижче на стежці — Litlanesfoss із гігантськими колонами базальту.",
+      "en": "At 128 m, Hengifoss cascades over sheer cliffs distinguished by rhythmic bright red clay paleosol bands interleaved between Tertiary basalt flows. Lower down, Litlanesfoss displays towering geometric columnar jointing."
+    },
+    "saga": {
+      "uk": "Озеро Lagarfljót внизу відоме сагою про змієподібне чудовисько Lagarfljótsormur («Лагарфльоутський черв»), перші згадки про якого датуються 1345 роком у давньоісландських літописах.",
+      "en": "The adjacent Lake Lagarfljót is renowned for the mythical serpent beast Lagarfljótsormur ('Lagarfljót Worm'), first recorded in Icelandic annals in 1345 AD."
+    },
+    "practical": {
+      "uk": "Пішохідний трекінг ~2.5 км вгору (близько 45-60 хв). Новий туристичний центр з паркінгом і туалетами біля підніжжя. Необхідне зручне трекінгове взуття.",
+      "en": "Uphill hiking trail ~2.5 km (45-60 min). Modern visitor center with parking and amenities at base. Sturdy hiking boots essential."
+    },
+    "sources": [
+      {
+        "name": "East Iceland Regional Authority",
+        "url": "https://www.east.is/en/"
+      },
+      {
+        "name": "Háskóli Íslands Geology",
+        "url": "https://earthice.hi.is/"
+      }
+    ]
+  },
+  {
+    "id": "aldeyjarfoss",
+    "name": {
+      "uk": "Aldeyjarfoss (Амфітеатр базальтових колон)",
+      "en": "Aldeyjarfoss Basalt Waterfall"
+    },
+    "region": "north",
+    "category": "waterfall",
+    "category_name": {
+      "uk": "Водоспад",
+      "en": "Waterfall"
+    },
+    "icon": "💧",
+    "color": "#00f0ff",
+    "lat": 65.3664,
+    "lng": -17.3369,
+    "radius": 2000,
+    "type": {
+      "uk": "Базальтовий каньйон • 20м",
+      "en": "Basalt Column Amphitheater"
+    },
+    "badge": "Basalt Amphitheater",
+    "vector": {
+      "uk": "Долина Bárðardalur • Траса 1 -> Дорога 842 -> Дорога F26",
+      "en": "Bárðardalur valley • Route 1 -> Road 842 -> Road F26"
+    },
+    "geology": {
+      "uk": "Блакитні води льодовикової річки Skjálfandafljót падають з висоти 20 м у вузький басейн, обрамлений бездоганними вигнутими та вертикальними колонами чорного базальту лавового поля Frambruni.",
+      "en": "Glacial turquoise waters of Skjálfandafljót plunge 20 m into a churning pool framed by symmetrical curved and vertical black hexagonal basalt colonnades formed during prehistoric lava cooling."
+    },
+    "saga": {
+      "uk": "Долина Bárðardalur названа на честь першопоселенця Баурдюра (Bárður Heyangurs-Bjarnarson), який за переказами провів тут свої отари через гірські перевали Sprengisandur.",
+      "en": "Bárðardalur valley is named after the early settler Bárður Heyangurs-Bjarnarson, celebrated in the Landnámabók for driving livestock across the arduous Sprengisandur highland pass."
+    },
+    "practical": {
+      "uk": "Останні 4 км проходять дорогою F26 (потрібне 4x4 авто). Стежка від стоянки до водоспаду займає 10 хвилин. Фотографічний рай для пейзажистів.",
+      "en": "Last 4 km via F26 require a 4x4 vehicle. Short 10-minute walk from parking to viewing rim. World-class photography destination."
+    },
+    "sources": [
+      {
+        "name": "Visit North Iceland",
+        "url": "https://www.northiceland.is/en/"
+      },
+      {
+        "name": "Vatnajökull Research Base",
+        "url": "https://joklarannsoknir.is/"
+      }
+    ]
+  },
+  {
+    "id": "stjornarfoss",
+    "name": {
+      "uk": "Stjórnarfoss & Systrafoss (Водоспади Сестер)",
+      "en": "Stjórnarfoss & Systrafoss"
+    },
+    "region": "south_coast",
+    "category": "waterfall",
+    "category_name": {
+      "uk": "Водоспад",
+      "en": "Waterfall"
+    },
+    "icon": "💧",
+    "color": "#00f0ff",
+    "lat": 63.8015,
+    "lng": -18.0583,
+    "radius": 2000,
+    "type": {
+      "uk": "Історичні водоспади • 80м",
+      "en": "Historic Falls • 80m Cascade"
+    },
+    "badge": "Historic Convent Falls",
+    "vector": {
+      "uk": "Траса 1 біля Kirkjubæjarklaustur • З'їзд 203",
+      "en": "Route 1 at Kirkjubæjarklaustur • Exit 203"
+    },
+    "geology": {
+      "uk": "Systrafoss спадає з висоти 80 м двома паралельними білими струменями з краю скельного плато озера Systravatn. Поруч мальовничий Stjórnarfoss у формі купола розбивається об лавові виступи.",
+      "en": "Systrafoss cascades 80 m in two graceful parallel white plumes down a sheer cliff fed by lake Systravatn, while nearby Stjórnarfoss forms a dome-shaped veil over volcanic sills."
+    },
+    "saga": {
+      "uk": "Пов'язані з історією бенедиктинського монастиря Kirkjubæjarklaustur (заснований 1186 р.). За переказами, черниці піднімалися до озера Systravatn, де за легендою золота рука з води заманила непокірну сестру.",
+      "en": "Steeped in medieval lore of the Benedictine nunnery at Kirkjubær (founded 1186 AD). Legend speaks of sisters ascending to Lake Systravatn, where a mysterious golden hand emerged from the deep."
+    },
+    "practical": {
+      "uk": "Зручний під'їзд прямо біля Траси 1 у селищі Kirkjubæjarklaustur. Доріжка веде безпосередньо до підніжжя. Ідеальне місце для короткої зупинки та пікніка.",
+      "en": "Immediate access from Route 1 in Kirkjubæjarklaustur village. Easy walking trail right to the splash pool. Ideal rest stop."
+    },
+    "sources": [
+      {
+        "name": "Kirkjubæjarklaustur Tourism",
+        "url": "https://www.klaustur.is/en/"
+      },
+      {
+        "name": "Saga of the Bishopric",
+        "url": "https://sagadb.org/"
       }
     ]
   }

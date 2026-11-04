@@ -1,241 +1,285 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="uk" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smart Audio Guide Iceland — Interactive Web Platform & Drive Studio</title>
+  <title>Iceland Smart Road Audio Guide — Interactive Drive Studio &amp; Platform (Bilingual UA/EN)</title>
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <style>
-    .tab-pane { display: none; }
-    .tab-pane.active { display: block; }
-    .map-container {
-      background: radial-gradient(circle at 50% 50%, #0e1726 0%, #060911 100%);
+    :root {
+      --primary: #3b82f6;
+      --accent: #10b981;
     }
-    .road-path {
+    .tab-pane { display: none; }
+    .tab-pane.active { display: block; animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* 3D Glassmorphism & Glow */
+    .glass-3d {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(10, 15, 28, 0.95) 100%);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-3d:hover {
+      border-color: rgba(59, 130, 246, 0.4);
+      box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      transform: translateY(-2px);
+    }
+    .map-canvas-bg {
+      background: radial-gradient(ellipse at 50% 50%, #0d172a 0%, #050811 100%);
+    }
+    .road-glow {
       stroke: #3b82f6;
-      stroke-width: 3.5;
+      stroke-width: 4;
       stroke-linecap: round;
-      stroke-linejoin: round;
       fill: none;
-      filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.6));
+      filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.85));
     }
     .road-secondary {
       stroke: #64748b;
-      stroke-width: 2;
-      stroke-dasharray: 4 3;
+      stroke-width: 2.2;
+      stroke-dasharray: 5 4;
       fill: none;
     }
     .car-marker {
-      transition: all 0.15s linear;
+      transition: all 0.18s linear;
     }
-    .pulse-ring {
-      animation: pulseAnimation 2s infinite;
+    .radar-pulse {
+      animation: radar 2s infinite ease-out;
     }
-    @keyframes pulseAnimation {
-      0% { r: 8; opacity: 0.9; }
-      100% { r: 28; opacity: 0; }
+    @keyframes radar {
+      0% { r: 6; opacity: 0.9; }
+      100% { r: 32; opacity: 0; }
+    }
+    .lang-pill.active {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+      border-color: rgba(255, 255, 255, 0.2);
     }
   </style>
 </head>
-<body class="bg-[#070b12] text-[#f1f5f9] antialiased min-h-screen p-3 md:p-6 font-sans">
+<body class="bg-[#050811] text-[#f8fafc] antialiased min-h-screen p-3 md:p-6 font-sans selection:bg-blue-600 selection:text-white">
 
-  <!-- TOP APP HEADER -->
-  <header class="max-w-7xl mx-auto mb-6 bg-[#0f172a] border border-slate-800 rounded-2xl p-4 md:p-5 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-4">
-    <div class="flex items-center gap-3">
-      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-emerald-500 flex items-center justify-center text-xl shadow-lg shadow-blue-500/20">
+  <!-- TOP APP HEADER WITH LANGUAGE SWITCHER -->
+  <header class="max-w-7xl mx-auto mb-6 glass-3d rounded-2xl p-4 md:p-5 flex flex-col md:flex-row items-center justify-between gap-4">
+    <!-- Brand Info -->
+    <div class="flex items-center gap-3.5">
+      <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-emerald-400 flex items-center justify-center text-2xl shadow-lg shadow-blue-500/25 border border-white/20">
         🧭
       </div>
       <div>
         <div class="flex items-center gap-2">
           <h1 class="text-xl md:text-2xl font-black tracking-tight text-white">
-            Iceland Smart Guide <span class="text-blue-500">Studio</span>
+            Iceland Smart Guide <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Studio</span>
           </h1>
-          <span class="px-2 py-0.5 rounded text-[10px] font-extrabold uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-            v1.0 Platform
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-black uppercase bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shadow-sm" id="badge-version">
+            v2.0 Dual-Lang
           </span>
         </div>
-        <p class="text-xs text-slate-400">Робочий простір контенту, симуляції поїздок та бази даних для мобільного додатку</p>
+        <p class="text-xs text-slate-400" id="header-subtitle">
+          Професійна платформа контенту, симуляції поїздок та бази даних для мобільного аудіогіда
+        </p>
       </div>
     </div>
 
-    <!-- MAIN NAVIGATION TABS -->
-    <nav class="flex items-center gap-1.5 bg-slate-900/90 p-1.5 rounded-xl border border-slate-800 text-xs font-semibold">
-      <button onclick="switchTab('simulator')" id="btn-tab-simulator" class="px-3.5 py-2 rounded-lg bg-blue-600 text-white shadow-sm transition">
-        🚗 Live Drive Симулятор
-      </button>
-      <button onclick="switchTab('poi-db')" id="btn-tab-poi-db" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-white transition">
-        📍 База POI &amp; Контент
-      </button>
-      <button onclick="switchTab('roadmap')" id="btn-tab-roadmap" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-white transition">
-        🗺️ Покроковий Роадмеп
-      </button>
-      <button onclick="switchTab('export')" id="btn-tab-export" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-white transition">
-        💾 GeoJSON Експорт
-      </button>
-      <a href="iceland_guide_encyclopedia.html" class="px-3.5 py-2 rounded-lg bg-emerald-600/30 hover:bg-emerald-600 text-emerald-300 hover:text-white border border-emerald-500/40 transition flex items-center gap-1.5">
-        <span>📚</span> Енциклопедія Гіда (Джерела)
+    <!-- Navigation Tabs & Language Toggle -->
+    <div class="flex flex-wrap items-center gap-2.5">
+      <!-- Main Nav -->
+      <nav class="flex items-center gap-1 bg-slate-900/90 p-1 rounded-xl border border-slate-800 text-xs font-semibold shadow-inner">
+        <button onclick="switchTab('simulator')" id="nav-btn-sim" class="px-3.5 py-2 rounded-lg bg-blue-600 text-white shadow-sm transition">
+          🚗 <span id="txt-nav-sim">Live Симулятор</span>
+        </button>
+        <button onclick="switchTab('poi-db')" id="nav-btn-poi" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-white transition">
+          📍 <span id="txt-nav-poi">База POI &amp; Контент</span>
+        </button>
+        <button onclick="switchTab('roadmap')" id="nav-btn-roadmap" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-white transition">
+          🗺️ <span id="txt-nav-roadmap">Роадмеп</span>
+        </button>
+        <button onclick="switchTab('export')" id="nav-btn-export" class="px-3.5 py-2 rounded-lg text-slate-400 hover:text-white transition">
+          💾 <span id="txt-nav-export">GeoJSON</span>
+        </button>
+      </nav>
+
+      <!-- External Links -->
+      <a href="iceland_guide_encyclopedia.html" class="px-3.5 py-2 rounded-xl bg-emerald-600/20 hover:bg-emerald-600 text-emerald-300 hover:text-white border border-emerald-500/30 text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+        <span>📚</span> <span id="txt-nav-encyclo">Енциклопедія Джерел</span>
       </a>
-    </nav>
+
+      <!-- 🇺🇦 UA | 🇬🇧 EN Toggle -->
+      <div class="flex items-center bg-slate-950 p-1 rounded-xl border border-slate-700/80 shadow-inner">
+        <button onclick="setLanguage('uk')" id="btn-lang-uk" class="lang-pill active px-2.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1">
+          <span>🇺🇦</span> UA
+        </button>
+        <button onclick="setLanguage('en')" id="btn-lang-en" class="lang-pill px-2.5 py-1.5 rounded-lg text-xs font-black text-slate-400 hover:text-white transition flex items-center gap-1">
+          <span>🇬🇧</span> EN
+        </button>
+      </div>
+    </div>
   </header>
 
-  <!-- MAIN CONTAINER -->
+  <!-- MAIN WORKSPACE -->
   <main class="max-w-7xl mx-auto space-y-6">
 
     <!-- ======================================================== -->
     <!-- TAB 1: LIVE DRIVE SIMULATOR & INTERACTIVE MAP            -->
     <!-- ======================================================== -->
     <section id="pane-simulator" class="tab-pane active space-y-6">
-      <!-- Simulator Controls Strip -->
-      <div class="bg-[#0f172a] border border-slate-800 rounded-2xl p-4 md:p-5 flex flex-wrap items-center justify-between gap-4">
+      
+      <!-- Control Bar Strip -->
+      <div class="glass-3d rounded-2xl p-4 md:p-5 flex flex-wrap items-center justify-between gap-4">
         <div class="flex items-center gap-3">
-          <button id="btn-sim-toggle" onclick="toggleSimulation()" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs md:text-sm shadow-lg shadow-emerald-600/30 transition flex items-center gap-2">
-            <span id="sim-icon">▶</span> <span id="sim-text">Запустити тест поїздки</span>
+          <button id="btn-sim-toggle" onclick="toggleSimulation()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs md:text-sm shadow-lg shadow-emerald-600/30 transition flex items-center gap-2 border border-emerald-400/30">
+            <span id="sim-icon">▶</span> <span id="sim-btn-text">Запустити тест поїздки</span>
           </button>
           <button onclick="resetSimulation()" class="px-3.5 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold transition border border-slate-700">
-            ↺ Скинути
+            ↺ <span id="sim-btn-reset">Скинути</span>
           </button>
           <div class="h-6 w-px bg-slate-800 hidden sm:block"></div>
           <div class="text-xs text-slate-300 hidden sm:block">
-            Маршрут: <span class="font-bold text-white">Золоте кільце &amp; Південне узбережжя (Route 1)</span>
+            <span id="txt-sim-route-label">Маршрут:</span> <strong class="text-white" id="txt-sim-route-name">Золоте кільце &amp; Південне узбережжя (Route 1)</strong>
           </div>
         </div>
 
-        <!-- Simulation HUD Readout -->
-        <div class="flex items-center gap-4 text-xs font-mono">
-          <div class="bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-800">
-            <span class="text-slate-500">Швидкість:</span> <strong id="hud-speed" class="text-blue-400">90 км/год</strong>
+        <!-- HUD Gauges -->
+        <div class="flex items-center gap-3 text-xs font-mono">
+          <div class="bg-slate-900/90 px-3.5 py-1.5 rounded-xl border border-slate-800 shadow-inner">
+            <span class="text-slate-500" id="hud-label-speed">Швидкість:</span> <strong id="hud-speed" class="text-blue-400">90 km/h</strong>
           </div>
-          <div class="bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-800">
-            <span class="text-slate-500">Азимут:</span> <strong id="hud-bearing" class="text-amber-400">105° (Схід)</strong>
+          <div class="bg-slate-900/90 px-3.5 py-1.5 rounded-xl border border-slate-800 shadow-inner">
+            <span class="text-slate-500" id="hud-label-bearing">Азимут:</span> <strong id="hud-bearing" class="text-amber-400">105° (East)</strong>
           </div>
-          <div class="bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-800">
-            <span class="text-slate-500">Озвучка:</span> <strong id="hud-voice" class="text-emerald-400">Live TTS Увімкнено</strong>
+          <div class="bg-slate-900/90 px-3.5 py-1.5 rounded-xl border border-slate-800 shadow-inner">
+            <span class="text-slate-500" id="hud-label-tts">Озвучка:</span> <strong id="hud-voice" class="text-emerald-400">Live TTS Active</strong>
           </div>
         </div>
       </div>
 
-      <!-- Main Visual Work Area: Split Grid -->
+      <!-- Main Visual Grid: Map + Active Audio Player -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
-        <!-- Left: Interactive Vector Map (2 cols) -->
-        <div class="lg:col-span-2 bg-[#0f172a] border border-slate-800 rounded-2xl p-4 md:p-6 relative overflow-hidden shadow-2xl flex flex-col justify-between">
+        <!-- Left 2 Cols: Vector Iceland Map -->
+        <div class="lg:col-span-2 glass-3d rounded-2xl p-4 md:p-6 relative overflow-hidden flex flex-col justify-between">
           <div class="flex justify-between items-center mb-3">
-            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
-              Інтерактивна Карта Маршруту (Ісландія Route 1)
+            <span class="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-blue-500 animate-ping"></span>
+              <span id="txt-map-header">Інтерактивна Карта Тригерів (Route 1 &amp; Golden Circle)</span>
             </span>
-            <span class="text-[11px] text-slate-500">Натисніть на будь-яку мітку, щоб послухати гіда</span>
+            <span class="text-[11px] text-slate-400 font-medium" id="txt-map-tip">Натисніть будь-яку мітку, щоб прослухати аудіо</span>
           </div>
 
-          <!-- SVG Visual Map Container -->
-          <div class="w-full h-[440px] map-container rounded-xl border border-slate-800/80 relative flex items-center justify-center overflow-hidden">
+          <!-- SVG Visual Map Area -->
+          <div class="w-full h-[450px] map-canvas-bg rounded-xl border border-slate-800/80 relative flex items-center justify-center overflow-hidden shadow-2xl">
             <svg id="iceland-svg" viewBox="0 0 900 550" class="w-full h-full select-none">
               <defs>
-                <!-- Island Landmass Gradient -->
-                <radialGradient id="land-grad" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="#192338" />
-                  <stop offset="100%" stop-color="#0f1626" />
+                <radialGradient id="land-gradient" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#18233a" />
+                  <stop offset="100%" stop-color="#0c1322" />
                 </radialGradient>
-                <!-- Glacier Gradient -->
-                <linearGradient id="glacier-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#e2e8f0" stop-opacity="0.35" />
-                  <stop offset="100%" stop-color="#94a3b8" stop-opacity="0.15" />
+                <linearGradient id="glacier-shimmer" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#f8fafc" stop-opacity="0.38" />
+                  <stop offset="100%" stop-color="#94a3b8" stop-opacity="0.12" />
                 </linearGradient>
               </defs>
 
-              <!-- Stylized Iceland Land Outline -->
+              <!-- Iceland Coastline Outline -->
               <path d="M 120 280 C 100 230, 140 180, 200 150 C 260 110, 310 90, 420 80 C 530 70, 640 90, 720 120 C 790 150, 840 210, 820 270 C 800 320, 820 370, 760 410 C 700 450, 600 440, 520 430 C 440 420, 350 440, 260 430 C 180 420, 130 380, 110 330 Z" 
-                    fill="url(#land-grad)" stroke="#27354f" stroke-width="2" />
+                    fill="url(#land-gradient)" stroke="#2b3b5c" stroke-width="2.5" />
 
-              <!-- Glaciers (Vatnajökull & Langjökull & Mýrdalsjökull) -->
-              <!-- Vatnajökull (Huge Southeast) -->
-              <path d="M 520 270 Q 620 250 640 310 Q 620 360 540 360 Q 490 320 520 270 Z" fill="url(#glacier-grad)" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 3"/>
-              <text x="560" y="315" fill="#94a3b8" font-size="11" font-weight="bold" opacity="0.6">Vatnajökull</text>
+              <!-- Vatnajökull Glacier -->
+              <path d="M 520 270 Q 620 250 640 310 Q 620 360 540 360 Q 490 320 520 270 Z" fill="url(#glacier-shimmer)" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="3 3"/>
+              <text x="560" y="315" fill="#e2e8f0" font-size="11" font-weight="bold" opacity="0.75">Vatnajökull</text>
 
-              <!-- Mýrdalsjökull / Katla -->
-              <circle cx="390" cy="380" r="30" fill="url(#glacier-grad)" stroke="#94a3b8" stroke-width="1" stroke-dasharray="2 2"/>
-              <text x="365" y="385" fill="#94a3b8" font-size="10" font-weight="bold" opacity="0.6">Katla / Mýrdalsjökull</text>
+              <!-- Mýrdalsjökull / Katla Volcano Icecap -->
+              <circle cx="390" cy="380" r="32" fill="url(#glacier-shimmer)" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="2 2"/>
+              <text x="355" y="385" fill="#e2e8f0" font-size="10" font-weight="bold" opacity="0.75">Katla / Mýrdalsjökull</text>
 
-              <!-- Main Roads -->
-              <!-- Golden Circle Loop -->
+              <!-- Secondary Tour: Golden Circle Loop -->
               <path d="M 210 360 Q 250 310 300 310 Q 340 320 320 370 Q 270 380 210 360" class="road-secondary"/>
-              
-              <!-- Route 1 (South & Ring Road Segment) -->
-              <path id="route1-path" d="M 210 360 L 260 375 L 320 380 L 370 395 L 430 405 L 510 400 L 590 380 L 670 360" class="road-path"/>
 
-              <!-- Ocean Waves Accent -->
-              <path d="M 200 460 Q 250 450 300 460" stroke="#1e293b" stroke-width="2" fill="none"/>
-              <path d="M 450 470 Q 500 460 550 470" stroke="#1e293b" stroke-width="2" fill="none"/>
+              <!-- Primary Route 1 (South Coast Segment) -->
+              <path id="route1-line" d="M 210 360 L 260 375 L 320 380 L 370 395 L 430 405 L 510 400 L 590 380 L 670 360" class="road-glow"/>
 
-              <!-- POI Trigger Circles & Pins (Rendered dynamically by JS) -->
-              <g id="svg-pois"></g>
+              <!-- Dynamic POI Markers Layer -->
+              <g id="svg-pois-layer"></g>
 
-              <!-- Animated Driving Car Icon -->
+              <!-- Animated Car Indicator -->
               <g id="svg-car" class="car-marker" transform="translate(210, 360)">
-                <circle cx="0" cy="0" r="16" fill="#3b82f6" fill-opacity="0.25" class="pulse-ring"/>
-                <circle cx="0" cy="0" r="8" fill="#3b82f6" stroke="#ffffff" stroke-width="2"/>
-                <polygon points="0,-11 -5,-3 5,-3" fill="#ffffff" id="car-pointer"/>
+                <circle cx="0" cy="0" r="18" fill="#3b82f6" fill-opacity="0.3" class="radar-pulse"/>
+                <circle cx="0" cy="0" r="8" fill="#3b82f6" stroke="#ffffff" stroke-width="2.5"/>
+                <polygon points="0,-12 -6,-3 6,-3" fill="#ffffff" id="car-dir"/>
               </g>
             </svg>
           </div>
 
-          <div class="mt-3 flex items-center justify-between text-[11px] text-slate-400">
+          <!-- Legend Bar -->
+          <div class="mt-3.5 flex flex-wrap items-center justify-between gap-3 text-[11px] text-slate-400">
             <div class="flex items-center gap-3">
-              <span class="flex items-center gap-1"><span class="w-3 h-1 bg-blue-500 rounded"></span> Траса 1 (Route 1)</span>
-              <span class="flex items-center gap-1"><span class="w-3 h-1 bg-slate-500 rounded border-dashed"></span> Золоте кільце</span>
-              <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-400"></span> Пам'ятки (POI)</span>
-              <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-amber-400"></span> Vista (Вулкани/Оглядові)</span>
+              <span class="flex items-center gap-1.5"><span class="w-3.5 h-1 bg-blue-500 rounded shadow-sm shadow-blue-500/50"></span> <span id="leg-route1">Route 1 (Траса 1)</span></span>
+              <span class="flex items-center gap-1.5"><span class="w-3.5 h-1 bg-slate-500 rounded border-dashed"></span> <span id="leg-gc">Golden Circle</span></span>
+              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span> <span id="leg-mustsee">Must-See</span></span>
+              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span> <span id="leg-vista">Dynamic Vista</span></span>
+              <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-red-400"></span> <span id="leg-safety">SafeTravel Warning</span></span>
             </div>
-            <span class="text-blue-400 font-medium">GPS Engine: Active</span>
+            <span class="text-blue-400 font-semibold" id="leg-offline">100% Offline-Ready</span>
           </div>
         </div>
 
-        <!-- Right: Active Live Audio & Driver Card (1 col) -->
-        <div class="bg-[#0f172a] border border-slate-800 rounded-2xl p-5 shadow-2xl flex flex-col justify-between">
+        <!-- Right 1 Col: In-Car Smart Audio Guide HUD -->
+        <div class="glass-3d rounded-2xl p-5 shadow-2xl flex flex-col justify-between">
           <div>
+            <!-- Audio Guide Status Header -->
             <div class="flex items-center justify-between pb-3 border-b border-slate-800 mb-4">
-              <span class="text-xs uppercase font-extrabold tracking-wider text-blue-400 flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                In-Car Smart Audio Guide
+              <span class="text-xs uppercase font-extrabold tracking-wider text-blue-400 flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                <span id="hud-guide-title">Smart Road Audio Guide</span>
               </span>
-              <span class="text-[11px] px-2 py-0.5 rounded bg-slate-800 text-slate-300 font-mono" id="poi-tag">READY</span>
+              <span class="text-[10px] px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 font-mono font-bold border border-slate-700" id="hud-badge-tag">
+                READY
+              </span>
             </div>
 
             <!-- Active Landmark Info Card -->
-            <div id="active-card" class="space-y-4">
+            <div id="hud-card" class="space-y-4">
               <div>
-                <span class="text-[11px] text-slate-400 uppercase font-semibold" id="active-region">Ісландія • Траса 1</span>
-                <h3 class="text-xl font-bold text-white mt-0.5" id="active-title">Готовність до старту</h3>
-                <div class="flex items-center gap-2 mt-1 text-xs text-amber-400" id="active-lead">
-                  <span>Вектор погляду: очікується наближення</span>
+                <span class="text-[11px] text-slate-400 uppercase font-semibold" id="hud-poi-region">Ісландія • Траса 1</span>
+                <h3 class="text-xl font-black text-white mt-0.5 leading-snug" id="hud-poi-title">Очікування активації</h3>
+                <div class="flex items-center gap-1.5 mt-1 text-xs text-amber-400 font-semibold" id="hud-poi-lead">
+                  <span>Вектор огляду: готовий до руху</span>
                 </div>
               </div>
 
-              <!-- Live Narrative Text Box -->
-              <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 text-xs md:text-sm text-slate-200 leading-relaxed max-h-48 overflow-y-auto" id="active-text">
-                Натисніть зелену кнопку «Запустити тест поїздки» або клікніть будь-яку точку на карті. При наближенні автомобіля гід автоматично приглушить фонову музику і розповість історію українською мовою голосом!
+              <!-- Narrative Story Box -->
+              <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 text-xs md:text-sm text-slate-200 leading-relaxed max-h-52 overflow-y-auto shadow-inner" id="hud-poi-narrative">
+                Натисніть зелену кнопку «Запустити тест поїздки» або клікніть будь-яку точку на карті. Автомобіль поїде дорогою, а гід автоматично розповість історію вибраною мовою (UA/EN)!
               </div>
 
-              <!-- Trigger ETA & Specs -->
-              <div class="grid grid-cols-2 gap-2 text-xs">
-                <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
-                  <span class="text-slate-500 block text-[10px]">Радіус тригера</span>
-                  <span class="font-bold text-white" id="active-radius">1,500 м</span>
+              <!-- Key Spatial Parameters -->
+              <div class="grid grid-cols-2 gap-2.5 text-xs">
+                <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                  <span class="text-slate-500 block text-[10px]" id="hud-lbl-radius">Радіус активації</span>
+                  <span class="font-bold text-white text-sm" id="hud-poi-radius">1,500 m</span>
                 </div>
-                <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800">
-                  <span class="text-slate-500 block text-[10px]">Випередження (ETA)</span>
-                  <span class="font-bold text-emerald-400" id="active-eta">~60 сек до точки</span>
+                <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800">
+                  <span class="text-slate-500 block text-[10px]" id="hud-lbl-leadtime">Випередження (ETA)</span>
+                  <span class="font-bold text-emerald-400 text-sm" id="hud-poi-eta">~60 s lead-time</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Bottom Manual Voice Tester -->
-          <div class="pt-4 border-t border-slate-800 mt-4">
-            <button onclick="speakCurrentText()" class="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition flex items-center justify-center gap-2 shadow-md shadow-blue-600/20">
-              <span>🔊</span> Послухати озвучку поточного тексту
+          <!-- Bottom Voice Test Button -->
+          <div class="pt-4 border-t border-slate-800 mt-4 space-y-2">
+            <button onclick="speakCurrentAudio()" class="w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs transition flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30 border border-blue-400/20">
+              <span class="text-base">🔊</span> <span id="hud-btn-listen">Прослухати розповідь голосом</span>
             </button>
-            <span class="text-[10px] text-slate-500 text-center block mt-1.5">Працює через вбудований мовний рушій вашого Mac / браузера</span>
+            <span class="text-[10px] text-slate-500 text-center block" id="hud-engine-status">
+              Web Speech API • Мова: Українська (uk-UA)
+            </span>
           </div>
         </div>
 
@@ -243,35 +287,36 @@
     </section>
 
     <!-- ======================================================== -->
-    <!-- TAB 2: POI DATABASE & CONTENT STUDIO                     -->
+    <!-- TAB 2: BILINGUAL POI DATABASE & CONTENT STUDIO           -->
     <!-- ======================================================== -->
     <section id="pane-poi-db" class="tab-pane space-y-6">
-      <div class="bg-[#0f172a] border border-slate-800 rounded-2xl p-6 shadow-sm">
+      <div class="glass-3d rounded-2xl p-6 shadow-xl">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-800">
           <div>
-            <h2 class="text-xl font-bold text-white">Реєстр локацій та сторітелінгу (POI Catalog)</h2>
-            <p class="text-xs text-slate-400 mt-1">Ключові тригери Золотого кільця, Південного узбережжя та панорамних вулканів</p>
+            <h2 class="text-xl font-bold text-white" id="tbl-hdr-title">Реєстр локацій та сторітелінгу (POI Catalog)</h2>
+            <p class="text-xs text-slate-400 mt-1" id="tbl-hdr-sub">Ключові тригери Золотого кільця, Південного узбережжя та вулканічних панорам</p>
           </div>
           <div class="flex items-center gap-2">
-            <input type="text" id="poi-search" placeholder="Пошук локації чи тегу..." oninput="filterPOITable()" class="px-3.5 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500">
+            <input type="text" id="tbl-search-input" placeholder="Пошук (Search)..." oninput="filterTable()" 
+                   class="px-4 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500">
           </div>
         </div>
 
-        <!-- Table of POIs -->
+        <!-- POI Table -->
         <div class="overflow-x-auto">
-          <table class="w-full text-left text-xs border border-slate-800 rounded-xl" id="poi-table">
-            <thead class="bg-slate-900 text-slate-400 uppercase font-semibold">
+          <table class="w-full text-left text-xs border border-slate-800 rounded-xl">
+            <thead class="bg-slate-900/90 text-slate-400 uppercase font-semibold">
               <tr>
-                <th class="p-3">Локація / Об'єкт</th>
-                <th class="p-3">Тип</th>
-                <th class="p-3">Траса / Азимут</th>
-                <th class="p-3">Радіус (м)</th>
-                <th class="p-3">Вектор розповіді</th>
-                <th class="p-3 text-right">Дія</th>
+                <th class="p-3.5" id="col-loc">Локація / Об'єкт</th>
+                <th class="p-3.5" id="col-type">Тип</th>
+                <th class="p-3.5" id="col-bearing">Азимут</th>
+                <th class="p-3.5" id="col-radius">Радіус (м)</th>
+                <th class="p-3.5" id="col-lead">Вектор розповіді</th>
+                <th class="p-3.5 text-right" id="col-action">Дія</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-slate-800 text-slate-300" id="poi-table-body">
-              <!-- Populated by JS -->
+            <tbody class="divide-y divide-slate-800 text-slate-300" id="tbl-body">
+              <!-- Rendered dynamically -->
             </tbody>
           </table>
         </div>
@@ -282,71 +327,17 @@
     <!-- TAB 3: STEP-BY-STEP IMPLEMENTATION ROADMAP               -->
     <!-- ======================================================== -->
     <section id="pane-roadmap" class="tab-pane space-y-6">
-      <div class="bg-[#0f172a] border border-slate-800 rounded-2xl p-6 md:p-8 shadow-sm">
+      <div class="glass-3d rounded-2xl p-6 md:p-8 shadow-xl">
         <div class="max-w-3xl mb-8">
-          <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block mb-1">Без хаосу • Чіткий алгоритм дій</span>
-          <h2 class="text-2xl font-bold text-white">Покроковий план втілення: Від контенту до мобільного релізу</h2>
-          <p class="text-xs md:text-sm text-slate-400 mt-1">
-            Ми розділили весь проект на 4 послідовні практичні спринти, щоб кожна дія мала завершений результат.
+          <span class="text-xs font-bold text-emerald-400 uppercase tracking-wider block mb-1" id="rdm-badge">Без хаосу • Чіткий алгоритм дій</span>
+          <h2 class="text-2xl font-bold text-white" id="rdm-title">Покроковий план втілення: Від контенту до релізу</h2>
+          <p class="text-xs md:text-sm text-slate-400 mt-1" id="rdm-subtitle">
+            Проект структуровано на 4 послідовні виробничі фази.
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <!-- Step 1 -->
-          <div class="p-5 rounded-2xl bg-slate-900/80 border border-blue-500/30 space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="w-7 h-7 rounded-lg bg-blue-500/20 text-blue-400 font-black flex items-center justify-center text-sm border border-blue-500/30">1</span>
-              <span class="text-[11px] font-bold text-blue-400 uppercase">Поточний етап (ТИЖНІ 1–2)</span>
-            </div>
-            <h3 class="text-base font-bold text-white">Контент-архітектура та Веб-платформа</h3>
-            <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
-              <li>Фіксація перших 50 ключових локацій у єдиному GeoJSON форматі.</li>
-              <li>Вичитка текстів українською та англійською мовами (таймінг 45–75 секунд на розповідь).</li>
-              <li>Створення та валідація інтерактивної веб-студії (цей дашборд).</li>
-            </ul>
-          </div>
-
-          <!-- Step 2 -->
-          <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="w-7 h-7 rounded-lg bg-slate-800 text-slate-300 font-black flex items-center justify-center text-sm border border-slate-700">2</span>
-              <span class="text-[11px] font-bold text-slate-400 uppercase">ТИЖНІ 3–4</span>
-            </div>
-            <h3 class="text-base font-bold text-white">Пакетна озвучка (Audio Pipeline на Mac M4 Pro)</h3>
-            <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
-              <li>Генерація фінальних високоякісних аудіодоріжок MP3 (ElevenLabs / Kokoro TTS).</li>
-              <li>Нормалізація рівня гучності (-14 LUFS) під автомобільні динаміки.</li>
-              <li>Пакування аудіо в офлайн-архіви для миттєвого завантаження туристом.</li>
-            </ul>
-          </div>
-
-          <!-- Step 3 -->
-          <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="w-7 h-7 rounded-lg bg-slate-800 text-slate-300 font-black flex items-center justify-center text-sm border border-slate-700">3</span>
-              <span class="text-[11px] font-bold text-slate-400 uppercase">ТИЖНІ 5–8</span>
-            </div>
-            <h3 class="text-base font-bold text-white">Розробка Мобільного додатку (Flutter Core)</h3>
-            <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
-              <li>Кросплатформовий каркас iOS / Android на Flutter.</li>
-              <li>Фоновий GPS-трекінг та плавний Audio Ducking (приглушення музики під час розповіді).</li>
-              <li>Тестування симулятором Xcode через реальні GPX-треки ісландських доріг прямо на вашому MacBook M4 Pro.</li>
-            </ul>
-          </div>
-
-          <!-- Step 4 -->
-          <div class="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="w-7 h-7 rounded-lg bg-slate-800 text-slate-300 font-black flex items-center justify-center text-sm border border-slate-700">4</span>
-              <span class="text-[11px] font-bold text-emerald-400 uppercase">ТИЖНІ 9–12</span>
-            </div>
-            <h3 class="text-base font-bold text-white">B2B Партнерства &amp; Реліз у Store</h3>
-            <ul class="text-xs text-slate-300 space-y-1.5 list-disc list-inside">
-              <li>Публікація в App Store та Google Play (In-App Purchase $30 за 7-Day Pass).</li>
-              <li>Підключення 2-3 автопрокатів (*Blue Car Rental, CampEasy*) за моделлю 50/50 RevShare або флоту за $2,500.</li>
-              <li>Розміщення промо-стійок з QR-кодами на стійках реєстрації в аеропорту KEF.</li>
-            </ul>
-          </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="rdm-grid">
+          <!-- Populated by JS for dual-lang -->
         </div>
       </div>
     </section>
@@ -355,126 +346,384 @@
     <!-- TAB 4: GEOJSON EXPORT & MOBILE SYNC                      -->
     <!-- ======================================================== -->
     <section id="pane-export" class="tab-pane space-y-6">
-      <div class="bg-[#0f172a] border border-slate-800 rounded-2xl p-6 shadow-sm">
+      <div class="glass-3d rounded-2xl p-6 shadow-xl">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4 pb-4 border-b border-slate-800">
           <div>
-            <h2 class="text-xl font-bold text-white">Єдиний файл структури даних (GeoJSON Engine)</h2>
-            <p class="text-xs text-slate-400 mt-1">Цей JSON напряму завантажується у Flutter-додаток та веб-клієнт</p>
+            <h2 class="text-xl font-bold text-white" id="exp-title">Єдиний файл структури даних (GeoJSON Engine)</h2>
+            <p class="text-xs text-slate-400 mt-1" id="exp-sub">Цей JSON напряму імпортується у Flutter-додаток для обох мов</p>
           </div>
-          <button onclick="copyGeoJSON()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition flex items-center gap-1.5">
-            📋 Скопіювати JSON
+          <button onclick="copyGeoJSON()" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs transition flex items-center gap-1.5 shadow-md">
+            📋 <span id="exp-btn-copy">Скопіювати JSON</span>
           </button>
         </div>
 
-        <pre id="geojson-code" class="p-4 rounded-xl bg-slate-950 font-mono text-xs text-emerald-400 border border-slate-800 overflow-x-auto max-h-96"></pre>
+        <pre id="geojson-code-box" class="p-4 rounded-xl bg-slate-950 font-mono text-xs text-emerald-400 border border-slate-800 overflow-x-auto max-h-96"></pre>
       </div>
     </section>
 
   </main>
 
-  <!-- JAVASCRIPT LOGIC ENGINE -->
+  <footer class="max-w-7xl mx-auto mt-12 pt-6 border-t border-slate-800 text-center text-xs text-slate-500">
+    Iceland Smart Road Audio Guide • Bilingual Academic Platform UA / EN • Antigravity AI
+  </footer>
+
+  <!-- BILINGUAL DATA & CONTROLLER SCRIPT -->
   <script>
-    // CORE POI DATASET
+    let currentLang = 'uk';
+
+    // BILINGUAL DICTIONARY
+    const I18N = {
+      uk: {
+        headerSubtitle: "Професійна платформа контенту, симуляції поїздок та бази даних для мобільного аудіогіда",
+        navSim: "Live Симулятор",
+        navPoi: "База POI & Контент",
+        navRoadmap: "Роадмеп",
+        navExport: "GeoJSON",
+        navEncyclo: "Енциклопедія Джерел",
+        simStart: "Запустити тест поїздки",
+        simPause: "Пауза симуляції",
+        simResume: "Продовжити поїздку",
+        simReset: "Скинути",
+        simRouteLabel: "Маршрут:",
+        simRouteName: "Золоте кільце & Південне узбережжя (Route 1)",
+        hudSpeed: "Швидкість:",
+        hudBearing: "Азимут:",
+        hudTts: "Озвучка:",
+        hudTtsActive: "Live TTS Увімкнено",
+        mapHeader: "Інтерактивна Карта Тригерів (Route 1 & Golden Circle)",
+        mapTip: "Натисніть будь-яку мітку, щоб прослухати аудіо",
+        legRoute1: "Траса 1 (Route 1)",
+        legGC: "Золоте кільце",
+        legMustSee: "Must-See",
+        legVista: "Dynamic Vista",
+        legSafety: "SafeTravel Попередження",
+        legOffline: "100% Offline Режим",
+        hudGuideTitle: "Smart Road Audio Guide",
+        hudPoiRegion: "Ісландія • Траса 1",
+        hudPoiTitle: "Очікування активації",
+        hudPoiLead: "Вектор огляду: готовий до руху",
+        hudPoiNarrative: "Натисніть зелену кнопку «Запустити тест поїздки» або клікніть будь-яку точку на карті. Автомобіль поїде дорогою, а гід автоматично розповість історію вибраною мовою (UA/EN)!",
+        hudLblRadius: "Радіус активації",
+        hudLblLeadtime: "Випередження (ETA)",
+        hudBtnListen: "Прослухати розповідь голосом",
+        hudEngineStatus: "Web Speech API • Мова: Українська (uk-UA)",
+        tblTitle: "Реєстр локацій та сторітелінгу (POI Catalog)",
+        tblSubtitle: "Ключові тригери Золотого кільця, Південного узбережжя та вулканічних панорам",
+        colLoc: "Локація / Об'єкт",
+        colType: "Тип",
+        colBearing: "Азимут",
+        colRadius: "Радіус (м)",
+        colLead: "Вектор розповіді",
+        colAction: "Дія",
+        btnTest: "Тест",
+        rdmBadge: "Без хаосу • Чіткий алгоритм дій",
+        rdmTitle: "Покроковий план втілення: Від контенту до релізу",
+        rdmSubtitle: "Проект структуровано на 4 послідовні виробничі фази.",
+        expTitle: "Єдиний файл структури даних (GeoJSON Engine)",
+        expSub: "Цей JSON напряму імпортується у Flutter-додаток для обох мов",
+        expBtnCopy: "Скопіювати JSON",
+        copiedAlert: "GeoJSON успішно скопійовано в буфер обміну!"
+      },
+      en: {
+        headerSubtitle: "Professional content management, drive simulation, and database platform for the smart audio guide app",
+        navSim: "Live Simulator",
+        navPoi: "POI Database",
+        navRoadmap: "Roadmap",
+        navExport: "GeoJSON",
+        navEncyclo: "Sources Encyclopedia",
+        simStart: "Start Drive Simulation",
+        simPause: "Pause Simulation",
+        simResume: "Resume Drive",
+        simReset: "Reset",
+        simRouteLabel: "Route:",
+        simRouteName: "Golden Circle & South Coast (Route 1)",
+        hudSpeed: "Speed:",
+        hudBearing: "Heading:",
+        hudTts: "Voice Engine:",
+        hudTtsActive: "Live TTS Active",
+        mapHeader: "Interactive Trigger Map (Route 1 & Golden Circle)",
+        mapTip: "Click any pin to preview dynamic audio narration",
+        legRoute1: "Route 1 (Ring Road)",
+        legGC: "Golden Circle Loop",
+        legMustSee: "Must-See Sights",
+        legVista: "Dynamic Vista",
+        legSafety: "SafeTravel Warning",
+        legOffline: "100% Offline-Ready",
+        hudGuideTitle: "Smart Road Audio Guide",
+        hudPoiRegion: "Iceland • Highway 1",
+        hudPoiTitle: "Awaiting Trigger Activation",
+        hudPoiLead: "View vector: ready for departure",
+        hudPoiNarrative: "Click the green 'Start Drive Simulation' button or click any point on the map. The car will navigate the route and the guide will automatically narrate in English or Ukrainian!",
+        hudLblRadius: "Trigger Radius",
+        hudLblLeadtime: "Lead Time (ETA)",
+        hudBtnListen: "Listen to Voice Narration",
+        hudEngineStatus: "Web Speech API • Language: English (en-US)",
+        tblTitle: "Locations & Storytelling Registry (POI Catalog)",
+        tblSubtitle: "Key GPS triggers for Golden Circle, South Coast, and Volcanic Vistas",
+        colLoc: "Location / Landmark",
+        colType: "Type",
+        colBearing: "Heading",
+        colRadius: "Radius (m)",
+        colLead: "Narrative Lead-In",
+        colAction: "Action",
+        btnTest: "Preview",
+        rdmBadge: "No Chaos • Disciplined Execution Plan",
+        rdmTitle: "Step-by-Step Implementation: From Content to Release",
+        rdmSubtitle: "The project is structured into 4 sequential production phases.",
+        expTitle: "Unified Spatial Data Engine (GeoJSON Export)",
+        expSub: "This production JSON feeds directly into the cross-platform Flutter app",
+        expBtnCopy: "Copy GeoJSON",
+        copiedAlert: "GeoJSON copied to clipboard successfully!"
+      }
+    };
+
+    // BILINGUAL POI DATABASE
     const POIS = [
       {
         id: "thingvellir",
-        name: "Þingvellir (Тінґветлір)",
-        type: "Must-See",
+        name: { uk: "Þingvellir (Тінґветлір)", en: "Þingvellir National Park" },
+        type: { uk: "Must-See • UNESCO", en: "Must-See • UNESCO" },
         tour: "golden_circle",
         coords: { x: 235, y: 320, lat: 64.2559, lng: -21.1295 },
         bearing: 90,
         radius: 1200,
-        lead: "Прямо за курсом • Розлом літосферних плит",
-        text: "Ми наближаємося до Тінґветліра — серця ісландської історії. Саме тут у 930 році вікінги заснували перший у світі парламент — Альтинг. Крім того, ви проїжджаєте точку, де Північноамериканська та Євразійська тектонічні плити щороку розходяться на два сантиметри, утворюючи гігантські ущелини.",
+        lead: {
+          uk: "Прямо за курсом • Розлом літосферних плит Almannagjá",
+          en: "Straight ahead • Mid-Atlantic Ridge Tectonic Rift"
+        },
+        text: {
+          uk: "Ми наближаємося до Тінґветліра — серця ісландської історії. У 930 році вікінги заснували тут найстаріший діючий парламент світу — Альтинг. Крім того, ви проїжджаєте точку, де Північноамериканська та Євразійська тектонічні плити щороку розходяться на два сантиметри, утворюючи гігантські скельні ущелини.",
+          en: "We are approaching Þingvellir — the historic heart of Iceland. In 930 AD, Vikings established the world's oldest surviving parliament, the Alþingi, right here. You are also driving through the Mid-Atlantic Ridge, where the North American and Eurasian tectonic plates drift apart by two centimeters every year, opening colossal fissures."
+        },
         tag: "Golden Circle"
       },
       {
         id: "geysir",
-        name: "Geysir & Strokkur (Гейзер)",
-        type: "Must-See",
+        name: { uk: "Geysir & Strokkur (Ґейзір)", en: "Geysir & Strokkur Geothermal Field" },
+        type: { uk: "Must-See • Геотермальне поле", en: "Must-See • Geothermal Area" },
         tour: "golden_circle",
         coords: { x: 290, y: 305, lat: 64.3104, lng: -20.3024 },
         bearing: 85,
         radius: 1000,
-        lead: "Попереду геотермальна долина Haukadalur",
-        text: "Попереду — геотермальне поле Хаукадалур. Саме місцевий Великий Гейзер дав назву всім гейзерам на планеті Земля! Хоча сам він зараз 'спить', поруч б'є фонтан Строккюр — він кожні 6–10 хвилин вистрілює киплячу воду на висоту до 20 метрів. Тримайте камери напоготові!",
+        lead: {
+          uk: "Попереду геотермальна долина Haukadalur",
+          en: "Approaching Haukadalur Geothermal Valley"
+        },
+        text: {
+          uk: "Попереду геотермальне поле Хаукадалур. Саме тутешній Великий Ґейзір дав назву всім гейзерам на планеті Земля! Поки сам він спить, поруч б'є фонтан Строккюр — кожні 6–10 хвилин він вистрілює стовп киплячої води на висоту до 20 метрів. Завжди стійте з навітряного боку від пару!",
+          en: "Ahead lies the Haukadalur geothermal field. The Great Geysir here gave its name to all geysers worldwide! While the Great Geysir currently rests, its active neighbor Strokkur erupts reliably every 6 to 10 minutes, shooting boiling water up to 20 meters into the sky. Always stand upwind to avoid steam burns!"
+        },
         tag: "Golden Circle"
       },
       {
         id: "gullfoss",
-        name: "Gullfoss (Золотий водоспад)",
-        type: "Must-See",
+        name: { uk: "Gullfoss (Золотий водоспад)", en: "Gullfoss (The Golden Waterfall)" },
+        type: { uk: "Must-See • Водоспад", en: "Must-See • Waterfall" },
         tour: "golden_circle",
         coords: { x: 325, y: 300, lat: 64.3271, lng: -20.1199 },
         bearing: 80,
         radius: 1500,
-        lead: "Праворуч шумить річковий каньйон Хвітау",
-        text: "Перед вами Ґульфосс — 'Золотий водоспад'. Льодовикова річка Хвітау з ревом обривається у двоступеневий 32-метровий каньйон. На початку 20 століття іноземні інвестори хотіли збудувати тут гідроелектростанцію, але донька місцевого фермера Сигріудюр Томасдоттір погрожувала кинутися у водоспад і врятувала цю перлину природи.",
+        lead: {
+          uk: "Праворуч шумить річковий каньйон Хвітау",
+          en: "To your right • Hvíta River Glacier Canyon"
+        },
+        text: {
+          uk: "Перед вами Ґульфосс — 'Золотий водоспад'. Льодовикова річка Хвітау з гуркотом падає у двоступеневий 32-метровий каньйон. На початку 20 століття донька місцевого фермера Сіґріудюр Тоумасдоуттір погрожувала кинутися у вир, щоб не допустити будівництва ГЕС, зберігши цей водоспад для нащадків.",
+          en: "Before you lies Gullfoss — 'The Golden Falls'. The glacial river Hvíta thunders down a two-tiered 32-meter canyon. In the early 20th century, Sigríður Tómasdóttir, a local farmer's daughter, threatened to throw herself into the roaring falls to prevent foreign investors from damming it for hydroelectricity, becoming Iceland's first environmental hero."
+        },
         tag: "Golden Circle"
       },
       {
         id: "hekla_vista",
-        name: "Вулкан Hekla (Ворота до Пекла)",
-        type: "Dynamic Vista",
+        name: { uk: "Вулкан Hekla (Ворота до Пекла)", en: "Hekla Volcano (Gateway to Hell)" },
+        type: { uk: "Dynamic Vista • Вулкан", en: "Dynamic Vista • Active Volcano" },
         tour: "south_coast",
         coords: { x: 330, y: 375, lat: 63.98, lng: -19.70 },
         bearing: 105,
         radius: 3500,
-        lead: "Подивіться ліворуч на горизонт!",
-        text: "Подивіться ліворуч на горизонт! Якщо погода ясна, ви бачите суворий хребет стратовулкана Гекла. У Середньовіччі монахи вважали його справжніми воротами до пекла. Гекла вивергається регулярно і зараз перебуває у стані підвищеної готовності під пильним оком сейсмологів.",
+        lead: {
+          uk: "Подивіться ліворуч на горизонт!",
+          en: "Look to your left towards the horizon!"
+        },
+        text: {
+          uk: "Подивіться ліворуч на горизонт. Якщо погода ясна, ви бачите суворий хребет стратовулкана Гекла заввишки 1491 метр. У Середньовіччі монахи вважали його справжніми воротами до пекла. Гекла вивергається регулярно і зараз перебуває у стані критичного тиску магми під пильним наглядом сейсмологів.",
+          en: "Look to your left towards the horizon. In clear weather, you will spot the jagged silhouette of Mount Hekla, rising 1,491 meters. Medieval European monks believed Hekla was the literal gateway to Hell. It has erupted over 20 times since settlement and is currently overdue, monitored around the clock by geophysicists."
+        },
         tag: "Active Volcano"
       },
       {
         id: "seljalandsfoss",
-        name: "Seljalandsfoss (Водоспад з гротом)",
-        type: "Must-See",
+        name: { uk: "Seljalandsfoss (Водоспад з гротом)", en: "Seljalandsfoss Waterfall" },
+        type: { uk: "Must-See • Водоспад", en: "Must-See • Waterfall" },
         tour: "south_coast",
         coords: { x: 370, y: 395, lat: 63.6156, lng: -19.9885 },
         bearing: 110,
         radius: 1400,
-        lead: "Ліворуч колишні прибережні скелі",
-        text: "Ліворуч відкривається Сельяландсфосс — 60-метровий струмінь льодовикової води, що зривається зі стародавніх морських кліфів. Його головна таємниця: за водяною завісою є стежка у скельну печеру. Обов'язково одягніть водонепроникну куртку перед виходом!",
+        lead: {
+          uk: "Ліворуч стародавні морські кліфи",
+          en: "On your left • Ancient Sea Cliffs"
+        },
+        text: {
+          uk: "Ліворуч відкривається Сельяландсфосс — 60-метровий каскад, що зривається зі стародавніх берегових скель. Його унікальна риса — просторий скельний грот позаду падаючої води, де можна пройти по колу на 360 градусів. Обов'язково одягніть водонепроникну куртку перед виходом з машини!",
+          en: "On your left is Seljalandsfoss, plunging 60 meters from ancient coastal cliffs. Its most famous feature is the wide cavern behind the veil of water, allowing you to walk completely behind the falls. Put on your waterproof jacket before stepping outside!"
+        },
         tag: "South Coast"
       },
       {
         id: "eyjafjallajokull",
-        name: "Eyjafjallajökull (Ейяф'ятлайокютль)",
-        type: "Dynamic Vista",
+        name: { uk: "Eyjafjallajökull (Ейяф'ятлайокютль)", en: "Eyjafjallajökull Glacier Volcano" },
+        type: { uk: "Dynamic Vista • Льодовик", en: "Dynamic Vista • Glacier Volcano" },
         tour: "south_coast",
         coords: { x: 410, y: 400, lat: 63.63, lng: -19.62 },
         bearing: 105,
         radius: 3000,
-        lead: "Подивіться ліворуч угору • Льодовиковий щит",
-        text: "Подивіться ліворуч угору. Перед вами знаменитий льодовик Ейяф'ятлайокютль! У 2010 році його виверження паралізувало авіапростір усієї Європи майже на два тижні. А прямо під ним біля траси розташована ферма Торвальдсейрі, яку тоді накрило шаром попелу, але вона повністю відродилася.",
+        lead: {
+          uk: "Подивіться ліворуч угору • Льодовиковий щит",
+          en: "Look up to your left • The Ice Cap Shield"
+        },
+        text: {
+          uk: "Подивіться ліворуч угору. Перед вами знаменитий льодовик Ейяф'ятлайокютль! У 2010 році його виверження паралізувало авіапростір усієї Європи майже на два тижні. А прямо під ним біля траси розташована ферма Торвальдсейрі, яка була повністю похована під попелом, але відродилася немов фенікс.",
+          en: "Look up to your left. Rising above you is the notorious Eyjafjallajökull glacier! In April 2010, its explosive eruption grounded over 100,000 flights across Europe. Right below it stands the historic Þorvaldseyri farm, which was blanketed under thick ash but made an inspiring full recovery."
+        },
         tag: "Famous Volcano"
       },
       {
         id: "skogafoss",
-        name: "Skógafoss (Водоспад Скоугафосс)",
-        type: "Must-See",
+        name: { uk: "Skógafoss (Водоспад Скоугафосс)", en: "Skógafoss Waterfall" },
+        type: { uk: "Must-See • Водоспад", en: "Must-See • Waterfall" },
         tour: "south_coast",
         coords: { x: 435, y: 405, lat: 63.5321, lng: -19.5114 },
         bearing: 105,
         radius: 1200,
-        lead: "Ліворуч перед вами монолітна водяна стіна",
-        text: "Попереду Скоугафосс — один із найпотужніших та найфотогенічніших водоспадів країни. Ширина стіни води — 25 метрів, а висота — 60. Через густу хмару бризок у сонячні дні тут майже завжди стоїть яскрава подвійна веселка. За легендою, перший вікінг заховав у печері за водоспадом скриню із золотом.",
+        lead: {
+          uk: "Ліворуч монолітна водяна стіна",
+          en: "Ahead on your left • 60-meter Wall of Water"
+        },
+        text: {
+          uk: "Попереду Скоугафосс — один із найпотужніших та найфотогенічніших водоспадів Ісландії завширшки 25 метрів та заввишки 60 метрів. За легендою вікінгів, перший поселенець Трасі заховав у печері за водоспадом скриню із золотом. Підніміться 370 сходинками нагору для неймовірного краєвиду!",
+          en: "Ahead is Skógafoss, one of Iceland's mightiest and most photogenic waterfalls, 25 meters wide with a 60-meter drop. Viking legend tells that the first settler, Þrasi, buried a treasure chest of gold behind the cascade. Climb the 370 steps to the top observation deck for an awe-inspiring view!"
+        },
         tag: "South Coast"
       },
       {
         id: "katla_warning",
-        name: "Кальдера вулкана Katla & Дюрхолей",
-        type: "Safety Warning",
+        name: { uk: "Кальдера Katla & Дюрхолей", en: "Katla Caldera & Dyrhólaey Hazard Zone" },
+        type: { uk: "Safety Alert • Безпека", en: "Safety Alert • High Hazard" },
         tour: "south_coast",
         coords: { x: 470, y: 405, lat: 63.50, lng: -19.10 },
         bearing: 100,
         radius: 2500,
-        lead: "УВАГА: Зона сильних вітрів та лавового піску",
-        text: "Увага водію! Ми під'їжджаємо до відкритого узбережжя біля Віка. Тут часто спостерігаються різкі бічні пориви вітру понад 25 м/с. При зупинці паркуйтеся носом проти вітру і тримайте двері обома руками, щоб їх не зірвало!",
+        lead: {
+          uk: "УВАГА: Зона штормових вітрів та лавового піску",
+          en: "WARNING: Severe Crosswinds & Sandblast Alert"
+        },
+        text: {
+          uk: "Увага водію! Ми під'їжджаємо до узбережжя біля Віка. Тут регулярно виникають різкі пориви бокового вітру понад 26 м/с. При зупинці паркуйтеся носом проти вітру і міцно тримайте двері обома руками, щоб їх не вирвало з петель! Також стережіться смертоносних снікер-хвиль на пляжі Рейнісф'яра.",
+          en: "Driver safety warning! We are entering the exposed coastal plain near Vík. Sudden crosswinds frequently exceed 26 meters per second (over 60 mph). When parking, always face the vehicle into the wind and hold car doors with both hands to prevent hinge damage! At nearby Reynisfjara beach, never turn your back to the deadly sneaker waves."
+        },
         tag: "SafeTravel Alert"
       }
     ];
 
-    // TAB SWITCHING
+    // ROADMAP CONTENT DUAL-LANG
+    const ROADMAP_DATA = {
+      uk: [
+        { step: "1", title: "Контент-архітектура та Веб-платформа", timing: "ТИЖНІ 1–2 (Поточний)", desc: "Фіксація перших 50 ключових локацій у єдиному GeoJSON форматі. Вичитка текстів українською та англійською мовами (таймінг 45–75 секунд на розповідь). Валідація веб-студії." },
+        { step: "2", title: "Пакетна озвучка (Audio Pipeline на Mac M4 Pro)", timing: "ТИЖНІ 3–4", desc: "Генерація фінальних високоякісних аудіодоріжок MP3 (ElevenLabs / Kokoro TTS). Нормалізація гучності до -14 LUFS під автомобільну акустику. Офлайн-пакування." },
+        { step: "3", title: "Розробка Мобільного додатку (Flutter Core)", timing: "ТИЖНІ 5–8", desc: "Кросплатформовий каркас iOS / Android на Flutter. Фоновий GPS-трекінг та плавний Audio Ducking (приглушення сторонньої музики). Тестування GPX-симулятором у Xcode на Mac." },
+        { step: "4", title: "B2B Партнерства & Реліз у Store", timing: "ТИЖНІ 9–12", desc: "Публікація в App Store та Google Play ($30 Pass). Підключення 2-3 автопрокатів (Blue Car Rental, CampEasy) за моделлю 50/50 RevShare або флоту за $2,500. Старт сезону." }
+      ],
+      en: [
+        { step: "1", title: "Content Architecture & Web Platform", timing: "WEEKS 1–2 (Current)", desc: "Lock in the first 50 core POIs in unified GeoJSON. Polish scripts in English and Ukrainian (45–75 sec duration). Validate web studio and interactive map." },
+        { step: "2", title: "Batch Audio Mastering (M4 Pro Pipeline)", timing: "WEEKS 3–4", desc: "Generate studio-grade MP3 audio tracks via ElevenLabs / Kokoro TTS. Master volume to -14 LUFS for automotive cabin clarity. Compress for lightweight offline downloads." },
+        { step: "3", title: "Flutter Mobile Engine Development", timing: "WEEKS 5–8", desc: "Cross-platform iOS / Android codebase. Background GPS tracking with zero battery drain, smooth Audio Ducking over Spotify. Xcode GPX route simulations." },
+        { step: "4", title: "B2B Fleet Rollout & Store Launch", timing: "WEEKS 9–12", desc: "Publish to App Store and Google Play ($30 Pass). Onboard 2-3 partner fleets (Blue Car Rental, CampEasy) on 50/50 RevShare or $2,500 fleet flat rate. Season launch." }
+      ]
+    };
+
+    // SET LANGUAGE FUNCTION
+    function setLanguage(lang) {
+      currentLang = lang;
+      const t = I18N[lang];
+
+      // Update Header & Nav
+      document.getElementById('header-subtitle').innerText = t.headerSubtitle;
+      document.getElementById('txt-nav-sim').innerText = t.navSim;
+      document.getElementById('txt-nav-poi').innerText = t.navPoi;
+      document.getElementById('txt-nav-roadmap').innerText = t.navRoadmap;
+      document.getElementById('txt-nav-export').innerText = t.navExport;
+      document.getElementById('txt-nav-encyclo').innerText = t.navEncyclo;
+
+      // Update Simulator Controls & HUD
+      document.getElementById('sim-btn-text').innerText = simInterval ? t.simPause : t.simStart;
+      document.getElementById('sim-btn-reset').innerText = t.simReset;
+      document.getElementById('txt-sim-route-label').innerText = t.simRouteLabel;
+      document.getElementById('txt-sim-route-name').innerText = t.simRouteName;
+      document.getElementById('hud-label-speed').innerText = t.hudSpeed;
+      document.getElementById('hud-label-bearing').innerText = t.hudBearing;
+      document.getElementById('hud-label-tts').innerText = t.hudTts;
+      document.getElementById('hud-voice').innerText = t.hudTtsActive;
+
+      // Map Texts
+      document.getElementById('txt-map-header').innerText = t.mapHeader;
+      document.getElementById('txt-map-tip').innerText = t.mapTip;
+      document.getElementById('leg-route1').innerText = t.legRoute1;
+      document.getElementById('leg-gc').innerText = t.legGC;
+      document.getElementById('leg-mustsee').innerText = t.legMustSee;
+      document.getElementById('leg-vista').innerText = t.legVista;
+      document.getElementById('leg-safety').innerText = t.legSafety;
+      document.getElementById('leg-offline').innerText = t.legOffline;
+
+      // HUD Player
+      document.getElementById('hud-guide-title').innerText = t.hudGuideTitle;
+      document.getElementById('hud-lbl-radius').innerText = t.hudLblRadius;
+      document.getElementById('hud-lbl-leadtime').innerText = t.hudLblLeadtime;
+      document.getElementById('hud-btn-listen').innerText = t.hudBtnListen;
+      document.getElementById('hud-engine-status').innerText = lang === 'uk' 
+        ? "Web Speech API • Мова: Українська (uk-UA)" 
+        : "Web Speech API • Language: English (en-US)";
+
+      // Table Headers
+      document.getElementById('tbl-hdr-title').innerText = t.tblTitle;
+      document.getElementById('tbl-hdr-sub').innerText = t.tblSubtitle;
+      document.getElementById('col-loc').innerText = t.colLoc;
+      document.getElementById('col-type').innerText = t.colType;
+      document.getElementById('col-bearing').innerText = t.colBearing;
+      document.getElementById('col-radius').innerText = t.colRadius;
+      document.getElementById('col-lead').innerText = t.colLead;
+      document.getElementById('col-action').innerText = t.colAction;
+
+      // Roadmap
+      document.getElementById('rdm-badge').innerText = t.rdmBadge;
+      document.getElementById('rdm-title').innerText = t.rdmTitle;
+      document.getElementById('rdm-subtitle').innerText = t.rdmSubtitle;
+
+      // Export
+      document.getElementById('exp-title').innerText = t.expTitle;
+      document.getElementById('exp-sub').innerText = t.expSub;
+      document.getElementById('exp-btn-copy').innerText = t.expBtnCopy;
+
+      // Toggle Pill Classes
+      document.getElementById('btn-lang-uk').className = lang === 'uk' ? 'lang-pill active px-2.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1' : 'lang-pill px-2.5 py-1.5 rounded-lg text-xs font-black text-slate-400 hover:text-white transition flex items-center gap-1';
+      document.getElementById('btn-lang-en').className = lang === 'en' ? 'lang-pill active px-2.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1' : 'lang-pill px-2.5 py-1.5 rounded-lg text-xs font-black text-slate-400 hover:text-white transition flex items-center gap-1';
+
+      // Re-render components with active lang
+      renderMapPins();
+      renderTable();
+      renderRoadmap();
+      renderGeoJSON();
+
+      // Refresh HUD if an active POI is selected
+      if (activeSelectedPOI) {
+        selectPOI(activeSelectedPOI, false);
+      } else {
+        document.getElementById('hud-poi-title').innerText = t.hudPoiTitle;
+        document.getElementById('hud-poi-lead').innerText = t.hudPoiLead;
+        document.getElementById('hud-poi-narrative').innerText = t.hudPoiNarrative;
+      }
+    }
+
+    // TAB CONTROLLER
     function switchTab(tabId) {
       document.querySelectorAll('.tab-pane').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('header nav button').forEach(el => {
@@ -482,89 +731,93 @@
       });
 
       const pane = document.getElementById('pane-' + tabId);
-      const btn = document.getElementById('btn-tab-' + tabId);
+      const btn = document.getElementById('nav-btn-' + (tabId === 'poi-db' ? 'poi' : tabId));
       if (pane) pane.classList.add('active');
       if (btn) btn.className = 'px-3.5 py-2 rounded-lg bg-blue-600 text-white shadow-sm transition';
     }
 
-    // POPULATE MAP POIS IN SVG
-    function renderSVGPOIs() {
-      const container = document.getElementById('svg-pois');
+    // MAP PINS RENDERING
+    function renderMapPins() {
+      const container = document.getElementById('svg-pois-layer');
       container.innerHTML = '';
 
       POIS.forEach(p => {
-        const color = p.type === 'Must-See' ? '#10b981' : (p.type === 'Dynamic Vista' ? '#f59e0b' : '#ef4444');
-        
-        // Trigger radius circle (semitransparent)
+        const color = p.tag === 'Golden Circle' ? '#10b981' : (p.tag === 'Active Volcano' || p.tag === 'Famous Volcano' ? '#f59e0b' : (p.tag === 'SafeTravel Alert' ? '#ef4444' : '#38bdf8'));
+
+        // Radius circle
         const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
         circle.setAttribute('cx', p.coords.x);
         circle.setAttribute('cy', p.coords.y);
-        circle.setAttribute('r', p.radius / 100);
+        circle.setAttribute('r', p.radius / 90);
         circle.setAttribute('fill', color);
         circle.setAttribute('fill-opacity', '0.12');
         circle.setAttribute('stroke', color);
-        circle.setAttribute('stroke-width', '1');
-        circle.setAttribute('stroke-dasharray', '2 2');
+        circle.setAttribute('stroke-width', '1.2');
+        circle.setAttribute('stroke-dasharray', '3 3');
         container.appendChild(circle);
 
         // Clickable Pin
         const pin = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
         pin.setAttribute('cx', p.coords.x);
         pin.setAttribute('cy', p.coords.y);
-        pin.setAttribute('r', '6');
+        pin.setAttribute('r', '7');
         pin.setAttribute('fill', color);
         pin.setAttribute('stroke', '#ffffff');
-        pin.setAttribute('stroke-width', '1.5');
-        pin.setAttribute('class', 'cursor-pointer hover:r-8 transition-all');
-        pin.onclick = () => selectPOI(p);
+        pin.setAttribute('stroke-width', '2');
+        pin.setAttribute('class', 'cursor-pointer hover:r-9 transition-all drop-shadow');
+        pin.onclick = () => selectPOI(p, true);
         container.appendChild(pin);
 
         // Label
         const txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        txt.setAttribute('x', p.coords.x + 8);
-        txt.setAttribute('y', p.coords.y - 6);
-        txt.setAttribute('fill', '#cbd5e1');
-        txt.setAttribute('font-size', '10');
+        txt.setAttribute('x', p.coords.x + 9);
+        txt.setAttribute('y', p.coords.y - 7);
+        txt.setAttribute('fill', '#e2e8f0');
+        txt.setAttribute('font-size', '10.5');
         txt.setAttribute('font-weight', 'bold');
-        txt.textContent = p.name.split(' ')[0];
+        txt.textContent = p.name[currentLang].split(' ')[0];
         container.appendChild(txt);
       });
     }
 
-    // SELECT POI & DISPLAY ON HUD
-    let currentNarrative = "";
-    function selectPOI(poi) {
-      document.getElementById('poi-tag').innerText = poi.tag.toUpperCase();
-      document.getElementById('active-region').innerText = poi.tour.replace('_', ' ').toUpperCase();
-      document.getElementById('active-title').innerText = poi.name;
-      document.getElementById('active-lead').innerText = poi.lead;
-      document.getElementById('active-text').innerText = poi.text;
-      document.getElementById('active-radius').innerText = poi.radius + ' м';
+    // SELECT POI LOGIC
+    let activeSelectedPOI = null;
+    function selectPOI(poi, autoSpeak = true) {
+      activeSelectedPOI = poi;
+      const lang = currentLang;
+
+      document.getElementById('hud-badge-tag').innerText = poi.tag.toUpperCase();
+      document.getElementById('hud-poi-region').innerText = poi.tour.replace('_', ' ').toUpperCase();
+      document.getElementById('hud-poi-title').innerText = poi.name[lang];
+      document.getElementById('hud-poi-lead').innerText = poi.lead[lang];
+      document.getElementById('hud-poi-narrative').innerText = poi.text[lang];
+      document.getElementById('hud-poi-radius').innerText = poi.radius + ' m';
       document.getElementById('hud-bearing').innerText = poi.bearing + '°';
 
-      currentNarrative = poi.text;
-      speakCurrentText();
+      if (autoSpeak) {
+        speakCurrentAudio();
+      }
     }
 
-    // WEB SPEECH API SYNTHESIS
-    function speakCurrentText() {
+    // SPEECH SYNTHESIS ENGINE (DUAL-LANG)
+    function speakCurrentAudio() {
       if (!('speechSynthesis' in window)) {
-        alert('Ваш браузер не підтримує Web Speech API');
+        alert('Web Speech API is not supported in this browser.');
         return;
       }
       window.speechSynthesis.cancel();
-      const text = currentNarrative || document.getElementById('active-text').innerText;
+      const text = document.getElementById('hud-poi-narrative').innerText;
       const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'uk-UA';
+      utterance.lang = currentLang === 'uk' ? 'uk-UA' : 'en-US';
       utterance.rate = 1.0;
       utterance.pitch = 1.0;
       window.speechSynthesis.speak(utterance);
     }
 
-    // DRIVE SIMULATION LOOP
+    // SIMULATOR LOOP
     let simInterval = null;
     let simStep = 0;
-    const waypoints = [
+    const WAYPOINTS = [
       { x: 210, y: 360, poiId: null },
       { x: 235, y: 335, poiId: "thingvellir" },
       { x: 285, y: 310, poiId: "geysir" },
@@ -578,57 +831,59 @@
     ];
 
     function toggleSimulation() {
+      const t = I18N[currentLang];
       if (simInterval) {
         clearInterval(simInterval);
         simInterval = null;
-        document.getElementById('sim-text').innerText = 'Продовжити тест поїздки';
+        document.getElementById('sim-btn-text').innerText = t.simResume;
         document.getElementById('sim-icon').innerText = '▶';
       } else {
-        document.getElementById('sim-text').innerText = 'Пауза симуляції';
+        document.getElementById('sim-btn-text').innerText = t.simPause;
         document.getElementById('sim-icon').innerText = '⏸';
         simInterval = setInterval(() => {
           simStep++;
-          if (simStep >= waypoints.length) {
-            simStep = 0;
-          }
-          const wp = waypoints[simStep];
+          if (simStep >= WAYPOINTS.length) simStep = 0;
+          const wp = WAYPOINTS[simStep];
           const car = document.getElementById('svg-car');
           car.setAttribute('transform', `translate(${wp.x}, ${wp.y})`);
 
           if (wp.poiId) {
             const found = POIS.find(p => p.id === wp.poiId);
-            if (found) selectPOI(found);
+            if (found) selectPOI(found, true);
           }
-        }, 3200);
+        }, 3400);
       }
     }
 
     function resetSimulation() {
+      const t = I18N[currentLang];
       if (simInterval) clearInterval(simInterval);
       simInterval = null;
       simStep = 0;
-      document.getElementById('sim-text').innerText = 'Запустити тест поїздки';
+      document.getElementById('sim-btn-text').innerText = t.simStart;
       document.getElementById('sim-icon').innerText = '▶';
       const car = document.getElementById('svg-car');
       car.setAttribute('transform', 'translate(210, 360)');
     }
 
-    // POPULATE POI TABLE IN TAB 2
-    function renderPOITable() {
-      const tbody = document.getElementById('poi-table-body');
+    // TABLE RENDERING
+    function renderTable() {
+      const tbody = document.getElementById('tbl-body');
       tbody.innerHTML = '';
+      const t = I18N[currentLang];
+
       POIS.forEach(p => {
         const tr = document.createElement('tr');
-        tr.className = 'hover:bg-slate-800/40';
+        tr.className = 'hover:bg-slate-800/40 transition';
         tr.innerHTML = `
-          <td class="p-3 font-semibold text-white">${p.name}</td>
-          <td class="p-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${p.type === 'Must-See' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'}">${p.type}</span></td>
-          <td class="p-3 text-slate-400">${p.bearing}°</td>
-          <td class="p-3 font-mono text-blue-400">${p.radius} м</td>
-          <td class="p-3 text-slate-300 text-[11px] max-w-xs truncate">${p.lead}</td>
-          <td class="p-3 text-right">
-            <button onclick='selectPOI(${JSON.stringify(p)}); switchTab("simulator")' class="px-2.5 py-1 rounded bg-slate-800 hover:bg-blue-600 text-white font-medium text-[11px] transition">
-              Тест
+          <td class="p-3.5 font-bold text-white">${p.name[currentLang]}</td>
+          <td class="p-3.5"><span class="px-2.5 py-0.5 rounded-full text-[10px] font-black ${p.tag === 'SafeTravel Alert' ? 'bg-red-500/20 text-red-300 border border-red-500/30' : 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30'}">${p.type[currentLang]}</span></td>
+          <td class="p-3.5 font-mono text-slate-400">${p.bearing}°</td>
+          <td class="p-3.5 font-mono text-blue-400 font-bold">${p.radius} m</td>
+          <td class="p-3.5 text-slate-300 text-[11px] max-w-xs truncate">${p.lead[currentLang]}</td>
+          <td class="p-3.5 text-right">
+            <button onclick='selectPOI(${JSON.stringify(p)}, true); switchTab("simulator")' class="px-3 py-1 rounded-lg bg-slate-800 hover:bg-blue-600 text-white font-bold text-[11px] transition shadow-sm">
+              ${t.btnTest}
             </button>
           </td>
         `;
@@ -636,21 +891,43 @@
       });
     }
 
-    function filterPOITable() {
-      const q = document.getElementById('poi-search').value.toLowerCase();
-      document.querySelectorAll('#poi-table-body tr').forEach(tr => {
+    function filterTable() {
+      const q = document.getElementById('tbl-search-input').value.toLowerCase();
+      document.querySelectorAll('#tbl-body tr').forEach(tr => {
         tr.style.display = tr.innerText.toLowerCase().includes(q) ? '' : 'none';
       });
     }
 
-    // GEOJSON ENGINE EXPORT
+    // ROADMAP RENDERING
+    function renderRoadmap() {
+      const container = document.getElementById('rdm-grid');
+      container.innerHTML = '';
+      const list = ROADMAP_DATA[currentLang];
+
+      list.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'p-5 rounded-2xl bg-slate-900/90 border border-slate-800/80 space-y-3 glass-3d';
+        card.innerHTML = `
+          <div class="flex items-center justify-between">
+            <span class="w-8 h-8 rounded-xl bg-blue-500/20 text-blue-400 font-black flex items-center justify-center text-sm border border-blue-500/30 shadow-sm">${item.step}</span>
+            <span class="text-[11px] font-black uppercase text-blue-400 tracking-wider">${item.timing}</span>
+          </div>
+          <h3 class="text-base font-bold text-white">${item.title}</h3>
+          <p class="text-xs text-slate-300 leading-relaxed">${item.desc}</p>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // GEOJSON RENDERING
     function renderGeoJSON() {
       const geo = {
         type: "FeatureCollection",
         metadata: {
           project: "Smart Road Audio Guide Iceland",
-          version: "1.0.0",
+          version: "2.0.0-bilingual",
           author: "Volodymyr Katasonov",
+          supported_languages: ["uk", "en"],
           updated_at: new Date().toISOString()
         },
         features: POIS.map(p => ({
@@ -661,29 +938,29 @@
             coordinates: [p.coords.lng, p.coords.lat]
           },
           properties: {
-            name: p.name,
-            type: p.type,
+            name_uk: p.name.uk,
+            name_en: p.name.en,
             tour: p.tour,
             trigger_radius_meters: p.radius,
             bearing_heading: p.bearing,
-            lead_in_text: p.lead,
-            narrative_ukr: p.text,
-            audio_target_lufs: -14
+            lead_in_uk: p.lead.uk,
+            lead_in_en: p.lead.en,
+            narrative_uk: p.text.uk,
+            narrative_en: p.text.en,
+            target_lufs: -14
           }
         }))
       };
-      document.getElementById('geojson-code').textContent = JSON.stringify(geo, null, 2);
+      document.getElementById('geojson-code-box').textContent = JSON.stringify(geo, null, 2);
     }
 
     function copyGeoJSON() {
-      navigator.clipboard.writeText(document.getElementById('geojson-code').textContent);
-      alert('GeoJSON успішно скопійовано в буфер обміну!');
+      navigator.clipboard.writeText(document.getElementById('geojson-code-box').textContent);
+      alert(I18N[currentLang].copiedAlert);
     }
 
-    // INIT ON LOAD
-    renderSVGPOIs();
-    renderPOITable();
-    renderGeoJSON();
+    // INITIALIZATION
+    setLanguage('uk');
   </script>
 </body>
 </html>

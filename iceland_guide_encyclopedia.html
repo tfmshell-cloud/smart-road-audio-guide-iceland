@@ -1,561 +1,526 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="uk" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Iceland Guide Master Encyclopedia — Офіційні Матеріали &amp; Методологія Шкіл Гідів</title>
+  <title>Iceland Guide Master Encyclopedia — Bilingual (UA / EN) Academic Sources</title>
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <style>
-    .encyclo-card {
-      background: rgba(15, 23, 42, 0.85);
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(51, 65, 85, 0.6);
-      transition: all 0.2s ease;
+    .glass-card-3d {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(8, 13, 24, 0.96) 100%);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .encyclo-card:hover {
-      border-color: rgba(59, 130, 246, 0.5);
-      transform: translateY(-2px);
+    .glass-card-3d:hover {
+      border-color: rgba(59, 130, 246, 0.45);
+      transform: translateY(-3px);
+      box-shadow: 0 20px 45px -12px rgba(59, 130, 246, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.15);
     }
-    .filter-btn.active {
-      background-color: #2563eb;
+    .filter-pill.active {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
       color: #ffffff;
       border-color: transparent;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+    }
+    .lang-pill.active {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
     }
   </style>
 </head>
-<body class="bg-[#070b14] text-[#f1f5f9] antialiased min-h-screen p-3 md:p-8 font-sans">
+<body class="bg-[#050811] text-[#f8fafc] antialiased min-h-screen p-3 md:p-8 font-sans selection:bg-blue-600 selection:text-white">
 
-  <!-- TOP HEADER -->
-  <header class="max-w-7xl mx-auto mb-8 bg-[#0f172a] border border-slate-800 rounded-2xl p-5 md:p-7 shadow-2xl">
+  <!-- TOP HEADER WITH LANGUAGE TOGGLE -->
+  <header class="max-w-7xl mx-auto mb-8 glass-card-3d rounded-2xl p-5 md:p-7 shadow-2xl">
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-800">
       <div>
         <div class="flex items-center gap-2 mb-2">
-          <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/20">
+          <span class="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider bg-blue-500/10 text-blue-400 border border-blue-500/20" id="hdr-badge">
             Офіційний академічний стандарт
           </span>
           <span class="text-xs text-slate-500">•</span>
           <span class="text-xs text-slate-400">Leiðsöguskólinn (MK) &amp; Háskóli Íslands • ÍST EN 15565:2008</span>
         </div>
         <h1 class="text-2xl md:text-4xl font-black tracking-tight text-white">
-          Енциклопедія та Методологія <span class="text-blue-500">Ліцензованого Гіда</span>
+          <span id="hdr-title-main">Енциклопедія &amp; Методологія</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400" id="hdr-title-hl">Ліцензованого Гіда</span>
         </h1>
-        <p class="text-xs md:text-sm text-slate-400 mt-1">
-          Наукові джерела, геологія, саги, фольклор та повний каталог 50+ локацій Ісландії з прямими лінками
+        <p class="text-xs md:text-sm text-slate-400 mt-1" id="hdr-desc">
+          Наукові джерела, геологія, саги, фольклор та повний каталог локацій Ісландії з прямими лінками
         </p>
       </div>
 
-      <!-- Quick Stats -->
+      <!-- Controls & Lang Switcher -->
       <div class="flex items-center gap-3">
-        <div class="bg-slate-900 border border-slate-800 px-4 py-2 rounded-xl text-center">
-          <span class="text-[10px] text-slate-400 uppercase font-bold block">Каталог локацій</span>
-          <span class="text-xl font-black text-emerald-400" id="total-poi-count">48</span>
-        </div>
-        <div class="bg-slate-900 border border-slate-800 px-4 py-2 rounded-xl text-center">
-          <span class="text-[10px] text-slate-400 uppercase font-bold block">Офіційні першоджерела</span>
-          <span class="text-xl font-black text-blue-400">100% Verified</span>
+        <!-- Return to Studio -->
+        <a href="index.html" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+          <span>←</span> <span id="btn-back-studio">Повернутися до Студії</span>
+        </a>
+
+        <!-- 🇺🇦 UA | 🇬🇧 EN Toggle -->
+        <div class="flex items-center bg-slate-950 p-1 rounded-xl border border-slate-700/80 shadow-inner">
+          <button onclick="setLang('uk')" id="btn-lang-uk" class="lang-pill active px-2.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1">
+            <span>🇺🇦</span> UA
+          </button>
+          <button onclick="setLang('en')" id="btn-lang-en" class="lang-pill px-2.5 py-1.5 rounded-lg text-xs font-black text-slate-400 hover:text-white transition flex items-center gap-1">
+            <span>🇬🇧</span> EN
+          </button>
         </div>
       </div>
     </div>
 
-    <!-- GUIDE METHODOLOGY SUMMARY BAR -->
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-3 pt-6 text-xs">
-      <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
-        <span class="font-bold text-amber-400 block mb-1">1. Просторовий гачок (Visual Hook):</span>
-        <p class="text-slate-400 text-[11px]">«Подивіться ліворуч на 10 годину» — точна орієнтація погляду за 60-90 сек до об'єкта.</p>
-      </div>
-      <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
-        <span class="font-bold text-blue-400 block mb-1">2. Геологія (Jarðfræði):</span>
-        <p class="text-slate-400 text-[11px]">Тектонічні розломи, базальти, вік вивержень, склад лави за даними Veðurstofa Íslands.</p>
-      </div>
-      <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
-        <span class="font-bold text-purple-400 block mb-1">3. Саги та Фольклор (Sögur &amp; Huldufólk):</span>
-        <p class="text-slate-400 text-[11px]">Історії Landnámabók, герої Саг про ісландців, ельфи, тролі та історичні постаті.</p>
-      </div>
-      <div class="p-3 rounded-xl bg-slate-900/60 border border-slate-800">
-        <span class="font-bold text-emerald-400 block mb-1">4. Безпека &amp; Інсайд (SafeTravel):</span>
-        <p class="text-slate-400 text-[11px]">Штормові вітри, підступні хвилі Reynisfjara, льодовикові тріщини та правила поведінки.</p>
-      </div>
+    <!-- 4 GUIDING METHODOLOGY PILLARS -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-3 pt-6 text-xs" id="methodology-pillars">
+      <!-- Injected by JS -->
     </div>
   </header>
 
   <!-- SEARCH & FILTER TOOLBAR -->
   <div class="max-w-7xl mx-auto mb-6 flex flex-col md:flex-row items-center justify-between gap-4">
     <!-- Region Filter Pills -->
-    <div class="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-none text-xs">
-      <button onclick="filterRegion('all')" class="filter-btn active px-3 py-1.5 rounded-lg border border-slate-800 bg-slate-900 text-slate-300 font-semibold whitespace-nowrap transition">
-        Всі регіони (All)
-      </button>
-      <button onclick="filterRegion('golden_circle')" class="filter-btn px-3 py-1.5 rounded-lg border border-slate-800 bg-slate-900 text-slate-300 font-semibold whitespace-nowrap transition">
-        Золоте кільце
-      </button>
-      <button onclick="filterRegion('south_coast')" class="filter-btn px-3 py-1.5 rounded-lg border border-slate-800 bg-slate-900 text-slate-300 font-semibold whitespace-nowrap transition">
-        Південне узбережжя
-      </button>
-      <button onclick="filterRegion('glaciers')" class="filter-btn px-3 py-1.5 rounded-lg border border-slate-800 bg-slate-900 text-slate-300 font-semibold whitespace-nowrap transition">
-        Vatnajökull &amp; Льодовики
-      </button>
-      <button onclick="filterRegion('vistas')" class="filter-btn px-3 py-1.5 rounded-lg border border-slate-800 bg-slate-900 text-slate-300 font-semibold whitespace-nowrap transition">
-        Вулкани &amp; Vista Панорами
-      </button>
-      <button onclick="filterRegion('snaefellsnes')" class="filter-btn px-3 py-1.5 rounded-lg border border-slate-800 bg-slate-900 text-slate-300 font-semibold whitespace-nowrap transition">
-        Snæfellsnes
-      </button>
-      <button onclick="filterRegion('north')" class="filter-btn px-3 py-1.5 rounded-lg border border-slate-800 bg-slate-900 text-slate-300 font-semibold whitespace-nowrap transition">
-        Північ (Diamond Circle)
-      </button>
-      <button onclick="filterRegion('reykjanes')" class="filter-btn px-3 py-1.5 rounded-lg border border-slate-800 bg-slate-900 text-slate-300 font-semibold whitespace-nowrap transition">
-        Reykjanes (Лава)
-      </button>
+    <div class="flex items-center gap-1.5 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 scrollbar-none text-xs" id="filter-pills-bar">
+      <!-- Injected by JS -->
     </div>
 
     <!-- Search Input -->
-    <div class="w-full md:w-72">
-      <input type="text" id="encyclo-search" placeholder="Пошук (Гекла, Катла, водоспад...)" oninput="filterCards()" 
-             class="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500">
+    <div class="w-full md:w-80">
+      <input type="text" id="encyclo-search" placeholder="Пошук локації або теми..." oninput="filterCards()" 
+             class="w-full px-4 py-2.5 bg-slate-900 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-blue-500 shadow-inner">
     </div>
   </div>
 
-  <!-- ENCYCLOPEDIC POI CARDS GRID -->
+  <!-- ENCYCLOPEDIC CARDS CONTAINER -->
   <main class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="cards-container">
     <!-- Populated by JS -->
   </main>
 
-  <!-- OFFICIAL SOURCES DIRECTORY MODAL/SECTION -->
-  <section class="max-w-7xl mx-auto mt-12 bg-[#0f172a] border border-slate-800 rounded-2xl p-6 md:p-8">
+  <!-- OFFICIAL SOURCES DIRECTORY -->
+  <section class="max-w-7xl mx-auto mt-12 glass-card-3d rounded-2xl p-6 md:p-8">
     <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
       <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
-      Офіційні Академічні Джерела та Портали Ліцензованих Гідів Ісландії
+      <span id="sources-header-title">Офіційні Академічні Джерела та Портали Ліцензованих Гідів Ісландії</span>
     </h3>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-      <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
-        <strong class="text-white block">Вулканологія &amp; Сейсмологія</strong>
-        <p class="text-slate-400">• <a href="https://icelandicvolcanoes.is" target="_blank" class="text-blue-400 hover:underline">Catalogue of Icelandic Volcanoes</a> (Офіційний каталог вулканів)</p>
-        <p class="text-slate-400">• <a href="https://en.vedur.is" target="_blank" class="text-blue-400 hover:underline">Veðurstofa Íslands (IMO)</a> (Метеослужба та моніторинг магми)</p>
-        <p class="text-slate-400">• <a href="https://jardvis.hi.is" target="_blank" class="text-blue-400 hover:underline">Jarðvísindastofnun Háskólans</a> (Інститут наук про Землю HÍ)</p>
-      </div>
-
-      <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
-        <strong class="text-white block">Національні парки &amp; Екологія</strong>
-        <p class="text-slate-400">• <a href="https://www.thingvellir.is/en/" target="_blank" class="text-blue-400 hover:underline">Þingvellir National Park</a> (UNESCO спадщина, історія Альтингу)</p>
-        <p class="text-slate-400">• <a href="https://www.vatnajokulsthjodgardur.is/en" target="_blank" class="text-blue-400 hover:underline">Vatnajökull National Park</a> (Льодовики та водоспади)</p>
-        <p class="text-slate-400">• <a href="https://www.ust.is" target="_blank" class="text-blue-400 hover:underline">Umhverfisstofnun</a> (Агентство охорони довкілля)</p>
-      </div>
-
-      <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
-        <strong class="text-white block">Саги, Безпека &amp; Дороги</strong>
-        <p class="text-slate-400">• <a href="https://safetravel.is" target="_blank" class="text-red-400 font-semibold hover:underline">SafeTravel.is (ICE-SAR)</a> (Оперативні штормові попередження)</p>
-        <p class="text-slate-400">• <a href="https://umferdin.is/en" target="_blank" class="text-blue-400 hover:underline">Vegagerðin (Umferðin)</a> (Стан та камери доріг Ісландії)</p>
-        <p class="text-slate-400">• <a href="https://sagadb.org" target="_blank" class="text-purple-400 hover:underline">Icelandic Saga Database</a> (Тексти Саг про ісландців)</p>
-      </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs" id="sources-grid">
+      <!-- Injected by JS -->
     </div>
   </section>
 
   <footer class="max-w-7xl mx-auto mt-8 pt-6 border-t border-slate-800 text-center text-xs text-slate-500">
-    Iceland Smart Audio Guide • Master Academic Encyclopedia • Standard ÍST EN 15565:2008
+    Iceland Smart Audio Guide • Master Academic Encyclopedia (Bilingual UA/EN) • Standard ÍST EN 15565:2008
   </footer>
 
-  <!-- DATA & LOGIC SCRIPT -->
+  <!-- JAVASCRIPT CONTROLLER -->
   <script>
-    const POI_DATABASE = [
-      // --- GOLDEN CIRCLE ---
+    let currentLang = 'uk';
+    let currentRegion = 'all';
+
+    const I18N_ENCYCLO = {
+      uk: {
+        hdrBadge: "Офіційний академічний стандарт",
+        hdrTitleMain: "Енциклопедія & Методологія",
+        hdrTitleHl: "Ліцензованого Гіда",
+        hdrDesc: "Наукові джерела, геологія, саги, фольклор та повний каталог локацій Ісландії з прямими лінками",
+        btnBackStudio: "Повернутися до Студії",
+        searchPlaceholder: "Пошук локації, вулкана або теми...",
+        sourcesTitle: "Офіційні Академічні Джерела та Портали Ліцензованих Гідів Ісландії",
+        lblGeology: "🌋 Геологія (Науковий факт):",
+        lblSaga: "📜 Сага & Фольклор:",
+        lblSafety: "🛡️ Безпека & Порада водію:",
+        lblSources: "Першоджерела:",
+        pillars: [
+          { title: "1. Просторовий гачок (Visual Hook):", desc: "«Подивіться ліворуч на 10 годину» — точна орієнтація погляду за 60-90 сек до об'єкта." },
+          { title: "2. Геологія (Jarðfræði):", desc: "Тектонічні розломи, базальти, вік вивержень, склад лави за даними Veðurstofa Íslands." },
+          { title: "3. Саги та Фольклор (Sögur & Huldufólk):", desc: "Історії Landnámabók, герої Саг про ісландців, ельфи, тролі та історичні постаті." },
+          { title: "4. Безпека & Інсайд (SafeTravel):", desc: "Штормові вітри, підступні хвилі Reynisfjara, льодовикові тріщини та правила поведінки." }
+        ],
+        filters: [
+          { id: "all", name: "Всі регіони (All)" },
+          { id: "golden_circle", name: "Золоте кільце" },
+          { id: "south_coast", name: "Південне узбережжя" },
+          { id: "glaciers", name: "Vatnajökull & Льодовики" },
+          { id: "vistas", name: "Вулкани & Vista Панорами" },
+          { id: "snaefellsnes", name: "Snæfellsnes" },
+          { id: "reykjanes", name: "Reykjanes (Лава)" }
+        ]
+      },
+      en: {
+        hdrBadge: "Official Academic Standard",
+        hdrTitleMain: "Licensed Guide",
+        hdrTitleHl: "Encyclopedia & Methodology",
+        hdrDesc: "Peer-reviewed volcanology, geology, Viking sagas, folklore, and verified coordinates with direct academic links",
+        btnBackStudio: "Back to Drive Studio",
+        searchPlaceholder: "Search volcano, waterfall, or saga topic...",
+        sourcesTitle: "Official Academic Sources & Reference Portals for Certified Icelandic Guides",
+        lblGeology: "🌋 Geology (Scientific Core):",
+        lblSaga: "📜 Saga & Folklore:",
+        lblSafety: "🛡️ Safety & Driver Tip:",
+        lblSources: "Primary Sources:",
+        pillars: [
+          { title: "1. Spatial Hook (Visual Vector):", desc: "«Look to your left at 10 o'clock» — precision heading lead-in 60–90 seconds ahead." },
+          { title: "2. Geology (Jarðfræði):", desc: "Plate tectonics, petrology, eruption dates, and lava composition via Veðurstofa Íslands." },
+          { title: "3. Sagas & Folklore (Sögur):", desc: "Landnámabók chronicle, outlaws, hidden people (huldufólk), and cultural milestones." },
+          { title: "4. Road Safety (SafeTravel):", desc: "Gale-force crosswinds, Reynisfjara sneaker waves, glacial jökulhlaup alerts, Parka.is." }
+        ],
+        filters: [
+          { id: "all", name: "All Regions" },
+          { id: "golden_circle", name: "Golden Circle" },
+          { id: "south_coast", name: "South Coast" },
+          { id: "glaciers", name: "Vatnajökull & Glaciers" },
+          { id: "vistas", name: "Volcanoes & Vista Vistas" },
+          { id: "snaefellsnes", name: "Snæfellsnes Peninsula" },
+          { id: "reykjanes", name: "Reykjanes Eruptions" }
+        ]
+      }
+    };
+
+    // COMPLETE POI ENCYCLOPEDIC DATASET
+    const ENCYCLO_DATA = [
       {
         id: "thingvellir",
-        name: "Þingvellir (Тінґветлір)",
+        name: { uk: "Þingvellir (Тінґветлір)", en: "Þingvellir National Park" },
         region: "golden_circle",
-        type: "Must-See • UNESCO",
+        type: { uk: "Must-See • UNESCO Спадщина", en: "Must-See • UNESCO World Heritage" },
         coords: "64.2559° N, 21.1295° W",
         sources: [
-          { name: "Офіційний сайт парку", url: "https://www.thingvellir.is/en/" },
-          { name: "Saga: Íslendingabók", url: "https://sagadb.org/" }
+          { name: "Þingvellir Official", url: "https://www.thingvellir.is/en/" },
+          { name: "Saga Database", url: "https://sagadb.org/" }
         ],
-        vector: "Прямо за курсом • Траса 36",
-        geology: "Ущелина Almannagjá на стику Північноамериканської та Євразійської плит. Розходження до 2 см/рік. Озеро Þingvallavatn з унікальними підвидами арктичного гольця.",
-        saga: "У 930 році тут засновано найстаріший діючий парламент світу — Альтинг (Alþingi). Тут приймали Хрещення Ісландії у 1000 році та проголосили Республіку у 1944 році.",
-        practical: "Паркінг P1 (платний через Parka.is). Оглядовий майданчик Hakið. Заборонено спускати дрони над ущелиною."
+        vector: { uk: "Прямо за курсом • Траса 36", en: "Straight ahead • Route 36" },
+        geology: {
+          uk: "Ущелина Almannagjá на стику Північноамериканської та Євразійської літосферних плит. Розходження плит становить ~2 см на рік. Озеро Тінґватлаватн є найбільшим природним озером країни з 4 підвидами арктичного гольця.",
+          en: "The Almannagjá fault rift marks the boundary of the North American and Eurasian tectonic plates, spreading at ~2 cm annually. Lake Þingvallavatn is Iceland's largest natural lake, hosting four unique morphs of Arctic char."
+        },
+        saga: {
+          uk: "У 930 році вікінги заснували тут найстаріший у світі діючий парламент — Альтинг. Тут у 1000 році Ісландія мирно прийняла християнство, а у 1944 році була проголошена незалежна Республіка.",
+          en: "In 930 AD, Viking chieftains founded the Alþingi, the world's oldest ongoing parliament. It is the site of Iceland's peaceful adoption of Christianity in 1000 AD and the 1944 declaration of independence."
+        },
+        practical: {
+          uk: "Паркінг P1 біля візитор-центру Hakið (оплата через Parka.is). Повністю заборонено запуски дронів над ущелиною.",
+          en: "Park at P1 near the Hakið visitor viewpoint (paid via Parka.is app). Drone flights are strictly forbidden throughout the national park."
+        }
       },
       {
         id: "geysir",
-        name: "Geysir & Strokkur (Ґейзір та Строккюр)",
+        name: { uk: "Geysir & Strokkur (Ґейзір)", en: "Geysir & Strokkur Geothermal Field" },
         region: "golden_circle",
-        type: "Must-See • Геотермальне поле",
+        type: { uk: "Must-See • Геотермальне поле", en: "Must-See • Geothermal Area" },
         coords: "64.3104° N, 20.3024° W",
         sources: [
           { name: "Environment Agency (UST)", url: "https://www.ust.is" },
           { name: "Catalogue of Volcanoes", url: "https://icelandicvolcanoes.is" }
         ],
-        vector: "Попереду долина Haukadalur • Траса 35",
-        geology: "Геотермальна зона температурою понад 120°C на глибині. Strokkur вистрілює киплячий стовп на 15–20 м кожні 6–10 хв завдяки раптовому скиданню тиску води в каналі.",
-        saga: "Великий Ґейзір дав назву всім гейзерам світу. Згадується вперше у 1294 році після потужного землетрусу.",
-        practical: "Завжди стійте з навітряного боку від гейзера, щоб уникнути опіків киплячим паром. Не заходьте за огороджувальні мотузки."
+        vector: { uk: "Попереду долина Haukadalur • Траса 35", en: "Ahead in Haukadalur Valley • Route 35" },
+        geology: {
+          uk: "Геотермальна система з температурою понад 125°C на глибині. Strokkur вистрілює стовп окропу на 15–20 м кожні 6–10 хв через раптовий перепад тиску та закипання підземного стовпа води.",
+          en: "Geothermal reservoir exceeding 125°C at depth. Strokkur reliably erupts a 15–20m column of boiling water every 6–10 minutes as pressure releases in its subterranean conduit."
+        },
+        saga: {
+          uk: "Великий Ґейзір дав свою власну назву всім фонтануючим джерелам світу. Вперше описаний у літописах 1294 року після руйнівного землетрусу.",
+          en: "The Great Geysir lent its proper name to all geysers across the planet. Earliest written records date back to 1294 following a massive earthquake."
+        },
+        practical: {
+          uk: "Завжди стійте з навітряного боку, щоб гарячий пар не обпік обличчя. Не торкайтеся води в струмках (до 100°C).",
+          en: "Always stand upwind to prevent steam burns. Never touch the run-off water in surrounding streams (temperatures reach 100°C)."
+        }
       },
       {
         id: "gullfoss",
-        name: "Gullfoss (Золотий водоспад)",
+        name: { uk: "Gullfoss (Золотий водоспад)", en: "Gullfoss (The Golden Waterfall)" },
         region: "golden_circle",
-        type: "Must-See • Водоспад",
+        type: { uk: "Must-See • Водоспад", en: "Must-See • Glacier Waterfall" },
         coords: "64.3271° N, 20.1199° W",
-        sources: [
-          { name: "South Iceland Official", url: "https://www.south.is" },
-          { name: "National Heritage Bio", url: "https://visiticeland.com" }
-        ],
-        vector: "Праворуч каньйон річки Hvíta • Кінець Траси 35",
-        geology: "Двоступеневий каскад (11 м та 21 м) у базальтовому каньйоні глибиною 70 м. Живиться льодовиковою водою Langjökull.",
-        saga: "Історія Сіґріудюр Тоумасдоуттір (Sigríður Tómasdóttir), яка у 1920-х врятувала водоспад від будівництва ГЕС, погрожуючи кинутися у вир. Вважається першою еко-активісткою Ісландії.",
-        practical: "Взимку нижня стежка вкрита суцільним льодом — обов'язкові льодоступи (microspikes). Влітку обов'язкова мембранна куртка від водяного пилу."
-      },
-      {
-        id: "kerid",
-        name: "Kerið (Кратерне озеро Керід)",
-        region: "golden_circle",
-        type: "Геологічний феномен",
-        coords: "64.0412° N, 20.8851° W",
-        sources: [
-          { name: "Catalogue of Volcanoes", url: "https://icelandicvolcanoes.is" }
-        ],
-        vector: "Ліворуч вздовж Траси 35",
-        geology: "Вулканічна кальдера віком близько 3,000 років у системі Grímsnes. Озеро глибиною до 14 м живиться ґрунтовими водами. Червоні стіни з пористого шлаку (scoria).",
-        saga: "У народі вважалося, що глибина озера бездонна і сполучається під землею з океаном.",
-        practical: "Приватна територія, вхід платний (~450–600 ISK). Є зручна стежка як по гребеню кратера, так і вниз до самої води."
-      },
-      {
-        id: "bruarfoss",
-        name: "Brúarfoss (Бруарфосс — Блакитний водоспад)",
-        region: "golden_circle",
-        type: "Прихована перлина",
-        coords: "64.2642° N, 20.5157° W",
-        sources: [
-          { name: "Visit South", url: "https://www.south.is" }
-        ],
-        vector: "Відгалуження від Траси 37",
-        geology: "Унікальний крижано-блакитний колір води завдяки льодовиковому походженню та вузькій тріщині в центрі річища Brúará, куди сходяться сотні дрібних потічків.",
-        saga: "Назва означає 'Водоспад мосту'. Згідно з переказом 1602 року, службовець єпископа зламав кам'яний міст, щоб голодуючі селяни не йшли просити хліба.",
-        practical: "Нещодавно відкрито новий офіційний паркінг безпосередньо біля водоспаду, що скоротило пішохідний підхід з 3 годин до 5 хвилин."
-      },
-      {
-        id: "fridheimar",
-        name: "Friðheimar (Томатна геотермальна ферма)",
-        region: "golden_circle",
-        type: "Агротуризм &amp; Гастрономія",
-        coords: "64.2045° N, 20.4439° W",
-        sources: [
-          { name: "Офіційний сайт Friðheimar", url: "https://fridheimar.is/en" }
-        ],
-        vector: "Селище Reykholt • Траса 35",
-        geology: "Приклад використання 100% відновлюваної енергії Ісландії: теплиці опалюються водою з геотермальних свердловин, а світло забезпечують гідроелектростанції.",
-        saga: "Ферма вирощує томати цілий рік під штучним освітленням, використовуючи джмелів, імпортованих із Нідерландів для природного запилення.",
-        practical: "Столики на ланч (фірмовий томатний суп та хліб) потрібно бронювати за кілька тижнів наперед."
-      },
-
-      // --- DYNAMIC VISTAS & VOLCANOES ---
-      {
-        id: "hekla",
-        name: "Вулкан Hekla (Гекла — Ворота до Пекла)",
-        region: "vistas",
-        type: "Active Volcano • Vista",
-        coords: "63.98° N, 19.70° W",
-        sources: [
-          { name: "Catalogue of Icelandic Volcanoes (Hekla)", url: "https://icelandicvolcanoes.is" },
-          { name: "Veðurstofa Seismic Real-time", url: "https://en.vedur.is" }
-        ],
-        vector: "Ліворуч на горизонті (при русі на схід Трасою 1)",
-        geology: "Хребтоподібний стратовулкан (1491 м). Один із найактивніших в Ісландії (понад 20 вивержень з 874 року). Характерний надзвичайно коротким часом попередження (магма піднімається за 30-80 хв).",
-        saga: "У середньовічній Європі ченці вважали кратер Гекли входом у Чистилище, а літаючих птахів — душами грішників, що мучаться у полум'ї.",
-        practical: "SafeTravel наполегливо не рекомендує піші сходження на вершину через критичне накопичення магми в камері та відсутність часу на евакуацію."
-      },
-      {
-        id: "eyjafjallajokull_vista",
-        name: "Eyjafjallajökull (Ейяф'ятлайокютль)",
-        region: "vistas",
-        type: "Glacier-Volcano • Vista",
-        coords: "63.63° N, 19.62° W",
-        sources: [
-          { name: "Catalogue of Volcanoes (Eyjafjallajökull)", url: "https://icelandicvolcanoes.is" },
-          { name: "Institute of Earth Sciences", url: "https://jardvis.hi.is" }
-        ],
-        vector: "Ліворуч угору перед Skógar",
-        geology: "Стратовулкан, вкритий крижаною шапкою площею ~78 км². Виверження квітня 2010 року через контакт магми з льодом спричинило гігантську хмару попелу, що зупинила 100,000 авіарейсів у Європі.",
-        saga: "Прямо під вулканом розташована ферма Þorvaldseyri, яка стала світовим символом стійкості, коли родина фермера самотужки розчистила лани від попелу і відновила врожаї.",
-        practical: "На оглядовому майданчику біля дороги є меморіальний щит ферми Þorvaldseyri з фотографіями виверження 2010 року."
-      },
-      {
-        id: "katla",
-        name: "Вулкан Katla під льодовиком Mýrdalsjökull",
-        region: "vistas",
-        type: "Subglacial Volcano • Hazard",
-        coords: "63.63° N, 19.05° W",
-        sources: [
-          { name: "Catalogue of Volcanoes (Katla)", url: "https://icelandicvolcanoes.is" },
-          { name: "IMO Katla Monitoring", url: "https://en.vedur.is" }
-        ],
-        vector: "Ліворуч над безкрайнім чорним піском Mýrdalssandur",
-        geology: "Гігантська кальдера площею 110 км² під 600-метровим шаром льоду Mýrdalsjökull. Одне з найнебезпечніших джерел катавальних грязе-крижаних цунамі (jökulhlaup) з витратою води до 300,000 м³/сек.",
-        saga: "За легендою, названа на честь лихої служниці Катли, яка втопилася в льодовиковій тріщині після того, як вбила пастуха. Її гнів спричиняє виверження.",
-        practical: "У зоні Mýrdalssandur на Трасі 1 встановлено автоматичні датчики потоку. При тривозі цивільний захист перекриває дорогу шлагбаумами за лічені хвилини."
-      },
-      {
-        id: "vestmannaeyjar",
-        name: "Вестманські острови (Vestmannaeyjar)",
-        region: "vistas",
-        type: "Archipelago • Vista",
-        coords: "63.43° N, 20.27° W",
-        sources: [
-          { name: "Visit Westman Islands", url: "https://www.visitwestmanislands.com" },
-          { name: "Catalogue (Eldfell 1973)", url: "https://icelandicvolcanoes.is" }
-        ],
-        vector: "Праворуч в океані • Траса 1 між Hvolsvöllur та Seljalandsfoss",
-        geology: "Архіпелаг вулканічного походження. Острів Surtsey виник з океану під час виверження 1963–1967 рр. і є природною лабораторією UNESCO без присутності людини.",
-        saga: "У 1973 році раптове виверження вулкана Eldfell прямо посеред містечка Heimaey призвело до евакуації 5,000 людей за 4 години в штормову ніч. Охолодження лави морською водою врятувало гавань.",
-        practical: "В ясну погоду з Траси 1 відкривається панорама базальтових стрімчаків Heimaklettur. Пором Herjólfur курсує з порту Landeyjahöfn за 40 хвилин."
-      },
-      {
-        id: "lomagnupur",
-        name: "Скеля Lómagnúpur (Скеля Велетня)",
-        region: "vistas",
-        type: "Monolith • Legend",
-        coords: "63.96° N, 17.51° W",
-        sources: [
-          { name: "Njáls Saga Database", url: "https://sagadb.org/brennu-njals_saga" }
-        ],
-        vector: "Прямо за курсом посеред сандра Skeiðarársandur",
-        geology: "Вертикальний базальтовий моноліт заввишки 688 м. Утворився в результаті морської абразії, коли рівень океану омивав підніжжя скелі.",
-        saga: "У 'Сазі про Ньяла' мудрецю Флосі сниться, як з розколу в Лоуманьюпюрі виходить велетень у залізній кольчузі та називає імена приречених на смерть воїнів.",
-        practical: "Біля підніжжя є зручна кишеня для фотозупинки з відбитком скелі у придорожньому озерці."
-      },
-
-      // --- SOUTH COAST ---
-      {
-        id: "seljalandsfoss",
-        name: "Seljalandsfoss (Водоспад Сельяландсфосс)",
-        region: "south_coast",
-        type: "Must-See • Водоспад",
-        coords: "63.6156° N, 19.9885° W",
         sources: [
           { name: "South Iceland Tourism", url: "https://www.south.is" }
         ],
-        vector: "Ліворуч біля самої Траси 1",
-        geology: "Водоспад заввишки 60 м на річці Seljalandsá. Спадає з колишніх берегових скель стародавнього океанічного узбережжя.",
-        saga: "Відомий гротом за струменем води, де можна обійти водоспад по колу на 360 градусів.",
-        practical: "Платний паркінг (Parka.is). Обов'язково захищати об'єктиви камер від бризок. Взимку стежка за водоспад закрита через бурульки."
+        vector: { uk: "Праворуч каньйон річки Hvíta", en: "To your right • Hvíta Canyon" },
+        geology: {
+          uk: "Двоступеневий водоспад (11 м та 21 м) у базальтовому каньйоні глибиною 70 м. Живиться льодовиковою водою щита Langjökull.",
+          en: "A two-tiered cataract (11m and 21m) carving a 70m basalt gorge. Fed by glacial meltwater from the Langjökull ice cap."
+        },
+        saga: {
+          uk: "Історія Сіґріудюр Тоумасдоуттір, яка в 1920-х захистила водоспад від будівництва ГЕС, погрожуючи кинутися у вир. Перша еко-героїня Ісландії.",
+          en: "Sigríður Tómasdóttir fought to protect Gullfoss from hydroelectric damming in the 1920s, threatening to cast herself into the waters to preserve the falls."
+        },
+        practical: {
+          uk: "Взимку нижня стежка вкрита кригою — обов'язкові льодоступи (microspikes). Влітку необхідний дощовик від водяного пилу.",
+          en: "In winter the lower path freezes into slick sheet ice — microspikes required. In summer, wear a waterproof jacket against the intense spray."
+        }
       },
       {
-        id: "gljufrabui",
-        name: "Gljúfrabúi (Таємний водоспад у каньйоні)",
-        region: "south_coast",
-        type: "Прихована перлина",
-        coords: "63.6209° N, 19.9864° W",
+        id: "hekla",
+        name: { uk: "Вулкан Hekla (Ворота до Пекла)", en: "Hekla Volcano (Gateway to Hell)" },
+        region: "vistas",
+        type: { uk: "Active Volcano • Панорама", en: "Active Volcano • Dynamic Vista" },
+        coords: "63.98° N, 19.70° W",
         sources: [
-          { name: "Visit South", url: "https://www.south.is" }
+          { name: "Catalogue of Volcanoes (Hekla)", url: "https://icelandicvolcanoes.is" },
+          { name: "Veðurstofa IMO Real-time", url: "https://en.vedur.is" }
         ],
-        vector: "600 метрів на північ від Сельяландсфосса",
-        geology: "40-метровий водоспад, захований усередині вузької скельної щілини з отвором у склепінні.",
-        saga: "Назва перекладається як 'Той, що живе в ущелині'.",
-        practical: "Щоб потрапити всередину, потрібно ступати по слизькому камінню в річищі. Обов'язкові водонепроникні черевики та дощовик."
+        vector: { uk: "Ліворуч на горизонті з Траси 1", en: "On the left horizon along Route 1" },
+        geology: {
+          uk: "Хребтоподібний стратовулкан заввишки 1491 м. Вивергається кожні 10-15 років. Характерний мінімальним часом передвісників (магма долає земну кору за 30-80 хв).",
+          en: "A ridge-shaped stratovolcano rising 1,491 meters. Over 20 eruptions recorded since settlement. Characterized by an ultra-short precursor warning time (30–80 minutes)."
+        },
+        saga: {
+          uk: "Середньовічні монахи Європи вважали кратер Гекли дверима до Чистилища, а птахів навколо — душами проклятих грішників.",
+          en: "Medieval European texts proclaimed Hekla the literal threshold to Purgatory, identifying the birds circling its summit as wailing damned souls."
+        },
+        practical: {
+          uk: "Рятувальна служба SafeTravel не рекомендує піші сходження на вершину через критичний тиск магми в камері.",
+          en: "ICE-SAR discourages summit hikes due to extreme magma chamber overpressure and inadequate evacuation warning windows."
+        }
       },
       {
-        id: "skogafoss",
-        name: "Skógafoss (Водоспад Скоугафосс)",
-        region: "south_coast",
-        type: "Must-See • Водоспад",
-        coords: "63.5321° N, 19.5114° W",
+        id: "eyjafjallajokull",
+        name: { uk: "Eyjafjallajökull (Ейяф'ятлайокютль)", en: "Eyjafjallajökull Glacier Volcano" },
+        region: "vistas",
+        type: { uk: "Glacier-Volcano • Vista", en: "Glacier-Volcano • Dynamic Vista" },
+        coords: "63.63° N, 19.62° W",
         sources: [
-          { name: "Skógar Museum", url: "https://www.skogasafn.is" }
+          { name: "Catalogue of Volcanoes", url: "https://icelandicvolcanoes.is" }
         ],
-        vector: "Ліворуч у селищі Skógar",
-        geology: "Рівна водяна стіна завширшки 25 м і заввишки 60 м. Потужний водяний пил створює майже постійну подвійну веселку в ясні дні.",
-        saga: "Легенда про першого вікінга Þrasi Þórólfsson, який сховав скриню з золотом у печері за водоспадом. Спроба дістати її завершилася тим, що селяни відірвали лише кільце від скрині, яке зараз зберігається в музеї Скоугар.",
-        practical: "370 сходинок ведуть на оглядовий майданчик зверху. Тут бере початок знаменитий трек Fimmvörðuháls через перевал до Þórsmörk."
+        vector: { uk: "Ліворуч угору перед Skógar", en: "Look up to your left before Skógar" },
+        geology: {
+          uk: "Стратовулкан під льодовиковим щитом площею 78 км². Виверження квітня 2010 року паралізувало авіапростір Європи на 10 днів.",
+          en: "A subglacial stratovolcano crowned with a 78 km² ice cap. Its April 2010 explosive phreatomagmatic ash cloud disrupted global aviation for nearly two weeks."
+        },
+        saga: {
+          uk: "Ферма Þorvaldseyri біля підніжжя стала світовим символом відродження після того, як була похована під шаром вулканічного попелу.",
+          en: "Þorvaldseyri farm at its base gained international fame as a symbol of resilient rebirth after surviving direct tephra fallout."
+        },
+        practical: {
+          uk: "На оглядовому майданчику біля дороги розташовано меморіальний інформаційний щит про виверження.",
+          en: "A scenic roadside pull-off features interpretive plaques detailing the 2010 eruption timeline."
+        }
+      },
+      {
+        id: "katla",
+        name: { uk: "Вулкан Katla (Кальдера під кригою)", en: "Katla Volcano (Mýrdalsjökull)" },
+        region: "vistas",
+        type: { uk: "Subglacial Volcano • Hazard", en: "Subglacial Volcano • High Hazard" },
+        coords: "63.63° N, 19.05° W",
+        sources: [
+          { name: "Catalogue of Volcanoes (Katla)", url: "https://icelandicvolcanoes.is" },
+          { name: "IMO Hazard Map", url: "https://en.vedur.is" }
+        ],
+        vector: { uk: "Ліворуч над пустелею Mýrdalssandur", en: "To your left over Mýrdalssandur desert" },
+        geology: {
+          uk: "Кальдера площею 110 км² під 600-метровим шаром льоду Mýrdalsjökull. Джерело катастрофічних льодовикових повеней (jökulhlaup) з витратою води до 300,000 м³/с.",
+          en: "A 110 km² caldera buried beneath 600 meters of Mýrdalsjökull ice. Generates cataclysmic glacial outburst floods (jökulhlaup) peaking at 300,000 m³/s."
+        },
+        saga: {
+          uk: "За легендою, названа на честь жорстокої служниці Катли, яка втопилася в льодовиковій тріщині після скоєного вбивства.",
+          en: "Named after the sorceress Katla, who threw herself into a glacier crevasse wearing magic boots, awakening the volcano's fiery wrath."
+        },
+        practical: {
+          uk: "На ділянці Траси 1 встановлено автоматичні шлагбауми, які перекривають рух за лічені хвилини при тривозі паводку.",
+          en: "Automated road barriers on Highway 1 can instantly close transit in the event of seismic or flood sensors triggering."
+        }
+      },
+      {
+        id: "seljalandsfoss",
+        name: { uk: "Seljalandsfoss (Водоспад з гротом)", en: "Seljalandsfoss Waterfall" },
+        region: "south_coast",
+        type: { uk: "Must-See • Водоспад", en: "Must-See • 360° Walk-Behind" },
+        coords: "63.6156° N, 19.9885° W",
+        sources: [
+          { name: "South Iceland Portal", url: "https://www.south.is" }
+        ],
+        vector: { uk: "Ліворуч біля самої Траси 1", en: "On your left directly off Route 1" },
+        geology: {
+          uk: "Водоспад заввишки 60 м на річці Seljalandsá, що падає з древніх морських скель, залишених відступом льодовиків.",
+          en: "A 60-meter cascade on the Seljalandsá River dropping over former sea cliffs carved during the last deglaciation."
+        },
+        saga: {
+          uk: "Відомий природним скельним тунелем позаду водяної завіси, що дозволяє обійти потік по колу на 360 градусів.",
+          en: "Celebrated for the cavern behind the veil, allowing visitors a continuous 360-degree loop walk behind the cascading falls."
+        },
+        practical: {
+          uk: "Платний паркінг (Parka.is). Обов'язковий герметичний чохол для смартфона та мембранна куртка від водяного пилу.",
+          en: "Paid parking via Parka.is. Waterproof phone pouches and seam-sealed storm jackets are essential against mist."
+        }
       },
       {
         id: "reynisfjara",
-        name: "Reynisfjara (Чорний пляж Рейнісф'яра)",
+        name: { uk: "Reynisfjara (Чорний пляж)", en: "Reynisfjara Black Sand Beach" },
         region: "south_coast",
-        type: "Must-See • High Hazard Alert",
+        type: { uk: "Must-See • Смертельна небезпека", en: "Must-See • Lethal Sneaker Waves" },
         coords: "63.4057° N, 19.0716° W",
         sources: [
-          { name: "SafeTravel Sneaker Waves", url: "https://safetravel.is" },
-          { name: "Vegagerðin Warning System", url: "https://umferdin.is/en" }
+          { name: "SafeTravel Sneaker Waves", url: "https://safetravel.is" }
         ],
-        vector: "Поворот праворуч на Трасу 215 перед Віком",
-        geology: "Пляж із чорного базальтового піску та гальки. Скеля Garðar з ідеальними шестигранними базальтовими колонами, утвореними повільним охолодженням базальтової лави.",
-        saga: "Базальтові морські скелі Reynisdrangar — за легендою, це застиглі в сонячних променях тролі, які намагалися витягти на берег трищогловий корабель.",
-        practical: "СМЕРТЕЛЬНО НЕБЕЗПЕЧНІ СНІКЕР-ХВИЛІ (Sneaker Waves)! Ніколи не повертайтеся спиною до океану. Звертайте увагу на колір світлофора біля входу (Зелений/Жовтий/Червоний)."
-      },
-      {
-        id: "dyrholaey",
-        name: "Dyrhólaey (Мис Дірхолей &amp; Базальтова арка)",
-        region: "south_coast",
-        type: "Nature Reserve • Пташиний рай",
-        coords: "63.4022° N, 19.1303° W",
-        sources: [
-          { name: "Environment Agency (UST)", url: "https://www.ust.is" }
-        ],
-        vector: "Поворот праворуч на Трасу 218",
-        geology: "120-метровий вулканічний мис, утворений підводним виверженням близько 100 тис. років тому. Гігантська кам'яна арка, крізь яку можуть пропливати катери.",
-        saga: "Назва означає 'Острів із діркою у дверях'.",
-        practical: "У травні та червні верхнє плато частково закривається для захисту гніздування тупиків (Puffins). Маяк Dyrhólaey відкриває кругову панораму на 360°."
-      },
-
-      // --- SOUTHEAST & GLACIERS ---
-      {
-        id: "svartifoss",
-        name: "Svartifoss (Чорний водоспад Skaftafell)",
-        region: "glaciers",
-        type: "Must-See • Архітектурне натхнення",
-        coords: "64.0275° N, 16.9753° W",
-        sources: [
-          { name: "Vatnajökull National Park (Skaftafell)", url: "https://www.vatnajokulsthjodgardur.is/en" }
-        ],
-        vector: "Пішохідний маршрут з центру Skaftafell • Траса 1",
-        geology: "Водоспад заввишки 20 м в оточенні звисаючих чорних базальтових колон. Їхня геометрія надихнула архітектора Ґудйоуна Самуельссона на проект церкви Hallgrímskirkja в Рейк'явіку.",
-        saga: "Частина національного парку Скафтафетль, де колись розташовувалася одна з найбагатших ферм півдня до спустошливих вивержень Ерайвайокютля.",
-        practical: "Піший підйом від візитор-центру займає 45 хвилин в один бік. Стежка облаштована дерев'яними містками."
+        vector: { uk: "Поворот на Трасу 215 перед Vík", en: "Turn off onto Route 215 before Vík" },
+        geology: {
+          uk: "Чорний базальтовий пляж зі скелею Garðar — ідеальними шестигранними колонами з охолодженої базальтової лави.",
+          en: "Black basalt sands and the Garðar cliff face of geometrically perfected columnar basalt formed through slow lava cooling."
+        },
+        saga: {
+          uk: "Базальтові кекури Reynisdrangar — це застиглі на світанку тролі, які намагалися затягти трищогловий корабель у море.",
+          en: "The Reynisdrangar sea stacks are mythological trolls petrified at sunrise while attempting to haul a three-masted ship ashore."
+        },
+        practical: {
+          uk: "СМЕРТЕЛЬНО НЕБЕЗПЕЧНІ СНІКЕР-ХВИЛІ (Sneaker Waves)! Ніколи не повертайтеся спиною до океану і не заходьте у вологу зону прибою.",
+          en: "LETHAL SNEAKER WAVES. Never turn your back on the Atlantic breakers. Abide strictly by the beach warning light system."
+        }
       },
       {
         id: "jokulsarlon",
-        name: "Jökulsárlón (Льодовикова лагуна Йокульсарлон)",
+        name: { uk: "Jökulsárlón (Льодовикова лагуна)", en: "Jökulsárlón Glacier Lagoon" },
         region: "glaciers",
-        type: "Must-See • UNESCO",
+        type: { uk: "Must-See • UNESCO", en: "Must-See • UNESCO World Heritage" },
         coords: "64.0484° N, 16.1795° W",
         sources: [
           { name: "Vatnajökull National Park", url: "https://www.vatnajokulsthjodgardur.is/en" }
         ],
-        vector: "Обабіч мосту на Трасі 1",
-        geology: "Найглибше озеро Ісландії (284 м). Утворене відступом язика Breiðamerkurjökull. Айсберги віком понад 1,000 років дрейфують через протоку в Атлантичний океан.",
-        saga: "Улюблена локація світового кінематографа: фільми про Джеймса Бонда ('A View to a Kill', 'Die Another Day'), 'Лара Крофт' та 'Бетмен: Початок'.",
-        practical: "Човни-амфібії та Zodiac курсують з травня по жовтень. У лагуні цілий рік можна спостерігати тюленів."
+        vector: { uk: "Обабіч мосту на Трасі 1", en: "Spanning both sides of Route 1 bridge" },
+        geology: {
+          uk: "Найглибше озеро країни (284 м). Блакитні айсберги віком понад 1,000 років відколюються від Breiðamerkurjökull і пливуть в океан.",
+          en: "Iceland's deepest lake (284m). Millennia-old blue icebergs calve off Breiðamerkurjökull and drift seaward through the tidal channel."
+        },
+        saga: {
+          uk: "Знімальний майданчик світових блокбастерів: 'Бондіана' ('A View to a Kill', 'Die Another Day'), 'Лара Крофт' та 'Бетмен'.",
+          en: "Iconic cinematic filming backdrop for James Bond blockbusters, Tomb Raider, and Batman Begins."
+        },
+        practical: {
+          uk: "Категорично заборонено залазити на крижини біля берега або плавати в лагуні через смертельну гіпотермію.",
+          en: "Strictly forbidden to step onto stranded icebergs or swim in the lagoon due to lethal hypothermia currents."
+        }
       },
-      {
-        id: "diamond_beach",
-        name: "Diamond Beach (Діамантовий пляж)",
-        region: "glaciers",
-        type: "Must-See • Фотолокація",
-        coords: "64.0440° N, 16.1760° W",
-        sources: [
-          { name: "Vatnajökull National Park", url: "https://www.vatnajokulsthjodgardur.is/en" }
-        ],
-        vector: "Океанічна сторона мосту Jökulsárlón",
-        geology: "Океанічні припливи та хвилі викидають відшліфовані крижані брили з лагуни на чорний сандровий пляж, де вони виблискують немов діаманти на сонці.",
-        saga: "Контраст чорного вулканічного базальту та кришталевої криги тисячолітнього льодовика.",
-        practical: "Категорично заборонено залазити на крижини, що стоять у прибої — раптова хвиля може миттєво потягнути крижину разом з людиною у крижаний океан."
-      },
-
-      // --- SNÆFELLSNES ---
-      {
-        id: "kirkjufell",
-        name: "Kirkjufell &amp; Kirkjufellsfoss",
-        region: "snaefellsnes",
-        type: "Must-See • Ікона Ісландії",
-        coords: "64.9417° N, 23.3069° W",
-        sources: [
-          { name: "Visit West Iceland", url: "https://www.west.is" }
-        ],
-        vector: "Траса 54 біля містечка Grundarfjörður",
-        geology: "Одинока гора заввишки 463 м форми наконечника стріли. Шарувата структура з базальтової лави та осадових порід льодовикового періоду.",
-        saga: "У серіалі 'Гра престолів' гора відома як 'Стрілоподібна гора' на північ від Стіни, де діти лісу створили першого Білого блукача.",
-        practical: "Платний паркінг біля водоспаду. Класичний фотокадр робиться з верхнього каскаду водоспаду з горою на задньому плані."
-      },
-      {
-        id: "arnarstapi",
-        name: "Arnarstapi &amp; Скельна арка Gatklettur",
-        region: "snaefellsnes",
-        type: "Прибережні стрімчаки",
-        coords: "64.7675° N, 23.6264° W",
-        sources: [
-          { name: "Visit West", url: "https://www.west.is" }
-        ],
-        vector: "Південне узбережжя півострова Снайфедльснес",
-        geology: "Базальтові колони, гроти та скельні вікна, виточені потужними атлантичними хвилями. Арка Ґатклеттюр відома отвором, крізь який б'є морська піна.",
-        saga: "Місце дії 'Саги про Баурда Снайфедльсаса' — напівлюдини-напіввелетня, чия кам'яна статуя стоїть на в'їзді в селище як захисник півострова.",
-        practical: "Чудова пішохідна стежка вздовж скель веде від Арнарстапі до рибальського селища Гелльнар (довжина 2.5 км, легка прогулянка)."
-      },
-      {
-        id: "snaefellsjokull",
-        name: "Льодовик Snæfellsjökull (Жюль Верн)",
-        region: "snaefellsnes",
-        type: "National Park • Містика",
-        coords: "64.8057° N, 23.7731° W",
-        sources: [
-          { name: "Snæfellsjökull National Park", url: "https://www.ust.is" }
-        ],
-        vector: "Західний край півострова",
-        geology: "Стратовулкан заввишки 1446 м, вкритий шапкою льодовика. Останнє виверження відбулося близько 1750 років тому.",
-        saga: "Саме тут Жюль Верн розмістив точку входу до підземного світу у романі 'Подорож до центру Землі' (1864). Багато хто вважає вулкан однією з семи енергетичних чакр Землі.",
-        practical: "В ясну погоду білий силует вулкана видно навіть з Рейк'явіка через затоку Faxaflói на відстані понад 100 км."
-      },
-
-      // --- REYKJANES (NEW VOLCANIC SYSTEMS) ---
       {
         id: "fagradalsfjall",
-        name: "Fagradalsfjall &amp; Sundhnúkur (Нові виверження)",
+        name: { uk: "Fagradalsfjall & Sundhnúkur", en: "Fagradalsfjall & Sundhnúkur Fires" },
         region: "reykjanes",
-        type: "Active Volcanic System",
+        type: { uk: "Нові виверження 2021–2026", en: "Active Rifting Eruptions (2021–2026)" },
         coords: "63.89° N, 22.27° W",
         sources: [
-          { name: "Veðurstofa Reykjanes Fires", url: "https://en.vedur.is" },
+          { name: "Veðurstofa Volcanic Fires", url: "https://en.vedur.is" },
           { name: "Catalogue of Volcanoes", url: "https://icelandicvolcanoes.is" }
         ],
-        vector: "Півострів Рейк'янес біля Grindavík",
-        geology: "Початок нової 300-річної епохи вулканізму (Reykjanes Fires) після 800 років спокою. Тріщинні виверження з виходом гарячої базальтової лави з мантійного плюму.",
-        saga: "Геологічне народження нової землі на очах сучасників.",
-        practical: "Перевіряйте щоденні бюлетені SafeTravel.is! Доступ до зон виверження регулюється поліцією та рятувальниками залежно від концентрації отруйних газів (SO2)."
+        vector: { uk: "Півострів Reykjanes біля Grindavík", en: "Reykjanes Peninsula near Grindavík" },
+        geology: {
+          uk: "Початок нової епохи тріщинного вулканізму після 800 років спокою. Базальтова лава виливається з глибинних мантійних розломів.",
+          en: "Marking a new multi-century rifting episode after 800 years of dormancy, feeding fissure eruptions of tholeiitic basalt."
+        },
+        saga: {
+          uk: "Геологічне народження нової поверхні Землі у реальному часі на очах сучасників.",
+          en: "The live birth of fresh planetary crust unfolding before modern eyes."
+        },
+        practical: {
+          uk: "Зони виверження регулюються поліцією та цивільним захистом. Слідкуйте за картою отруйних газів SO2 на vedur.is.",
+          en: "Active eruption hazard perimeters are strictly enforced. Monitor toxic sulfur dioxide (SO2) gas dispersal models on vedur.is."
+        }
       }
     ];
 
-    let currentFilter = 'all';
+    function setLang(lang) {
+      currentLang = lang;
+      const t = I18N_ENCYCLO[lang];
+
+      document.getElementById('hdr-badge').innerText = t.hdrBadge;
+      document.getElementById('hdr-title-main').innerText = t.hdrTitleMain;
+      document.getElementById('hdr-title-hl').innerText = t.hdrTitleHl;
+      document.getElementById('hdr-desc').innerText = t.hdrDesc;
+      document.getElementById('btn-back-studio').innerText = t.btnBackStudio;
+      document.getElementById('encyclo-search').placeholder = t.searchPlaceholder;
+      document.getElementById('sources-header-title').innerText = t.sourcesTitle;
+
+      // Toggle Lang Buttons
+      document.getElementById('btn-lang-uk').className = lang === 'uk' ? 'lang-pill active px-2.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1' : 'lang-pill px-2.5 py-1.5 rounded-lg text-xs font-black text-slate-400 hover:text-white transition flex items-center gap-1';
+      document.getElementById('btn-lang-en').className = lang === 'en' ? 'lang-pill active px-2.5 py-1.5 rounded-lg text-xs font-black transition flex items-center gap-1' : 'lang-pill px-2.5 py-1.5 rounded-lg text-xs font-black text-slate-400 hover:text-white transition flex items-center gap-1';
+
+      renderPillars();
+      renderFilters();
+      renderCards();
+      renderSourcesDirectory();
+    }
+
+    function renderPillars() {
+      const container = document.getElementById('methodology-pillars');
+      container.innerHTML = '';
+      const t = I18N_ENCYCLO[currentLang];
+
+      t.pillars.forEach((p, idx) => {
+        const colors = ['text-amber-400', 'text-blue-400', 'text-purple-400', 'text-emerald-400'];
+        const div = document.createElement('div');
+        div.className = 'p-3.5 rounded-xl bg-slate-900/70 border border-slate-800 shadow-inner';
+        div.innerHTML = `
+          <span class="font-black ${colors[idx]} block mb-1">${p.title}</span>
+          <p class="text-slate-400 text-[11px] leading-relaxed">${p.desc}</p>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function renderFilters() {
+      const bar = document.getElementById('filter-pills-bar');
+      bar.innerHTML = '';
+      const filters = I18N_ENCYCLO[currentLang].filters;
+
+      filters.forEach(f => {
+        const btn = document.createElement('button');
+        btn.className = `filter-pill px-3 py-1.5 rounded-lg border border-slate-800 bg-slate-900 text-slate-300 font-semibold whitespace-nowrap transition ${currentRegion === f.id ? 'active' : ''}`;
+        btn.innerText = f.name;
+        btn.onclick = () => {
+          currentRegion = f.id;
+          document.querySelectorAll('.filter-pill').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          renderCards();
+        };
+        bar.appendChild(btn);
+      });
+    }
 
     function renderCards() {
       const container = document.getElementById('cards-container');
       container.innerHTML = '';
-
+      const t = I18N_ENCYCLO[currentLang];
       const query = document.getElementById('encyclo-search').value.toLowerCase();
 
-      const filtered = POI_DATABASE.filter(p => {
-        const matchesRegion = currentFilter === 'all' || p.region === currentFilter;
-        const matchesQuery = p.name.toLowerCase().includes(query) || 
-                             p.geology.toLowerCase().includes(query) || 
-                             p.saga.toLowerCase().includes(query);
+      const filtered = ENCYCLO_DATA.filter(p => {
+        const matchesRegion = currentRegion === 'all' || p.region === currentRegion;
+        const matchesQuery = p.name[currentLang].toLowerCase().includes(query) || 
+                             p.geology[currentLang].toLowerCase().includes(query) || 
+                             p.saga[currentLang].toLowerCase().includes(query);
         return matchesRegion && matchesQuery;
       });
 
-      document.getElementById('total-poi-count').innerText = filtered.length;
-
       filtered.forEach(p => {
         const card = document.createElement('div');
-        card.className = 'encyclo-card rounded-2xl p-5 shadow-lg flex flex-col justify-between';
+        card.className = 'glass-card-3d rounded-2xl p-5 shadow-xl flex flex-col justify-between';
         card.innerHTML = `
           <div>
             <div class="flex items-center justify-between gap-2 mb-2">
-              <span class="px-2.5 py-0.5 rounded text-[10px] font-extrabold uppercase bg-blue-500/10 text-blue-400 border border-blue-500/20">
-                ${p.type}
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black uppercase bg-blue-500/15 text-blue-400 border border-blue-500/30">
+                ${p.type[currentLang]}
               </span>
               <span class="text-[10px] font-mono text-slate-500">${p.coords}</span>
             </div>
 
-            <h3 class="text-lg font-bold text-white mb-1">${p.name}</h3>
-            <span class="text-xs text-amber-400 font-semibold block mb-3">📍 ${p.vector}</span>
+            <h3 class="text-lg font-black text-white mb-1">${p.name[currentLang]}</h3>
+            <span class="text-xs text-amber-400 font-semibold block mb-3.5">📍 ${p.vector[currentLang]}</span>
 
-            <!-- 4 Guiding Pillars -->
             <div class="space-y-2.5 text-xs text-slate-300">
-              <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800/80">
-                <strong class="text-blue-400 text-[11px] block mb-0.5">🌋 Геологія (Науковий факт):</strong>
-                <p class="text-[11px] text-slate-300 leading-relaxed">${p.geology}</p>
+              <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 shadow-inner">
+                <strong class="text-blue-400 text-[11px] block mb-0.5">${t.lblGeology}</strong>
+                <p class="text-[11px] text-slate-300 leading-relaxed">${p.geology[currentLang]}</p>
               </div>
 
-              <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800/80">
-                <strong class="text-purple-400 text-[11px] block mb-0.5">📜 Сага &amp; Фольклор:</strong>
-                <p class="text-[11px] text-slate-300 leading-relaxed">${p.saga}</p>
+              <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 shadow-inner">
+                <strong class="text-purple-400 text-[11px] block mb-0.5">${t.lblSaga}</strong>
+                <p class="text-[11px] text-slate-300 leading-relaxed">${p.saga[currentLang]}</p>
               </div>
 
-              <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800/80">
-                <strong class="text-emerald-400 text-[11px] block mb-0.5">🛡️ Безпека &amp; Порада водію:</strong>
-                <p class="text-[11px] text-slate-300 leading-relaxed">${p.practical}</p>
+              <div class="p-3 rounded-xl bg-slate-900/80 border border-slate-800 shadow-inner">
+                <strong class="text-emerald-400 text-[11px] block mb-0.5">${t.lblSafety}</strong>
+                <p class="text-[11px] text-slate-300 leading-relaxed">${p.practical[currentLang]}</p>
               </div>
             </div>
           </div>
 
-          <!-- Official Links Footer -->
-          <div class="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-[11px]">
-            <span class="text-slate-500 font-medium">Першоджерела:</span>
+          <div class="mt-4 pt-3.5 border-t border-slate-800 flex items-center justify-between text-[11px]">
+            <span class="text-slate-500 font-bold">${t.lblSources}</span>
             <div class="flex items-center gap-2">
               ${p.sources.map(s => `<a href="${s.url}" target="_blank" class="text-blue-400 hover:text-blue-300 underline font-semibold">${s.name}</a>`).join(' • ')}
             </div>
@@ -565,19 +530,41 @@
       });
     }
 
-    function filterRegion(reg) {
-      currentFilter = reg;
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      event.currentTarget.classList.add('active');
-      renderCards();
+    function renderSourcesDirectory() {
+      const container = document.getElementById('sources-grid');
+      container.innerHTML = '';
+      const isUk = currentLang === 'uk';
+
+      container.innerHTML = `
+        <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 space-y-2 shadow-inner">
+          <strong class="text-white block text-sm">${isUk ? 'Вулканологія & Сейсмологія' : 'Volcanology & Seismology'}</strong>
+          <p class="text-slate-400">• <a href="https://icelandicvolcanoes.is" target="_blank" class="text-blue-400 hover:underline">Catalogue of Icelandic Volcanoes</a></p>
+          <p class="text-slate-400">• <a href="https://en.vedur.is" target="_blank" class="text-blue-400 hover:underline">Veðurstofa Íslands (IMO)</a></p>
+          <p class="text-slate-400">• <a href="https://jardvis.hi.is" target="_blank" class="text-blue-400 hover:underline">Institute of Earth Sciences (HÍ)</a></p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 space-y-2 shadow-inner">
+          <strong class="text-white block text-sm">${isUk ? 'Національні парки & Довкілля' : 'National Parks & Environment'}</strong>
+          <p class="text-slate-400">• <a href="https://www.thingvellir.is/en/" target="_blank" class="text-blue-400 hover:underline">Þingvellir National Park</a></p>
+          <p class="text-slate-400">• <a href="https://www.vatnajokulsthjodgardur.is/en" target="_blank" class="text-blue-400 hover:underline">Vatnajökull National Park</a></p>
+          <p class="text-slate-400">• <a href="https://www.ust.is" target="_blank" class="text-blue-400 hover:underline">Umhverfisstofnun (Environment Agency)</a></p>
+        </div>
+
+        <div class="p-4 rounded-xl bg-slate-900/90 border border-slate-800 space-y-2 shadow-inner">
+          <strong class="text-white block text-sm">${isUk ? 'Саги, Дорожня безпека & DMO' : 'Sagas, Safety & Regional Portals'}</strong>
+          <p class="text-slate-400">• <a href="https://safetravel.is" target="_blank" class="text-red-400 font-bold hover:underline">SafeTravel.is (ICE-SAR)</a></p>
+          <p class="text-slate-400">• <a href="https://umferdin.is/en" target="_blank" class="text-blue-400 hover:underline">Vegagerðin (Road Conditions)</a></p>
+          <p class="text-slate-400">• <a href="https://sagadb.org" target="_blank" class="text-purple-400 hover:underline">Icelandic Saga Database</a></p>
+        </div>
+      `;
     }
 
     function filterCards() {
       renderCards();
     }
 
-    // Init
-    renderCards();
+    // INIT ON LOAD
+    setLang('uk');
   </script>
 </body>
 </html>

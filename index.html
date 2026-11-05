@@ -244,6 +244,16 @@
         <span>🗺️</span> <span>3D Карта (115 POI)</span>
       </a>
       
+      
+      <button onclick="triggerHyperspaceDive()" class="px-3 py-1.5 rounded-lg bg-gradient-to-r from-cyan-500/25 to-blue-600/25 hover:from-cyan-500/40 hover:to-blue-600/40 text-cyan-200 border border-cyan-400/50 font-semibold flex items-center gap-1.5 shadow-md shadow-cyan-500/15 transition" title="Запустити орбітальний гіперстрибок та 3D спуск">
+        <span>🚀</span> <span>Телепортація 3D</span>
+      </button>
+
+      <a href="iceland_guide_vision_lab.html" class="px-3 py-1.5 rounded-lg bg-gradient-to-r from-purple-500/20 to-pink-500/20 hover:from-purple-500/30 hover:to-pink-500/30 text-purple-300 border border-purple-500/40 font-semibold flex items-center gap-1.5 shadow-md shadow-purple-500/10 transition" title="10 Інноваційних Концептів Інтерфейсу Майбутнього">
+        <span>🎨</span> <span>10 Концептів</span>
+        <span class="text-[9px] px-1 py-0.2 rounded bg-purple-500/30 font-mono text-purple-200">WOW</span>
+      </a>
+
       <button onclick="openFactsModal()" class="px-3 py-1.5 rounded-lg bg-gradient-to-r from-amber-500/20 to-orange-500/20 hover:from-amber-500/30 hover:to-orange-500/30 text-amber-300 border border-amber-500/40 font-semibold flex items-center gap-1.5 shadow-md shadow-amber-500/10 transition">
         <span>💡</span> <span>Цікаві факти про Ісландію</span>
         <span class="text-[9px] px-1 py-0.2 rounded bg-amber-500/30 font-mono text-amber-200">ТОП</span>
@@ -1972,6 +1982,123 @@
     }
 
     window.toggleSidebar = toggleSidebar;
+    
+    // ==========================================
+    // HYPERSPACE ORBITAL DIVE TELEPORTATION ENGINE
+    // ==========================================
+    let isWarping = false;
+
+    function triggerHyperspaceDive(targetPoiId = 'gullfoss') {
+      if (isWarping) return;
+      isWarping = true;
+
+      const overlay = document.getElementById('warp-overlay');
+      const canvas = document.getElementById('warp-canvas');
+      if (!overlay || !canvas) return;
+
+      overlay.classList.remove('hidden');
+      overlay.style.opacity = '1';
+
+      // Play Sound
+      playAmbientGlacierTone();
+      try {
+        if (webAudioCtx) {
+          const osc = webAudioCtx.createOscillator();
+          const gain = webAudioCtx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(60, webAudioCtx.currentTime);
+          osc.frequency.exponentialRampToValueAtTime(840, webAudioCtx.currentTime + 1.2);
+          osc.frequency.exponentialRampToValueAtTime(120, webAudioCtx.currentTime + 2.4);
+          gain.gain.setValueAtTime(0.01, webAudioCtx.currentTime);
+          gain.gain.linearRampToValueAtTime(0.15, webAudioCtx.currentTime + 0.9);
+          gain.gain.exponentialRampToValueAtTime(0.001, webAudioCtx.currentTime + 2.4);
+          osc.connect(gain);
+          gain.connect(webAudioCtx.destination);
+          osc.start();
+          osc.stop(webAudioCtx.currentTime + 2.4);
+        }
+      } catch (e) {}
+
+      // Fast Warp Canvas Stars
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const stars = Array.from({ length: 140 }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        z: Math.random() * canvas.width,
+        color: Math.random() > 0.4 ? '#00f0ff' : '#10b981'
+      }));
+
+      let startTs = Date.now();
+      const duration = 2200;
+
+      function renderWarp() {
+        const elapsed = Date.now() - startTs;
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+
+        stars.forEach(s => {
+          s.z -= 18;
+          if (s.z <= 0) s.z = canvas.width;
+          const k = 220 / s.z;
+          const px = (s.x - cx) * k + cx;
+          const py = (s.y - cy) * k + cy;
+          const sz = Math.max(1, (1 - s.z / canvas.width) * 6);
+
+          ctx.fillStyle = s.color;
+          ctx.beginPath();
+          ctx.arc(px, py, sz, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        // Altitude counter countdown
+        const frac = Math.min(1, elapsed / duration);
+        const altKm = Math.floor(450000 * (1 - frac) + 1.2);
+        const machVal = (18.4 * (1 - frac * 0.9)).toFixed(1);
+        const altElem = document.getElementById('warp-alt');
+        const machElem = document.getElementById('warp-mach');
+        if (altElem) altElem.textContent = `${altKm.toLocaleString()} KM`;
+        if (machElem) machElem.textContent = `MACH ${machVal}`;
+
+        if (elapsed < duration) {
+          requestAnimationFrame(renderWarp);
+        } else {
+          // Camera zoom into target POI
+          const target = POIS.find(p => p.id === targetPoiId) || POIS[0];
+          if (map && target) {
+            map.flyTo({
+              center: [target.lng, target.lat],
+              zoom: 14.5,
+              pitch: 62,
+              bearing: 40,
+              speed: 2.2,
+              curve: 1.2,
+              essential: true
+            });
+          }
+
+          // Fade out overlay
+          overlay.style.opacity = '0';
+          setTimeout(() => {
+            overlay.classList.add('hidden');
+            isWarping = false;
+            // Open POI modal with slight delay for dramatic effect
+            setTimeout(() => {
+              openPoiModal(target.id);
+            }, 500);
+          }, 700);
+        }
+      }
+
+      renderWarp();
+    }
+
+    window.triggerHyperspaceDive = triggerHyperspaceDive;
     window.setNavMode = setNavMode;
     window.openFactsModal = openFactsModal;
     window.closeFactsModal = closeFactsModal;
@@ -2001,6 +2128,14 @@
     document.addEventListener('DOMContentLoaded', () => {
       initMap();
       renderPoiList();
+
+      // Check for ?warp=true in query string
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('warp') === 'true') {
+        setTimeout(() => {
+          triggerHyperspaceDive('gullfoss');
+        }, 600);
+      }
     });
   </script>
 
@@ -2436,6 +2571,32 @@
     <!-- Live Teleprompter Script Drawer (collapsible) -->
     <div id="fplayer-script-drawer" class="hidden p-2.5 rounded-xl bg-slate-950/80 border border-slate-800 text-[11px] text-slate-300 italic leading-relaxed max-h-28 overflow-y-auto">
       <p id="fplayer-transcript-text">--</p>
+    </div>
+  </div>
+
+
+  <!-- HYPERSPACE ORBITAL RE-ENTRY OVERLAY -->
+  <div id="warp-overlay" class="hidden fixed inset-0 z-50 bg-black/90 flex flex-col items-center justify-center pointer-events-none transition-opacity duration-700">
+    <canvas id="warp-canvas" class="absolute inset-0 w-full h-full"></canvas>
+    <div class="relative z-10 flex flex-col items-center space-y-3 text-center px-4">
+      <div class="w-14 h-14 rounded-2xl bg-cyan-500/20 text-cyan-300 border border-cyan-400/50 flex items-center justify-center text-3xl shadow-2xl shadow-cyan-500/40 animate-pulse">
+        🚀
+      </div>
+      <div class="space-y-1">
+        <h2 class="text-xl md:text-3xl font-black text-white tracking-widest uppercase">
+          Орбітальний Спуск • Гіперстрибок
+        </h2>
+        <p class="text-xs md:text-sm font-mono text-cyan-300 tracking-wider">
+          ATMOSPHERIC RE-ENTRY • MID-ATLANTIC RIDGE INTERCEPT
+        </p>
+      </div>
+      <div class="p-3 rounded-xl bg-slate-950/80 border border-cyan-500/40 font-mono text-xs text-emerald-400 flex items-center gap-4">
+        <span>ALTITUDE: <b id="warp-alt">450,000 KM</b></span>
+        <span>•</span>
+        <span>VELOCITY: <b id="warp-mach">MACH 18.4</b></span>
+        <span>•</span>
+        <span>TARGET: <b id="warp-target">GULLFOSS</b></span>
+      </div>
     </div>
   </div>
 

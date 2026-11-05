@@ -256,6 +256,24 @@
       pointer-events: none;
       will-change: transform;
     }
+    
+    /* Custom sleek scrollbar for modal panes */
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(6, 182, 212, 0.4);
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: rgba(6, 182, 212, 0.7);
+    }
+
     .radar-spin {
       animation: radarSpin 0.9s linear infinite;
     }
@@ -4495,393 +4513,270 @@
     });
   </script>
 
-  <!-- MODAL 1: AI COPILOT COMMAND CENTER (SAFETRAVEL, VEGAGERÐIN, VEDUR, AURORA) -->
-  <div id="copilot-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 md:p-6">
-    <div class="glass-panel w-full max-w-7xl lg:w-[94vw] xl:w-[92vw] max-h-[82vh] md:max-h-[72vh] rounded-2xl border border-emerald-500/40 overflow-hidden shadow-2xl flex flex-col bg-slate-950/95 backdrop-blur-2xl">
-      <!-- Cockpit Header -->
-      <div class="px-5 py-3 border-b border-slate-800 bg-gradient-to-r from-emerald-950/60 via-slate-900 to-slate-900 flex items-center justify-between shrink-0">
+  <!-- MODAL 1: AI COPILOT EXECUTIVE COCKPIT (SAFETRAVEL, VEGAGERÐIN, VEDUR, AURORA) -->
+  <div id="copilot-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-2 sm:p-3 md:p-5">
+    <div class="glass-panel w-full max-w-[1440px] lg:w-[95vw] xl:w-[94vw] h-[92vh] max-h-[880px] rounded-3xl border border-cyan-500/40 overflow-hidden shadow-2xl flex flex-col bg-slate-950/98 backdrop-blur-2xl">
+      
+      <!-- Cockpit Header (Fixed Slim Bar) -->
+      <div class="px-5 py-2.5 border-b border-slate-800/90 bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 flex items-center justify-between shrink-0">
         <div class="flex items-center space-x-3">
-          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-emerald-500 to-cyan-500 flex items-center justify-center text-lg shadow-lg shadow-emerald-500/25">
+          <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-cyan-500 to-emerald-500 flex items-center justify-center text-sm shadow-md shadow-cyan-500/30 text-white font-bold">
             🛡️
           </div>
           <div>
             <div class="flex items-center space-x-2">
-              <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                <span>Штурман-Копілот: Командний Центр Експедиції</span>
-                <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[10px] font-bold border border-emerald-500/30">AI RANGER • 9:16 LIVE</span>
+              <h3 class="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+                <span>ШТУРМАН-КОПІЛОТ: КОМАНДНИЙ ЦЕНТР ЕКСПЕДИЦІЇ</span>
+                <span class="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[9px] font-bold border border-emerald-500/30">
+                  AI RANGER • 9:16 EN FACE LIVE
+                </span>
               </h3>
             </div>
-            <p class="text-[11px] text-slate-400">Синхронізовано з радарами SafeTravel.is • Vegagerðin • Veðurstofa Íslands • NOAA</p>
+            <p class="text-[10px] text-slate-400 font-sans hidden sm:block">
+              Оперативна телеметрія SafeTravel.is • Vegagerðin • Veðurstofa Íslands • NOAA
+            </p>
           </div>
         </div>
-        <button onclick="closeCopilotModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center text-sm transition">✕</button>
+
+        <!-- Header Actions: Voice Engine, LM Studio, Close -->
+        <div class="flex items-center gap-1.5 sm:gap-2">
+          <!-- Voice Settings -->
+          <button onclick="toggleCopilotVoiceSettings()" class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-200 border border-slate-700 text-[11px] font-semibold flex items-center gap-1 transition" title="Налаштування голосу">
+            <span>🎙️</span> <span class="hidden md:inline">Голос</span>
+          </button>
+
+          <!-- LM Studio Settings -->
+          <button onclick="toggleLmStudioSettings()" class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 border border-slate-700 text-[11px] font-mono flex items-center gap-1 transition" title="Налаштування LM Studio">
+            <span>⚙️</span> <span class="hidden md:inline">LM Studio</span>
+          </button>
+
+          <!-- Engine Status Pill -->
+          <span id="copilot-ai-engine-badge" class="hidden sm:flex px-2 py-0.5 rounded-full bg-slate-900 text-cyan-300 font-mono text-[10px] border border-cyan-500/30 items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+            <span>115 POI Експерт</span>
+          </span>
+
+          <!-- Close Button -->
+          <button onclick="closeCopilotModal()" class="w-8 h-8 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center text-sm transition" title="Закрити штурмана">
+            ✕
+          </button>
+        </div>
       </div>
 
-      <!-- Cockpit Content: Left 9:16 Video Avatar + Right Telemetry & Interactive Chat -->
-      <div class="p-4 md:p-5 overflow-y-auto flex-1 flex flex-col md:flex-row gap-4.5 text-xs">
+      <!-- Cockpit Main Body: 3-Column Luxury Architecture (Left: Kári Pinned • Center: Live Dialogue Console • Right: Telemetry & Routes) -->
+      <div class="flex-1 p-3 sm:p-4 overflow-hidden flex flex-col md:flex-row gap-3 md:gap-4 min-h-0 text-xs">
         
-        <!-- LEFT: 9:16 PROPORTIONATE AVATAR CARD (АНФАС: ЖИВИЙ ДІАЛОГ ТА ІМІТАЦІЯ РУХУ ГУБ) -->
-        <div class="w-full md:w-[280px] lg:w-[310px] shrink-0 flex flex-col">
-          <div class="relative w-full aspect-[9/16] max-h-[480px] rounded-2xl overflow-hidden border border-cyan-400/50 shadow-2xl bg-slate-950 flex flex-col justify-between group">
+        <!-- ============================================================ -->
+        <!-- COLUMN 1 (LEFT WING): KÁRI NAVIGATOR PROSCENIUM (PINNED 100%) -->
+        <!-- ============================================================ -->
+        <div class="w-full md:w-[260px] lg:w-[285px] shrink-0 flex flex-col justify-between h-full bg-slate-950/90 rounded-2xl border border-cyan-500/30 p-2.5 shadow-xl relative overflow-hidden">
+          
+          <!-- Avatar Card 9:16 (Pinned at Top-Center) -->
+          <div class="relative w-full aspect-[9/13] sm:aspect-[9/14] md:aspect-[9/13] max-h-[340px] rounded-xl overflow-hidden border border-cyan-400/40 shadow-2xl bg-slate-950 flex flex-col justify-between group">
             
-            <!-- AVATAR EN-FACE STAGE (АНФАС: ДИВИТЬСЯ ПРЯМО В ОЧІ КОРИСТУВАЧУ) -->
+            <!-- AVATAR EN-FACE STAGE -->
             <div id="copilot-avatar-stage" class="absolute inset-0 w-full h-full overflow-hidden">
-              <!-- Base Resting Portrait (Анфас, очі спрямовані прямо на користувача, рот закритий) -->
-              <img id="copilot-avatar-img-rest" src="assets/images/viking_copilot_rest.jpg" alt="Viking Navigator Kári (En Face Neutral)" class="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-150">
+              <!-- Base Resting Portrait -->
+              <img id="copilot-avatar-img-rest" src="assets/images/viking_copilot_rest.jpg" alt="Viking Navigator Kári (En Face Neutral)" class="absolute inset-0 w-full h-full object-cover object-top transition-opacity duration-150">
 
-              <!-- Active Talking Animation Layer (Активна імітація розмови та руху губ при відповіді) -->
-              <img id="copilot-avatar-img-talk" src="assets/images/viking_copilot_frontal_talking.webp" alt="Viking Navigator Kári (En Face Speaking)" class="absolute inset-0 w-full h-full object-cover object-center opacity-0 transition-opacity duration-150">
+              <!-- Active Talking Animation Layer -->
+              <img id="copilot-avatar-img-talk" src="assets/images/viking_copilot_frontal_talking.webp" alt="Viking Navigator Kári (En Face Speaking)" class="absolute inset-0 w-full h-full object-cover object-top opacity-0 transition-opacity duration-150">
 
-              <!-- Cyan Scanlines & Tactical Vignette -->
-              <div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-cyan-500/10 via-transparent to-slate-950/50"></div>
+              <!-- Cyan Scanlines & Vignette -->
+              <div class="absolute inset-0 pointer-events-none bg-gradient-to-b from-cyan-500/10 via-transparent to-slate-950/60"></div>
             </div>
 
-            <!-- Top Overlay: Live Status Pill -->
-            <div class="relative z-10 p-3 flex items-center justify-between pointer-events-none">
-              <div id="copilot-live-pill" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-slate-950/80 backdrop-blur-md border border-emerald-400/50 text-[10px] text-emerald-300 font-mono shadow-md">
-                <span id="copilot-live-dot" class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <!-- Top Live Badge Overlay -->
+            <div class="relative z-10 p-2 flex items-center justify-between pointer-events-none">
+              <div id="copilot-live-pill" class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-slate-950/85 backdrop-blur-md border border-emerald-400/50 text-[9px] text-emerald-300 font-mono shadow-md">
+                <span id="copilot-live-dot" class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
                 <span id="copilot-status-label" class="font-bold uppercase tracking-wider">НА ЗВ'ЯЗКУ</span>
               </div>
-              <span class="px-2 py-0.5 rounded bg-slate-950/75 backdrop-blur-md text-cyan-300 font-mono text-[9px] border border-cyan-400/30">
-                АНФАС • 9:16 LIVE
+              <span class="px-1.5 py-0.2 rounded bg-slate-950/80 backdrop-blur-md text-cyan-300 font-mono text-[8px] border border-cyan-400/30">
+                АНФАС • 9:16
               </span>
             </div>
 
-            <!-- Center Speaking Visualizer HUD -->
+            <!-- Speaking HUD Pulsar -->
             <div id="copilot-vocal-hud" class="relative z-10 flex-1 flex items-center justify-center pointer-events-none opacity-0 transition-opacity duration-300">
-              <div class="p-3.5 rounded-full bg-cyan-500/25 border border-cyan-400/60 backdrop-blur-md animate-pulse shadow-xl shadow-cyan-500/30 flex items-center justify-center">
-                <span class="text-2xl">🎙️</span>
+              <div class="p-3 rounded-full bg-cyan-500/25 border border-cyan-400/60 backdrop-blur-md animate-pulse shadow-xl shadow-cyan-500/30 flex items-center justify-center">
+                <span class="text-xl">🎙️</span>
               </div>
             </div>
 
-            <!-- Bottom Overlay: Persona Card & Animated Vocal Equalizer -->
-            <div class="relative z-10 p-3.5 bg-gradient-to-t from-slate-950 via-slate-950/90 to-transparent space-y-1.5 border-t border-cyan-500/20">
+            <!-- Bottom Avatar Label & Mute Toggle -->
+            <div class="relative z-10 p-2.5 bg-gradient-to-t from-slate-950 via-slate-950/90 to-transparent space-y-1 border-t border-cyan-500/20">
               <div class="flex items-center justify-between">
                 <div>
-                  <h4 class="text-sm font-black text-white flex items-center gap-1.5">
+                  <h4 class="text-xs font-black text-white flex items-center gap-1">
                     <span>Кáрі (Kári)</span>
-                    <span class="text-[9px] px-1.5 py-0.2 rounded bg-cyan-500/30 text-cyan-200 font-mono border border-cyan-400/30">LEIÐSÖGUMAÐUR</span>
+                    <span class="text-[8px] px-1 py-0.2 rounded bg-cyan-500/30 text-cyan-200 font-mono border border-cyan-400/30">LEIÐSÖGUMAÐUR</span>
                   </h4>
-                  <p class="text-[10px] text-slate-300 font-medium">Арктичний штурман • Анфас-комунікатор</p>
+                  <p class="text-[9px] text-slate-300 font-medium">Штурман експедиції</p>
                 </div>
-                <button onclick="toggleCopilotMute()" id="btn-copilot-sound-toggle-avatar" class="p-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-cyan-300 text-xs border border-slate-700" title="Увімкнути/вимкнути голосові відповіді штурмана">
+                <button onclick="toggleCopilotMute()" id="btn-copilot-sound-toggle-avatar" class="p-1 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-cyan-300 text-xs border border-slate-700 transition" title="Увімкнути/вимкнути голосові відповіді">
                   🔊
                 </button>
               </div>
 
-              <!-- Animated Voice Wave Bars -->
-              <div id="copilot-soundwave-bars" class="flex items-center justify-between pt-1">
-                <div class="flex items-end gap-1 h-3.5">
-                  <span class="w-1 bg-cyan-400 rounded-full h-2 animate-bounce"></span>
-                  <span class="w-1 bg-emerald-400 rounded-full h-3.5 animate-bounce" style="animation-delay: 0.1s"></span>
-                  <span class="w-1 bg-cyan-400 rounded-full h-2 animate-bounce" style="animation-delay: 0.2s"></span>
-                  <span class="w-1 bg-cyan-400 rounded-full h-3 animate-bounce" style="animation-delay: 0.15s"></span>
+              <!-- Animated Soundwave Bars -->
+              <div id="copilot-soundwave-bars" class="flex items-center justify-between pt-0.5">
+                <div class="flex items-end gap-0.5 h-3">
+                  <span class="w-1 bg-cyan-400 rounded-full h-1.5 animate-bounce"></span>
+                  <span class="w-1 bg-emerald-400 rounded-full h-3 animate-bounce" style="animation-delay: 0.1s"></span>
+                  <span class="w-1 bg-cyan-400 rounded-full h-1.5 animate-bounce" style="animation-delay: 0.2s"></span>
+                  <span class="w-1 bg-cyan-400 rounded-full h-2.5 animate-bounce" style="animation-delay: 0.15s"></span>
                   <span class="w-1 bg-emerald-400 rounded-full h-2 animate-bounce" style="animation-delay: 0.25s"></span>
                 </div>
-                <span id="copilot-wave-text" class="text-[9px] font-mono text-cyan-300 font-semibold">ГОТОВИЙ ДО ДІАЛОГУ</span>
+                <span id="copilot-wave-text" class="text-[8px] font-mono text-cyan-300 font-bold">ГОТОВИЙ ДО ДІАЛОГУ</span>
               </div>
             </div>
 
           </div>
+
+          <!-- Navigator Quick Controls beneath Kári -->
+          <div class="space-y-1.5 pt-2">
+            <!-- Morning Audio Briefing Button -->
+            <div class="p-2 rounded-xl bg-slate-900 border border-emerald-500/30 space-y-1 shadow-inner">
+              <div class="flex items-center justify-between">
+                <span class="text-[9px] font-bold text-slate-300 flex items-center gap-1">
+                  <span>📻</span> <span>Ранковий бриф (45 сек)</span>
+                </span>
+                <button id="btn-ranger-audio-modal" onclick="playRangerAudio()" class="px-2 py-0.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[9px] flex items-center gap-1 transition shadow-sm">
+                  <span>▶</span> <span id="lbl-ranger-btn-modal">Слухати</span>
+                </button>
+              </div>
+              <p class="text-[9px] text-slate-400 italic line-clamp-2" id="ranger-briefing-text">
+                "Góðan daginn! Говорить черговий штурман Кáрі. Траса 1 вільна. Увага на мисі Дирхолей..."
+              </p>
+            </div>
+
+            <!-- In-Drive Hands-Free Toggle Button -->
+            <button id="btn-copilot-handsfree" onclick="toggleCopilotHandsFree()" class="w-full py-1.5 px-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 flex items-center justify-center gap-1.5 text-[10px] font-semibold transition" title="Режим 'Вільні руки' для водіїв">
+              <span class="text-xs">🚗</span> <span>Режим водія: Hands-Free</span>
+            </button>
+
+            <!-- Sound Mute/Unmute Toggle Button -->
+            <button id="btn-copilot-sound-toggle" onclick="toggleCopilotMute()" class="w-full py-1.5 px-2.5 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 border border-cyan-400/40 flex items-center justify-center gap-1.5 text-[10px] font-semibold transition">
+              <span class="text-xs">🔊</span> <span>Голосові відповіді: УВІМК</span>
+            </button>
+          </div>
+
         </div>
 
-        <!-- RIGHT: MISSION DASHBOARD, MORNING BRIEF & CHAT -->
-        <div class="flex-1 flex flex-col justify-between space-y-3.5 min-w-0">
+        <!-- ============================================================ -->
+        <!-- COLUMN 2 (CENTER CORE): LIVE INTERACTIVE DIALOGUE & SPEECH CONSOLE -->
+        <!-- ============================================================ -->
+        <div class="flex-1 flex flex-col justify-between h-full bg-slate-950/90 rounded-2xl border border-cyan-500/30 p-3 shadow-xl relative overflow-hidden min-w-0">
           
-          <!-- Row 1: Spoken Morning Briefing Box -->
-          <div class="p-3.5 rounded-xl bg-gradient-to-r from-emerald-950/40 via-slate-900 to-slate-900 border border-emerald-500/40 space-y-2">
-            <div class="flex flex-wrap items-center justify-between gap-2">
-              <span class="font-bold text-white text-xs flex items-center gap-2">
-                <span>📻</span> Оперативний ранковий аудіо-бриф Leiðsöguskólinn (45 сек)
+          <!-- Dialogue Top Bar -->
+          <div class="flex items-center justify-between pb-2 border-b border-slate-800/80 shrink-0">
+            <div class="flex items-center gap-1.5">
+              <span class="text-sm">💬</span>
+              <span class="text-xs font-bold text-cyan-300 uppercase font-mono tracking-wide">
+                ЖИВИЙ ДІАЛОГ ЗІ ШТУРМАНОМ КÁРІ (ДВОМОВНИЙ UA / EN)
               </span>
-              <button id="btn-ranger-audio-modal" onclick="playRangerAudio()" class="px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-emerald-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-md shadow-emerald-600/30 transition">
-                <span>▶</span> <span id="lbl-ranger-btn-modal">Слухати бриф Штурмана</span>
+            </div>
+            <div class="flex items-center gap-1 text-[9px] font-mono text-slate-400">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+              <span>ГОЛОС + ТЕКСТ + САГИ</span>
+            </div>
+          </div>
+
+          <!-- Voice Engine Settings Dropdown (collapsible) -->
+          <div id="copilot-voice-settings-box" class="hidden absolute top-12 left-3 right-3 z-30 p-3.5 rounded-xl bg-slate-950 border border-cyan-500/60 shadow-2xl space-y-2.5 text-[11px] backdrop-blur-xl">
+            <div class="flex items-center justify-between font-bold text-white border-b border-slate-800 pb-1.5">
+              <span class="flex items-center gap-1.5"><span>🎙️</span> НАЛАШТУВАННЯ ГОЛОСОВОГО ДВИЖКА ШТУРМАНА</span>
+              <button onclick="toggleCopilotVoiceSettings()" class="text-slate-400 hover:text-white">✕</button>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+              <div>
+                <label class="block text-[10px] uppercase font-mono text-cyan-300 mb-1">Оберіть движок синтезу мови:</label>
+                <select id="copilot-voice-engine-select" onchange="changeCopilotVoiceEngine(this.value)" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-200 text-xs focus:outline-none focus:border-cyan-400">
+                  <option value="neural">🏆 HD Neural Voice (Вбудований HD голос системи)</option>
+                  <option value="radio">📻 Радіозв'язок Рейнджера (Expedition Intercom з DSP)</option>
+                  <option value="elevenlabs">⚡ ElevenLabs Studio AI (Студійна якість)</option>
+                  <option value="openai">🧠 OpenAI Audio TTS (onyx / alloy)</option>
+                  <option value="mute">🔇 Лише текст (Без озвучення)</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-[10px] uppercase font-mono text-cyan-300 mb-1">Швидкість мови (Rate):</label>
+                <input type="range" id="copilot-voice-rate" min="0.8" max="1.3" step="0.05" value="1.0" class="w-full accent-cyan-400" oninput="copilotSpeechRate = parseFloat(this.value)">
+              </div>
+            </div>
+
+            <!-- ElevenLabs API Subbox -->
+            <div id="elevenlabs-config-subbox" class="hidden p-2.5 rounded-lg bg-slate-900 border border-indigo-500/30 space-y-1.5">
+              <span class="text-[10px] font-bold text-indigo-300 uppercase">⚡ Підключення ElevenLabs API:</span>
+              <input type="password" id="copilot-elevenlabs-key" placeholder="Вставте ваш ElevenLabs API Key..." class="w-full px-2.5 py-1.5 rounded bg-slate-950 border border-slate-700 text-xs text-white">
+              <p class="text-[10px] text-slate-400">Використовується голос Adam (Expedition Navigator).</p>
+            </div>
+
+            <!-- OpenAI API Subbox -->
+            <div id="openai-config-subbox" class="hidden p-2.5 rounded-lg bg-slate-900 border border-emerald-500/30 space-y-1.5">
+              <span class="text-[10px] font-bold text-emerald-300 uppercase">🧠 Підключення OpenAI Audio TTS:</span>
+              <input type="password" id="copilot-openai-key" placeholder="Вставте ваш OpenAI API Key (sk-...)..." class="w-full px-2.5 py-1.5 rounded bg-slate-950 border border-slate-700 text-xs text-white">
+              <p class="text-[10px] text-slate-400">Використовується голос 'onyx' (тембр гіда).</p>
+            </div>
+
+            <div class="flex items-center justify-between pt-1 border-t border-slate-800">
+              <button onclick="testCopilotVoice()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 text-xs font-semibold flex items-center gap-1 transition">
+                <span>▶️</span> Протестувати голос
+              </button>
+              <button onclick="saveCopilotVoiceSettings()" class="px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow transition">
+                Зберегти налаштування
               </button>
             </div>
-            <p class="text-slate-300 leading-relaxed text-[11px] italic bg-slate-950/60 p-2.5 rounded-lg border border-slate-800" id="ranger-briefing-text">
-              "Góðan daginn! Говорить черговий штурман Кáрі. Сьогодні ідеальний день для поїздки Південним кільцем. Траса 1 вільна (Greiðfært). Увага на мисі Дирхолей: бічний вітер 16 м/с — тримайте двері авто обома руками. На чорному пляжі Рейнісф'яра суворо дотримуйтесь жовтого світлофора безпеки. Увечері заплановано Kp 4.2 з чистим вікном низької хмарності. Безпечної експедиції!"
+          </div>
+
+          <!-- LM Studio Connection Settings Dropdown (collapsible) -->
+          <div id="lm-studio-settings-box" class="hidden absolute top-12 left-3 right-3 z-30 p-3.5 rounded-xl bg-slate-950 border border-slate-700 shadow-2xl space-y-2 text-[11px] backdrop-blur-xl">
+            <div class="flex items-center justify-between font-bold text-white">
+              <span>🔌 Підключення Local AI / LM Studio (OpenAI API)</span>
+              <button onclick="toggleLmStudioSettings()" class="text-slate-400 hover:text-white">✕</button>
+            </div>
+            <p class="text-slate-300 text-[10px] leading-relaxed">
+              Запустіть LM Studio на комп'ютері, завантажте модель та увімкніть Local Server на порту 1234.
             </p>
+            <div class="flex items-center gap-2">
+              <input type="text" id="lm-studio-url-input" value="http://localhost:1234/v1/chat/completions" class="flex-1 px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-cyan-300 font-mono text-[11px] focus:outline-none focus:border-cyan-400">
+              <button onclick="checkLmStudioConnection(true)" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition">
+                Перевірити
+              </button>
+            </div>
+            <div id="lm-settings-status" class="text-[10px] font-mono text-slate-400"></div>
           </div>
 
-          <!-- Row 2: Real-time Telemetry Widgets -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-            <!-- Safety Index Widget -->
-            <div class="p-2.5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-1">
-              <span class="text-[9px] text-slate-400 uppercase font-mono font-bold">ІНДЕКС БЕЗПЕКИ:</span>
-              <div class="text-lg font-black text-emerald-400 flex items-center justify-between">
-                <span>92 / 100</span>
-                <span class="text-[9px] px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 font-sans font-bold">БЕЗПЕЧНО</span>
-              </div>
-              <p class="text-[10px] text-slate-400">Траса 1 суха, ожеледиця відсутня.</p>
-            </div>
-
-            <!-- Wind & Door Warning Widget -->
-            <div class="p-2.5 rounded-xl bg-slate-900/90 border border-amber-500/30 space-y-1">
-              <span class="text-[9px] text-amber-400 uppercase font-mono font-bold">⚠️ DOOR DANGER ALERT:</span>
-              <div class="text-lg font-black text-amber-300 flex items-center justify-between">
-                <span>16.2 м/с</span>
-                <span class="text-[9px] px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-300 font-sans font-bold">ВІТЕР</span>
-              </div>
-              <p class="text-[10px] text-amber-200/80">Дирхолей: тримайте двері обома руками!</p>
-            </div>
-
-            <!-- Aurora Radar Widget -->
-            <div class="p-2.5 rounded-xl bg-slate-900/90 border border-cyan-500/30 space-y-1">
-              <span class="text-[9px] text-cyan-400 uppercase font-mono font-bold">🌌 АВРОРА СЬОГОДНІ:</span>
-              <div class="text-lg font-black text-cyan-300 flex items-center justify-between">
-                <span>Kp 4.2</span>
-                <span class="text-[9px] px-1.5 py-0.2 rounded bg-cyan-500/20 text-cyan-300 font-sans font-bold">АКТИВНА</span>
-              </div>
-              <p class="text-[10px] text-slate-400">Lágský: 12% (Скоугафосс після 22:00).</p>
-            </div>
+          <!-- Speech Dictation Live Status Alert -->
+          <div id="copilot-mic-status" class="hidden shrink-0 my-1 p-2 rounded-xl bg-red-950/85 border border-red-500/60 text-red-200 font-mono text-[10px] shadow-lg animate-pulse flex items-center justify-between">
+            <!-- dynamic mic bar -->
           </div>
 
-          <!-- DEDICATED QUICK DESTINATION DISPATCHER -->
-          <div class="p-3 rounded-xl bg-slate-900/95 border border-emerald-500/40 space-y-2 shadow-xl">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <span class="text-base">🧭</span>
-                <span class="text-xs font-bold text-emerald-300 uppercase tracking-wider">
-                  КУДИ ВИ ПЛАНУЄТЕ ЇХАТИ? ШВИДКИЙ БРИФІНГ НАПРЯМКУ:
+          <!-- Conversation Scrollable Feed (flex-1) -->
+          <div id="copilot-chat-feed" class="flex-1 overflow-y-auto space-y-2.5 my-2 pr-1 custom-scrollbar">
+            
+            <!-- Default Welcome Dispatch from Kári -->
+            <div class="p-3 rounded-xl bg-slate-900/80 border border-cyan-500/25 space-y-1.5">
+              <div class="flex items-center justify-between text-[10px] font-mono text-cyan-400">
+                <span class="font-bold flex items-center gap-1">
+                  <span>🛡️</span> <span>КÁРІ (LEIÐSÖGUMAÐUR)</span>
                 </span>
+                <span class="text-slate-500">Оперативний черговий</span>
               </div>
-              <span class="text-[10px] text-slate-400 font-mono hidden sm:inline">9 оперативних коридорів • SafeTravel &amp; Vegagerðin</span>
-            </div>
-
-            <!-- 9 Corridor Destination Quick-Select Cards -->
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 gap-1.5 text-left">
-              <!-- Corridor 1: Golden Circle -->
-              <button onclick="briefRouteCorridor('golden_circle')" class="group p-2 rounded-xl bg-slate-950/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex flex-col justify-between">
-                <div class="flex items-center justify-between mb-1">
-                  <span class="text-base">🏛️</span>
-                  <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-300 font-bold">ТРАСИ 36/35</span>
-                </div>
-                <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Золоте кільце</div>
-                <div class="text-[10px] text-slate-400 truncate">Тінгведлір • Ґулльфосс • Гейсір</div>
-              </button>
-
-              <!-- Corridor 2: South Coast -->
-              <button onclick="briefRouteCorridor('south_coast')" class="group p-2 rounded-xl bg-slate-950/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex flex-col justify-between">
-                <div class="flex items-center justify-between mb-1">
-                  <span class="text-base">🌊</span>
-                  <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-cyan-500/20 text-cyan-300 font-bold">ТРАСА 1 • ВІК</span>
-                </div>
-                <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Південь &amp; Катла</div>
-                <div class="text-[10px] text-slate-400 truncate">Скоугафосс • Сельяландс • Рейнісф'яра</div>
-              </button>
-
-              <!-- Corridor 3: Glacier Lagoon -->
-              <button onclick="briefRouteCorridor('glacier_lagoon')" class="group p-2 rounded-xl bg-slate-950/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex flex-col justify-between">
-                <div class="flex items-center justify-between mb-1">
-                  <span class="text-base">🧊</span>
-                  <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-blue-500/20 text-blue-300 font-bold">ЛЬОДОВИКИ</span>
-                </div>
-                <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Ййокюльсарлон</div>
-                <div class="text-[10px] text-slate-400 truncate">Diamond Beach • Скафтафетль • Стокснес</div>
-              </button>
-
-              <!-- Corridor 4: Snæfellsnes -->
-              <button onclick="briefRouteCorridor('snaefellsnes')" class="group p-2 rounded-xl bg-slate-950/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex flex-col justify-between">
-                <div class="flex items-center justify-between mb-1">
-                  <span class="text-base">🏔️</span>
-                  <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 font-bold">ДОРОГА 54</span>
-                </div>
-                <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Снайфедльснес</div>
-                <div class="text-[10px] text-slate-400 truncate">Кірк'юфетль • Арнарстапі • Будір</div>
-              </button>
-
-              <!-- Corridor 5: North & Mývatn -->
-              <button onclick="briefRouteCorridor('north')" class="group p-2 rounded-xl bg-slate-950/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex flex-col justify-between">
-                <div class="flex items-center justify-between mb-1">
-                  <span class="text-base">💎</span>
-                  <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-teal-500/20 text-teal-300 font-bold">DIAMOND CIRCLE</span>
-                </div>
-                <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Північ &amp; Міватн</div>
-                <div class="text-[10px] text-slate-400 truncate">Деттіфосс • Ґодафосс • Хусавік</div>
-              </button>
-
-              <!-- Corridor 6: East Fjords -->
-              <button onclick="briefRouteCorridor('east_fjords')" class="group p-2 rounded-xl bg-slate-950/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex flex-col justify-between">
-                <div class="flex items-center justify-between mb-1">
-                  <span class="text-base">🌲</span>
-                  <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-indigo-500/20 text-indigo-300 font-bold">СХІДНІ ФІОРДИ</span>
-                </div>
-                <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Східні фіорди</div>
-                <div class="text-[10px] text-slate-400 truncate">Студлагіл • Сейдісфйордюр • Генгіфосс</div>
-              </button>
-
-              <!-- Corridor 7: Reykjanes -->
-              <button onclick="briefRouteCorridor('reykjanes')" class="group p-2 rounded-xl bg-slate-950/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex flex-col justify-between">
-                <div class="flex items-center justify-between mb-1">
-                  <span class="text-base">🌋</span>
-                  <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-rose-500/20 text-rose-300 font-bold">ВУЛКАНИ &amp; СПА</span>
-                </div>
-                <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Рейк'янес</div>
-                <div class="text-[10px] text-slate-400 truncate">Фаградальсф'ятль • Blue Lagoon • Мости</div>
-              </button>
-
-              <!-- Corridor 8: Highlands -->
-              <button onclick="briefRouteCorridor('highlands')" class="group p-2 rounded-xl bg-slate-950/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex flex-col justify-between">
-                <div class="flex items-center justify-between mb-1">
-                  <span class="text-base">🚙</span>
-                  <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-orange-500/20 text-orange-300 font-bold">F-ROADS 4X4</span>
-                </div>
-                <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Хайлендс</div>
-                <div class="text-[10px] text-slate-400 truncate">Ландманналаугар • Аск'я • Керлінгарфйотль</div>
-              </button>
-
-              <!-- Corridor 9: Westfjords -->
-              <button onclick="briefRouteCorridor('westfjords')" class="group p-2 rounded-xl bg-slate-950/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex flex-col justify-between">
-                <div class="flex items-center justify-between mb-1">
-                  <span class="text-base">🦅</span>
-                  <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-purple-500/20 text-purple-300 font-bold">ДИКІ ФІОРДИ</span>
-                </div>
-                <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Вестфіорди</div>
-                <div class="text-[10px] text-slate-400 truncate">Діньянді • Латраб'ярг • Рейдасандюр</div>
-              </button>
-            </div>
-          </div>
-
-          <!-- Row 3: Interactive Co-Pilot AI Dialogue, Speech-To-Text & Studio Voice Controls -->
-          <div class="p-3.5 rounded-xl bg-slate-900/95 border border-cyan-500/40 space-y-3 shadow-xl">
-            <!-- Header with Engine Status Badge and Settings Toggles -->
-            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/80 pb-2">
-              <span class="text-[11px] uppercase font-bold text-cyan-300 flex items-center gap-1.5">
-                <span>💬</span> ЖИВИЙ ДІАЛОГ ЗІ ШТУРМАНОМ КÁРІ (ДВОМОВНИЙ UA / EN)
-              </span>
-              <div class="flex items-center gap-2">
-                <!-- Sound Toggle Button -->
-                <button id="btn-copilot-sound-toggle" onclick="toggleCopilotMute()" class="px-2.5 py-1.5 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-400/50 flex items-center gap-1.5 text-xs font-semibold shadow-sm transition" title="Увімкнути/вимкнути голосові відповіді">
-                  <span class="text-sm">🔊</span> <span class="hidden sm:inline">Голос УВІМК</span>
-                </button>
-
-                <!-- Hands-Free In-Drive Mode Button -->
-                <button id="btn-copilot-handsfree" onclick="toggleCopilotHandsFree()" class="px-2.5 py-1.5 rounded-xl bg-slate-800 text-slate-400 border border-slate-700 flex items-center gap-1.5 text-xs transition" title="Режим 'Вільні руки' для водіїв (автоматичний повторний запуск мікрофона після відповіді штурмана)">
-                  <span class="text-sm">🚗</span> <span class="hidden sm:inline">Hands-Free</span>
-                </button>
-
-                <!-- Voice Engine Settings Toggle -->
-                <button onclick="toggleCopilotVoiceSettings()" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold flex items-center gap-1 transition" title="Налаштування голосового движка (Neural, Radio DSP, ElevenLabs, OpenAI)">
-                  <span>🎙️</span> <span class="hidden sm:inline">Голос</span>
-                </button>
-
-                <!-- LM Studio Connection Toggle -->
-                <button onclick="toggleLmStudioSettings()" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs font-mono flex items-center gap-1 transition" title="Налаштування локального сервера LM Studio (localhost:1234)">
-                  <span>⚙️</span> <span class="hidden sm:inline">LM Studio</span>
-                </button>
-
-                <span id="copilot-ai-engine-badge" class="px-2 py-0.5 rounded-full bg-slate-800 text-cyan-300 font-mono text-[10px] border border-slate-700 flex items-center gap-1 shadow-sm">
-                  <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> <span>115 POI Експерт</span>
-                </span>
-              </div>
-            </div>
-
-            <!-- Voice Engine Settings Dropdown (collapsible) -->
-            <div id="copilot-voice-settings-box" class="hidden p-3 rounded-xl bg-slate-950/95 border border-cyan-500/40 space-y-2.5 text-[11px]">
-              <div class="flex items-center justify-between font-bold text-white border-b border-slate-800 pb-1.5">
-                <span class="flex items-center gap-1.5"><span>🎙️</span> НАЛАШТУВАННЯ ГОЛОСОВОГО ДВИЖКА ШТУРМАНА</span>
-                <button onclick="toggleCopilotVoiceSettings()" class="text-slate-400 hover:text-white">✕</button>
-              </div>
-
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                <div>
-                  <label class="block text-[10px] uppercase font-mono text-cyan-300 mb-1">Оберіть движок синтезу мови:</label>
-                  <select id="copilot-voice-engine-select" onchange="changeCopilotVoiceEngine(this.value)" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-200 text-xs focus:outline-none focus:border-cyan-400">
-                    <option value="neural">🏆 HD Neural Voice (Вбудований HD голос системи)</option>
-                    <option value="radio">📻 Радіозв'язок Рейнджера (Expedition Intercom з DSP)</option>
-                    <option value="elevenlabs">⚡ ElevenLabs Studio AI (Студійна людська якість)</option>
-                    <option value="openai">🧠 OpenAI Audio TTS (onyx / alloy)</option>
-                    <option value="mute">🔇 Лише текст (Без озвучення)</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label class="block text-[10px] uppercase font-mono text-cyan-300 mb-1">Швидкість мови (Rate):</label>
-                  <input type="range" id="copilot-voice-rate" min="0.8" max="1.3" step="0.05" value="1.0" class="w-full accent-cyan-400" oninput="copilotSpeechRate = parseFloat(this.value)">
-                </div>
-              </div>
-
-              <!-- ElevenLabs API Subbox -->
-              <div id="elevenlabs-config-subbox" class="hidden p-2.5 rounded-lg bg-slate-900 border border-indigo-500/30 space-y-1.5">
-                <span class="text-[10px] font-bold text-indigo-300 uppercase">⚡ Підключення ElevenLabs API (Студійний звук):</span>
-                <input type="password" id="copilot-elevenlabs-key" placeholder="Вставте ваш ElevenLabs API Key..." class="w-full px-2.5 py-1.5 rounded bg-slate-950 border border-slate-700 text-xs text-white">
-                <p class="text-[10px] text-slate-400">Використовується голос Adam (Expedition Navigator). Ключ зберігається лише у вашому браузері.</p>
-              </div>
-
-              <!-- OpenAI API Subbox -->
-              <div id="openai-config-subbox" class="hidden p-2.5 rounded-lg bg-slate-900 border border-emerald-500/30 space-y-1.5">
-                <span class="text-[10px] font-bold text-emerald-300 uppercase">🧠 Підключення OpenAI Audio TTS:</span>
-                <input type="password" id="copilot-openai-key" placeholder="Вставте ваш OpenAI API Key (sk-...)..." class="w-full px-2.5 py-1.5 rounded bg-slate-950 border border-slate-700 text-xs text-white">
-                <p class="text-[10px] text-slate-400">Використовується голос 'onyx' (глибокий спокійний тембр гіда).</p>
-              </div>
-
-              <div class="flex items-center justify-between pt-1 border-t border-slate-800">
-                <button onclick="testCopilotVoice()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 text-xs font-semibold flex items-center gap-1 transition">
-                  <span>▶️</span> Протестувати голос
-                </button>
-                <button onclick="saveCopilotVoiceSettings()" class="px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow transition">
-                  Зберегти налаштування
-                </button>
-              </div>
-            </div>
-
-            <!-- LM Studio Connection Settings Dropdown (collapsible) -->
-            <div id="lm-studio-settings-box" class="hidden p-3 rounded-xl bg-slate-950/95 border border-slate-700 space-y-2 text-[11px]">
-              <div class="flex items-center justify-between font-bold text-white">
-                <span>🔌 Підключення Local AI / LM Studio (OpenAI API)</span>
-                <button onclick="toggleLmStudioSettings()" class="text-slate-400 hover:text-white">✕</button>
-              </div>
-              <p class="text-slate-300 text-[10px] leading-relaxed">
-                Запустіть LM Studio на комп'ютері, завантажте будь-яку модель (Llama-3, Mistral, Qwen тощо) і натисніть <b>Start Server</b> на порту <b>1234</b>. Додаток автоматично з'єднається через локальний API.
+              <p class="text-[11px] text-slate-200 leading-relaxed">
+                Góðan daginn! Я ваш сертифікований ісландський штурман Кáрі. Я в реальному часі відстежую стан доріг (Vegagerðin), метеорадар хмарності та спалахи Аврори (Veðurstofa &amp; NOAA). Натисніть на мікрофон для голосового запитання, введіть текст або оберіть маршрут праворуч!
               </p>
-              <div class="flex items-center gap-2">
-                <input type="text" id="lm-studio-url-input" value="http://localhost:1234/v1/chat/completions" class="flex-1 px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-cyan-300 font-mono text-[11px] focus:outline-none focus:border-cyan-400">
-                <button onclick="checkLmStudioConnection(true)" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition">
-                  Перевірити зв'язок
-                </button>
-              </div>
-              <div id="lm-settings-status" class="text-[10px] font-mono text-slate-400"></div>
             </div>
 
-            <!-- Speech Dictation Live Status Alert -->
-            <div id="copilot-mic-status" class="hidden p-2.5 rounded-xl bg-red-950/80 border border-red-500/60 text-red-200 font-mono text-[11px] shadow-lg animate-pulse">
-              <!-- Live mic bar inserted dynamically -->
-            </div>
-
-            <!-- Speech Input Row with Microphone Dictation Button -->
-            <div class="flex items-center space-x-1.5">
-              <div class="relative flex-1">
-                <input type="text" id="copilot-modal-input" placeholder="Запитайте Кáрі або натисніть мікрофон для надиктовування..." class="w-full pl-3 pr-9 py-2 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition" onkeydown="if(event.key==='Enter') sendCopilotModalQuery()">
-                <button onclick="clearCopilotModalInput()" class="absolute right-2.5 top-2.5 text-slate-500 hover:text-slate-300 text-xs">✕</button>
-              </div>
-
-              <!-- Microphone Speech-to-Text Button -->
-              <button id="btn-copilot-mic" onclick="toggleSpeechRecognition()" class="px-3.5 py-2 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/40 text-cyan-300 border border-cyan-400/50 flex items-center justify-center transition shadow-md shadow-cyan-500/10 cursor-pointer" title="Натисніть для голосового надиктовування запитання (українською або англійською)">
-                <span class="text-sm">🎙️</span>
-              </button>
-
-              <!-- Send Button -->
-              <button onclick="sendCopilotModalQuery()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white text-xs font-bold shadow-md shadow-cyan-600/30 transition">
-                Запитати
-              </button>
-            </div>
-
-            <!-- Quick Suggestion Buttons -->
-            <div class="flex items-center gap-1.5 text-[10px] overflow-x-auto pb-0.5 scrollbar-none">
-              <button onclick="askCopilotModalPredefined('Чи відкрита дорога до Віка?')" class="px-2.5 py-1 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700/80 whitespace-nowrap transition">🛣️ Траса до Віка</button>
-              <button onclick="askCopilotModalPredefined('Де сьогодні шукати Аврору?')" class="px-2.5 py-1 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700/80 whitespace-nowrap transition">🌌 Де Аврора?</button>
-              <button onclick="askCopilotModalPredefined('Які секретні водоспади поруч?')" class="px-2.5 py-1 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700/80 whitespace-nowrap transition">💧 Водоспади</button>
-              <button onclick="askCopilotModalPredefined('Що з вітром на Рейнісф\'ярі?')" class="px-2.5 py-1 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700/80 whitespace-nowrap transition">⚠️ Вітер на пляжі</button>
-              <button onclick="askCopilotModalPredefined('Розкажи про каньйон Колуглювур')" class="px-2.5 py-1 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700/80 whitespace-nowrap transition">🏞️ Колуглювур</button>
-              <button onclick="askCopilotModalPredefined('How is the weather and road conditions today?')" class="px-2.5 py-1 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 whitespace-nowrap transition">🇬🇧 English Query</button>
-            </div>
-
-            <!-- Dedicated Response Box with Full Speech & Copy Controls -->
-            <div id="copilot-modal-reply" class="hidden p-3.5 rounded-xl bg-slate-950/95 border border-cyan-500/50 text-[11px] text-slate-200 leading-relaxed shadow-inner space-y-2 max-h-56 overflow-y-auto">
+            <!-- Dedicated Response Box (when active) -->
+            <div id="copilot-modal-reply" class="hidden p-3.5 rounded-xl bg-slate-900/95 border border-cyan-400/60 text-[11.5px] text-slate-100 leading-relaxed shadow-xl space-y-2">
               <div class="flex items-center justify-between border-b border-cyan-500/20 pb-1.5 text-[10px] text-cyan-400 font-mono">
                 <span id="copilot-modal-reply-title" class="font-bold flex items-center gap-1.5">
-                  <span>🤖</span> <span>ШТУРМАН КÁРІ (LEIÐSÖGUMAÐUR)</span>
+                  <span>🤖</span> <span>ВІДПОВІДЬ ШТУРМАНА</span>
                 </span>
                 <div class="flex items-center gap-1.5">
                   <button onclick="replayCopilotSpeech()" class="px-2 py-0.5 rounded bg-cyan-500/20 hover:bg-cyan-500/40 text-cyan-300 border border-cyan-400/30 text-[10px] flex items-center gap-1 transition" title="Озвучити відповідь знову">
@@ -4896,8 +4791,217 @@
                 </div>
               </div>
               <div id="copilot-modal-reply-content" class="text-slate-100 text-[11.5px] leading-relaxed pt-0.5">
-                <!-- Response content inserted here -->
+                <!-- Response content inserted dynamically -->
               </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Console: Suggestion Chips + Luxury Input Bar -->
+          <div class="space-y-2 pt-1 border-t border-slate-800/80 shrink-0">
+            
+            <!-- Quick Suggestion Pills (Horizontally Scrollable) -->
+            <div class="flex items-center gap-1.5 text-[10px] overflow-x-auto pb-0.5 scrollbar-none">
+              <button onclick="askCopilotModalPredefined('Чи відкрита дорога до Віка?')" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 hover:border-cyan-500/40 whitespace-nowrap transition flex items-center gap-1">
+                <span>🛣️</span> <span>Траса до Віка</span>
+              </button>
+              <button onclick="askCopilotModalPredefined('Де сьогодні шукати Аврору?')" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 hover:border-cyan-500/40 whitespace-nowrap transition flex items-center gap-1">
+                <span>🌌</span> <span>Де Аврора?</span>
+              </button>
+              <button onclick="askCopilotModalPredefined('Які секретні водоспади поруч?')" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 hover:border-cyan-500/40 whitespace-nowrap transition flex items-center gap-1">
+                <span>💧</span> <span>Секретні водоспади</span>
+              </button>
+              <button onclick="askCopilotModalPredefined('Що з вітром на Рейнісф'ярі?')" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 hover:border-cyan-500/40 whitespace-nowrap transition flex items-center gap-1">
+                <span>⚠️</span> <span>Вітер на пляжі</span>
+              </button>
+              <button onclick="askCopilotModalPredefined('Розкажи про каньйон Колуглювур')" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-800 hover:border-cyan-500/40 whitespace-nowrap transition flex items-center gap-1">
+                <span>🏞️</span> <span>Колуглювур</span>
+              </button>
+              <button onclick="askCopilotModalPredefined('How is the weather and road conditions today?')" class="px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 text-cyan-300 border border-cyan-500/30 whitespace-nowrap transition flex items-center gap-1">
+                <span>🇬🇧</span> <span>English</span>
+              </button>
+            </div>
+
+            <!-- Speech Input Row with Tactile Mic & Send Button -->
+            <div class="flex items-center space-x-2">
+              <div class="relative flex-1">
+                <input type="text" id="copilot-modal-input" placeholder="Запитайте Кáрі або надиктуйте голосом..." class="w-full pl-3.5 pr-8 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition" onkeydown="if(event.key==='Enter') sendCopilotModalQuery()">
+                <button onclick="clearCopilotModalInput()" class="absolute right-2.5 top-3 text-slate-500 hover:text-slate-300 text-xs">✕</button>
+              </div>
+
+              <!-- Microphone Speech-to-Text Button -->
+              <button id="btn-copilot-mic" onclick="toggleSpeechRecognition()" class="px-4 py-2.5 rounded-xl bg-gradient-to-tr from-cyan-600 to-teal-600 hover:from-cyan-500 hover:to-teal-500 text-white border border-cyan-400/50 flex items-center justify-center transition shadow-lg shadow-cyan-500/20 cursor-pointer shrink-0" title="Натисніть для голосового надиктовування запитання">
+                <span class="text-sm">🎙️</span>
+              </button>
+
+              <!-- Send Button -->
+              <button onclick="sendCopilotModalQuery()" class="px-4 py-2.5 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white text-xs font-bold shadow-md shadow-cyan-600/30 transition shrink-0">
+                Запитати
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- COLUMN 3 (RIGHT WING): TACTICAL TELEMETRY & 9 EXPEDITION CORRIDORS -->
+        <!-- ============================================================ -->
+        <div class="w-full md:w-[310px] lg:w-[340px] shrink-0 flex flex-col justify-between h-full bg-slate-950/90 rounded-2xl border border-emerald-500/30 p-3 shadow-xl relative overflow-hidden">
+          
+          <!-- Section 1: Real-time Telemetry Widgets -->
+          <div class="space-y-1.5 shrink-0">
+            <div class="flex items-center justify-between pb-1 border-b border-slate-800">
+              <span class="text-[10px] font-mono font-bold text-emerald-400 uppercase tracking-wide flex items-center gap-1">
+                <span>🛰️</span> <span>ОПЕРАТИВНИЙ РАДАР</span>
+              </span>
+              <span class="text-[9px] font-mono text-slate-500">LIVE SYNC</span>
+            </div>
+
+            <div class="grid grid-cols-3 gap-1.5">
+              <!-- Safety Index Widget -->
+              <div class="p-1.5 rounded-xl bg-slate-900/90 border border-slate-800 space-y-0.5">
+                <span class="text-[8px] text-slate-400 uppercase font-mono font-bold">БЕЗПЕКА:</span>
+                <div class="text-sm font-black text-emerald-400">92/100</div>
+                <div class="text-[8px] text-slate-400 truncate">Траса 1 вільна</div>
+              </div>
+
+              <!-- Wind Warning Widget -->
+              <div class="p-1.5 rounded-xl bg-slate-900/90 border border-amber-500/30 space-y-0.5">
+                <span class="text-[8px] text-amber-400 uppercase font-mono font-bold">ВІТЕР:</span>
+                <div class="text-sm font-black text-amber-300">16.2 м/с</div>
+                <div class="text-[8px] text-amber-300/80 truncate">Дирхолей!</div>
+              </div>
+
+              <!-- Aurora Radar Widget -->
+              <div class="p-1.5 rounded-xl bg-slate-900/90 border border-cyan-500/30 space-y-0.5">
+                <span class="text-[8px] text-cyan-400 uppercase font-mono font-bold">АВРОРА:</span>
+                <div class="text-sm font-black text-cyan-300">Kp 4.2</div>
+                <div class="text-[8px] text-slate-400 truncate">Lágský 12%</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: 9 Expedition Corridors (Scrollable Corridor Grid) -->
+          <div class="flex-1 flex flex-col my-2 min-h-0">
+            <div class="flex items-center justify-between pb-1.5">
+              <span class="text-[10px] font-bold text-emerald-300 uppercase font-mono flex items-center gap-1">
+                <span>🧭</span> <span>КУДИ ЇХАТИ? БРИФІНГ:</span>
+              </span>
+              <span class="text-[9px] text-slate-500 font-mono">9 коридорів</span>
+            </div>
+
+            <!-- Scrollable Corridor Cards List -->
+            <div class="flex-1 overflow-y-auto space-y-1.5 pr-1 custom-scrollbar">
+              
+              <!-- Corridor 1: Golden Circle -->
+              <button onclick="briefRouteCorridor('golden_circle')" class="w-full group p-2 rounded-xl bg-slate-900/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-base">🏛️</span>
+                  <div>
+                    <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Золоте кільце</div>
+                    <div class="text-[9px] text-slate-400">Тінгведлір • Ґулльфосс • Гейсір</div>
+                  </div>
+                </div>
+                <span class="text-[8px] font-mono px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-300 font-bold shrink-0">ТРАСИ 36/35</span>
+              </button>
+
+              <!-- Corridor 2: South Coast -->
+              <button onclick="briefRouteCorridor('south_coast')" class="w-full group p-2 rounded-xl bg-slate-900/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-base">🌊</span>
+                  <div>
+                    <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Південь &amp; Катла</div>
+                    <div class="text-[9px] text-slate-400">Скоугафосс • Сельяландс • Вік</div>
+                  </div>
+                </div>
+                <span class="text-[8px] font-mono px-1.5 py-0.2 rounded bg-cyan-500/20 text-cyan-300 font-bold shrink-0">ТРАСА 1 • ВІК</span>
+              </button>
+
+              <!-- Corridor 3: Glacier Lagoon -->
+              <button onclick="briefRouteCorridor('glacier_lagoon')" class="w-full group p-2 rounded-xl bg-slate-900/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-base">🧊</span>
+                  <div>
+                    <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Ййокюльсарлон</div>
+                    <div class="text-[9px] text-slate-400">Diamond Beach • Скафтафетль</div>
+                  </div>
+                </div>
+                <span class="text-[8px] font-mono px-1.5 py-0.2 rounded bg-blue-500/20 text-blue-300 font-bold shrink-0">ЛЬОДОВИКИ</span>
+              </button>
+
+              <!-- Corridor 4: Snæfellsnes -->
+              <button onclick="briefRouteCorridor('snaefellsnes')" class="w-full group p-2 rounded-xl bg-slate-900/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-base">🏔️</span>
+                  <div>
+                    <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Снайфедльснес</div>
+                    <div class="text-[9px] text-slate-400">Кірк'юфетль • Арнарстапі</div>
+                  </div>
+                </div>
+                <span class="text-[8px] font-mono px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 font-bold shrink-0">ДОРОГА 54</span>
+              </button>
+
+              <!-- Corridor 5: North & Mývatn -->
+              <button onclick="briefRouteCorridor('north')" class="w-full group p-2 rounded-xl bg-slate-900/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-base">💎</span>
+                  <div>
+                    <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Північ &amp; Міватн</div>
+                    <div class="text-[9px] text-slate-400">Деттіфосс • Ґодафосс • Хусавік</div>
+                  </div>
+                </div>
+                <span class="text-[8px] font-mono px-1.5 py-0.2 rounded bg-teal-500/20 text-teal-300 font-bold shrink-0">DIAMOND</span>
+              </button>
+
+              <!-- Corridor 6: East Fjords -->
+              <button onclick="briefRouteCorridor('east_fjords')" class="w-full group p-2 rounded-xl bg-slate-900/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-base">🌲</span>
+                  <div>
+                    <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Східні фіорди</div>
+                    <div class="text-[9px] text-slate-400">Студлагіл • Сейдісфйордюр</div>
+                  </div>
+                </div>
+                <span class="text-[8px] font-mono px-1.5 py-0.2 rounded bg-indigo-500/20 text-indigo-300 font-bold shrink-0">ФІОРДИ</span>
+              </button>
+
+              <!-- Corridor 7: Reykjanes -->
+              <button onclick="briefRouteCorridor('reykjanes')" class="w-full group p-2 rounded-xl bg-slate-900/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-base">🌋</span>
+                  <div>
+                    <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Рейк'янес &amp; Спа</div>
+                    <div class="text-[9px] text-slate-400">Фаградальсф'ятль • Blue Lagoon</div>
+                  </div>
+                </div>
+                <span class="text-[8px] font-mono px-1.5 py-0.2 rounded bg-rose-500/20 text-rose-300 font-bold shrink-0">ВУЛКАНИ</span>
+              </button>
+
+              <!-- Corridor 8: Highlands -->
+              <button onclick="briefRouteCorridor('highlands')" class="w-full group p-2 rounded-xl bg-slate-900/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-base">🚙</span>
+                  <div>
+                    <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Хайлендс 4x4</div>
+                    <div class="text-[9px] text-slate-400">Ландманналаугар • Аск'я</div>
+                  </div>
+                </div>
+                <span class="text-[8px] font-mono px-1.5 py-0.2 rounded bg-orange-500/20 text-orange-300 font-bold shrink-0">F-ROADS</span>
+              </button>
+
+              <!-- Corridor 9: Westfjords -->
+              <button onclick="briefRouteCorridor('westfjords')" class="w-full group p-2 rounded-xl bg-slate-900/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <span class="text-base">🦅</span>
+                  <div>
+                    <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Вестфіорди</div>
+                    <div class="text-[9px] text-slate-400">Діньянді • Латраб'ярг</div>
+                  </div>
+                </div>
+                <span class="text-[8px] font-mono px-1.5 py-0.2 rounded bg-purple-500/20 text-purple-300 font-bold shrink-0">ДИКІ ФІОРДИ</span>
+              </button>
+
             </div>
           </div>
 
@@ -4905,17 +5009,18 @@
 
       </div>
 
-      <!-- Cockpit Footer -->
-      <div class="px-5 py-2.5 border-t border-slate-800 bg-slate-950 flex items-center justify-between text-[11px] text-slate-400 shrink-0">
+      <!-- Cockpit Footer (Slim Status Bar) -->
+      <div class="px-5 py-2 border-t border-slate-800 bg-slate-950 flex items-center justify-between text-[10px] text-slate-400 shrink-0">
         <div class="flex items-center gap-2">
           <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-          <span>Штурман Кáрі контролює телеметрію вашого маршруту (115 локацій)</span>
+          <span>Штурман Кáрі контролює телеметрію маршруту (115 локацій Ісландії)</span>
         </div>
-        <button onclick="closeCopilotModal()" class="px-4 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs transition">Закрити панель</button>
+        <button onclick="closeCopilotModal()" class="px-3.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs transition">Закрити панель</button>
       </div>
+
     </div>
   </div>
-
+  
   <!-- MODAL 2: NOTEBOOKLM & AUDIO PRODUCTION STUDIO -->
   <div id="audio-studio-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-5">
     <div class="glass-panel w-full max-w-4xl rounded-2xl border border-slate-700 overflow-hidden shadow-2xl flex flex-col max-h-[92vh]">

@@ -1643,7 +1643,7 @@
     // ==========================================
     // CO-PILOT VIDEO AVATAR & VOCAL ANIMATION ENGINE
     // ==========================================
-    let isCopilotMuted = false;
+    let isCopilotMuted = (typeof localStorage !== "undefined" && localStorage.getItem("copilot_is_muted") === "true");
 
     function setCopilotSpeakingState(isSpeaking, customText = '') {
       const vid = document.getElementById('copilot-video');
@@ -1680,74 +1680,521 @@
       }
     }
 
+    // ==========================================
+    // ADVANCED MULTI-ENGINE COPILOT VOICE & SPEECH ENGINE (HD NEURAL / RADIO DSP / ELEVENLABS / OPENAI)
+    // ==========================================
+    let copilotVoiceEngine = localStorage.getItem('copilot_voice_engine') || 'neural'; // 'neural', 'radio', 'elevenlabs', 'openai', 'mute'
+    let elevenLabsApiKey = localStorage.getItem('copilot_elevenlabs_key') || '';
+    let elevenLabsVoiceId = localStorage.getItem('copilot_elevenlabs_voice') || 'pNInz6obpgDQGcFmaJgB'; // Adam (Deep Authoritative Explorer)
+    let openAiApiKey = localStorage.getItem('copilot_openai_key') || '';
+    let openAiVoice = localStorage.getItem('copilot_openai_voice') || 'onyx'; // Deep calm guide
+    let copilotSpeechRate = parseFloat(localStorage.getItem('copilot_speech_rate') || '1.0');
+    let copilotSpeechPitch = parseFloat(localStorage.getItem('copilot_speech_pitch') || '0.96');
+    let lastCopilotSpokenText = '';
+    let currentAudioSource = null;
+
+    // Cache voices when loaded
+    let cachedSystemVoices = [];
+    if ('speechSynthesis' in window) {
+      cachedSystemVoices = window.speechSynthesis.getVoices();
+      window.speechSynthesis.onvoiceschanged = () => {
+        cachedSystemVoices = window.speechSynthesis.getVoices();
+      };
+    }
+
     function toggleCopilotMute() {
       isCopilotMuted = !isCopilotMuted;
-      const btn = document.getElementById('btn-copilot-sound-toggle');
-      if (btn) btn.textContent = isCopilotMuted ? '🔇' : '🔊';
-      if (isCopilotMuted && 'speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-        setCopilotSpeakingState(false);
+      localStorage.setItem('copilot_is_muted', isCopilotMuted ? 'true' : 'false');
+      updateCopilotSoundUI();
+      if (isCopilotMuted) {
+        stopAllCopilotSpeech();
       }
     }
 
-    function speakCopilot(text) {
-      if (isCopilotMuted) return;
-
-      // Play tactical radio chirp
-      try {
-        initWebAudio();
-        if (webAudioCtx) {
-          const osc = webAudioCtx.createOscillator();
-          const gain = webAudioCtx.createGain();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(580, webAudioCtx.currentTime);
-          osc.frequency.setValueAtTime(880, webAudioCtx.currentTime + 0.05);
-          gain.gain.setValueAtTime(0.04, webAudioCtx.currentTime);
-          gain.gain.exponentialRampToValueAtTime(0.001, webAudioCtx.currentTime + 0.12);
-          osc.connect(gain);
-          gain.connect(webAudioCtx.destination);
-          osc.start();
-          osc.stop(webAudioCtx.currentTime + 0.12);
+    function updateCopilotSoundUI() {
+      const btn = document.getElementById('btn-copilot-sound-toggle');
+      if (btn) {
+        if (isCopilotMuted || copilotVoiceEngine === 'mute') {
+          btn.innerHTML = '<span class="text-sm">🔇</span> <span class="hidden sm:inline">Без звуку</span>';
+          btn.className = 'px-2.5 py-1.5 rounded-xl bg-slate-800 text-slate-400 border border-slate-700 flex items-center gap-1.5 text-xs transition';
+        } else {
+          btn.innerHTML = '<span class="text-sm">🔊</span> <span class="hidden sm:inline">Голос УВІМК</span>';
+          btn.className = 'px-2.5 py-1.5 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-400/50 flex items-center gap-1.5 text-xs font-semibold shadow-sm shadow-cyan-500/20 transition';
         }
-      } catch (e) {}
+      }
+    }
 
+    function stopAllCopilotSpeech() {
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
+      }
+      if (currentAudioSource) {
+        try {
+          currentAudioSource.stop();
+          currentAudioSource.disconnect();
+        } catch (e) {}
+        currentAudioSource = null;
+      }
+      setCopilotSpeakingState(false);
+      const stopBtn = document.getElementById('btn-copilot-reply-stop');
+      if (stopBtn) stopBtn.classList.add('hidden');
+    }
+
+    // Smart Neural Voice Scoring Algorithm
+    function getBestSystemVoice(lang) {
+      const voices = cachedSystemVoices.length > 0 ? cachedSystemVoices : (('speechSynthesis' in window) ? window.speechSynthesis.getVoices() : []);
+      if (!voices || voices.length === 0) return null;
+
+      const isUk = (lang === 'uk');
+      const targetLangs = isUk ? ['uk', 'ua'] : ['en'];
+
+      let candidates = voices.filter(v => {
+        const l = (v.lang || '').toLowerCase();
+        return targetLangs.some(tl => l.includes(tl));
+      });
+
+      if (candidates.length === 0 && isUk) {
+        candidates = voices.filter(v => {
+          const n = (v.name || '').toLowerCase();
+          return n.includes('lesya') || n.includes('polina') || n.includes('milena') || n.includes('ukr');
+        });
+      }
+      if (candidates.length === 0) candidates = voices;
+
+      const scored = candidates.map(v => {
+        let score = 0;
+        const name = (v.name || '').toLowerCase();
+        const l = (v.lang || '').toLowerCase();
+
+        if (isUk && (l === 'uk-ua' || l === 'uk_ua')) score += 60;
+        if (!isUk && (l === 'en-us' || l === 'en-gb')) score += 60;
+
+        // Neural / Enhanced Priority
+        if (name.includes('enhanced')) score += 120;
+        if (name.includes('natural')) score += 110;
+        if (name.includes('premium')) score += 100;
+        if (name.includes('neural')) score += 95;
+        if (name.includes('siri')) score += 85;
+        if (name.includes('google')) score += 70;
+
+        // Specific high-quality natural voice actors
+        if (isUk && (name.includes('lesya') || name.includes('polina') || name.includes('milena'))) score += 50;
+        if (!isUk && (name.includes('samantha') || name.includes('daniel') || name.includes('oliver') || name.includes('ryan') || name.includes('jenny'))) score += 50;
+
+        // Penalize legacy robotic formant voices
+        if (name.includes('sin-ji') || name.includes('yuri') || name.includes('compact') || name.includes('espeak')) score -= 80;
+
+        return { voice: v, score };
+      });
+
+      scored.sort((a, b) => b.score - a.score);
+      return scored[0] ? scored[0].voice : null;
+    }
+
+    // Tactical Expedition VHF Radio Sounds
+    function playTacticalRadioStartFX() {
+      try {
+        initWebAudio();
+        if (!webAudioCtx) return;
+        if (webAudioCtx.state === 'suspended') webAudioCtx.resume();
+
+        const osc = webAudioCtx.createOscillator();
+        const gain = webAudioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(640, webAudioCtx.currentTime);
+        osc.frequency.setValueAtTime(890, webAudioCtx.currentTime + 0.05);
+        gain.gain.setValueAtTime(0.04, webAudioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, webAudioCtx.currentTime + 0.12);
+        osc.connect(gain);
+        gain.connect(webAudioCtx.destination);
+        osc.start();
+        osc.stop(webAudioCtx.currentTime + 0.12);
+      } catch (e) {}
+    }
+
+    function playTacticalRadioEndFX() {
+      try {
+        initWebAudio();
+        if (!webAudioCtx) return;
+        const osc = webAudioCtx.createOscillator();
+        const gain = webAudioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(740, webAudioCtx.currentTime);
+        osc.frequency.setValueAtTime(420, webAudioCtx.currentTime + 0.04);
+        gain.gain.setValueAtTime(0.03, webAudioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, webAudioCtx.currentTime + 0.09);
+        osc.connect(gain);
+        gain.connect(webAudioCtx.destination);
+        osc.start();
+        osc.stop(webAudioCtx.currentTime + 0.09);
+      } catch (e) {}
+    }
+
+    // MAIN VOCAL DISPATCHER
+    async function speakCopilot(text) {
+      if (isCopilotMuted || copilotVoiceEngine === 'mute') return;
+      if (!text || text.trim().length === 0) return;
+
+      lastCopilotSpokenText = text;
+      stopAllCopilotSpeech();
+
+      const stopBtn = document.getElementById('btn-copilot-reply-stop');
+      if (stopBtn) stopBtn.classList.remove('hidden');
+
+      // 1. ELEVENLABS STUDIO VOICE
+      if (copilotVoiceEngine === 'elevenlabs' && elevenLabsApiKey) {
+        try {
+          setCopilotSpeakingState(true);
+          const res = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${elevenLabsVoiceId}`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'xi-api-key': elevenLabsApiKey
+            },
+            body: JSON.stringify({
+              text: text.slice(0, 500),
+              model_id: "eleven_multilingual_v2",
+              voice_settings: { stability: 0.55, similarity_boost: 0.8 }
+            })
+          });
+
+          if (res.ok) {
+            initWebAudio();
+            const arrayBuf = await res.arrayBuffer();
+            const audioBuf = await webAudioCtx.decodeAudioData(arrayBuf);
+            currentAudioSource = webAudioCtx.createBufferSource();
+            currentAudioSource.buffer = audioBuf;
+            currentAudioSource.connect(webAudioCtx.destination);
+            currentAudioSource.onended = () => {
+              setCopilotSpeakingState(false);
+              if (stopBtn) stopBtn.classList.add('hidden');
+            };
+            currentAudioSource.start();
+            return;
+          }
+        } catch (err) {
+          console.warn('ElevenLabs speech failed, falling back to neural system voice', err);
+        }
+      }
+
+      // 2. OPENAI AUDIO TTS
+      if (copilotVoiceEngine === 'openai' && openAiApiKey) {
+        try {
+          setCopilotSpeakingState(true);
+          const res = await fetch('https://api.openai.com/v1/audio/speech', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${openAiApiKey}`
+            },
+            body: JSON.stringify({
+              model: 'tts-1',
+              voice: openAiVoice,
+              input: text.slice(0, 500)
+            })
+          });
+
+          if (res.ok) {
+            initWebAudio();
+            const arrayBuf = await res.arrayBuffer();
+            const audioBuf = await webAudioCtx.decodeAudioData(arrayBuf);
+            currentAudioSource = webAudioCtx.createBufferSource();
+            currentAudioSource.buffer = audioBuf;
+            currentAudioSource.connect(webAudioCtx.destination);
+            currentAudioSource.onended = () => {
+              setCopilotSpeakingState(false);
+              if (stopBtn) stopBtn.classList.add('hidden');
+            };
+            currentAudioSource.start();
+            return;
+          }
+        } catch (err) {
+          console.warn('OpenAI TTS failed, falling back to neural system voice', err);
+        }
+      }
+
+      // 3. HD NEURAL OR EXPEDITION RADIO (BROWSER SPEECH SYNTHESIS)
+      if ('speechSynthesis' in window) {
+        // Radio Mode pre-chirp
+        if (copilotVoiceEngine === 'radio' || copilotVoiceEngine === 'neural') {
+          playTacticalRadioStartFX();
+        }
+
         const u = new SpeechSynthesisUtterance(text);
-        
-        // Voice matching
-        const voices = window.speechSynthesis.getVoices();
-        const ukVoice = voices.find(v => v.lang.toLowerCase().includes('uk') || v.lang.toLowerCase().includes('ua'));
-        if (currentLang === 'uk' && ukVoice) {
-          u.voice = ukVoice;
-          u.lang = ukVoice.lang;
+        const bestVoice = getBestSystemVoice(currentLang);
+        if (bestVoice) {
+          u.voice = bestVoice;
+          u.lang = bestVoice.lang;
         } else {
           u.lang = currentLang === 'uk' ? 'uk-UA' : 'en-US';
         }
 
-        u.rate = 1.05;
-        u.pitch = 0.95; // Confident, grounded ranger tone
+        u.rate = copilotSpeechRate;
+        u.pitch = copilotSpeechPitch;
 
         u.onstart = () => {
           setCopilotSpeakingState(true);
         };
         u.onend = () => {
           setCopilotSpeakingState(false);
+          if (stopBtn) stopBtn.classList.add('hidden');
+          if (copilotVoiceEngine === 'radio') playTacticalRadioEndFX();
         };
-        u.onerror = () => {
+        u.onerror = (e) => {
           setCopilotSpeakingState(false);
+          if (stopBtn) stopBtn.classList.add('hidden');
         };
 
         window.speechSynthesis.speak(u);
       }
     }
 
-    
+    function replayCopilotSpeech() {
+      if (lastCopilotSpokenText) {
+        speakCopilot(lastCopilotSpokenText);
+      }
+    }
+
+    function toggleCopilotVoiceSettings() {
+      const box = document.getElementById('copilot-voice-settings-box');
+      if (box) box.classList.toggle('hidden');
+      const select = document.getElementById('copilot-voice-engine-select');
+      if (select) select.value = copilotVoiceEngine;
+      const rateEl = document.getElementById('copilot-voice-rate');
+      if (rateEl) rateEl.value = copilotSpeechRate;
+      const elKey = document.getElementById('copilot-elevenlabs-key');
+      if (elKey) elKey.value = elevenLabsApiKey;
+      const oaKey = document.getElementById('copilot-openai-key');
+      if (oaKey) oaKey.value = openAiApiKey;
+    }
+
+    function changeCopilotVoiceEngine(val) {
+      copilotVoiceEngine = val;
+      localStorage.setItem('copilot_voice_engine', val);
+      const elBox = document.getElementById('elevenlabs-config-subbox');
+      const oaBox = document.getElementById('openai-config-subbox');
+      if (elBox) elBox.classList.toggle('hidden', val !== 'elevenlabs');
+      if (oaBox) oaBox.classList.toggle('hidden', val !== 'openai');
+      updateCopilotSoundUI();
+    }
+
+    function saveCopilotVoiceSettings() {
+      const select = document.getElementById('copilot-voice-engine-select');
+      if (select) {
+        copilotVoiceEngine = select.value;
+        localStorage.setItem('copilot_voice_engine', copilotVoiceEngine);
+      }
+      const rateEl = document.getElementById('copilot-voice-rate');
+      if (rateEl) {
+        copilotSpeechRate = parseFloat(rateEl.value);
+        localStorage.setItem('copilot_speech_rate', copilotSpeechRate.toString());
+      }
+      const elKey = document.getElementById('copilot-elevenlabs-key');
+      if (elKey) {
+        elevenLabsApiKey = elKey.value.trim();
+        localStorage.setItem('copilot_elevenlabs_key', elevenLabsApiKey);
+      }
+      const oaKey = document.getElementById('copilot-openai-key');
+      if (oaKey) {
+        openAiApiKey = oaKey.value.trim();
+        localStorage.setItem('copilot_openai_key', openAiApiKey);
+      }
+      updateCopilotSoundUI();
+      toggleCopilotVoiceSettings();
+      alert(currentLang === 'uk' ? '✅ Налаштування голосу штурмана збережено!' : '✅ Navigator voice settings saved!');
+    }
+
+    function testCopilotVoice() {
+      const testPhrase = currentLang === 'uk' 
+        ? "Штурман Кáрі на зв'язку. Траса номер один у зоні Південного узбережжя відкрита, пориви вітру 14 метрів на секунду."
+        : "Navigator Kári online. Route 1 along the South Coast is clear, crosswinds reaching 14 meters per second.";
+      speakCopilot(testPhrase);
+    }
+
+    function copyCopilotReply() {
+      const replyEl = document.getElementById('copilot-modal-reply-content');
+      if (!replyEl) return;
+      const text = replyEl.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert(currentLang === 'uk' ? '📋 Відповідь скопійовано в буфер!' : '📋 Briefing copied to clipboard!');
+      });
+    }
+
     // ==========================================
-    // STT (MICROPHONE SPEECH-TO-TEXT) & LM STUDIO BRIDGE
+    // STT (MICROPHONE SPEECH-TO-TEXT) WITH SILENCE DEBOUNCE & ZERO AUTO-INTERRUPT
     // ==========================================
     let speechRecognitionInstance = null;
     let isSpeechRecognitionActive = false;
+    let speechSilenceDebounceTimer = null;
+    let capturedSpeechBuffer = '';
+
+    function toggleSpeechRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) {
+        alert(currentLang === 'uk' 
+          ? 'Розпізнавання голосу не підтримується вашим браузером. Використовуйте Google Chrome, Apple Safari або Microsoft Edge.' 
+          : 'Speech recognition is not supported in this browser. Please use Chrome, Safari, or Edge.');
+        return;
+      }
+
+      if (isSpeechRecognitionActive) {
+        finishSpeechRecognition(true);
+        return;
+      }
+
+      startSpeechRecognition();
+    }
+
+    function startSpeechRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRecognition) return;
+
+      // 1. STRICT REQUIREMENT: Instantly mute and cancel all speech synthesis! Bot must NEVER talk while listening!
+      stopAllCopilotSpeech();
+
+      const micBtn = document.getElementById('btn-copilot-mic');
+      const micStatus = document.getElementById('copilot-mic-status');
+      const input = document.getElementById('copilot-modal-input');
+
+      capturedSpeechBuffer = '';
+      if (input) {
+        input.value = '';
+        input.placeholder = currentLang === 'uk' ? '🎙️ Слухаю вас... Говоріть запитання...' : '🎙️ Listening... Speak your query...';
+      }
+
+      try {
+        speechRecognitionInstance = new SpeechRecognition();
+        speechRecognitionInstance.continuous = true; // DO NOT cut off on short pause!
+        speechRecognitionInstance.interimResults = true;
+        speechRecognitionInstance.lang = currentLang === 'uk' ? 'uk-UA' : 'en-US';
+
+        speechRecognitionInstance.onstart = () => {
+          isSpeechRecognitionActive = true;
+          if (micBtn) {
+            micBtn.className = 'px-3.5 py-2 rounded-xl bg-red-600 text-white border border-red-400 animate-pulse shadow-lg shadow-red-500/50 flex items-center justify-center transition cursor-pointer';
+            micBtn.innerHTML = '<span class="text-sm font-bold flex items-center gap-1"><span>⏹️</span> <span class="text-[11px] font-sans">СТОП</span></span>';
+            micBtn.title = currentLang === 'uk' ? 'Натисніть щоб завершити надиктовування і надіслати' : 'Click to finish and send';
+          }
+          if (micStatus) {
+            micStatus.classList.remove('hidden');
+            micStatus.innerHTML = `
+              <div class="flex flex-wrap items-center justify-between gap-2 w-full">
+                <div class="flex items-center gap-2">
+                  <span class="w-2.5 h-2.5 rounded-full bg-red-400 animate-ping"></span>
+                  <span class="font-bold text-red-300 text-xs">🔴 ${currentLang === 'uk' ? 'ШТУРМАН СЛУХАЄ:' : 'LISTENING:'}</span>
+                  <span class="text-slate-300 text-[11px] italic">${currentLang === 'uk' ? 'говоріть у мікрофон, штурман не перебиватиме...' : 'speak freely, navigator will not interrupt...'}</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button onclick="finishSpeechRecognition(true)" class="px-3 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md transition">
+                    ${currentLang === 'uk' ? '✅ Готово (Запитати)' : '✅ Done (Send)'}
+                  </button>
+                  <button onclick="cancelSpeechRecognition()" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs transition">
+                    ${currentLang === 'uk' ? '✕ Скасувати' : '✕ Cancel'}
+                  </button>
+                </div>
+              </div>
+            `;
+          }
+        };
+
+        speechRecognitionInstance.onresult = (event) => {
+          let fullText = '';
+          for (let i = 0; i < event.results.length; ++i) {
+            fullText += event.results[i][0].transcript;
+          }
+          capturedSpeechBuffer = fullText.trim();
+          if (input && capturedSpeechBuffer) {
+            input.value = capturedSpeechBuffer;
+          }
+
+          // Gentle silence timer: Auto-send ONLY if at least 2 words spoken and 2.8s total silence
+          if (speechSilenceDebounceTimer) clearTimeout(speechSilenceDebounceTimer);
+          if (capturedSpeechBuffer.split(/\s+/).length >= 2) {
+            speechSilenceDebounceTimer = setTimeout(() => {
+              if (isSpeechRecognitionActive) {
+                finishSpeechRecognition(true);
+              }
+            }, 2800);
+          }
+        };
+
+        speechRecognitionInstance.onerror = (event) => {
+          console.warn('Speech recognition status:', event.error);
+          if (event.error === 'no-speech') return; // Silence is normal, don't crash UI
+          stopSpeechRecognitionUI();
+          if (micStatus) {
+            micStatus.classList.remove('hidden');
+            micStatus.innerHTML = `<span class="text-amber-400 text-xs">⚠️ ${currentLang === 'uk' ? 'Помилка мікрофона: ' + event.error : 'Microphone status: ' + event.error}</span>`;
+            setTimeout(() => micStatus.classList.add('hidden'), 3500);
+          }
+        };
+
+        speechRecognitionInstance.onend = () => {
+          // If browser terminated session while still active, evaluate buffer
+          if (isSpeechRecognitionActive) {
+            if (capturedSpeechBuffer && capturedSpeechBuffer.length > 2) {
+              finishSpeechRecognition(true);
+            } else {
+              stopSpeechRecognitionUI();
+            }
+          }
+        };
+
+        speechRecognitionInstance.start();
+      } catch (err) {
+        console.error('Cannot start recognition:', err);
+        stopSpeechRecognitionUI();
+      }
+    }
+
+    function finishSpeechRecognition(shouldSend = true) {
+      if (speechSilenceDebounceTimer) clearTimeout(speechSilenceDebounceTimer);
+      if (speechRecognitionInstance) {
+        try { speechRecognitionInstance.stop(); } catch (e) {}
+      }
+      isSpeechRecognitionActive = false;
+      stopSpeechRecognitionUI();
+
+      const input = document.getElementById('copilot-modal-input');
+      const query = (capturedSpeechBuffer || (input ? input.value : '')).trim();
+
+      if (shouldSend && query.length >= 2) {
+        sendCopilotModalQuery();
+      }
+    }
+
+    function cancelSpeechRecognition() {
+      if (speechSilenceDebounceTimer) clearTimeout(speechSilenceDebounceTimer);
+      if (speechRecognitionInstance) {
+        try { speechRecognitionInstance.stop(); } catch (e) {}
+      }
+      isSpeechRecognitionActive = false;
+      capturedSpeechBuffer = '';
+      const input = document.getElementById('copilot-modal-input');
+      if (input) {
+        input.value = '';
+        input.placeholder = currentLang === 'uk' ? 'Запитайте Кáрі або натисніть мікрофон для надиктовування...' : 'Ask Kári or click mic to dictate...';
+      }
+      stopSpeechRecognitionUI();
+    }
+
+    function stopSpeechRecognitionUI() {
+      isSpeechRecognitionActive = false;
+      const micBtn = document.getElementById('btn-copilot-mic');
+      const micStatus = document.getElementById('copilot-mic-status');
+      if (micBtn) {
+        micBtn.className = 'px-3.5 py-2 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/40 text-cyan-300 border border-cyan-400/50 flex items-center justify-center transition shadow-md shadow-cyan-500/10 cursor-pointer';
+        micBtn.innerHTML = '<span class="text-sm">🎙️</span>';
+        micBtn.title = currentLang === 'uk' ? 'Натисніть для голосового надиктовування запитання' : 'Click to dictate question';
+      }
+      if (micStatus) {
+        micStatus.classList.add('hidden');
+      }
+    }
+
+    // ==========================================
+    // LM STUDIO LOCAL AI BRIDGE
+    // ==========================================
     let lmStudioEndpoint = 'http://localhost:1234/v1/chat/completions';
     let isLmStudioConnected = false;
 
@@ -1767,7 +2214,6 @@
       try {
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 2000);
-        // Test base endpoint
         const baseUrl = lmStudioEndpoint.replace('/chat/completions', '/models');
         const res = await fetch(baseUrl, { signal: controller.signal });
         clearTimeout(timeoutId);
@@ -1788,99 +2234,11 @@
 
       if (badge) {
         badge.className = 'px-2 py-0.5 rounded-full bg-slate-800 text-cyan-300 font-mono text-[10px] border border-slate-700 flex items-center gap-1 shadow-sm';
-        badge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> <span>⚡ Автономний Експерт (115 POI) • LM Studio: Офлайн</span>';
+        badge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> <span>⚡ Автономний Експерт (115 POI)</span>';
       }
       if (statusText) statusText.innerHTML = '<span class="text-amber-400">⚠️ Сервер LM Studio не знайдено на порту 1234. Працює автономна база 115 POI.</span>';
       if (isUserInitiated) alert('⚠️ LM Studio не відповідає на http://localhost:1234.\nПереконайтеся, що в LM Studio запущено сервер (кнопка Start Server) та дозволено CORS.');
       return false;
-    }
-
-    function toggleSpeechRecognition() {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRecognition) {
-        alert(currentLang === 'uk' 
-          ? 'Розпізнавання голосу не підтримується вашим браузером. Використовуйте Google Chrome, Safari або Microsoft Edge.' 
-          : 'Speech recognition is not supported in this browser. Please use Chrome, Safari, or Edge.');
-        return;
-      }
-
-      const micBtn = document.getElementById('btn-copilot-mic');
-      const micStatus = document.getElementById('copilot-mic-status');
-      const input = document.getElementById('copilot-modal-input');
-
-      if (isSpeechRecognitionActive) {
-        if (speechRecognitionInstance) speechRecognitionInstance.stop();
-        stopSpeechRecognitionUI();
-        return;
-      }
-
-      speechRecognitionInstance = new SpeechRecognition();
-      speechRecognitionInstance.continuous = false;
-      speechRecognitionInstance.interimResults = true;
-      speechRecognitionInstance.lang = currentLang === 'uk' ? 'uk-UA' : 'en-US';
-
-      speechRecognitionInstance.onstart = () => {
-        isSpeechRecognitionActive = true;
-        if (micBtn) {
-          micBtn.className = 'px-3.5 py-2 rounded-xl bg-red-600 text-white border border-red-400 animate-pulse shadow-lg shadow-red-500/50 flex items-center justify-center transition cursor-pointer';
-          micBtn.innerHTML = '<span class="text-sm">🔴</span>';
-        }
-        if (micStatus) {
-          micStatus.classList.remove('hidden');
-          micStatus.textContent = currentLang === 'uk' 
-            ? '🎙️ Говоріть зараз... Штурман слухає українською...' 
-            : '🎙️ Speak now... Listening for English speech...';
-        }
-      };
-
-      speechRecognitionInstance.onresult = (event) => {
-        let transcript = '';
-        for (let i = event.resultIndex; i < event.results.length; ++i) {
-          transcript += event.results[i][0].transcript;
-        }
-        if (input) input.value = transcript;
-      };
-
-      speechRecognitionInstance.onerror = (event) => {
-        console.warn('Speech recognition error:', event.error);
-        stopSpeechRecognitionUI();
-        if (micStatus) {
-          micStatus.classList.remove('hidden');
-          micStatus.textContent = currentLang === 'uk' 
-            ? '⚠️ Не вдалося отримати доступ до мікрофона (' + event.error + '). Перевірте дозволи браузера.' 
-            : '⚠️ Microphone access error (' + event.error + '). Please grant browser permissions.';
-        }
-      };
-
-      speechRecognitionInstance.onend = () => {
-        stopSpeechRecognitionUI();
-        // Auto send if non-empty
-        if (input && input.value.trim().length > 1) {
-          sendCopilotModalQuery();
-        }
-      };
-
-      try {
-        speechRecognitionInstance.start();
-      } catch (err) {
-        console.error('Cannot start recognition:', err);
-        stopSpeechRecognitionUI();
-      }
-    }
-
-    function stopSpeechRecognitionUI() {
-      isSpeechRecognitionActive = false;
-      const micBtn = document.getElementById('btn-copilot-mic');
-      const micStatus = document.getElementById('copilot-mic-status');
-      if (micBtn) {
-        micBtn.className = 'px-3.5 py-2 rounded-xl bg-cyan-500/20 hover:bg-cyan-500/40 text-cyan-300 border border-cyan-400/50 flex items-center justify-center transition shadow-md shadow-cyan-500/10 cursor-pointer';
-        micBtn.innerHTML = '<span class="text-sm">🎙️</span>';
-      }
-      if (micStatus) {
-        setTimeout(() => {
-          micStatus.classList.add('hidden');
-        }, 2000);
-      }
     }
 
     function clearCopilotModalInput() {
@@ -1892,6 +2250,273 @@
       const inp = document.getElementById('copilot-modal-input');
       if (inp) inp.value = q;
       sendCopilotModalQuery();
+    }
+
+    // ==========================================
+    // 9 CORRIDOR OPERATIONAL EXPEDITION BRIEFINGS
+    // ==========================================
+    const CORRIDOR_BRIEFINGS = {
+      golden_circle: {
+        id: 'golden_circle',
+        title: { uk: 'Золоте кільце & Долина Хейкадалур', en: 'Golden Circle & Haukadalur' },
+        center: [-20.6, 64.25],
+        zoom: 9.8,
+        pitch: 50,
+        briefing: {
+          uk: "🏛️ <b>Оперативний брифінг коридору: Золоте кільце (Golden Circle • 300 км)</b><br>" +
+              "• <b>Дорожня обстановка (Vegagerðin):</b> Дороги 36 (Тінгведлір), 35 (Ґулльфосс/Гейсір) та 37 відкриті (Greiðfært). Покриття — чистий асфальт. Слизькі дерев'яні трапи біля гейзерів через геотермальний конденсат.<br>" +
+              "• <b>Метеорологія:</b> На перевалі Mosfellsheiði пориви вітру до 12 м/с. Видимість відмінна.<br>" +
+              "• <b>Ключові об'єкти:</b><br>" +
+              "  1. <b>Þingvellir:</b> Розлом Almannagjá між Північноамериканською та Євразійською плитами та кришталева ущелина Silfra (прозорість >100м).<br>" +
+              "  2. <b>Haukadalur:</b> Гейзер Strokkur (виверження кожні 5–8 хв на висоту 20–30м).<br>" +
+              "  3. <b>Gullfoss:</b> Двоступеневий 32-метровий водоспад у каньйоні річки Hvítá.<br>" +
+              "  4. <b>Kerið:</b> Вулканічний кратер віком 3000 років із сапфіровим озером.<br>" +
+              "• <b>Порада гіда:</b> Найкращий час для Ґулльфосса — ранковий або передзахідний для подвійної веселки над прірвою.",
+          en: "🏛️ <b>Operational Corridor Briefing: Golden Circle (300 km loop)</b><br>" +
+              "• <b>Road Logistics (Vegagerðin):</b> Routes 36, 35, and 37 are clear (Greiðfært). Paved tarmac throughout. Wet slippery boardwalks around geysers due to geothermal mist.<br>" +
+              "• <b>Meteorology:</b> Mosfellsheiði pass winds up to 12 m/s. High visibility.<br>" +
+              "• <b>Prime Checkpoints:</b><br>" +
+              "  1. <b>Þingvellir:</b> Almannagjá continental rift and pristine Silfra fissure (>100m underwater optical clarity).<br>" +
+              "  2. <b>Haukadalur:</b> Strokkur geysir erupting every 5–8 minutes reaching 20–30 meters.<br>" +
+              "  3. <b>Gullfoss:</b> 32m cataract plunging into the Hvítá glacial river canyon.<br>" +
+              "  4. <b>Kerið:</b> 3,000-year-old volcanic caldera harboring an azure lake.<br>" +
+              "• <b>Pro Tip:</b> Best photo window for Gullfoss is morning or late afternoon for double rainbows over the canyon."
+        }
+      },
+      south_coast: {
+        id: 'south_coast',
+        title: { uk: 'Південне узбережжя & Вулкан Катла', en: 'South Coast & Katla Volcano' },
+        center: [-19.05, 63.55],
+        zoom: 9.4,
+        pitch: 52,
+        briefing: {
+          uk: "🌊 <b>Оперативний брифінг: Південне узбережжя & Вулкан Катла (380 км)</b><br>" +
+              "• <b>Дорожня обстановка:</b> Кільцева Траса 1 повністю відкрита. Відрізок Сельяландсфосс — Скоугафосс зазнає різких бічних поривів вітру з льодовика Ейяф'ятлайокюдль.<br>" +
+              "• <b>КРИТИЧНА БЕЗПЕКА (SafeTravel):</b><br>" +
+              "  ⚠️ <b>Чорний пляж Reynisfjara:</b> Смертельні хвилі-підкрадачі (sneaker waves)! Суворо дотримуйтесь світлофора безпеки, тримайте дистанцію мінімум 30 метрів від прибою і ніколи не повертайтеся спиною до океану.<br>" +
+              "  💨 <b>Мис Dyrhólaey:</b> Пориви вітру 16–22 м/с. Тримайте двері авто обома руками при відкриванні!<br>" +
+              "• <b>Ключові локації:</b> Seljalandsfoss (прохід за водоспадом), Gljúfrabúi (печерний водоспад), Skógafoss (60м стіна води), Kvernufoss (секретна ущелина), містечко Vík із червоною церквою.<br>" +
+              "• <b>Порада штурмана:</b> Заправте повний бак у містечку Вік — далі на схід заправки вкрай рідкісні!",
+          en: "🌊 <b>Operational Briefing: South Coast & Katla Volcano (380 km)</b><br>" +
+              "• <b>Road Status:</b> Ring Road 1 is fully open. Watch for severe katabatic crosswinds between Seljalandsfoss and Skógafoss flowing off Eyjafjallajökull.<br>" +
+              "• <b>CRITICAL SAFETY (SafeTravel):</b><br>" +
+              "  ⚠️ <b>Reynisfjara Beach:</b> Lethal sneaker waves surge unpredictably! Obey automated safety lights, stay 30m back from surf, and never turn your back on the Atlantic Ocean.<br>" +
+              "  💨 <b>Dyrhólaey Promontory:</b> Gale gusts 16–22 m/s. Always hold car doors with both hands!<br>" +
+              "• <b>Highlights:</b> Seljalandsfoss (walk behind cataract), Gljúfrabúi, Skógafoss (60m roar), Kvernufoss hidden ravine, Vík coastal village.<br>" +
+              "• <b>Navigator Tip:</b> Top off your fuel tank in Vík before traversing the eastern glacial outwash plains."
+        }
+      },
+      glacier_lagoon: {
+        id: 'glacier_lagoon',
+        title: { uk: 'Південний Схід: Скафтафетль & Ййокюльсарлон', en: 'Southeast: Skaftafell & Glacier Lagoons' },
+        center: [-16.18, 64.05],
+        zoom: 9.2,
+        pitch: 55,
+        briefing: {
+          uk: "🧊 <b>Оперативний брифінг: Льодовикові лагуни & Скафтафетль</b><br>" +
+              "• <b>Дорожня обстановка:</b> Траса 1 через чорні піщані зандри Skeiðarársandur. Односмугові вузькі мости (Einbreið brú) — пріоритет у того, хто ближче до мосту. Знижуйте швидкість до 50 км/год.<br>" +
+              "• <b>Фактори безпеки:</b><br>" +
+              "  🚫 <b>Ййокюльсарлон:</b> Категорично заборонено ставати на айсберги або крижини! Швидка течія виносить лід у відкритий океан за хвилини.<br>" +
+              "  🧊 <b>Льодовик Svínafellsjökull:</b> Вихід на лід виключно в кішках і з сертифікованим гідом.<br>" +
+              "• <b>Головні локації:</b> Скафтафетль, водоспад Svartifoss (базальтові колони), льодовикова лагуна Fjallsárlón, Jökulsárlón, Diamond Beach (айсберги на чорному піску), гора Vestrahorn (Stokknes).<br>" +
+              "• <b>Порада штурмана:</b> Найкраще світло для Diamond Beach — світанок або захід сонця.",
+          en: "🧊 <b>Operational Briefing: Glacier Lagoons & Skaftafell</b><br>" +
+              "• <b>Road Status:</b> Route 1 across Skeiðarársandur black outwash sands. Single-lane bridges (Einbreið brú) require slowing to 50 km/h; vehicle closer to bridge has right of way.<br>" +
+              "• <b>Safety Alerts:</b><br>" +
+              "  🚫 <b>Jökulsárlón:</b> Stepping onto floating icebergs is strictly forbidden! Tidal currents drag calved ice into the open ocean within minutes.<br>" +
+              "  🧊 <b>Svínafellsjökull:</b> Glacier hikes require licensed guides, crampons, and ice axes.<br>" +
+              "• <b>Key POIs:</b> Skaftafell, Svartifoss basalt colonnade waterfall, Fjallsárlón lagoon, Jökulsárlón, Diamond Beach, Vestrahorn mountain peaks at Stokknes.<br>" +
+              "• <b>Pro Tip:</b> Golden hour light on Diamond Beach creates unparalleled crystalline ice refraction."
+        }
+      },
+      snaefellsnes: {
+        id: 'snaefellsnes',
+        title: { uk: 'Півострів Снайфедльснес ("Ісландія в мініатюрі")', en: 'Snæfellsnes Peninsula' },
+        center: [-23.5, 64.85],
+        zoom: 9.6,
+        pitch: 52,
+        briefing: {
+          uk: "🏔️ <b>Оперативний брифінг: Півострів Снайфедльснес ('Ісландія в мініатюрі')</b><br>" +
+              "• <b>Дорожня обстановка:</b> Дорога 54 огинає півострів. Північ — асфальт, південь має рівні гравійні ділянки. Перевал Fróðárheiði схильний до раптових туманів.<br>" +
+              "• <b>Ключові локації:</b><br>" +
+              "  1. <b>Kirkjufell:</b> Найвідоміша гора-шапка та водоспад Kirkjufellsfoss.<br>" +
+              "  2. <b>Búðir:</b> Чорна дерев'яна смолена церква посеред лавового поля Búðahraun.<br>" +
+              "  3. <b>Arnarstapi:</b> Базальтові арки Gatklettur та прибережні пташині скелі.<br>" +
+              "  4. <b>Djúpalónssandur:</b> Пляж чорної гальки та камені сили вікінгів (Amlóði, Fullsterkur).<br>" +
+              "  5. <b>Snæfellsjökull:</b> Стратовулкан-льодовик, описаний Жулем Верном у 'Подорожі до Центру Землі'.",
+          en: "🏔️ <b>Operational Briefing: Snæfellsnes Peninsula ('Iceland in Miniature')</b><br>" +
+              "• <b>Road Status:</b> Route 54 loops the peninsula. North is paved, south features well-graded gravel. Fróðárheiði mountain pass subject to dense fog and sudden squalls.<br>" +
+              "• <b>Key Landmarks:</b><br>" +
+              "  1. <b>Kirkjufell:</b> Arrowhead mountain and Kirkjufellsfoss twin cascades.<br>" +
+              "  2. <b>Búðir:</b> Historic black timber church in the Búðahraun lava field.<br>" +
+              "  3. <b>Arnarstapi:</b> Basalt arches of Gatklettur and nesting seabird cliffs.<br>" +
+              "  4. <b>Djúpalónssandur:</b> Black pebble shore featuring legendary Viking lifting stones.<br>" +
+              "  5. <b>Snæfellsjökull:</b> Glaciated stratovolcano, legendary gateway to the Center of the Earth in Jules Verne's saga."
+        }
+      },
+      north: {
+        id: 'north',
+        title: { uk: 'Північ & Озеро Міватн (Diamond Circle)', en: 'North Iceland & Mývatn' },
+        center: [-16.9, 65.6],
+        zoom: 9.2,
+        pitch: 55,
+        briefing: {
+          uk: "💎 <b>Оперативний брифінг: Північ & Озеро Міватн (Діамантове кільце)</b><br>" +
+              "• <b>Дорожня обстановка:</b> Траса 1 через перевал Öxnadalsheiði відкрита. До водоспаду Dettifoss веде західна асфальтована дорога 862 (рекомендується цілорічно) та східна складна гравійна 864.<br>" +
+              "• <b>Безпека:</b> На геотермальному полі Námafjall / Hverir температура фумарол перевищує 100°C — ходіть лише по дерев'яних настилах.<br>" +
+              "• <b>Головні локації:</b> Goðafoss (Водоспад язичницьких богів), Dettifoss (найпотужніший у Європі — 500 м³/с), Dimmuborgir (лавові 'чорні замки'), термальні басейни Mývatn Nature Baths, каньйон Ásbyrgi, китова столиця Húsavík.<br>" +
+              "• <b>Порада штурмана:</b> Регіон Міватн — одна з найкращих локацій Ісландії для спостереження Аврори!",
+          en: "💎 <b>Operational Briefing: North Iceland & Mývatn (Diamond Circle)</b><br>" +
+              "• <b>Road Status:</b> Route 1 via Öxnadalsheiði pass is clear. To reach Dettifoss, west Route 862 is fully paved (recommended year-round); east Route 864 is rough gravel.<br>" +
+              "• <b>Hazard Warnings:</b> Námafjall / Hverir fumaroles exceed 100°C; thin sulfur crusts break easily—stay strictly on designated paths.<br>" +
+              "• <b>Highlights:</b> Goðafoss (Waterfall of the Norse Gods), Dettifoss (Europe's most powerful cataract, 500 m³/s), Dimmuborgir lava fortresses, Mývatn Nature Baths, Ásbyrgi horseshoe canyon, whale capital Húsavík.<br>" +
+              "• <b>Navigator Tip:</b> Lake Mývatn's dark skies make it an exceptional Aurora observation theater."
+        }
+      },
+      east_fjords: {
+        id: 'east_fjords',
+        title: { uk: 'Східні фіорди & Каньйон Студлагіл', en: 'East Fjords & Stuðlagil' },
+        center: [-14.5, 65.1],
+        zoom: 9.0,
+        pitch: 50,
+        briefing: {
+          uk: "🌲 <b>Оперативний брифінг: Східні фіорди & Студлагіл</b><br>" +
+              "• <b>Дорожня обстановка:</b> Траса 1 в'ється вздовж фіордів. Перевал Öxi (дорога 939) скорочує маршрут на 60 км, але це крутий гравійний серпантин без відбійників — лише для впевнених водіїв за сухої погоди.<br>" +
+              "• <b>Головні локації:</b><br>" +
+              "  1. <b>Stuðlagil Canyon:</b> Найвеличніший базальтовий каньйон із бірюзовою водою. Спуск до води — виключно зі східного боку від ферми Klaustursel (піший трек 4 км).<br>" +
+              "  2. <b>Seyðisfjörður:</b> Норвезьке дерев'яне містечко з блакитною церквою та райдужною вулицею.<br>" +
+              "  3. <b>Hengifoss:</b> 128-метровий водоспад із контрастними червоними смугами глини.<br>" +
+              "• <b>Увага:</b> Океанічні тумани (hafþoka) можуть знижувати видимість до 20 метрів.",
+          en: "🌲 <b>Operational Briefing: East Fjords & Stuðlagil Canyon</b><br>" +
+              "• <b>Road Status:</b> Route 1 follows winding coastline. Öxi mountain pass (Route 939) saves 60 km but is steep unpaved gravel with sheer drops—exercise utmost caution.<br>" +
+              "• <b>Prime Checkpoints:</b><br>" +
+              "  1. <b>Stuðlagil Canyon:</b> Colossal hexagonal basalt columns embracing turquoise glacial waters. River-bed access is exclusively from the eastern Klaustursel farm trail (4 km hike).<br>" +
+              "  2. <b>Seyðisfjörður:</b> Norwegian-style fjord harbor with its iconic blue church and rainbow lane.<br>" +
+              "  3. <b>Hengifoss:</b> 128m cascade flanked by crimson sedimentary clay layers.<br>" +
+              "• <b>Weather Advisory:</b> Sudden coastal sea fogs (hafþoka) can rapidly drop road visibility below 20 meters."
+        }
+      },
+      reykjanes: {
+        id: 'reykjanes',
+        title: { uk: 'Півострів Рейк\'янес & Свіжі вулкани', en: 'Reykjanes & Active Volcanoes' },
+        center: [-22.3, 63.9],
+        zoom: 10.2,
+        pitch: 48,
+        briefing: {
+          uk: "🌋 <b>Оперативний брифінг: Півострів Рейк'янес & Свіжа Лава</b><br>" +
+              "• <b>Дорожня обстановка:</b> Траса 41 (Рейк'явік — Keflavík) відкрита. Траса 43 (до Grindavík) регулюється згідно з поточною вулканічною ситуацією в системі Sundhnúkagígar.<br>" +
+              "• <b>Безпека (SO2 Alert):</b> Постійний моніторинг концентрації вулканічного діоксиду сірки (SO2). За високих рівнів уникайте низин лавових полів.<br>" +
+              "• <b>Головні об'єкти:</b> Blue Lagoon (всесвітньо відоме геотермальне спа), міст між Північноамериканською та Євразійською плитами Miðlína, кипляче джерело Gunnuhver, лавові поля вивержень Fagradalsfjall 2021–2024 рр., маяк Reykjanesviti.",
+          en: "🌋 <b>Operational Briefing: Reykjanes Peninsula & Active Volcanism</b><br>" +
+              "• <b>Road Logistics:</b> Route 41 (Reykjavík—Keflavík International Airport) is fully open. Route 43 to Grindavík is monitored dynamically based on Sundhnúkagígar volcanic fissure activity.<br>" +
+              "• <b>Gas Safety (SO2 Alert):</b> Real-time volcanic gas sensors operate continuously. Never linger in low-lying craters when SO2 levels peak.<br>" +
+              "• <b>Highlights:</b> Blue Lagoon mineral spa, Miðlína continental rift bridge, Gunnuhver boiling mud cauldrons, Fagradalsfjall 2021–2024 fresh basalt fields, Reykjanesviti lighthouse."
+        }
+      },
+      highlands: {
+        id: 'highlands',
+        title: { uk: 'Високогір\'я F-Roads: Ландманналаугар & Аск\'я', en: 'Highlands F-Roads: Landmannalaugar & Askja' },
+        center: [-19.0, 64.8],
+        zoom: 8.8,
+        pitch: 60,
+        briefing: {
+          uk: "🚙 <b>Оперативний брифінг: Високогір'я F-Roads (Highlands)</b><br>" +
+              "• <b>СТАТУС ДОРОГИ ТА ВИМОГИ:</b> Дороги F208, F26, F35 дозволені ВИКЛЮЧНО для підготовлених повнопривідних авто 4x4 із високим кліренсом (Superjeep). Легкові 2WD авто — КАТЕГОРИЧНО ЗАБОРОНЕНО законодавством Ісландії.<br>" +
+              "• <b>ПРАВИЛА БРОДУ РІЧОК:</b><br>" +
+              "  1. Ніколи не перетинайте річку поодинці без спостереження іншого екіпажу.<br>" +
+              "  2. Перевірте глибину та брід пішки.<br>" +
+              "  3. Рухайтеся на 1-й зниженій передачі (4L) по діагоналі вниз за течією.<br>" +
+              "  4. Рівень води ввечері завжди вищий, ніж уранці, через танення льодовика!<br>" +
+              "• <b>Головні локації:</b> Landmannalaugar (ріолітові кольорові гори та природні гарячі джерела), кратерне озеро Víti та кальдера Askja, геотермальний хребет Kerlingarfjöll.",
+          en: "🚙 <b>Operational Briefing: Central Highlands F-Roads Wilderness</b><br>" +
+              "• <b>ROAD REGULATIONS & PERMITS:</b> F-roads (F208, F26 Sprengisandur, F35 Kjölur) are legally restricted to modified 4x4 vehicles with high ground clearance. Standard 2WD passenger vehicles are strictly prohibited (insurance voided; SAR towing costs >3,000 EUR).<br>" +
+              "• <b>RIVER CROSSING PROTOCOL:</b><br>" +
+              "  1. Never ford an unbridged river alone.<br>" +
+              "  2. Wade first to inspect rocks and water depth.<br>" +
+              "  3. Engage Low-Range 4L, proceed diagonally downstream at steady throttle.<br>" +
+              "  4. Glacial river levels surge significantly in late afternoon due to solar melt!<br>" +
+              "• <b>Key POIs:</b> Landmannalaugar rhyolite mountains and natural thermal baths, Askja caldera with Víti geothermal crater, steaming Kerlingarfjöll peaks."
+        }
+      },
+      westfjords: {
+        id: 'westfjords',
+        title: { uk: 'Дикі Вестфіорди: Діньянді & Латраб\'ярг', en: 'The Wild Westfjords' },
+        center: [-23.2, 65.7],
+        zoom: 8.8,
+        pitch: 52,
+        briefing: {
+          uk: "🦅 <b>Оперативний брифінг: Дикі Вестфіорди</b><br>" +
+              "• <b>Дорожня обстановка:</b> Дороги 60 та 61. Численні гравійні серпантини та гірські перевали (Dynjandisheiði). Слідкуйте за паливом — дистанції між АЗС нерідко перевищують 120 км.<br>" +
+              "• <b>Головні локації:</b><br>" +
+              "  1. <b>Dynjandi (Fjallfoss):</b> 100-метровий ступінчастий каскадний водоспад (ширина внизу досягає 60 метрів).<br>" +
+              "  2. <b>Látrabjarg:</b> Найзахідніша точка Європи та 14-кілометрові пташині скелі заввишки до 441 метра (колонії мільйонів тупиків).<br>" +
+              "  3. <b>Rauðasandur:</b> 10-кілометровий золотаво-рожевий піщаний пляж із подрібнених черепашок молюсків.",
+          en: "🦅 <b>Operational Briefing: The Wild Westfjords</b><br>" +
+              "• <b>Road Logistics:</b> Routes 60 and 61. Extensive unpaved switchbacks and mountain passes (Dynjandisheiði). Fuel stations are sparse—never let fuel drop below half tank.<br>" +
+              "• <b>Key POIs:</b><br>" +
+              "  1. <b>Dynjandi (Fjallfoss):</b> 100-meter tiered bridal-veil cascade spanning 60 meters at base.<br>" +
+              "  2. <b>Látrabjarg:</b> Westernmost promontory of Europe, 14 km sea cliffs up to 441 meters sheltering millions of nesting puffins.<br>" +
+              "  3. <b>Rauðasandur:</b> 10 km expanse of pink and golden pulverized shell sands."
+        }
+      }
+    };
+
+    function briefRouteCorridor(corridorKey) {
+      const c = CORRIDOR_BRIEFINGS[corridorKey];
+      if (!c) return;
+
+      // 1. Instantly silence previous speech
+      stopAllCopilotSpeech();
+
+      // 2. Fly map smoothly to corridor center
+      if (typeof map !== 'undefined' && map) {
+        map.flyTo({
+          center: c.center,
+          zoom: c.zoom,
+          pitch: c.pitch,
+          bearing: 15,
+          speed: 1.2,
+          curve: 1.4,
+          essential: true
+        });
+      }
+
+      // 3. Highlight region in sidebar if mapped
+      if (typeof selectRegion === 'function') {
+        const regionMap = {
+          golden_circle: 'golden_circle',
+          south_coast: 'south_coast',
+          glacier_lagoon: 'south_coast',
+          snaefellsnes: 'snaefellsnes',
+          north: 'north',
+          east_fjords: 'east_fjords',
+          reykjanes: 'reykjanes',
+          highlands: 'highlands',
+          westfjords: 'westfjords'
+        };
+        const mappedReg = regionMap[corridorKey] || corridorKey;
+        try { selectRegion(mappedReg); } catch (e) {}
+      }
+
+      // 4. Render Rich Dispatch into Modal Reply Box
+      const replyEl = document.getElementById('copilot-modal-reply');
+      const replyContent = document.getElementById('copilot-modal-reply-content');
+      const replyTitle = document.getElementById('copilot-modal-reply-title');
+
+      const text = c.briefing[currentLang] || c.briefing.uk;
+      const plainText = text.replace(/<[^>]+>/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+
+      if (replyEl) replyEl.classList.remove('hidden');
+      if (replyTitle) {
+        replyTitle.innerHTML = `<span>🧭</span> <span>${c.title[currentLang] || c.title.uk}</span>`;
+      }
+      if (replyContent) {
+        replyContent.innerHTML = text;
+      }
+      if (replyEl) replyEl.scrollTop = 0;
+
+      // 5. Speak response via chosen voice engine (if unmuted)
+      speakCopilot(plainText);
     }
 
     // ==========================================
@@ -1955,35 +2580,42 @@
         return isUk 
           ? "⛽ <b>Заправки в Ісландії:</b> Мережі N1, Olís, Orkan. На автоматичних колонках вимагається банківська картка з 4-значним PIN-кодом (Apple Pay не завжди працює на автоматах самообслуговування). На південному узбережжі між Віком та Хьофном заправки рідкісні — заправляйте повний бак при кожній нагоді!"
           : "⛽ <b>Refueling Logistics:</b> Key brands are N1, Olís, and Orkan. Unattended pumps require a physical chip-and-PIN credit/debit card (Apple Pay often rejected at self-service terminals). Between Vík and Höfn, fuel stations are sparse—fill up whenever below half a tank!";
-      }
+      } 
       else if (lower.includes('112') || lower.includes('sos') || lower.includes('порятунок') || lower.includes('emergency')) {
         return isUk 
           ? "🚨 <b>Екстрена допомога в Ісландії:</b> Єдиний номер екстрених служб — <b>112</b> (працює навіть без SIM-карти та покриття оператора через будь-яку доступну вежу). Рекомендуємо завантажити додаток <b>112 Iceland</b> та зареєструвати свій план подорожі на SafeTravel.is!"
           : "🚨 <b>Emergency Protocol:</b> Universal emergency hotline is <b>112</b> (connects without SIM card via any available satellite cell tower). Download the <b>112 Iceland</b> app and lodge your travel plan at SafeTravel.is before heading into remote regions!";
-      }
+      } 
       else {
         return isUk 
-          ? "🛡️ <b>Штурман Кáрі:</b> За даними SafeTravel і Vegagerðin, ваш маршрут надійний (Індекс безпеки 92/100). У базі зафіксовано 115 перевірених об'єктів. Запитайте мене про стан Траси 1, прогноз Аврори, секретні водоспади або правила безпеки!"
-          : "🛡️ <b>Navigator Kári:</b> Telemetry from SafeTravel and Vegagerðin indicates a favorable expedition day (Safety Index 92/100). All 115 POIs are verified. Ask me about Ring Road conditions, Aurora forecast, hidden waterfalls, or severe wind advisories!";
+          ? "🛡️ <b>Штурман Кáрі:</b> За даними SafeTravel і Vegagerðin, ваш маршрут надійний (Індекс безпеки 92/100). У базі зафіксовано 115 перевірених об'єктів. Оберіть оперативний коридор внизу або запитайте мене про стан Траси 1, прогноз Аврори, секретні водоспади чи правила безпеки!"
+          : "🛡️ <b>Navigator Kári:</b> Telemetry from SafeTravel and Vegagerðin indicates favorable expedition conditions (Safety Index 92/100). All 115 POIs verified. Select a corridor below or ask about Ring Road conditions, Aurora forecast, hidden waterfalls, or severe wind advisories!";
       }
     }
 
-    // ==========================================
     // SEND QUERY DISPATCHER (LM STUDIO OR EXPERT ENGINE)
-    // ==========================================
     async function sendCopilotModalQuery() {
       const input = document.getElementById('copilot-modal-input');
       if (!input) return;
       const q = input.value.trim();
       if (!q) return;
 
+      // Silence any playing audio when sending new query
+      stopAllCopilotSpeech();
+
       const replyEl = document.getElementById('copilot-modal-reply');
-      if (replyEl) {
-        replyEl.classList.remove('hidden');
-        replyEl.innerHTML = `
-          <div class="flex items-center gap-2 text-cyan-400 font-mono text-xs">
+      const replyContent = document.getElementById('copilot-modal-reply-content');
+      const replyTitle = document.getElementById('copilot-modal-reply-title');
+
+      if (replyEl) replyEl.classList.remove('hidden');
+      if (replyTitle) {
+        replyTitle.innerHTML = `<span>💬</span> <span>${q.slice(0, 35)}${q.length > 35 ? '...' : ''}</span>`;
+      }
+      if (replyContent) {
+        replyContent.innerHTML = `
+          <div class="flex items-center gap-2 text-cyan-400 font-mono text-xs py-2">
             <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-            <span>${currentLang === 'uk' ? 'Штурман Кáрі обробляє запит...' : 'Navigator Kári is analyzing expedition telemetry...'}</span>
+            <span>${currentLang === 'uk' ? 'Штурман Кáрі аналізує дані...' : 'Navigator Kári is analyzing telemetry...'}</span>
           </div>
         `;
       }
@@ -2033,23 +2665,18 @@
         finalAnswer = generateDeepCopilotAnswer(q, currentLang);
       }
 
+      if (replyContent) {
+        replyContent.innerHTML = finalAnswer;
+      }
       if (replyEl) {
-        replyEl.innerHTML = `
-          <div class="space-y-1">
-            <div class="flex items-center justify-between border-b border-cyan-500/20 pb-1 text-[10px] text-cyan-400 font-mono">
-              <span class="font-bold flex items-center gap-1"><span>🤖</span> <span>ШТУРМАН КÁРІ (LEIÐSÖGUMAÐUR):</span></span>
-              <span class="text-slate-400">${isLmStudioConnected ? 'LM Studio Model' : '115 POI Knowledge Engine'}</span>
-            </div>
-            <div class="text-slate-100 text-[11px] leading-relaxed pt-0.5">${finalAnswer}</div>
-          </div>
-        `;
-        replyEl.scrollTop = replyEl.scrollHeight;
+        replyEl.scrollTop = 0;
       }
 
       // Strip HTML tags for clean speech recital
       const plainText = finalAnswer.replace(/<[^>]+>/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
       speakCopilot(plainText);
     }
+
 
     function sendMiniCopilotQuery() {
       const inp = document.getElementById('copilot-mini-input');
@@ -2385,6 +3012,16 @@
     window.openAudioStudioModal = openAudioStudioModal;
     window.closeAudioStudioModal = closeAudioStudioModal;
     window.copyNotebookLmDossier = copyNotebookLmDossier;
+    window.briefRouteCorridor = briefRouteCorridor;
+    window.toggleCopilotVoiceSettings = toggleCopilotVoiceSettings;
+    window.changeCopilotVoiceEngine = changeCopilotVoiceEngine;
+    window.saveCopilotVoiceSettings = saveCopilotVoiceSettings;
+    window.testCopilotVoice = testCopilotVoice;
+    window.stopAllCopilotSpeech = stopAllCopilotSpeech;
+    window.replayCopilotSpeech = replayCopilotSpeech;
+    window.copyCopilotReply = copyCopilotReply;
+    window.finishSpeechRecognition = finishSpeechRecognition;
+    window.cancelSpeechRecognition = cancelSpeechRecognition;
     window.openPoiModal = openPoiModal;
     window.closePoiModal = closePoiModal;
     window.playModalAudio = playModalAudio;
@@ -2720,19 +3357,186 @@
             </div>
           </div>
 
-          <!-- Row 3: Interactive Co-Pilot AI Chat, Speech Recognition & LM Studio Bridge -->
+          <!-- DEDICATED QUICK DESTINATION DISPATCHER -->
+          <div class="p-3 rounded-xl bg-slate-900/95 border border-emerald-500/40 space-y-2 shadow-xl">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="text-base">🧭</span>
+                <span class="text-xs font-bold text-emerald-300 uppercase tracking-wider">
+                  КУДИ ВИ ПЛАНУЄТЕ ЇХАТИ? ШВИДКИЙ БРИФІНГ НАПРЯМКУ:
+                </span>
+              </div>
+              <span class="text-[10px] text-slate-400 font-mono hidden sm:inline">9 оперативних коридорів • SafeTravel &amp; Vegagerðin</span>
+            </div>
+
+            <!-- 9 Corridor Destination Quick-Select Cards -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-5 gap-1.5 text-left">
+              <!-- Corridor 1: Golden Circle -->
+              <button onclick="briefRouteCorridor('golden_circle')" class="group p-2 rounded-xl bg-slate-950/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex flex-col justify-between">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-base">🏛️</span>
+                  <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-300 font-bold">ТРАСИ 36/35</span>
+                </div>
+                <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Золоте кільце</div>
+                <div class="text-[10px] text-slate-400 truncate">Тінгведлір • Ґулльфосс • Гейсір</div>
+              </button>
+
+              <!-- Corridor 2: South Coast -->
+              <button onclick="briefRouteCorridor('south_coast')" class="group p-2 rounded-xl bg-slate-950/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex flex-col justify-between">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-base">🌊</span>
+                  <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-cyan-500/20 text-cyan-300 font-bold">ТРАСА 1 • ВІК</span>
+                </div>
+                <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Південь &amp; Катла</div>
+                <div class="text-[10px] text-slate-400 truncate">Скоугафосс • Сельяландс • Рейнісф'яра</div>
+              </button>
+
+              <!-- Corridor 3: Glacier Lagoon -->
+              <button onclick="briefRouteCorridor('glacier_lagoon')" class="group p-2 rounded-xl bg-slate-950/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex flex-col justify-between">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-base">🧊</span>
+                  <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-blue-500/20 text-blue-300 font-bold">ЛЬОДОВИКИ</span>
+                </div>
+                <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Ййокюльсарлон</div>
+                <div class="text-[10px] text-slate-400 truncate">Diamond Beach • Скафтафетль • Стокснес</div>
+              </button>
+
+              <!-- Corridor 4: Snæfellsnes -->
+              <button onclick="briefRouteCorridor('snaefellsnes')" class="group p-2 rounded-xl bg-slate-950/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex flex-col justify-between">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-base">🏔️</span>
+                  <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 font-bold">ДОРОГА 54</span>
+                </div>
+                <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Снайфедльснес</div>
+                <div class="text-[10px] text-slate-400 truncate">Кірк'юфетль • Арнарстапі • Будір</div>
+              </button>
+
+              <!-- Corridor 5: North & Mývatn -->
+              <button onclick="briefRouteCorridor('north')" class="group p-2 rounded-xl bg-slate-950/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex flex-col justify-between">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-base">💎</span>
+                  <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-teal-500/20 text-teal-300 font-bold">DIAMOND CIRCLE</span>
+                </div>
+                <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Північ &amp; Міватн</div>
+                <div class="text-[10px] text-slate-400 truncate">Деттіфосс • Ґодафосс • Хусавік</div>
+              </button>
+
+              <!-- Corridor 6: East Fjords -->
+              <button onclick="briefRouteCorridor('east_fjords')" class="group p-2 rounded-xl bg-slate-950/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex flex-col justify-between">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-base">🌲</span>
+                  <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-indigo-500/20 text-indigo-300 font-bold">СХІДНІ ФІОРДИ</span>
+                </div>
+                <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Східні фіорди</div>
+                <div class="text-[10px] text-slate-400 truncate">Студлагіл • Сейдісфйордюр • Генгіфосс</div>
+              </button>
+
+              <!-- Corridor 7: Reykjanes -->
+              <button onclick="briefRouteCorridor('reykjanes')" class="group p-2 rounded-xl bg-slate-950/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex flex-col justify-between">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-base">🌋</span>
+                  <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-rose-500/20 text-rose-300 font-bold">ВУЛКАНИ &amp; СПА</span>
+                </div>
+                <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Рейк'янес</div>
+                <div class="text-[10px] text-slate-400 truncate">Фаградальсф'ятль • Blue Lagoon • Мости</div>
+              </button>
+
+              <!-- Corridor 8: Highlands -->
+              <button onclick="briefRouteCorridor('highlands')" class="group p-2 rounded-xl bg-slate-950/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex flex-col justify-between">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-base">🚙</span>
+                  <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-orange-500/20 text-orange-300 font-bold">F-ROADS 4X4</span>
+                </div>
+                <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Хайлендс</div>
+                <div class="text-[10px] text-slate-400 truncate">Ландманналаугар • Аск'я • Керлінгарфйотль</div>
+              </button>
+
+              <!-- Corridor 9: Westfjords -->
+              <button onclick="briefRouteCorridor('westfjords')" class="group p-2 rounded-xl bg-slate-950/80 hover:bg-emerald-950/40 border border-slate-800 hover:border-emerald-500/50 text-left transition flex flex-col justify-between">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-base">🦅</span>
+                  <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-purple-500/20 text-purple-300 font-bold">ДИКІ ФІОРДИ</span>
+                </div>
+                <div class="text-xs font-bold text-white group-hover:text-emerald-300 transition">Вестфіорди</div>
+                <div class="text-[10px] text-slate-400 truncate">Діньянді • Латраб'ярг • Рейдасандюр</div>
+              </button>
+            </div>
+          </div>
+
+          <!-- Row 3: Interactive Co-Pilot AI Dialogue, Speech-To-Text & Studio Voice Controls -->
           <div class="p-3.5 rounded-xl bg-slate-900/95 border border-cyan-500/40 space-y-3 shadow-xl">
-            <!-- Header with Engine Status Badge and Settings Toggle -->
-            <div class="flex flex-wrap items-center justify-between gap-2">
+            <!-- Header with Engine Status Badge and Settings Toggles -->
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/80 pb-2">
               <span class="text-[11px] uppercase font-bold text-cyan-300 flex items-center gap-1.5">
-                <span>💬</span> ЖИВИЙ ГОЛОСОВИЙ ДІАЛОГ ЗІ ШТУРМАНОМ КÁРІ (ДВОМОВНИЙ UA / EN)
+                <span>💬</span> ЖИВИЙ ДІАЛОГ ЗІ ШТУРМАНОМ КÁРІ (ДВОМОВНИЙ UA / EN)
               </span>
               <div class="flex items-center gap-2">
+                <!-- Sound Toggle Button -->
+                <button id="btn-copilot-sound-toggle" onclick="toggleCopilotMute()" class="px-2.5 py-1.5 rounded-xl bg-cyan-500/20 text-cyan-300 border border-cyan-400/50 flex items-center gap-1.5 text-xs font-semibold shadow-sm transition" title="Увімкнути/вимкнути голосові відповіді">
+                  <span class="text-sm">🔊</span> <span class="hidden sm:inline">Голос УВІМК</span>
+                </button>
+
+                <!-- Voice Engine Settings Toggle -->
+                <button onclick="toggleCopilotVoiceSettings()" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold flex items-center gap-1 transition" title="Налаштування голосового движка (Neural, Radio DSP, ElevenLabs, OpenAI)">
+                  <span>🎙️</span> <span class="hidden sm:inline">Голос</span>
+                </button>
+
+                <!-- LM Studio Connection Toggle -->
+                <button onclick="toggleLmStudioSettings()" class="px-2.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs font-mono flex items-center gap-1 transition" title="Налаштування локального сервера LM Studio (localhost:1234)">
+                  <span>⚙️</span> <span class="hidden sm:inline">LM Studio</span>
+                </button>
+
                 <span id="copilot-ai-engine-badge" class="px-2 py-0.5 rounded-full bg-slate-800 text-cyan-300 font-mono text-[10px] border border-slate-700 flex items-center gap-1 shadow-sm">
-                  <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> <span>Автономний Експерт (115 POI)</span>
+                  <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> <span>115 POI Експерт</span>
                 </span>
-                <button onclick="toggleLmStudioSettings()" class="text-[10px] text-slate-400 hover:text-cyan-300 font-mono underline" title="Налаштування підключення LM Studio (localhost:1234)">
-                  ⚙️ LM Studio
+              </div>
+            </div>
+
+            <!-- Voice Engine Settings Dropdown (collapsible) -->
+            <div id="copilot-voice-settings-box" class="hidden p-3 rounded-xl bg-slate-950/95 border border-cyan-500/40 space-y-2.5 text-[11px]">
+              <div class="flex items-center justify-between font-bold text-white border-b border-slate-800 pb-1.5">
+                <span class="flex items-center gap-1.5"><span>🎙️</span> НАЛАШТУВАННЯ ГОЛОСОВОГО ДВИЖКА ШТУРМАНА</span>
+                <button onclick="toggleCopilotVoiceSettings()" class="text-slate-400 hover:text-white">✕</button>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <div>
+                  <label class="block text-[10px] uppercase font-mono text-cyan-300 mb-1">Оберіть движок синтезу мови:</label>
+                  <select id="copilot-voice-engine-select" onchange="changeCopilotVoiceEngine(this.value)" class="w-full px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-200 text-xs focus:outline-none focus:border-cyan-400">
+                    <option value="neural">🏆 HD Neural Voice (Вбудований HD голос системи)</option>
+                    <option value="radio">📻 Радіозв'язок Рейнджера (Expedition Intercom з DSP)</option>
+                    <option value="elevenlabs">⚡ ElevenLabs Studio AI (Студійна людська якість)</option>
+                    <option value="openai">🧠 OpenAI Audio TTS (onyx / alloy)</option>
+                    <option value="mute">🔇 Лише текст (Без озвучення)</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-[10px] uppercase font-mono text-cyan-300 mb-1">Швидкість мови (Rate):</label>
+                  <input type="range" id="copilot-voice-rate" min="0.8" max="1.3" step="0.05" value="1.0" class="w-full accent-cyan-400" oninput="copilotSpeechRate = parseFloat(this.value)">
+                </div>
+              </div>
+
+              <!-- ElevenLabs API Subbox -->
+              <div id="elevenlabs-config-subbox" class="hidden p-2.5 rounded-lg bg-slate-900 border border-indigo-500/30 space-y-1.5">
+                <span class="text-[10px] font-bold text-indigo-300 uppercase">⚡ Підключення ElevenLabs API (Студійний звук):</span>
+                <input type="password" id="copilot-elevenlabs-key" placeholder="Вставте ваш ElevenLabs API Key..." class="w-full px-2.5 py-1.5 rounded bg-slate-950 border border-slate-700 text-xs text-white">
+                <p class="text-[10px] text-slate-400">Використовується голос Adam (Expedition Navigator). Ключ зберігається лише у вашому браузері.</p>
+              </div>
+
+              <!-- OpenAI API Subbox -->
+              <div id="openai-config-subbox" class="hidden p-2.5 rounded-lg bg-slate-900 border border-emerald-500/30 space-y-1.5">
+                <span class="text-[10px] font-bold text-emerald-300 uppercase">🧠 Підключення OpenAI Audio TTS:</span>
+                <input type="password" id="copilot-openai-key" placeholder="Вставте ваш OpenAI API Key (sk-...)..." class="w-full px-2.5 py-1.5 rounded bg-slate-950 border border-slate-700 text-xs text-white">
+                <p class="text-[10px] text-slate-400">Використовується голос 'onyx' (глибокий спокійний тембр гіда).</p>
+              </div>
+
+              <div class="flex items-center justify-between pt-1 border-t border-slate-800">
+                <button onclick="testCopilotVoice()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 text-xs font-semibold flex items-center gap-1 transition">
+                  <span>▶️</span> Протестувати голос
+                </button>
+                <button onclick="saveCopilotVoiceSettings()" class="px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow transition">
+                  Зберегти налаштування
                 </button>
               </div>
             </div>
@@ -2756,8 +3560,8 @@
             </div>
 
             <!-- Speech Dictation Live Status Alert -->
-            <div id="copilot-mic-status" class="hidden p-2 rounded-lg bg-red-950/60 border border-red-500/50 text-red-200 font-mono text-[11px] flex items-center gap-2 animate-pulse">
-              <span>🎙️</span> <span>Запис голосу активний... Говоріть у мікрофон...</span>
+            <div id="copilot-mic-status" class="hidden p-2.5 rounded-xl bg-red-950/80 border border-red-500/60 text-red-200 font-mono text-[11px] shadow-lg animate-pulse">
+              <!-- Live mic bar inserted dynamically -->
             </div>
 
             <!-- Speech Input Row with Microphone Dictation Button -->
@@ -2788,9 +3592,27 @@
               <button onclick="askCopilotModalPredefined('How is the weather and road conditions today?')" class="px-2.5 py-1 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-cyan-300 border border-cyan-500/30 whitespace-nowrap transition">🇬🇧 English Query</button>
             </div>
 
-            <!-- Dedicated Response Box with Live Typography -->
-            <div id="copilot-modal-reply" class="hidden p-3 rounded-xl bg-slate-950/95 border border-cyan-500/50 text-[11px] text-slate-200 leading-relaxed shadow-inner space-y-1.5 max-h-48 overflow-y-auto">
-              <!-- Live response text inserted here -->
+            <!-- Dedicated Response Box with Full Speech & Copy Controls -->
+            <div id="copilot-modal-reply" class="hidden p-3.5 rounded-xl bg-slate-950/95 border border-cyan-500/50 text-[11px] text-slate-200 leading-relaxed shadow-inner space-y-2 max-h-56 overflow-y-auto">
+              <div class="flex items-center justify-between border-b border-cyan-500/20 pb-1.5 text-[10px] text-cyan-400 font-mono">
+                <span id="copilot-modal-reply-title" class="font-bold flex items-center gap-1.5">
+                  <span>🤖</span> <span>ШТУРМАН КÁРІ (LEIÐSÖGUMAÐUR)</span>
+                </span>
+                <div class="flex items-center gap-1.5">
+                  <button onclick="replayCopilotSpeech()" class="px-2 py-0.5 rounded bg-cyan-500/20 hover:bg-cyan-500/40 text-cyan-300 border border-cyan-400/30 text-[10px] flex items-center gap-1 transition" title="Озвучити відповідь знову">
+                    <span>🔊</span> <span>Озвучити</span>
+                  </button>
+                  <button id="btn-copilot-reply-stop" onclick="stopAllCopilotSpeech()" class="hidden px-2 py-0.5 rounded bg-red-600/30 hover:bg-red-600/50 text-red-300 border border-red-500/40 text-[10px] flex items-center gap-1 transition" title="Зупинити мову">
+                    <span>⏹️</span> <span>Стоп</span>
+                  </button>
+                  <button onclick="copyCopilotReply()" class="px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-[10px] flex items-center gap-1 transition" title="Копіювати текст">
+                    <span>📋</span> <span>Копіювати</span>
+                  </button>
+                </div>
+              </div>
+              <div id="copilot-modal-reply-content" class="text-slate-100 text-[11.5px] leading-relaxed pt-0.5">
+                <!-- Response content inserted here -->
+              </div>
             </div>
           </div>
 

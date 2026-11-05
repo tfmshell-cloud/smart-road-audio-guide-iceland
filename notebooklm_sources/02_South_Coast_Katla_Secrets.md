@@ -1,209 +1,753 @@
-# Південне Узбережжя, Вулкан Катла, Сандри та Секретні Водоспади
-**Офіційний стандарт підготовки:** Leiðsöguskóli Íslands (ÍST EN 15565:2008)
-**Кількість майстер-об'єктів:** 29
+# КОРИДОР 2: South Coast, Katla & Sandur Secrets (POIs #12 – #40)
+
+Офіційне компенсаційне досьє експедиційного гіда відповідно до стандарту European Tour Guiding Standard ÍST EN 15565:2008.
+Професійний стандарт: Leiðsöguskóli Íslands (MK) & Félag leiðsögumanna.
+Загальна кількість майстер-об'єктів у коридорі: 29 POIs (Об'єкти #12 – #40)
 
 ---
 
-## 1. Urriðafoss (Найбільш повноводний водоспад) (Urriðafoss River Rapids)
-- **Категорія:** Водоспад | **GPS:** 63.9247, -20.6725
-- **Просторовий вектор:** Траса 1 перед Hella
-- **Геологія & Вулканологія:** Водоспад на найдовшій річці Þjórsá скидає до 360 кубометрів води щосекунди через лавове поле Þjórsárhraun.
-- **Саги, Історія & Фольклор:** Місцевий фольклор розповідає про водяних коней (Nykur), що ховаються під льодовиковими заломами.
-- **Безпека водія & Практичні поради:** 5 хвилин від Траси 1. Безкоштовний паркінг, дерев'яна платформа без натовпів.
+### 12. Urriðafoss Waterfall / Уррідафосс (Urriðafoss River Rapids)
+- **GPS & Route:** 63.9248, -20.6722 • Дорога № 1 (між Сельфоссом та Геллою)
+- **Category:** Waterfall / River
 
-## 2. Gluggafoss / Merkjárfoss (Віконний водоспад) (Gluggafoss (Window Falls))
-- **Категорія:** Водоспад | **GPS:** 63.7212, -19.8931
-- **Просторовий вектор:** Траса 250 на північ від Hvolsvöllur
-- **Геологія & Вулканологія:** Річка Merkjá пробила серію отворів ('вікон') у м'якому вулканічному туфі, крізь які струмені б'ють назовні.
-- **Саги, Історія & Фольклор:** Звідси відкривається вид на хутір Hlíðarendi, де жив легендарний Ґуннар із саги про Ньяла.
-- **Безпека водія & Практичні поради:** З'їзд на гравійну трасу 250. Безкоштовний паркінг, пішохідна стежка веде на верхній ярус.
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** За 90 секунд до з'їзду на південь із траси № 1 перед великим мостом через річку Тьоурсау (Þjórsá). Подивіться на 1-шу годину: перед вами відкривається широкий розлив найдовшої річки країни, де водяна маса з гуркотом прориває древній лавовий бар'єр.
+   - **[EN]:** In 90 seconds prior to turning south off Route 1 before the Þjórsá river bridge. Look toward 1 o'clock: observe the broad expanse of Iceland's longest glacial river churning furiously over an ancient prehistoric basalt threshold.
 
-## 3. Seljalandsfoss (Водоспад з гротом) (Seljalandsfoss Waterfall)
-- **Категорія:** Водоспад | **GPS:** 63.6156, -19.9885
-- **Просторовий вектор:** Прямо на Трасі 1 • Поворот на 249
-- **Геологія & Вулканологія:** Падіння з висоти 60 м з колишніх морських кліфів льодовикового періоду. Ерозія вимила глибокий грот позаду водної стіни.
-- **Саги, Історія & Фольклор:** Старовинна межа між береговою лінією та океаном до відступу моря після танення льодовиків.
-- **Безпека водія & Практичні поради:** Платний паркінг (Parka.is). Обов'язково повністю непромокальний одяг та захист для камери.
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Найбільш повноводний водоспад Ісландії за середньорічною витратою води (близько 360–370 м³/с, під час весняних паводків — понад 1000 м³/с). Водоспад спадає з висоти 6 метрів серією широких порогів на річці Тьоурсау. Ложе утворене лавовим потоком Тьоурсаурхраун (Þjórsárhraun) — найбільшим лавовим потоком голоцену на Землі за останні 10 000 років (виверження вулканічної системи Вейдівотн/Бардарбунґа близько 8600 років тому, об'єм лави понад 25 км³, площа понад 950 км²). Базальт тут щільний, олівіновий, стійкий до ерозії, що зумовило збереження порогу посеред рівнини.
+   - **[EN]:** Iceland's most voluminous waterfall by average annual discharge, roaring at approximately 360–370 m³/s (surpassing 1,000 m³/s during spring melt peaks). Plunging 6 meters over multiple cascading rapids on the Þjórsá river. The cataract flows across the Great Þjórsá Lava (Þjórsárhraun), the largest single effusive Holocene basalt flow on Earth within the last 10,000 years (erupted from the Bárðarbunga/Veiðivötn system ~8,600 BP, exceeding 25 km³ in volume).
 
-## 4. Gljúfrabúi (Таємний печерний водоспад) (Gljúfrabúi Hidden Cave Falls)
-- **Категорія:** Водоспад | **GPS:** 63.6209, -19.9864
-- **Просторовий вектор:** 600 метрів північніше Сельяландсфосса
-- **Геологія & Вулканологія:** Водоспад 40 м, повністю схований всередині вузької скельної ущелини з куполоподібною стелею.
-- **Саги, Історія & Фольклор:** Назва перекладається як 'Мешканець ущелини' — притулок самітників та відьом за народними переказами.
-- **Безпека водія & Практичні поради:** Потрібно зайти у вузьку щілину по слизькому камінню річки. Високі гумові чоботи та дощовик обов'язкові!
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** Назва походить від ісландського *urriði* (пструг струмковий / кумжа), який масово заходив на нерест у прибережні спокійні заплави біля водоспаду. За фольклорними переказами басейну Тьоурсау, у вирах під лавовими уступами мешкає Нікур (Nykur) — міфічний водяний кінь зі спрямованими назад копитами, який заманює втомлених подорожніх сісти йому на спину, після чого кидається у вир. На початку XX століття водоспад планували знищити будівництвом гігантської ГЕС Уррідафосс, проте місцева громада відстояла природне русло.
+   - **[EN]:** Named after the abundant brown trout (*urriði*) historically harvested in the downstream eddies. Regional folklore abounds with tales of the Nykur—a supernatural kelpie-like aquatic equine with backwards-turned hooves that lurks in deep foam pools to lure weary riders into watery depths. In the early 20th century, foreign syndicates planned to dam the rapids for a massive hydro-plant, but fierce local resistance preserved its wild integrity.
 
-## 5. Nauthúsagil (Секретна ущелина з ланцюгами) (Nauthúsagil Secret Ravine)
-- **Категорія:** Каньйон & Водоспад | **GPS:** 63.6705, -19.8552
-- **Просторовий вектор:** Траса 249 у напрямку Торсмерка
-- **Геологія & Вулканологія:** Вузька глибока розколина, поросла мохом і віковими деревами горобини, що сплітаються над головою.
-- **Саги, Історія & Фольклор:** Назва походить від садиби Nauthús, де в XVII ст. переховувалися брати-втікачі.
-- **Безпека водія & Практичні поради:** Доступний для 4x4 на початку F249. Прохід руслом струмка з підйомом по закріплених ланцюгах.
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Короткий асфальтовано-гравійний під'їзд (1 км на південь від кільцевої дороги). Безкоштовний паркінг, облаштований інформаційними стендами та дерев'яним оглядовим настилом. Береги складаються зі слизького вологого базальту; огородження стоять не скрізь — заборонено підходити до краю обриву під час заморозків або штормових вітрів.
+   - **[EN]:** Smooth 1 km access spur south of Route 1. Generous free parking with interpretive plaques and maintained boardwalks. Hazards: wet basalt edges are exceptionally treacherous; spray forms invisible black ice in sub-zero weather. Never step past boundary marker ropes near the undercut torrent.
 
-## 6. Þorvaldseyri & Eyjafjallajökull (Þorvaldseyri & Eyjafjallajökull Viewpoint)
-- **Категорія:** Льодовик & Вулкан | **GPS:** 63.5321, -19.6543
-- **Просторовий вектор:** Траса 1 навпроти ферми Þorvaldseyri
-- **Геологія & Вулканологія:** Стратовулкан під льодовиковою шапкою 1651 м. Виверження 2010 року підняло хмару попелу на 9 км і паралізувало небо Європи.
-- **Саги, Історія & Фольклор:** Ферма Þorvaldseyri стала світовим символом ісландської стійкості, повністю відновившись після засипання попелом.
-- **Безпека водія & Практичні поради:** Оглядовий майданчик з інформаційними стелами біля шосе. У ясну погоду видно верхівку льодовика.
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Перед вами Уррідафосс — справжній велетень південної Ісландії, що тримає абсолютний рекорд країни за об'ємом води! Щосекунди крізь ці базальтові пороги проноситься понад триста шістдесят кубометрів крижаної стихії — це більше, ніж у знаменитих Ґудльфоссі чи Скоґафоссі. Водоспад бурлить на річці Тьоурсау, що пробиває собі шлях крізь гігантське лавове поле, яке вилилося понад вісім тисяч років тому і є найбільшим лавовим потоком нашої планети за всю історію після льодовикового періоду. Подивіться, з якою первісною міццю річка розсікає вулканічний моноліт. Насолоджуйтеся цим спокійним куточком, адже більшість туристів пролітають повз нього трасою номер один, навіть не підозрюючи про існування цього водного колоса!
+   - **[EN]:** Welcome to Urriðafoss, the thunderous heavyweight of Iceland’s southern plains! By sheer volume of water, this is the most powerful waterfall in Iceland, discharging an astounding three hundred and sixty cubic meters of surging river every single second—dwarfing even Gullfoss and Skógafoss. Fed by massive glacial systems, the Þjórsá River here cascades over the ancient Great Þjórsá Lava, the largest volcanic lava field formed on Earth since the end of the last Ice Age. Watch the frothing glacial currents hammer against resistant columnar basalt that was forged more than eight thousand years ago. Because tour buses usually bypass this site, you can savor the raw, unhurried spectacle of Iceland's mightiest river in breathtaking solitude!
 
-## 7. Skógafoss (Водоспад Скоугафосс) (Skógafoss Waterfall)
-- **Категорія:** Водоспад | **GPS:** 63.5321, -19.5114
-- **Просторовий вектор:** Селище Skógar • Траса 1
-- **Геологія & Вулканологія:** Ширина 25 м, висота падіння 60 м. Потужні бризки породжують подвійну веселку в сонячні дні.
-- **Саги, Історія & Фольклор:** Перший поселенець Трасі Тоуркіллссон сховав скриню із золотом у печері за водоспадом.
-- **Безпека водія & Практичні поради:** Металеві сходи з 527 сходинок на оглядовий майданчик. Початок треку Fimmvörðuháls.
+---
 
-## 8. Kvernufoss (Таємний каньйонний водоспад) (Kvernufoss Secret Canyon Falls)
-- **Категорія:** Водоспад | **GPS:** 63.5283, -19.4805
-- **Просторовий вектор:** Паркінг Музею Skógar • 15 хв пішки
-- **Геологія & Вулканологія:** Водоспад заввишки 30 м у затишному скельному амфітеатрі річки Kverná, за струменями якого є суха стежка.
-- **Саги, Історія & Фольклор:** Прихований від вітрів каньйон використовувався вікінгами як зимове сховище для худоби.
-- **Безпека водія & Практичні поради:** Паркуйтесь біля Skógar Museum (оплата Parka). 15 хвилин легкої стежки вздовж річки.
+### 13. Gluggafoss / Ґлуґґафосс (Merkjárfoss with Tuff Windows)
+- **GPS & Route:** 63.7208, -19.8926 • Дорога № 261 (Fljótshlíð)
+- **Category:** Waterfall / Canyon
 
-## 9. Sólheimajökull (Чорний льодовиковий язик) (Sólheimajökull Glacier Tongue)
-- **Категорія:** Льодовик | **GPS:** 63.5306, -19.3703
-- **Просторовий вектор:** З'їзд на трасу 221 з Траси 1
-- **Геологія & Вулканологія:** Вивідний язик льодовика Mýrdalsjökull, вкритий смугами чорного базальтового попелу від вивержень вулкана Katla.
-- **Саги, Історія & Фольклор:** Під льодовиком дрімає гігантський вулкан Катла, чиї супер-виверження відбуваються кожні 50–100 років.
-- **Безпека водія & Практичні поради:** Вихід на лід суворо заборонений без сертифікованого гіда, кішок та льодоруба! Льодовикова лагуна біля паркінгу.
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** Через 90 секунд плавний поворот ліворуч із траси № 261 до підніжжя скель Фльотсхлід (Fljótshlíð). Подивіться на 2-гу годину: на зеленому схилі гори ви побачите білий водоспад, який дивовижним чином пробивається крізь серію круглих отворів-«вікон» у скелі.
+   - **[EN]:** In 90 seconds, slow down for the approach along Route 261 into the pastoral Fljótshlíð district. Look toward 2 o'clock: along the cliff face rises an extraordinary cascade whose waters spout dramatically through natural rounded rock apertures known as the "windows."
 
-## 10. Dyrhólaey (Мис Дірхолей & Велетенська арка) (Dyrhólaey Promontory & Arch)
-- **Категорія:** Узбережжя & Скелі | **GPS:** 63.4022, -19.1303
-- **Просторовий вектор:** Траса 218 • Підйом до маяка
-- **Геологія & Вулканологія:** 120-метровий вулканічний мис із гігантською природною базальтовою аркою, крізь яку пропливають катери.
-- **Саги, Історія & Фольклор:** Англійські моряки називали мис 'Cape Portland'. Маяк збудований у 1927 році.
-- **Безпека водія & Практичні поради:** Увага на сильний вітер! Обов'язково тримайте двері авто. Колонії тупиків гніздяться з травня по серпень.
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Загальна висота водоспаду на річці Меркьяу (Merkjá) становить близько 44 метрів у два яруси. Верхній уступ спадає на 17 метрів крізь вертикальний пласт м'якого палагонітового вулканічного туфу (palagonite tuff), перекритого міцнішим шаром базальту. За тисячоліття гідравлічна ерозія просвердлила в туфовій стіні вертикальні тунелі та горизонтальні отвори («вікна» — ісл. *gluggar*), крізь які вода вилітає фонтанами. Після виверження вулкана Ейяф'ятлайокюдль у 2010 році русло забило товстим шаром попелу, що тимчасово змінило геометрію вікон, однак річка швидко промиває нові тунелі.
+   - **[EN]:** Totaling 44 meters over two distinct tiers on the Merkjá river. The upper 17-meter fall plunges through stratified palagonite hyaloclastite tuff capped by resistant hard basalt. Hydraulic abrasion carved hollow subterranean tubes and circular caverns ("windows" or *gluggar*), forcing pressurized water to jet directly out of holes in the cliff face. Following the 2010 Eyjafjallajökull eruption, heavy volcanic ash clogged the channels, but continuous river flow has dynamically sculpted new cavities through the porous tuff.
 
-## 11. Reynisfjara (Чорний пляж & Базальтові колони) (Reynisfjara Black Sand Beach)
-- **Категорія:** Узбережжя & Скелі | **GPS:** 63.4045, -19.0436
-- **Просторовий вектор:** Кінець Траси 215 • Біля Віка
-- **Геологія & Вулканологія:** Пісок із роздробленої океаном лави, геометричний базальтовий орган Garðar та скелі-пальці Reynisdrangar у морі.
-- **Саги, Історія & Фольклор:** За легендою, скелі Рейнісдранґар — це тролі, які намагалися витягти трищогловий корабель, але закам'яніли на світанку.
-- **Безпека водія & Практичні поради:** СУВОРА НЕБЕЗПЕКА! Ніколи не повертайтеся спиною до океану. Слідкуйте за кольоровим світлофором безпеки на вході.
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** Сакральне серце «Саги про Ньяла» (*Brennu-Njáls saga*). Схили Фльотсхліда навколо Ґлуґґафосса вважалися найкрасивішими землями Ісландії. Саме тут розташовувався хутір Глідаренді (Hlíðarendi), де жив герой Ґуннар Гамундарсон. Коли його засудили до вигнання, Ґуннар озирнувся на ці квітучі схили біля водоспаду і виголосив безсмертні слова: «Прекрасний цей схил, і ніколи він не здавався мені гарнішим... я не поїду звідси». За це рішення він залишився і прийняв героїчну смерть у своєму домі.
+   - **[EN]:** The spiritual heartland of *Brennu-Njáls saga*, Iceland's greatest medieval epic. The surrounding pastoral slopes of Fljótshlíð were home to chieftain Gunnar Hámundarson at Hlíðarendi farm. Exiled abroad after bloodshed, Gunnar turned back towards these very slopes by Gluggafoss and uttered the immortal words: "Fair is the hillside, fairer than I have ever seen it... I will ride back home and not go abroad." He chose to remain and meet his tragic, heroic demise on this beloved soil.
 
-## 12. Vík í Mýrdal & Церква на пагорбі (Vík í Mýrdal & Hilltop Church)
-- **Категорія:** Місто & Саги | **GPS:** 63.4194, -19.0064
-- **Просторовий вектор:** Центр Віка • Пагорб Víkurkirkja
-- **Геологія & Вулканологія:** Селище розташоване прямо в зоні потенційного селевого потоку (jökulhlaup) у разі виверження вулкана Катла.
-- **Саги, Історія & Фольклор:** Білосніжна церква з червоним дахом — офіційно визнане єдине безпечне місце евакуації мешканців при виверженні.
-- **Безпека водія & Практичні поради:** Останній великий супермаркет (Krónan), заправка, сервісні станції перед перетином пустелі Skeiðarársandur.
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Траса 261 повністю заасфальтована до паркінгу Ґлуґґафосса. Безкоштовний паркінг із туалетом та лавками для відпочинку. Облаштована гравійна стежка веде до підніжжя нижнього водоспаду, а вища стежка підіймається до самих «вікон». У дощову погоду ґрунт на підйомі стає надзвичайно слизьким — взувайте трекінгові черевики з глибоким протектором.
+   - **[EN]:** Paved roadway along Route 261 directly to the site. Free gravel car park equipped with WC and picnic tables. Easy boardwalk footpath leads to the lower cascade, while a switchback trail climbs toward the upper windows. Footwear warning: clay-rich volcanic mud on the upper climb becomes treacherous when wet—sturdy hiking boots with ankle support required.
 
-## 13. Лавове поле Eldhraun (Виверження Лакі 1783) (Eldhraun Mossy Lava Field)
-- **Категорія:** Лавове поле | **GPS:** 63.6756, -18.1478
-- **Просторовий вектор:** Обидва боки Траси 1 між Vík та Kirkjubæjarklaustur
-- **Геологія & Вулканологія:** 565 кв. км базальтової лави від виверження кратерів Laki (1783–1784), що спричинило похолодання в Європі. Вкрите товстим килимом моху Woolly fringe-moss.
-- **Саги, Історія & Фольклор:** Пастор Йон Стейнґрімссон зупинив потік вогню знаменитою 'Вогняною проповіддю' (Eldmessa) у церкві Клаустюра.
-- **Безпека водія & Практичні поради:** ХОДИТИ ПО МОХУ СУВОРО ЗАБОРОНЕНО! Відновлення пошкодженого моху триває понад 100 років. Користуйтеся паркінгом.
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Перед вами Ґлуґґафосс — один із найромантичніших і найнезвичніших водоспадів на всій південній трасі! Подивіться на його скелю: бурхливий потік Меркьяу падає не суцільною стіною, а буквально прострілює камінь крізь серію круглих отворів, які ісландці називають «вікнами». Природа створила це диво, вимивши м'який вулканічний туф під шаром твердого базальту. А навколишні пагорби Фльотсхлід увічнені в найзнаменитішій сазі Ісландії — Сазі про Ньяла. Саме цими пейзажами милувався легендарний вікінг Ґуннар, коли вирішив пожертвувати власним життям, аби лише не покидати рідну землю. Пройдіться стежкою до верхнього ярусу, відчуйте легкий водяний пил на обличчі і торкніться живої легенди скандинавського епосу!
+   - **[EN]:** Welcome to Gluggafoss, undeniably one of the most intriguing and poetic geological phenomena in southern Iceland! As you look up at the falls, notice how the churning river doesn’t merely spill over a cliff edge, but tunnels straight through the volcanic cliff, shooting out through cavernous stone apertures called "windows." This rare phenomenon is carved into soft palagonite tuff, dynamically reshaping every decade. You are standing in the hallowed landscape of *Njál’s Saga*: it was this very panorama of Fljótshlíð that inspired chieftain Gunnar to refuse exile and embrace his fate because the hillside was simply too beautiful to leave. Walk up the hillside path, listen to the echo of the cascades within the rock windows, and immerse yourself in Iceland’s timeless literary legacy!
 
-## 14. Fjaðrárgljúfur (Каньйон Джастіна Бібера) (Fjaðrárgljúfur Canyon)
-- **Категорія:** Каньйон | **GPS:** 63.7713, -18.1718
-- **Просторовий вектор:** Траса 206 біля Kirkjubæjarklaustur
-- **Геологія & Вулканологія:** Глибина 100 м, довжина 2 км. Вимитий талими льодовиковими водами у гірських породах палагоніту близько 2 млн років тому.
-- **Саги, Історія & Фольклор:** У каньйоні знімали сцени 'Гри Престолів' та знаменитий кліп Бібера I'll Show You.
-- **Безпека водія & Практичні поради:** Офіційні оглядові платформи. Паркінг платний (Parka.is). Сходити зі стежки заборонено.
+---
 
-## 15. Stjórnarfoss & Systrafoss (Водоспади Сестер) (Stjórnarfoss & Systrafoss)
-- **Категорія:** Водоспад | **GPS:** 63.8015, -18.0583
-- **Просторовий вектор:** Північна околиця Kirkjubæjarklaustur
-- **Геологія & Вулканологія:** Куполоподібний базальтовий водоспад Стьорнарфосс поруч із двома тонкими стрічками Систрафосс, що стікають з плато.
-- **Саги, Історія & Фольклор:** Названі на честь монахинь бенедиктинського монастиря XII століття, з якими пов'язані містичні саги про озеро Систраватн.
-- **Безпека водія & Практичні поради:** Тиха локація для пікніка в 2 хв від Траси 1. Зручний заїзд у будь-яку пору року.
+### 14. Seljalandsfoss / Сельяландсфосс (Walk-Behind Cascade)
+- **GPS & Route:** 63.6156, -19.9886 • З'їзд з Траси № 1 на Дорогу № 249
+- **Category:** Waterfall / Coastal Cliff
 
-## 16. Скеля Lómagnúpur (Скеля Велетня) (Lómagnúpur Giant's Cliff)
-- **Категорія:** Скеля & Панорама | **GPS:** 63.96, -17.51
-- **Просторовий вектор:** Траса 1 на в'їзді в пустелю Skeiðarársandur
-- **Геологія & Вулканологія:** Стрімка базальтова стіна заввишки 688 м, яка колись височіла над бурхливим океаном, а тепер височіє над чорними пісками зандрів.
-- **Саги, Історія & Фольклор:** У сазі про Ньяла з цієї гори виходить дух-велетень Йотюн із залізною палицею — один із чотирьох священних захисників (Landvættir) герба Ісландії.
-- **Безпека водія & Практичні поради:** Чудове місце для зупинки та зйомки масштабу природи прямо з шосе.
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** За 90 секунд до повороту на трасу № 249 з траси № 1. Подивіться на 3-тю годину: струнка шістдесятиметрова стрічка води спадає з прямовисної базальтової скелі колишнього океанічного узбережжя, виблискуючи на тлі смарагдового моху.
+   - **[EN]:** In 90 seconds prior to turning off Route 1 onto Route 249. Look toward 3 o'clock: observe the iconic sixty-meter ribbon of water leaping clean off the former oceanic sea cliff, crowned by vivid green mosses.
 
-## 17. Svartifoss (Чорний водоспад Skaftafell) (Svartifoss Basalt Column Falls)
-- **Категорія:** Водоспад | **GPS:** 64.0275, -16.9753
-- **Просторовий вектор:** Національний парк Skaftafell • 45 хв хайкінг
-- **Геологія & Вулканологія:** 20-метровий потік спадає з нависаючої стіни ідеальних шестигранних чорних базальтових колон, утворених при повільному охолодженні лави.
-- **Саги, Історія & Фольклор:** Саме форма цих колон надихнула архітектора Ґудйоуна Самуельссона на дизайн собору Hallgrímskirkja в Рейк'явіку.
-- **Безпека водія & Практичні поради:** Паркінг Skaftafell (Parka.is). Підйом пішки 1.8 км облаштованою гірською стежкою.
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Висота вільного падіння становить 60 метрів. Водоспад спадає з краю палео-берегового кліфу, сформованого морською абразією в кінці останнього льодовикового максимуму (LGM), коли рівень світового океану омивав саме ці скелі перед ізостатичним підняттям суші. Геологічний фундамент складається з перешарування міцних базальтових лав та м'якших шарів гіалокластитів і туфових брекчій. Завдяки інтенсивній ерозії м'яких порід за водяною завісою утворився велетенський сухий грот-амфітеатр, що дозволяє людині повністю обійти струмінь водоспаду зі зворотного боку по скельному карнизу.
+   - **[EN]:** Plunging 60 meters in a single breathtaking drop from an ancient coastal precipice. The cliffs were originally sea scarps cut by intense wave erosion at the close of the last glacial period before post-glacial isostatic rebound pushed the Atlantic coastline miles to the south. Geologically, resistant basalt flow caps softer volcanic hyaloclastite and sedimentary breccia beneath; centuries of spray back-eddying hollowed out a massive natural cavern behind the sheet of falling water, enabling a full 360-degree circumnavigation behind the falls.
 
-## 18. Svínafellsjökull (Льодовик Інтерстеллар) (Svínafellsjökull (Interstellar Glacier))
-- **Категорія:** Льодовик | **GPS:** 64.0083, -16.8833
-- **Просторовий вектор:** З'їзд на 1 км східніше Skaftafell
-- **Геологія & Вулканологія:** Гострі льодові сераки, глибокі сині тріщини та морени від найбільшої льодовикової шапки Європи Vatnajökull.
-- **Саги, Історія & Фольклор:** Локація зйомок 'Інтерстеллар' (крижана планета Манна) та 'Бетмен: Початок'.
-- **Безпека водія & Практичні поради:** Гравійна дорога доступна для звичайних авто. Стежка веде вздовж гребеня над льодовиковою лагуною.
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** Назва водоспаду походить від стародавнього маєтку Сельяланд (Seljaland — «Земля літніх пасовищних хатин»). За записами в *Landnámabók*, ці землі були заселені в IX столітті родичами першого колонізатора Інгольва Арнарсона. Народні казки пов'язували темний грот за водоспадом із прихистком для «прихованого народу» (*huldufólk*): вірили, що на світанку під шумом водяної завіси ельфи розвішують сушитися золотий посуд і шовкові шати.
+   - **[EN]:** Derived from the historic estate of Seljaland ("Land of Shielings/Summer Pastures"). Recorded in the *Landnámabók* as early Norse settler land claimed by kin of Ingólfr Arnarson. Regional mythology long attributed the hollow amphitheater behind the waterfall curtain to the secret realm of the *huldufólk* (Icelandic Hidden Folk), claiming that the elves held dances behind the shimmering veil of mist on clear midsummer nights.
 
-## 19. Múlagljúfur (Секретний каньйон Hangandifoss) (Múlagljúfur Secret Canyon)
-- **Категорія:** Каньйон & Водоспади | **GPS:** 63.9897, -16.4358
-- **Просторовий вектор:** Непозначений з'їзд біля Fjallsárlón
-- **Геологія & Вулканологія:** Велична розколина, в яку падають два височенних водоспади: Hangandifoss (123 м) та Múlafoss, серед зелених скельних гребенів.
-- **Саги, Історія & Фольклор:** Століттями був відомий лише місцевим пастухам, які шукали заблукалих овець серед скель.
-- **Безпека водія & Практичні поради:** Гравійна дорога вимагає обережності. Хайкінг 4 км туди й назад (близько 2 годин). Найкращий вид на заході сонця.
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Офіційний асфальтований паркінг P1 (оплата через Parka.is, 1000 ISK). ОБОВ'ЯЗКОВО: щоб пройти ЗА водоспад, потрібен повноцінний комплект водонепроникного штормового мембранного одягу (куртка, штани) та захисний чохол для смартфона/камери, оскільки водяний пил просочує тканину за лічені секунди. Взимку стежка позаду водоспаду закривається SafeTravel через небезпеку зриву велетенських бурульок та суцільної льодової кірки на скелях.
+   - **[EN]:** Official paved parking area (managed via Parka.is, approx. 1,000 ISK). CRITICAL GEAR REQUIREMENT: To hike behind the cascade, complete waterproof outer shells (jacket and rain pants) plus lens protection are mandatory; constant turbulent spray drenches normal clothing in seconds. In winter, the path behind the falls is strictly locked by SafeTravel due to lethal falling ice icicles and glazed ice pack on the cliff footpaths.
 
-## 20. Jökulsárlón & Diamond Beach (Jökulsárlón Glacier Lagoon & Diamond Beach)
-- **Категорія:** Льодовикова Лагуна & Океан | **GPS:** 64.0484, -16.1795
-- **Просторовий вектор:** Міст Траси 1 над протокою Jökulsá
-- **Геологія & Вулканологія:** Найглибше озеро Ісландії (284 м), де тисячолітні блакитні брили відламуються від льодовика Breiðamerkurjökull і пливуть у відкритий океан.
-- **Саги, Історія & Фольклор:** Зйомки фільмів про Джеймса Бонда ('Помри, але не зараз', 'Вид на вбивство') та Лари Крофт.
-- **Безпека водія & Практичні поради:** Паркінг платний (Parka.is). Обов'язково перейдіть дорогу на чорний пляж Diamond Beach, щоб побачити лід у прибої.
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Ласкаво просимо до Сельяландсфосса — одного з найвідоміших та найдивовижніших водоспадів на всій планеті! Вода річки Сельяландсау зривається з шістдесятиметрової висоти над колишнім морським узбережжям, яке тисячі років тому омивали хвилі океану. Але його головна магія прихована всередині: завдяки потужній ерозії за водяним стовпом утворилася гігантська печера, що дарує рідкісну можливість обійти водоспад повністю навколо! Поглянути на захід сонця крізь бурхливу прозору завісу води — це враження, яке залишається в пам'яті на все життя. Обов'язково надягніть водонепроникну куртку, захистіть камеру від вологи та сміливо крокуйте кам'яною стежкою за лаштунки цієї величної стихії!
+   - **[EN]:** Welcome to Seljalandsfoss, one of the most celebrated and spellbinding natural icons in the world! Plunging sixty meters straight down from an ancient coastal cliff line once beaten by Atlantic surf, this glacial spring-fed cascade holds a world-famous secret: a vast cavern hollowed out behind the falling torrent that allows you to walk entirely behind the roaring curtain of water! Looking outward toward the southern plains through a shimmering wall of liquid diamond—especially at golden hour—is an unforgettable sensory masterpiece. Ensure your waterproofs are zipped tight, protect your camera optics from dense mist, and embark along the stone path for an exhilarating, 360-degree journey behind the falls!
 
-## 21. Vestrahorn & Stokksnes (Скелі Бетмена) (Vestrahorn & Stokksnes Batman Mountain)
-- **Категорія:** Узбережжя & Гори | **GPS:** 64.2417, -14.975
-- **Просторовий вектор:** Півострів Stokksnes за Höfn • Траса 99
-- **Геологія & Вулканологія:** 454-метрові гострі піки з магматичного габро, що відбиваються в тонкому шарі припливної води на чорному піщаному пляжі.
-- **Саги, Історія & Фольклор:** Місце першого поселення Хьорлейва (побратима Інгольфура Арнарсона). Поруч збереглося кінематографічне село вікінгів.
-- **Безпека водія & Практичні поради:** Приватна територія (оплата в Viking Café близько 1000 ISK). Ідеальне місце для полювання на Північне сяйво.
+---
 
-## 22. Reykjadalur (Термальна купальна річка) (Reykjadalur Thermal Bathing River)
-- **Категорія:** Гаряча річка | **GPS:** 64.0494, -21.2144
-- **Просторовий вектор:** Початок треку за Hveragerði
-- **Геологія & Вулканологія:** Змішування киплячих геотермальних ключів із крижаними струмками утворює комфортну для купання температуру води 38–40°C.
-- **Саги, Історія & Фольклор:** Долина 'Паруючої долини' — серце ісландської культури відкритого геотермального купання.
-- **Безпека водія & Практичні поради:** Хайкінг 3.5 км (близько 50 хвилин вгору мальовничою стежкою). Дерев'яні помости та ширми для перевдягання.
+### 15. Gljúfrabúi / Ґльюфрабуї (Hidden Canyon Cave Waterfall)
+- **GPS & Route:** 63.6201, -19.9864 • Дорога № 249 (600 м на північ від Сельяландсфосса)
+- **Category:** Waterfall / Canyon
 
-## 23. Seljavallalaug (Культовий гірський басейн 1923) (Seljavallalaug Historic Mountain Pool)
-- **Категорія:** Гірський басейн | **GPS:** 63.5656, -19.6078
-- **Просторовий вектор:** Долина під Eyjafjallajökull • Траса 242
-- **Геологія & Вулканологія:** Басейн збудований на схилі вузької скельної ущелини, одна стіна — природна скеля, з якої стікає тепла геотермальна вода.
-- **Саги, Історія & Фольклор:** Зведений у 1923 році, щоб навчити дітей плавати у країні рибалок. Пережив засипання попелом Ейяф'ятлайокютля у 2010 р.
-- **Безпека водія & Практичні поради:** Безкоштовно. 20 хв мальовничого хайкінгу руслом річки від паркінгу. Вода помірно тепла (30–35°C), спартанські роздягальні.
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** За 90 секунд після огляду Сельяландсфосса продовжуйте рух на північ дорогою № 249 до кемпінгу Хамраґардар (Hamragarðar). Подивіться на 2-гу годину: у скельній стіні помітна вузька щілина завширшки всього півтора метра, з якої з гуркотом витікає річковий потік.
+   - **[EN]:** 90 seconds after leaving Seljalandsfoss, proceed north along Route 249 towards Hamragarðar camping ground. Look toward 2 o'clock: scan the vertical cliff face to locate a narrow vertical canyon crevice barely shoulder-width across, emitting a hidden thunderous roar.
 
-## 24. Fjallsárlón (Таємнича льодовикова лагуна Ф'яльсаурлоун) (Fjallsárlón Glacier Lagoon)
-- **Категорія:** Льодовикова лагуна | **GPS:** 64.0167, -16.3667
-- **Просторовий вектор:** Траса 1 • 10 км на захід від Jökulsárlón
-- **Геологія & Вулканологія:** Прильодовикова лагуна біля язика льодовика Fjallsjökull (вивідного льодовика Vatnajökull). На відміну від Йьокюльсаурлоуна, тут крижана стіна льодовика спускається прямо у воду безпосередньо перед очима туристів, а над озером височіє найвища гора Ісландії Hvannadalshnjúkur (2110 м).
-- **Саги, Історія & Фольклор:** Місце спокою серед безкраїх сандрів Breiðamerkursandur, де в середньовіччі протікали річки з талих вод під час підлідних вивержень вулкана Ерайфайокютль (1362 р.).
-- **Безпека водія & Практичні поради:** Зручний асфальтований з'їзд з Траси 1. Сучасний візитор-центр Frost Restaurant, прогулянки човнами Zodiac до крижаної стіни. Значно менше натовпів, ніж на Jökulsárlón.
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Прихований сорокаметровий водоспад на річці Ґльюфурау (Gljúfurá), що падає всередині замкненої карстоподібної ерозійної шахти в базальтово-туфовому масиві. Стеля каньйону частково обвалилася, утворивши природне світлове вікно (skylight), крізь яке на водоспад падають сонячні промені. Дно печери заповнене великими уламками базальту, вкритими густим шаром папоротей та смарагдових мохів, що процвітають в умовах 100% постійної вологості.
+   - **[EN]:** A secluded 40-meter cascade concealed inside an enclosed cylindrical plunge chamber within the volcanic palagonite cliff. Glacial runoff hollowed out a semi-cavernous rock cathedral featuring an open skylight fissure at the ceiling. The cavern floor is scattered with moss-cloaked basalt boulders, mist-nourished liverworts, and ferns thriving under perpetual 100% atmospheric humidity.
 
-## 25. Hjálparfoss (Водоспад порятунку в базальтовій лаві) (Hjálparfoss Waterfall)
-- **Категорія:** Водоспад | **GPS:** 64.1167, -19.85
-- **Просторовий вектор:** Траса 32 • Долина Þjórsárdalur
-- **Геологія & Вулканологія:** Унікальний симетричний подвійний водоспад, де дві річки Fossá та Rauðá зливаються під кутом майже 90 градусів і падають двома струменями заввишки 9 м у глибокий круглий басейн, обрамлений вигнутими віялоподібними базальтовими стовпами.
-- **Саги, Історія & Фольклор:** Назва означає 'Водоспад допомоги/порятунку'. Тут втомлені мандрівники після небезпечного переходу пустелею Sprengisandur знаходили першу воду, зелену траву та пасовисько для коней.
-- **Безпека водія & Практичні поради:** Асфальтована дорога до самого паркінгу біля Траси 32. Зручні дерев'яні платформи для огляду. Чудове місце для пікніка біля підніжжя вулкана Hekla.
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** Назва буквально перекладається як «Мешканець ущелини» (*gljúfur* — ущелина, каньйон; *búi* — мешканець / житель). За народними повір'ями півдня, у темній ущелині століттями переховувалися відлюдники, вигнанці та духи скель. Велетенський камінь Франсманінн (Fransmanninn — «Француз») перед ущелиною пов'язаний із легендою про французького моряка, який врятувався після кораблетрощі біля берегів Сандура і знайшов притулок у цій таємній печері.
+   - **[EN]:** The name translates directly from Icelandic as "Dweller of the Gorge" (*gljúfur* = chasm; *búi* = inhabitant). Regional mythology portrayed the secluded vault as a sanctuary for outlaws, hermits, and elemental rock spirits. A monolithic boulder near the chasm opening called *Fransmanninn* ("The Frenchman") recalls an 18th-century shipwrecked French mariner who miraculously washed ashore on the black sand coast and found shelter within the cavern.
 
-## 26. Þjófafoss (Водоспад злодіїв на річці Тьорсау) (Þjófafoss Waterfall)
-- **Категорія:** Водоспад | **GPS:** 64.0567, -19.8667
-- **Просторовий вектор:** Гравійна дорога від Траси 26 біля гори Búrfell
-- **Геологія & Вулканологія:** Широкий 11-метровий водоспад на найдовшій річці Ісландії Þjórsá (230 км). Вода має насичений молочно-бірюзовий колір завдяки льодовиковому борошну. Водоспад оточений чорними лавовими полями та березовим гаєм Búrfellsskógur.
-- **Саги, Історія & Фольклор:** Назва перекладається як 'Водоспад злодіїв'. У давнину за законами тінгу спійманих злодіїв і розбійників страчували, зв'язували і скидали з урвища прямо в бурхливий вир водоспаду.
-- **Безпека водія & Практичні поради:** 4 км ґрунтової дороги від Траси 26 (рекомендується авто з нормальним кліренсом). Оглядовий майданчик з чудовою панорамою на вулкан Hekla.
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Паркуйтеся на стоянці біля Hamragarðar (або пройдіть 600 м пішки від паркінгу Сельяландсфосса). УВАГА: прохід всередину ущелини вимагає стрибків по слизькому камінню прямо в руслі річки глибиною 10–20 см. Обов'язкове високе непромокальне взуття (гумові чоботи або водонепроникні черевики Gore-Tex), дощовик з капюшоном та обережність: камінь у центрі печери слизький від бризок, тримайте баланс.
+   - **[EN]:** Park at the Hamragarðar lot or walk 600 meters north from Seljalandsfoss. CRITICAL CAUTION: Entering the chamber requires stepping directly across partially submerged, slick cobblestones inside the cold stream (depth 10–20 cm). Waterproof high-ankle boots or waders, waterproof jacket, and headlamp/hood are essential. The central boulder directly beneath the spray is extremely slick; exercise extreme caution when climbing up for photographs.
 
-## 27. Dverghamrar (Скелі карликів — шестигранні базальти) (Dverghamrar (Dwarf Cliffs))
-- **Категорія:** Базальтові колони & Фольклор | **GPS:** 63.85, -17.8667
-- **Просторовий вектор:** Прямо на Трасі 1 • 10 км на схід від Kirkjubæjarklaustur
-- **Геологія & Вулканологія:** Підковоподібний амфітеатр ідеальних шестигранних базальтових колон, що утворилися в результаті повільного рівномірного охолодження лавового потоку морською водою наприкінці льодовикового періоду, коли рівень океану був вищим.
-- **Саги, Історія & Фольклор:** Вважаються домівкою карликів (dvergar) та ельфів (huldufólk). За народними переказами 1904 року, дівчина на ім'я Олоф чула тут надприродний дзвінкий спів ельфів, які виконували християнський гімн 'Faðir vor' (Отче наш).
-- **Безпека водія & Практичні поради:** Безкоштовний паркінг прямо біля Траси 1. Коротка 5-хвилинна пішохідна стежка між величними колонами. Ідеальна зупинка для відпочинку під час переїзду півднем.
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Перед вами Ґльюфрабуї — справжня таємна перлина, схована від очей усього за кілька сотень метрів від велелюдного Сельяландсфосса! Якщо не знати точного місця, ви можете пройти повз і навіть не здогадатися, що за вузькою щілиною у скелі прихований величний підземний храм природи. Назва «Ґльюфрабуї» перекладається як «Мешканець ущелини». Щоб побачити його, вам доведеться обережно ступати по камінню прямо серед бурхливого струмка всередину темного грота. Але всередині на вас чекає справжній шок: сорокаметровий водоспад падає просто з відкритого неба крізь отвір у стелі, наповнюючи печеру громовим гуркотом, вихором бризок та казковим смарагдовим світлом. Це один із найяскравіших моментів подорожі півднем!
+   - **[EN]:** You have reached Gljúfrabúi, an astonishing secret cavern waterfall tucked just footsteps away from busy Seljalandsfoss! Unsuspecting travelers often drive right past, completely unaware that behind a narrow fissure in the cliff face hides an extraordinary subterranean cathedral of water. Its name means "Dweller of the Gorge." To enter, step carefully along mossy river stones right through the splashing creek into the semi-darkness. Suddenly, the cavern opens upwards to reveal a forty-meter waterfall plunging straight down through a skylight in the rock ceiling, filling the echoing chamber with thunderous resonance, swirling iridescent mist, and otherworldly green light. Stepping inside Gljúfrabúi feels like uncovering a mystical portal into another realm!
 
-## 28. Foss á Síðu (Водоспад, що летить угору при вітрі) (Foss á Síðu Waterfall)
-- **Категорія:** Водоспад | **GPS:** 63.855, -17.8733
-- **Просторовий вектор:** Траса 1 навпроти Dverghamrar
-- **Геологія & Вулканологія:** Тонкий витончений водоспад заввишки 82 м, що зривається з базальтового обриву плато. При сильному південному вітрі струмінь води не досягає землі, а розпилюється і злітає вгору назад на вершину скелі у вигляді водяного смерчу.
-- **Саги, Історія & Фольклор:** Згадується в Landnámabók як володіння першопоселенця Кетіля Дурного (Ketill hinn fíflski), побожного християнина з Британських островів, який заборонив язичникам жити на його землях.
-- **Безпека водія & Практичні поради:** Видно прямо з вікна автомобіля на Трасі 1. Паркуйтеся на майданчику Dverghamrar, не заходьте на приватне подвір'я ферми.
+---
 
-## 29. Vestmannaeyjar / Eldfell (Острови Вестмана — 'Північні Помпеї') (Vestmannaeyjar (Westman Islands) & Eldfell)
-- **Категорія:** Вулканічний архіпелаг / Вулкан | **GPS:** 63.4333, -20.2667
-- **Просторовий вектор:** Пором Landeyjahöfn (Траса 254) • 35 хв морем
-- **Геологія & Вулканологія:** Острів Heimaey пережив раптове нічне виверження вулкана Eldfell 23 січня 1973 року. Лава і попіл поховали 400 будинків. Мешканці врятували гавань, невпинно поливаючи край лави морською водою з пожежних суден. Тут знаходиться музей Eldheimar над розкопаними з-під попелу будинками.
-- **Саги, Історія & Фольклор:** Названі 'Островами людей заходу' (ірландців). Сюди втекли ірландські раби, які вбили Хьорлейва (побратима першого поселенця Інгольфура Арнарсона). Інгольфур вистежив і помстився рабам на цих скелях.
-- **Безпека водія & Практичні поради:** Пором Herjólfur ходить кілька разів на день (можна пливти з авто або без). Найбільша колонія тупиків (тупіків/puffins) в Атлантиці (понад 2 млн птахів).
+### 16. Nauthúsagil / Наутусаґіл (Rowan Tree Chain Ravine)
+- **GPS & Route:** 63.6744, -19.8578 • Дорога F249 (початок траси на Торсмерк)
+- **Category:** Canyon / Waterfall / Adventure
 
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** Через 90 секунд на трасі F249 перед першими складними бродами з'явиться стоянка біля ферми Наутус (Nauthús). Подивіться на 11-ту годину: глибока зелена розколина врізається в базальтовий масив, а над її урвищами нависають крони реліктових дерев горобини.
+   - **[EN]:** In 90 seconds while driving on the northern stretch of F249 toward Þórsmörk, slow down at the Nauthús parking area before the major unbridged rivers. Look toward 11 o'clock: notice the deep, narrow ravine slicing into the volcanic plateau, crowned by twisting wild rowan trees.
+
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Глибокий каньйон тріщинного типу, прорізаний талими водами льодовика Ейяф'ятлайокюдль у товщі плейстоценових гіалокластитів і стовпчастих базальтів. Каньйон настільки вузький, що його стіни місцями сходяться вгорі на відстань менше метра. Завдяки унікальному мікроклімату, захищеному від суворих субарктичних вітрів, на стрімких скелях збереглися вікові реліктові дерева горобини звичайної (*Sorbus aucuparia*), які пустили коріння прямо в розколини скель і сплітаються над головою, утворюючи живий купол над каскадами струмка.
+   - **[EN]:** An exceptionally narrow slot canyon eroded by meltwater from Eyjafjallajökull ice cap slicing through Pleistocene palagonite hyaloclastite and columnar basalts. The gorge is so deeply incised that cliff tops converge overhead, creating near-total shade. Sheltered from fierce sub-arctic winds, the microclimate sustains ancient native rowan trees (*Sorbus aucuparia*) growing horizontally out of vertical basalt crevices, their interlocking branches forming a natural arboreal roof above the churning canyon floor.
+
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** Назва «Nauthúsagil» походить від хутора Наутус (Nauthús — «Бичачий дім»), заснованого ще в добу перших поселенців. За переказами XVII–XVIII століть, у непрохідних нетрях цієї ущелини переховувалися двоє братів-вигнанців, які викрадали овець у заможних хуторян і жили в печері під водоспадом. За фольклорною традицією, велика горобина, що росте на скелі над водоспадом, вважалася священним деревом ельфів: згідно з повір'ям, будь-хто, хто зламає гілку цього дерева, накличе на себе страшне прокляття.
+   - **[EN]:** Named after the early settlement farmstead of Nauthús ("Bull Farm"). Local legends from the 17th century recount that two outlaw brothers lived in the deep chasm, surviving by raiding sheep from lowland farmers and hiding beneath the overhangs of the inner waterfall. Folk belief revered the ancient rowan clinging over the canyon crest as protected by the Hidden People: folklore warned that anyone who broke a living branch from the sacred rowan would suffer devastating misfortune.
+
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Під'їзд вимагає автомобіля з повним приводом 4x4 (дорога F249). Безкоштовний паркінг перед входом в ущелину. ЕКСПЕДИЦІЙНИЙ МАРШРУТ: шлях проходить дном каньйону по камінню серед води. У фінальній частині для виходу до головного прихованого водоспаду необхідно піднятися скелею за допомогою сталевих ланцюгів, закріплених у скелі. Обов'язкове взуття з чіпкою підошвою Vibram, водонепроникні штани та рукавички для тримання мокрого ланцюга. Категорично заборонено йти під час сильної зливи через ризик раптового паводку (flash flood).
+   - **[EN]:** Requires high-clearance 4x4 vehicle to navigate the gravel track of F249. Free trailhead parking. EXPEDITION LEVEL: The hike traverses the riverbed, requiring wading across freezing rivulets. Reaching the final hidden waterfall requires ascending a slick rock face assisted by permanently installed steel chains. Sturdy Vibram boots, waterproof shells, and climbing gloves are strongly recommended. Never enter during torrential rains due to acute flash-flood hazards within the narrow chasm.
+
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Ласкаво просимо до Наутусаґіл — однієї з найдикіших та найбільш захоплюючих секретних ущелин Південної Ісландії! Схований на початку гірської траси до Торсмерка, цей каньйон переносить вас у первісний світ пригод. Тут скелі сходяться настільки близько, що сонячне світло ледь пробивається крізь зелений килим моху та крони стародавніх горобин, що нависають прямо над головою. Колись у цій неприступній схованці знаходили притулок безстрашні ісландські одинаки та розбійники. Рухаючись руслом льодовикового струмка та піднімаючись кам'яними уступами за допомогою залізних ланцюгів, ви дійдете до серця каньйону, де шумить прихований водоспад. Це справжній ковток дикого драйву для тих, хто прагне вийти за межі звичних туристичних автобусних маршрутів!
+   - **[EN]:** Welcome to Nauthúsagil, one of the wildest and most thrilling hidden adventures on Iceland’s southern boundary! Tucked along the rugged approach toward Þórsmörk, this enchanting slot ravine transports you into a prehistoric sanctuary. The vertical basalt walls narrow until they almost touch, while twisted, ancient rowan trees cling miraculously to the stone ledges, weaving a verdant canopy overhead. Historically a secluded stronghold where outlaws found shelter from the law, navigating Nauthúsagil requires wading up the bed of a mountain stream and scaling a slippery rock wall aided by fixed steel chains. Reaching the thunderous waterfall echoing in the deep interior is an unforgettable triumph of exploration for true adventurers!
+
+---
+
+### 17. Þorvaldseyri & Eyjafjallajökull Viewpoint / Торвальдсейрі (Eyjafjallajökull Viewpoint)
+- **GPS & Route:** 63.5422, -19.6601 • Дорога № 1 (прямо на шосе під вулканом)
+- **Category:** Volcano / Glacier
+
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** За 90 секунд до оглядового майданчика на південному узбіччі траси № 1. Подивіться на 10-ту годину: над зеленими полями історичної ферми Торвальдсейрі велично здіймається білосніжна льодова шапка стратовулкана Ейяф'ятлайокюдль заввишки 1651 метр.
+   - **[EN]:** In 90 seconds, approach the official pullout on the ocean side of Route 1. Look toward 10 o'clock: soaring dramatically above the pastures of Þorvaldseyri farm stands the glistening glacier ice cap of the notorious Eyjafjallajökull stratovolcano (1,651 m).
+
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Активний стратовулкан центрального типу, перекритий льодовиковим куполом площею близько 78 км² та товщиною до 200 м. Історичне виверження 14 квітня 2010 року було фреатомагматичним: контакт андезито-базальтової магми з льодом вершини спричинив миттєве вибухове подрібнення розплаву на мікроскопічні склоподібні частинки вулканічного попелу. Шлейф попелу піднявся на висоту понад 9 км і призвів до безпрецедентного закриття європейського повітряного простору на 6 днів (скасовано понад 100 000 рейсів). Вулканічний попіл повністю поховав ферму Торвальдсейрі під шаром сірого шлаку, проте ґрунт швидко відновив родючість завдяки високому вмісту фосфору та калію.
+   - **[EN]:** Active central stratovolcano capped by an ice sheet measuring ~78 km² with summit thickness up to 200 meters. The catastrophic April 2010 eruption was phreatomagmatic: rising trachyandesite magma met dense subglacial meltwater, triggering ultra-fine explosive fragmentation into abrasive, silica-rich glass shards. The ash plume reached 9 km in altitude, causing an unprecedented 6-day shutdown of European airspace (over 100,000 flights canceled). Massive ashfall blanketed Þorvaldseyri farm in deep volcanic silt, though mineral nutrients (phosphorus, potassium) later enriched agricultural yields.
+
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** Ферма Торвальдсейрі відома з доби заселення Ісландії (*Landnámabók*). Вона стала глобальним світовим символом незламності ісландського духу. Під час виверження 2010 року фермери Олафур та Ґудні відмовилися здаватися: замість евакуації вони врятували свою молочну худобу, власноруч очистили сотні гектарів землі від попелу і створили знаменитий Центр відвідувачів Eyjafjallajökull Erupts з гаслом: «Ми не здаємося, ми прибираємо попіл і сіємо знову».
+   - **[EN]:** Farmstead recorded in *Landnámabók* since the 9th-century Settlement Era. Following the 2010 eruption, Þorvaldseyri gained global acclaim as the enduring symbol of Icelandic resilience. Rather than abandoning their ash-smothered home, farmers Ólafur and Guðný rescued their dairy herds, cleared thousands of tons of tephra, and opened the famous visitor pavilion under the inspiring motto: "The ash fell, the world stopped, but life goes on."
+
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Безкоштовний просторий асфальтований майданчик біля траси 1 з великими інформаційними стендами та панорамними картами вивержень. Увага: на цій відкритій ділянці шосе під вулканом часті сильні бічні шквали вітру з гірських перевалів (пориви понад 25 м/с можуть вирвати двері авто або здути легкі причепи). Завжди міцно тримайте двері обома руками при виході!
+   - **[EN]:** Wide paved pullout on Route 1 equipped with full-color geological memorial panels. CRITICAL WIND HAZARD: The open flats below Eyjafjallajökull are subject to violent katabatic winds descending from the ice cap (>25 m/s gusts). Always grasp car doors with both hands when opening to prevent hinge buckling.
+
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Подивіться ліворуч — перед вами Ейяф'ятлайокюдль, найзнаменитіший вулкан сучасності, чию назву у квітні 2010 року марно намагалися вимовити диктори теленовин по всьому світу! Саме тут розплавлена базальтова магма зустрілася з товщею льодовика, спричинивши вибух неймовірної сили. Хмара дрібного скляного попелу піднялася на дев'ять кілометрів у стратосферу, зупинивши авіасполучення над усією Європою та змусивши замовкнути понад сто тисяч авіарейсів. А просто під вулканом лежить ферма Торвальдсейрі, яка була повністю похована під товстим чорним попелом. Але ісландські фермери не здалися: вони розчистили поля, відродили господарство і довели всьому людству силу духу перед обличчям розлюченої природи. Зупиніться на мить, вдихніть свіже повітря і відчуйте спокійну велич цієї сплячої стихії!
+   - **[EN]:** Look to your left—you are gazing at Eyjafjallajökull, the formidable volcano whose name global news anchors famously struggled to pronounce in April 2010! Here, rising magma collided with the summit glacier, igniting a cataclysmic phreatomagmatic explosion that shot abrasive glass ash nine kilometers into the skies, grounding aviation across Europe and stranding millions of passengers. Directly below rests Þorvaldseyri farm, which was completely buried under suffocating volcanic dust. Yet the family refused to capitulate; they bulldozed the ash, replanted the soil, and showed the world the indomitable tenacity of the Icelandic people. Take a moment to view this gleaming glacier against the sky, remembering the terrifying power slumbering beneath its frozen mantle!
+
+---
+
+### 18. Skógafoss / Скоґафосс (60m Classic Curtain Waterfall)
+- **GPS & Route:** 63.5321, -19.5113 • З'їзд з Траси № 1 до селища Скоґар
+- **Category:** Waterfall / Coastal Cliff
+
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** Через 90 секунд плавний поворот ліворуч із траси № 1 за вказівником Skógar. Подивіться на 11-ту годину: прямо перед вами відкривається грандіозна, ідеально прямокутна білосніжна стіна водоспаду Скоґафосс заввишки шістдесят метрів, що розсікає темні скелі.
+   - **[EN]:** In 90 seconds, take the left exit off Route 1 toward Skógar village. Look straight ahead at 11 o'clock: marvel at the majestic, perfectly symmetrical 60-meter curtain of falling water thundering against the ancient sea cliffs.
+
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Один із найбільших та найкрасивіших класичних водоспадів завісного типу в країні шириною 25 метрів та висотою вільного падіння 60 метрів на річці Скоґау (Skógá). Водоспад скидається з чітко вираженого краю стародавнього морського кліфу льодовикового періоду. Постійна щільна водяна хмара від розбивання струменя об каміння в сонячні дні майже завжди створює яскраву поодиноку або подвійну кругову веселку завдяки ідеальному куту заломлення світла (42°). Праворуч від водоспаду облаштовано металеві сходи з 527 сходинок, що ведуть на оглядову платформу над самим обривом.
+   - **[EN]:** One of Iceland's grandest classic curtain waterfalls, spanning 25 meters across with a 60-meter vertical drop on the Skógá river. Flowing over the abrupt lip of a former Pleistocene marine cliffline created before coastal land rebound. The perpetual heavy mist generated by the immense hydraulic impact consistently produces vivid single and double rainbows on sunny days via ideal 42-degree light refraction. A steel staircase of 527 steps climbs the cliff ridge to a suspended observation platform cantilevered above the chasm.
+
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** Зафіксовано в *Landnámabók*: перший норвезький поселенець у Скоґарі, вікінг Трасі Тоуроульфссон (Þrasi Þórólfsson), перед смертю заховав свою важку ковану скриню з золотом і сріблом у глибокій печері прямо за водяною стіною Скоґафосса. Місцеві жителі століттями намагалися дістати скарб; за легендою, одному хлопцеві вдалося зачепити скриню гаком, але він зміг відірвати лише масивне золочене кільце-ручку. Це автентичне кільце пізніше прикріпили до дверей сусідньої церкви в Скоґарі, а сьогодні воно експонується в краєзнавчому музеї Скоуґасабн (Skógasafn).
+   - **[EN]:** Immortally preserved in the *Landnámabók*: Skógar's original Viking settler, Þrasi Þórólfsson, concealed his heavy ironbound treasure chest brimming with gold deep within a cavern behind the thundering water wall. Folklore tells of a brave youth who managed to hook the chest, but the chest slipped away, leaving only its ornate brass ring in his grasp. This legendary Viking ring was affixed to the door of Skógar church and is now preserved in the nearby Skógasafn cultural museum.
+
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Безкоштовний просторий паркінг біля підніжжя водоспаду та кемпінгу. Щоб підійти впритул до підніжжя (ближче ніж 50 м), обов'язкова штормова мембранна куртка з капюшоном. Сходи нагору (527 сходинок) взимку покриваються льодом — мікрошипи/льодоступи суворо обов'язкові. Верхній оглядовий майданчик є початком знаменитого 25-кілометрового гірського треку Фіммвьордюхаулс (Fimmvörðuháls) між льодовиками до Торсмерка.
+   - **[EN]:** Generous free parking adjacent to the falls and campground. Approaching within 50 meters of the plunge pool guarantees soaking spray—waterproof shells required. The 527-step summit staircase becomes dangerously glazed with ice during winter—microspikes or ice grips are indispensable. The upper viewing deck marks the trailhead for the world-renowned 25 km Fimmvörðuháls wilderness trail winding between two glaciers to Þórsmörk.
+
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Ви наближаєтеся до Скоґафосса — грандіозного володаря південних скель, що по праву вважається королем ісландських водоспадів! Справжня жива стіна води завширшки двадцять п'ять метрів з ревом обривається з шістдесятиметрової висоти колишніх океанічних кліфів. Коли світить сонце, у густому водяному пилу спалахує сліпуча подвійна веселка, що здається настільки близькою, ніби до неї можна доторкнутися рукою. Стародавні саги повідають, що перший вікінг Трасі сховав за цим водоспадом скриню з золотом, яку так ніхто і не зміг дістати. Якщо ви маєте сили, подолайте п'ятсот двадцять сім сходинок праворуч і підніміться на оглядовий майданчик над прірвою: звідти відкривається приголомшливий краєвид на річку та безкраї простори південного узбережжя!
+   - **[EN]:** Welcome to Skógafoss, the indisputable monarch of southern Iceland's coastal waterfalls! Spanning an imposing twenty-five meters wide, a roaring wall of crystalline glacial water plunges sixty meters down from former sea cliffs into a foaming basin below. On bright days, the dense airborne mist reliably creates shimmering, picture-perfect double rainbows arching across the spray. Local sagas proclaim that Þrasi the Viking buried a treasure chest of gold behind the falls, forever guarded by the thundering waters. If you are up for the climb, conquer the five hundred and twenty-seven steps flanking the ridge to stand on the suspended viewing platform above: gaze out over the roaring precipice and witness the breathtaking panorama stretching towards the wild Atlantic Ocean!
+
+---
+
+### 19. Kvernufoss / Квернуфосс (Hidden Gorge Waterfall)
+- **GPS & Route:** 63.5283, -19.4808 • Паркінг біля Skógar Museum (Траса № 1)
+- **Category:** Waterfall / Canyon
+
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** Через 90 секунд після Скоґафосса поверніть до етнографічного музею Скоуґар (Skógasafn). Подивіться на 1-шу годину: за музейними будівлями ховається глибока смарагдова ущелина річки Квернау (Kverná), де серед скель схований водоспад Квернуфосс.
+   - **[EN]:** In 90 seconds past Skógafoss, turn toward the turf roofs of Skógar Museum. Look toward 1 o'clock: tucked discreetly into the emerald volcanic ravine behind the museum grounds lies the secluded jewel of Kvernufoss.
+
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Тридцятиметровий водоспад у затишному скельному амфітеатрі з палагоніту та базальту, прорізаному річкою Квернау. Завдяки закритій геоморфології каньйону тут сформувався унікальний безвітряний мікроклімат, де скелі вкриті пишними килимами рідкісних видів мохів. Позаду водяного струменя розташований глибокий сухий скельний навіс (under-cliff shelf), що дозволяє обійти водоспад ззаду аналогічно до Сельяландсфосса, але в повній тиші та без туристичних натовпів.
+   - **[EN]:** A 30-meter waterfall sheltered within a tranquil amphitheater of palagonite hyaloclastite and eroded basalt columns carved by the Kverná river. The enclosed morphology creates a wind-protected microclimate sustaining lush colonies of delicate mosses and alpine ferns. Crucially, a sheltered volcanic terrace runs directly behind the plummeting torrent, allowing visitors to walk behind the cascade just like at Seljalandsfoss, but in sublime serenity without tour bus crowds.
+
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** Назва «Kverná» походить від давньоісландського слова *kvern* (ручні кам'яні жорна для зерна) — через форму круглих вирв, вибитих водою в лаві, що нагадували жорна млина. У суворі середньовічні зими фермери Скоґара заганяли в цю глибоку захищену ущелину своїх овець, ховаючи їх від штормових північних буранів. За легендами, в ущелині мешкає добрий дух-хранитель, який оберігає мандрівників від каменепадів.
+   - **[EN]:** Named after the river Kverná, from the Old Norse *kvern* (hand-mill or quern-stone), honoring the perfectly rounded scouring basins carved into the volcanic bedrock by whirlpool action. During punishing sub-arctic winters, medieval farmers utilized this sheltered canyon as a natural stable for livestock against devastating blizzard gales. Local folklore holds that a benevolent guardian spirit watches over the ravine, protecting respectful wanderers from loose stones.
+
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Паркуйтеся на спеціальному платному паркінгу біля Skógar Museum (оплата через Parka.is, близько 750 ISK). Від паркінгу веде легка, мальовнича стежка вздовж річки (близько 15–20 хвилин спокійної ходьби). Потрібно перелізти через спеціальний дерев'яний перелаз через огорожу для овець. Стежка за водоспадом буває вологою та слизькою — тримайтеся скельної стіни та обов'язково одягайте трекінгове взуття.
+   - **[EN]:** Park in the dedicated lot behind the Skógar Museum (fee managed via Parka.is, ~750 ISK). A tranquil, scenic 15–20 minute footpath winds alongside the babbling river. Visitors cross a stile over a sheep fence. When traversing the gravel ledge behind the falls, surfaces are damp and slick—wear sturdy traction boots and step mindfully along the back wall.
+
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Перед вами Квернуфосс — одна з найкраще збережених таємниць південного узбережжя, схована всього за два кілометри від велелюдного Скоґафосса! Більшість мандрівників навіть не здогадуються, що за будівлями музею ховається казкова смарагдова ущелина річки Квернау. Пройшовши двадцять хвилин тихою стежкою вздовж пагорбів, де пасуться коні, ви опинитеся перед тридцятиметровим водоспадом у затишному скельному амфітеатрі. Тут панує неймовірна тиша, порушувана лише гуркотом води. І найкраще: ви можете обережно обійти водоспад зі зворотного боку і зайти в сухий кам'яний грот позаду водяної завіси, насолоджуючись магією ісландської природи в абсолютній гармонії та спокої!
+   - **[EN]:** You have discovered Kvernufoss, one of the South Coast’s best-kept secrets, tucked away barely two kilometers from bustling Skógar! While millions flock to nearby Skógafoss, very few realize that an enchanting fairytale gorge hides right behind the Skógar cultural museum. Following a serene twenty-minute riverbank trail where sheep graze peacefully, you enter a sheltered amphitheater crowned by a thirty-meter cascade dropping into a mossy pool. Because it is cradled within deep cliffs, the air is surprisingly still. And the ultimate reward awaits: just like at Seljalandsfoss, a natural footpath leads directly behind the curtain of water, offering an intimate, spellbinding encounter with Iceland's untamed spirit without any tourist crowds!
+
+---
+
+### 20. Sólheimajökull Glacier Tongue / Сольхеймайокюдль (Sólheimajökull Glacier Tongue)
+- **GPS & Route:** 63.5305, -19.3711 • Дорога № 221 (з'їзд на північ з Траси № 1)
+- **Category:** Glacier / Volcano
+
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** Через 90 секунд плавний поворот ліворуч із траси № 1 на дорогу № 221 (Sólheimajökulsvegur). Подивіться на 12-ту годину: наприкінці долини між темними скелями спускається гігантський крижаний язик Сольхеймайокюдль, смугастий від чорного вулканічного попелу.
+   - **[EN]:** In 90 seconds, prepare to turn left off Route 1 onto Route 221 (Sólheimajökulsvegur). Look straight ahead at 12 o'clock: descending through the mountain notch appears the sprawling, rugged glacier tongue of Sólheimajökull, striped in dramatically folded black volcanic tephra.
+
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Південно-західний вивідний льодовиковий язик купола Мірдалсйокюдль (Mýrdalsjökull) завдовжки близько 8 км і завширшки 1–2 км. Льодовик рухається вниз долиною під дією власної ваги, утворюючи гігантські льодові тріщини (crevasses) глибиною до 30 метрів та льодові піраміди-сераки. Характерний чорний смугастий візерунок криги зумовлений прошарками базальтової тефри від вивержень підлідного супервулкана Катла (Katla), чия гігантська кальдера розташована прямо під основним льодовиковим куполом. Через глобальне потепління льодовик стрімко відступає зі швидкістю до 50–60 метрів на рік, залишивши на своєму місці глибоку прильодовикову лагуну та кінцеві морени.
+   - **[EN]:** A major southwestern valley outlet glacier descending from the mighty Mýrdalsjökull ice cap, measuring ~8 km long and 1–2 km wide. The ice tongue advances and fractures dynamically over steep bedrock topography, carving deep crevasses up to 30 meters deep and towering seracs. Its striking zebra-like black stratification represents volcanic tephra layers deposited by historical eruptions of the subglacial Katla volcanic caldera sleeping directly beneath the ice sheet. Sólheimajökull serves as a premier climate change indicator: it has retreated at an alarming rate of 50–60 meters per year, creating an expanding proglacial iceberg lagoon at its snout.
+
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** Назва перекладається як «Льодовик сонячного дому» (*sól* — сонце, *heimur* — дім). У середньовічних ісландських сагах льодовик практично не згадувався як перешкода, оскільки під час Малого кліматичного оптимуму (IX–XII ст.) льодовики були значно меншими, а долина використовувалася як пасовище. Проте пізніше, під час Малого льодовикового періоду (XIV–XIX ст.), лід насунувся вперед і поховав під собою стародавні ферми. Місцевий фольклор тісно пов'язує лід із гнівом відьми Катли, чия чарівна ступа, за переказами, спричиняє катастрофічні льодовикові повені йокюдльхльойп (jökulhlaup).
+   - **[EN]:** Translates as "Home-of-the-Sun Glacier." During the warm Medieval Climate Optimum when Norse settlers arrived in the 9th century, the glacier was vastly smaller and cattle grazed where the ice now rests. As the Little Ice Age gripped Iceland from 1300 onwards, the expanding ice tongue overran pastures and swallowed medieval shielings. Folk lore entwined the ice with Katla, the malevolent sorceress whose supernatural wrath supposedly sparks the catastrophic subglacial outburst floods known as *jökulhlaups*.
+
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Асфальтована дорога № 221 веде до паркінгу (оплата через Parka.is, 1000 ISK). Центр відвідувачів, кафе та прокат спорядження. СУВОРА БЕЗПЕКА: вихід на поверхню льодовика без сертифікованого гіда, захисного шолома, кішок та льодоруба КАТЕГОРИЧНО ЗАБОРОНЕНИЙ (смертельна небезпека зриву у приховані льодові тріщини та воронки-мули). Для звичайних туристів прокладено безпечну гравійну стежку (15 хв) до оглядового майданчика біля льодовикової лагуни. Ніколи не підходьте близько до плаваючих айсбергів — вони можуть раптово перевернутися!
+   - **[EN]:** Fully paved Route 221 terminates at the visitor parking (managed by Parka.is, ~1,000 ISK), equipped with coffee kiosk and expedition cabins. CRITICAL LIFESAVING PROTOCOL: Venturing onto the glacier ice without a certified glacier guide, safety helmet, crampons, and ice axe is STRICTLY PROHIBITED (concealed crevasses and moulin shafts present mortal peril). Casual visitors should stay on the safe gravel path leading to the iceberg lagoon shore. Never step onto floating shore ice—calving icebergs roll over with crushing hydraulic force without warning!
+
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Перед вами Сольхеймайокюдль — величний крижаний язик, що спускається з вершин велетенського льодовика Мірдалсйокюдль! Подивіться на його дивовижний колір: це не просто білий лід, він пронизаний чорними смугами вулканічного попелу. Ці чорні лінії — це геологічний літопис вивержень грізного підлідного вулкана Катла, що дрімає в глибинах цього льодовикового купола. Сольхеймайокюдль є живим свідком змін клімату: щороку він тане і відступає на десятки метрів, залишивши біля свого підніжжя глибоку лагуну з крижаними айсбергами. Якщо ви вирушаєте в льодовиковий похід, надіньте кішки, візьміть льодоруб і слухайте команди сертифікованого гіда. А з берега лагуни обов'язково насолодіться цим драматичним зіткненням льоду, вулканічного вогню та часу!
+   - **[EN]:** You have arrived at Sólheimajökull, an awe-inspiring glacial tongue descending straight from the massive Mýrdalsjökull ice cap! Notice the surreal, dramatic coloration of the ice: it is heavily banded with deep black strata of volcanic tephra. These dark veins are direct footprints from historical eruptions of Katla, the legendary subglacial volcano sleeping beneath the massive ice sheet. Sólheimajökull is one of the world's most dramatic classrooms of climate change, currently retreating fifty meters every single year and calving blue icebergs into its expanding terminal lagoon. If you have booked a glacier hike, tighten your crampons, hold your ice axe, and follow your certified guide onto the sculptured seracs. From the lagoon overlook, admire this colossal collision of fire and ice frozen in motion!
+
+### 21. Dyrhólaey Promontory / Дирхолаей (Sea Arch & Door Danger Alert Zone)
+- **GPS & Route:** 63.3996, -19.1269 • Дорога № 218 (Dyrhólavegur)
+- **Category:** Coastal Cliff / Wildlife
+
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** За 90 секунд до повороту на дорогу № 218 з траси № 1. Подивіться на 1-шу годину: над безкрайнім чорним пляжем височіє масивний 120-метровий темний мис, увінчаний білосніжним маяком, крізь кам'яну арку якого пробиваються океанічні вали.
+   - **[EN]:** In 90 seconds, approach the turnoff for Route 218 off the Ring Road. Look toward 1 o'clock: jutting 120 meters into the wild North Atlantic stands the dramatic volcanic promontory of Dyrhólaey, crowned by a lone white lighthouse and its massive natural sea arch.
+
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Вулканічний масив субмаринного походження, утворений підводно-підлідним виверженням наприкінці плейстоцену (близько 100 000 років тому), аналогічно до острова Суртсей. Мис складається з палагонітових туфів та стовпчастих базальтів. Візитівка мису — колосальна природна арка заввишки понад 20 метрів, промита хвильовою абразією Атлантики у товщі базальту (звідси назва *Dyrhólaey* — «Острів із дверним отвором»). Через арку під час штилю можуть пропливати невеликі катери, а у 1993 році крізь неї навіть пролетів сміливий пілот-шибайголова на легкомоторному літаку.
+   - **[EN]:** A submarine tuff and basalt headland formed by surtseyan eruptions approximately 100,000 BP during the late Pleistocene. Its defining geological monument is a colossal marine arch rising over 20 meters, hollowed by relentless Atlantic hydraulic swell through fractured basalt (hence the name *Dyrhólaey*, "Door-Hill Island"). During calm seas, expedition boats can pass through the archway, and in 1993 a daredevil pilot famously flew an airplane straight through the natural stone aperture.
+
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** В історичних мореплавних картах британських моряків XVIII століття мис фігурував під назвою «Мис Портленд» (Cape Portland). Маяк на вершині був збудований у 1927 році у вигляді масивної замкової вежі. Влітку скелі мису перетворюються на один із найбільших пташиних базарів Європи, де гніздяться тисячі атлантичних тупиків (*Fratercula arctica*), кайр та гагар. За народними повір'ями, тупики — це «морські папуги», які приносять удачу рибалкам.
+   - **[EN]:** Historical 18th-century English maritime logs named the cape "Cape Portland." The picturesque cast-concrete castle-tower lighthouse was erected in 1927. During summer, Dyrhólaey transforms into one of the North Atlantic's premier nesting colonies for Atlantic puffins (*Fratercula arctica*), fulmars, and guillemots. Icelandic lore celebrated puffins as gentle spirit-birds whose spring arrival signaled the departure of winter darkness.
+
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Дорога 218 веде до двох паркінгів: нижнього (з видом на чорний пляж) та верхнього (біля маяка, підйом крутим серпантином). ЗОНА КРИТИЧНОГО ВІТРУ: мис є одним із найбільш вітряних місць Ісландії! Пориви вітру тут регулярно перевищують 30–35 м/с. ДВЕРІ АВТОМОБІЛЯ: тримайте обома руками при кожному відкриванні — порив вивертає петлі назовні за частку секунди. У травні–червні доступ може обмежуватися для захисту птахів під час гніздування.
+   - **[EN]:** Paved Route 218 leads to lower parking and an upper lot by the lighthouse reached via a steep incline. EXTREME WIND WARNING ZONE: Dyrhólaey is one of the windiest promontories on the island, with gusts frequently exceeding 30–35 m/s. VEHICLE DOOR DANGER: Always grasp doors with both hands when exiting. Spring notice: areas are temporarily restricted during May–June to protect nesting puffin burrows.
+
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Перед вами Дирхолаей — грандіозний вулканічний мис, що велично врізається у бурхливі води Північної Атлантики! Його назва означає «Острів із дверним отвором» завдяки гігантській кам'яній арці, яку океанські шторми виточили прямо в базальтових скелях. З висоти ста двадцяти метрів відкривається один із найвеличніших краєвидів на Землі: на схід лежить знаменитий Чорний пляж Рейнісф'яра, на захід — нескінченна чорна коса узбережжя, а на півночі сяють льодовикові шапки вулканів. З травня по серпень круті трав'янисті схили мису оживають: сюди прилітають тисячі чарівних атлантичних тупиків із яскравими дзьобами. Будьте вкрай обережні з вітром під час виходу з машини та насолодіться безкрайньою морською стихією!
+   - **[EN]:** Welcome to Dyrhólaey, an awe-inspiring volcanic promontory standing sentinel over the storm-swept waters of the Atlantic! Its name literally translates to "The Island with the Door Hole," celebrating the monumental natural basalt arch carved out by millennia of relentless surf. From this 120-meter cliff summit, you behold one of the most sublime vistas in the world: to the east lie the black sands and sea stacks of Reynisfjara; to the west, an infinite expanse of ebony coastline; and to the north, the gleaming ice sheets of sleeping volcanoes. From late spring through August, the grassy cliff edges become a bustling metropolis for thousands of charismatic Atlantic puffins. Hold onto your car doors in the gusty wind, and absorb this raw masterpiece of maritime Iceland!
+
+---
+
+### 22. Reynisfjara Black Sand Beach / Рейнісф'яра (Reynisdrangar Basalt Stacks)
+- **GPS & Route:** 63.4057, -19.0449 • Дорога № 215 (Reynishverfisvegur)
+- **Category:** Coastal Cliff / Ocean / Beach
+
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** Через 90 секунд плавний поворот праворуч із траси № 1 на дорогу № 215 до пляжу Рейнісф'яра. Подивіться на 11-ту годину: на тлі пінистих білих хвиль здіймаються шпилі базальтових скель Рейнісдранґар, а скеля гори Рейнісф'ятль вкрита ідеальними колонами «кам'яного органу».
+   - **[EN]:** In 90 seconds, turn south off Route 1 onto Route 215 toward Reynisfjara. Look toward 11 o'clock: rising dramatically out of the crashing white surf stand the jagged offshore basalt spires of Reynisdrangar, backed by the hexagonal columns of Mount Reynisfjall.
+
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Всесвітньо відомий чорний пляж, сформований тонко подрібненим олівіновим базальтом, утвореним при контакті гарячої лави з холодними водами океану та при розмиванні палеовулканічних масивів. Скельний масив Ґардар (Garðar) на пляжі демонструє неперевершений приклад стовпчастої базальтової окремості (columnar jointing): повільне, рівномірне охолодження товстого шару лави призвело до радіального стиснення та розтріскування на правильні шестикутні вертикальні призми. У морі височіють морські останцеві кекури Рейнісдранґар (Reynisdrangar) заввишки до 66 метрів — ерозійні залишки колишнього вулканічного купола.
+   - **[EN]:** World-renowned black sand beach composed of fine-grained basalt tephra formed through the explosive quenching of volcanic magma entering the ocean and subsequent tidal pulverization. The sea cliff Garðar displays magnificent textbook columnar basalt jointing: symmetrical contraction during slow, uniform cooling fractured the basalt into vertical hexagonal prisms. Emerging from the offshore surf stand the iconic Reynisdrangar sea stacks (up to 66 meters tall), representing eroded volcanic necks of an ancient subaqueous volcanic vent.
+
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** Згідно з народними легендами Півдня, зафіксованими Йоном Арнасоном, скелі Рейнісдранґар — це двоє тролів (Скалі та Скесса), які вночі намагалися затягнути на мілину великий трищогловий торговельний корабель. Вони забарилися у воді, і коли перші промені сонця осяяли океан, тролі разом із кораблем миттєво перетворилися на вічне каміння. Пляж і гора названі на честь норвезького вікінга Рейніра, першого поселенця цієї долини.
+   - **[EN]:** Preserved in Jón Árnason's folk compendium: the towering spires of Reynisdrangar are petrified night trolls. The troll pair, Skessu and Skali, attempted to drag a three-masted schooner to shore before dawn; delayed by the heavy ship, the sudden rays of the rising sun struck them, petrifying monsters and vessel into perpetual stone. Named after Reynir, the pioneer Norse chieftain who claimed these coastal pastures in the 9th century.
+
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Платний паркінг P1/P2 (Parka.is, 1000 ISK). СУВОРА СМЕРТЕЛЬНА НЕБЕЗПЕКА: пляж сумнозвісний смертоносними хвилями-вбивцями («sneaker waves» / хвилі-підкрадачі). Це раптові аномальні хвилі, які накочуються на десятки метрів вище лінії прибою і збивають людей з ніг за частку секунди. ЗВОРОТНА ДОННА ТЕЧІЯ НЕ ЗАЛИШАЄ ШАНСІВ НА ВИПЛИВАННЯ! ПРАВИЛА ЖИТТЯ: 1) Завжди перевіряйте світлофор безпеки SafeTravel на вході (Зелений / Жовтий / Червоний); 2) НІКОЛИ не повертайтеся спиною до океану; 3) Тримайтеся мінімум на 30–40 метрів від краю води.
+   - **[EN]:** Paid parking lot via Parka.is (~1,000 ISK) with Black Beach Restaurant and modern facilities. CRITICAL LIFE-THREATENING HAZARD: Reynisfjara is notorious for deadly "sneaker waves" that surge dozens of meters further inland than average breakers with sudden, ferocious momentum. The rip currents drag victims into freezing Atlantic waters where survival is measured in minutes. MANDATORY SAFETY RULES: 1) Obey the automated SafeTravel coastal warning lights (Green/Yellow/Red); 2) NEVER turn your back on the ocean; 3) Maintain at least 30–40 meters distance from the water's edge.
+
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Вітаємо на Рейнісф'ярі — одному з найкрасивіших, найзагадковіших і водночас найнебезпечніших пляжів нашої планети! Подивіться на ідеальні шестикутні базальтові колони скелі Ґардар: вони виглядають наче гігантський орган, витесаний невідомим майстром, але це творіння самої природи при охолодженні лави. А у морі височіють гострі шпилі Рейнісдранґар — за давньою легендою, це тролі, які закам'яніли на світанку. Але головне правило Рейнісф'яри — це гранична повага до океану. Тут народжуються підступні хвилі-вбивці, які накочуються значно далі звичайних і миттєво збивають людину з ніг. Запам'ятайте головне правило безпеки: ніколи не повертайтеся спиною до хвиль, не підходьте близько до кромки води і тримайтеся безпечної зони. Насолоджуйтеся цим драматичним шедевром природи усвідомлено!
+   - **[EN]:** Welcome to Reynisfjara, widely celebrated as one of the most stunning, cinematic, and treacherous beaches on Earth! Gaze upon the breathtaking basalt cliffs of Garðar: the perfectly carved hexagonal columns resemble an immense stone pipe organ sculpted by Titans, formed by the slow geometric cooling of ancient lava flows. Out in the churning ocean, the sea stacks of Reynisdrangar jut skyward—legend tells they are petrified trolls caught by the morning sun. Yet the sublime grandeur of Reynisfjara demands utmost vigilance. The North Atlantic generates deadly "sneaker waves" that surge without warning far up the dark sand, packing enough hydraulic force to pull adults into powerful offshore rip currents. Always obey the safety signs, stay well back from the water’s edge, and never turn your back on the Atlantic Ocean!
+
+---
+
+### 23. Vík í Mýrdal & Víkurkirkja / Вік і Мюрдаль (Vík Village & Church Viewpoint)
+- **GPS & Route:** 63.4194, -19.0061 • Дорога № 1 (Центр селища Вік)
+- **Category:** Saga & UNESCO / Coastal Cliff / City
+
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** За 90 секунд до в'їзду в селище Вік по трасі № 1. Подивіться на 11-ту годину: на високому смарагдовому пагорбі над містечком височіє білосніжна церква Вікюркіркья з яскраво-червоним дахом, що слугує головним орієнтиром для мореплавців та мешканців.
+   - **[EN]:** In 90 seconds, descend along Route 1 into the seaside haven of Vík í Mýrdal. Look toward 11 o'clock: perched high on the prominent green ridge above the village stands the iconic white Víkurkirkja church with its vibrant red gabled roof.
+
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Селище Вік розташоване в зоні прямої вулканічної небезпеки підлідного вулкана Катла (Katla), прихованого під льодовиком Мірдалсйокюдль усього за 15 км на північ. У разі великого виверження льодовиковий сель йокюдльхльойп (jökulhlaup) з витратою води понад 100 000 м³/с накриє долину за 15–20 хвилин. Скельний пагорб, на якому збудована церква Вікюркіркья (споруджена у 1934 році), є єдиною піднесеною топографічною висотою, яка не буде затоплена потоком селю, тому церква офіційно визначена головним пунктом аварійної евакуації всього населення селища при сейсмічній тривозі.
+   - **[EN]:** Vík lies directly inside the primary hazard corridor of Katla, the notorious subglacial caldera slumbering under Mýrdalsjökull barely 15 km to the north. A major eruption will trigger catastrophic jökulhlaup glacial floods (discharges exceeding 100,000 m³/s) submerging the coastal plain within 15–20 minutes. The high bedrock knoll of Víkurkirkja (consecrated in 1934) represents the sole elevated refuge safe from flood inundation, officially designated by Icelandic Civil Protection as the emergency rallying sanctuary for all residents upon earthquake warning sirens.
+
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** Вік — найпівденніше поселення материкової Ісландії, що століттями було ізольованим форпостом через небезпечні чорні піски сандрів та відсутність природної гавані. Сюди доставляли товари човнами крізь бурхливий прибій. За переказами, у церкві зберігаються старовинні дзвони, які під час штормів били на сполох, коли кораблі розбивалися об підводні рифи Рейнісдранґар.
+   - **[EN]:** Vík is the southernmost village on the Icelandic mainland, historically isolated between impassable glacial sandur plains and harbourless coasts where trade goods were landed by open rowing boats through terrifying surf. Local folklore attributes guardian powers to the church bells, which tolled mournfully through centuries of maritime shipwrecks along the treacherous offshore reefs.
+
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Вільний паркінг біля церкви нагорі пагорба та в торговому центрі внизу. СТРАТЕГІЧНИЙ ХАБ: Вік — останній великий населений пункт із супермаркетом (Krónan), заправками N1/Orkan та сервісними станціями перед перетином гігантської безлюдної пустелі Скейдараурсандур (Skeiðarársandur) завдовжки 140 км. Обов'язково заправте повний бак пального та поповніть запаси води та їжі перед продовженням руху на схід!
+   - **[EN]:** Free parking available both atop the church ridge and at the central commercial mall below. CRITICAL LOGISTICS HUB: Vík is the last major settlement featuring comprehensive grocery stores (Krónan), fuel stations (N1, Orkan), and mechanical services before entering the 140 km expanse of uninhabited sandur deserts to Skaftafell. Fill your fuel tank to capacity and stock food supplies before driving eastward!
+
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Ласкаво просимо до Вік і Мюрдаль — найпівденнішого та найзатишнішого селища Ісландії! Подивіться на чарівну білу церкву з червоним дахом на вершині пагорба: це не просто красива архітектурна пам'ятка, це справжній ковчег порятунку для місцевих жителів. Усього за кілька кілометрів на північ під товщею льодовика дрімає вулкан Катла. Якщо він прокинеться, гігантський льодовиковий паводок затопить усю долину, і цей пагорб біля церкви — єдине безпечне місце евакуації, куди мають бігти всі мешканці за сигналом тривоги. А для мандрівників Вік — це стратегічний оазис перед перетином безкрайніх чорних пустель півдня. Заправте автомобіль, випийте кави в затишній пекарні і насолодіться панорамою океану з пагорба біля церкви!
+   - **[EN]:** Welcome to Vík í Mýrdal, the picturesque, southernmost outpost of mainland Iceland! Gaze up at the storybook white church with its ruby-red roof crowning the hillside: this is far more than an idyllic postcard view—it is a vital emergency sanctuary. Barely fifteen kilometers to the north, under the massive Mýrdalsjökull glacier, slumbers Katla, one of Iceland’s fiercest volcanoes. Should Katla erupt, catastrophic glacial outburst floods would sweep across the lowlands; this very knoll is the designated high-ground refuge for the entire village. For road trippers, Vík represents the essential gateway before traversing the vast, uninhabited black sands of the south. Top off your fuel, savor local pastries, and take in the magnificent panoramic views over the Atlantic!
+
+---
+
+### 24. Eldhraun Lava Field / Ельдхраун (Skaftáreldar 1783 Moss Lava Field)
+- **GPS & Route:** 63.6751, -18.1411 • Дорога № 1 (між Віком та Кірк'юбайярклейстюром)
+- **Category:** Volcano / Saga & UNESCO / Landscape
+
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** За 90 секунд до облаштованої стоянки посеред лавового поля на трасі № 1. Подивіться на 10-ту та 2-гу години: по обидва боки шосе на десятки кілометрів розкинувся неземний ландшафт із велетенських лавових горбів, вкритих суцільним товстим килимом сріблясто-зеленого моху.
+   - **[EN]:** In 90 seconds, approach the official roadside rest area on Route 1. Look to both sides toward 10 and 2 o'clock: prepare to enter the surreal, undulating moonscape of the Eldhraun lava field, carpeted completely in a thick, spongy blanket of silvery-green moss.
+
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Гігантське лавове поле площею 565 км² та об'ємом близько 14,7 км³ базальтової лави, утворене під час катастрофічного виверження тріщини Лакі (Skaftáreldar — «Скафтаурські вогні») у 1783–1784 роках. Це одне з найбільш руйнівних вивержень в історії людства: воно викинуло в атмосферу понад 120 мільйонів тонн діоксиду сірки, що спричинило токсичний туман над Європою, знищило 75% худоби в Ісландії та викликало Великий голод (Móðuharðindin), а також аномальні кліматичні аномалії, які передували Французькій революції 1789 року. Лава переважно типу пахоехое (pahoehoe), вкрита рідкісним товстим килимом шерстистого моху (*Racomitrium lanuginosum*) товщиною до 20–30 см.
+   - **[EN]:** A monumental basaltic lava field encompassing 565 km² with an estimated volume of 14.7 km³, extruded during the cataclysmic 1783–1784 Skaftáreldar ("Skaftá Fires") eruption from the Laki crater row. Emitting over 120 million tons of toxic sulfur dioxide, it generated a volcanic haze over Europe that caused severe climatic disruptions and famine, decimating 75% of Iceland's livestock in the "Mist Hardships" (Móðuharðindin). The vesicular pahoehoe lava forms rolling blisters blanketed by a fragile 20–30 cm deep cushion of woolly fringe-moss (*Racomitrium lanuginosum*).
+
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** Головна історична постать Ельдхрауна — пастор Йон Стейнґрімссон (Jón Steingrímsson), «пастор вогню». 20 липня 1783 року, коли розпечений потік лави наближався до селища Кірк'юбайярклейстюр, загрожуючи стерти його з лиця землі, пастор зібрав усіх мешканців у церкві і виголосив свою знамениту «Вогняну проповідь» (*Eldmessa*). За літописами, сталося диво: саме того дня лавовий потік зупинився всього за кілька сотень метрів від храму, повернувши в русло річки.
+   - **[EN]:** Inextricably tied to Reverend Jón Steingrímsson, famously known as the "Fire Priest." On July 20, 1783, as glowing molten lava advanced relentlessly toward Kirkjubæjarklaustur, Reverend Jón gathered desperate townsfolk inside the chapel and delivered his legendary "Fire Sermon" (*Eldmessa*). Historical records note that the lava flow miraculously ground to a halt only hundreds of yards from the settlement, sparing the congregation.
+
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Спеціальний паркінг біля траси 1 з круговою оглядовою платформою та дерев'яними містками. СУВОРА ЕКОЛОГІЧНА ЗАБОРОНА: ХОДИТИ ПО МОХУ КАТЕГОРИЧНО ЗАБОРОНЕНО! Мох *Racomitrium* росте зі швидкістю лише 1–2 міліметри на рік; один слід ноги людини руйнує екосистему, яка відновлюватиметься понад 100 років. Рухайтеся виключно дерев'яними помостами.
+   - **[EN]:** Designated pullout on Route 1 featuring wooden boardwalks and educational plaques. CRITICAL CONSERVATION LAW: WALKING ON THE MOSS IS STRICTLY FORBIDDEN. Sub-arctic *Racomitrium* moss grows at merely 1–2 millimeters per year; a single footprint crushes delicate roots, requiring up to a century to heal. Stay strictly on marked platforms.
+
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Ви в'їжджаєте в Ельдхраун — «Поле вогню», що виглядає як пейзаж далекої неземної планети! Цей безкрайній оксамитовий килим із сріблясто-зеленого моху приховує під собою сліди однієї з найстрашніших катастроф в історії людства. У 1783 році тут вивергалися кратери Лакі, затопивши південні долини чотирнадцятьма кубічними кілометрами палаючої лави. Отруйний сірчаний туман окутав усю Європу, спричинивши неврожаї та зміни клімату. Проте за два з половиною століття природа залікувала рани, вкривши застиглий камінь ніжним мохом завтовшки тридцять сантиметрів. Пам'ятайте: цей мох неймовірно крихкий, і ходити по ньому суворо заборонено. Зупиніться на дерев'яному майданчику, відчуйте тишу і пориньте у споглядання цієї величної гармонії між вогнем і життям!
+   - **[EN]:** You are driving through Eldhraun, the "Fire Lava" field, presenting a hauntingly beautiful, otherworldly lunar terrain! This vast, velvety carpet of silvery moss blankets the frozen scars of one of the deadliest volcanic catastrophes in human history. In 1783, the Laki fissure erupted for eight terrifying months, submerging five hundred square kilometers under molten rock. The toxic sulfur cloud drifted across Europe, devastating agriculture and triggering continental famines. Over centuries, nature reclaimed the wasteland, draping the sharp basalt mounds in a thirty-centimeter-thick mantle of delicate arctic moss. Walking on this fragile moss is strictly prohibited, as damage takes decades to heal. Pause at the viewing platform, absorb the eerie silence, and witness how Iceland's raw volcanic fury transforms into serene, poetic beauty!
+
+---
+
+### 25. Fjaðrárgljúfur Canyon / Фьядрарґльюфюр (Serpentine Canyon)
+- **GPS & Route:** 63.7712, -18.1718 • Дорога № F206 (3 км на північ від Траси № 1)
+- **Category:** Canyon / River
+
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** За 90 секунд до повороту на дорогу № 206 біля селища Кірк'юбайярклейстюр. Подивіться на 10-ту годину: серед зелених пагорбів відкривається вхід у звивистий каньйон, чиї вертикальні смарагдові стіни вигинаються змійкою на глибину ста метрів.
+   - **[EN]:** In 90 seconds, watch for the turnoff onto Route 206 just west of Kirkjubæjarklaustur. Look toward 10 o'clock: tucked into the rolling green hills unfolds the dramatic, serpentine fissure of Fjaðrárgljúfur canyon, its mossy walls plunging 100 meters down.
+
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Величний каньйон змієподібної форми завдовжки близько 2 км і завглибшки до 100 метрів. Утворений приблизно 2 мільйони років тому в товщі плейстоценових палагонітових туфів та лавових порід. Остаточного вигляду каньйон набув наприкінці останнього льодовикового періоду (близько 9000–10000 років тому), коли відступаючий льодовик утворив підпруджене льодовикове озеро, катастрофічний прорив якого промив у м'яких гіалокластитах вузькі каньйонні меандри. Дном каньйону протікає кришталево чиста річка Фьядрау (Fjaðrá).
+   - **[EN]:** A magnificent serpentine canyon stretching 2 km long and up to 100 meters deep. Carved through stratified Pleistocene palagonite hyaloclastite and pillow lavas. The modern canyon was excavated during the retreat of the last ice sheet (~9,000–10,000 BP) when an ice-dammed meltwater lake suffered catastrophic drainage, incising narrow meanders through the volcanic bedrock. The crystal-clear Fjaðrá river flows serenely across the canyon floor.
+
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** Район навколо каньйону належав до середньовічних володінь жіночого бенедиктинського монастиря в Кірк'юбайрі (Kirkjubæjarklaustur, заснованого у 1186 році). Черниці використовували каньйон як природну схованку для худоби під час набігів розбійників. У новітній історії каньйон здобув шалену популярність після зйомок музичного кліпу Джастіна Бібера у 2015 році, через що сюди ринув натовп туристів, і уряду довелося тимчасово закрити локацію для порятунку витоптаного моху.
+   - **[EN]:** Historically pastureland associated with the Benedictine Convent of Kirkjubæjarklaustur (founded in 1186). Medieval nuns used the enclosed ravine as safe pasturage during civil feuds. In pop culture, the site became an international sensation after appearing in Justin Bieber's 2015 music video; skyrocketing tourist traffic caused severe footpath degradation, prompting the Environment Agency to close the canyon temporarily to allow the trampled moss to regenerate.
+
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Дорога 206 гравійна, але влітку доступна для 2WD (взимку обов'язковий 4WD). Платний паркінг (Parka.is, 1000 ISK). Каньйон облаштований винятково якісними оглядовими платформами над прірвою. СУВОРО ЗАБОРОНЕНО перелазити через огороджувальні троси на край урвища — палагонітовий ґрунт пухкий і схильний до раптових обвалів у прірву!
+   - **[EN]:** Gravel access via Route 206 (accessible by standard 2WD in summer, 4WD in winter). Paid parking via Parka.is (~1,000 ISK) with modern restrooms. Highly developed boardwalk trail with cantilevered viewing platforms over the abyss. CRITICAL RULE: Never cross protective boundary ropes to stand on cliff edges—volcanic palagonite soils are crumbly and collapse without warning.
+
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Перед вами Фьядрарґльюфюр — неймовірно мальовничий каньйон, який справедливо називають природним шедевром Ісландії! Його звивисті стометрові стіни, вкриті смарагдовим мохом, нагадують велетенського казкового дракона, що застиг посеред пагорбів. Цю дивовижну ущелину виточили льодовикові потоки талої води наприкінці льодовикового періоду, пробивши м'який вулканічний туф. Каньйон став настільки популярним у світі, що кілька років тому його навіть довелося закривати для туристів, аби захистити делікатну природу від витоптування. Сьогодні тут прокладено зручні дерев'яні доріжки та оглядові майданчики, що ширяють над прірвою. Пройдіться вздовж краю, погляньте вниз на прозору річку Фьядрау і насолодіться бездоганною геометрією цієї стародавньої казки!
+   - **[EN]:** Welcome to Fjaðrárgljúfur, universally acclaimed as one of the most breathtaking fairytale canyons on Earth! Its serpentine, moss-draped walls plunge one hundred meters down in undulating curves resembling a slumbering dragon etched into the green plains. Excavated ten thousand years ago by catastrophic glacial meltwater carving through soft volcanic tuff, this natural sanctuary is so delicate that it was temporarily closed to allow damaged vegetation to recover after booming global fame. Today, beautifully maintained gravel paths and cantilevered overlooks let you safely peer directly into the abyss. Walk to the highest viewing terrace, watch the crystal-clear Fjaðrá river snake below, and witness nature's flawless sculpting prowess!
+
+### 26. Stjórnarfoss Waterfall / Стйорнарфосс (Stjórnarfoss Cascade)
+- **GPS & Route:** 63.7915, -18.0572 • Дорога № 203 (Кірк'юбайярклейстюр)
+- **Category:** Waterfall / River
+
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** Через 90 секунд плавний поворот ліворуч із траси № 1 за селищем Кірк'юбайярклейстюр на дорогу № 203. Подивіться на 10-ту годину: серед зелених березових схилів спадає мальовничий симетричний водоспад у формі купола або дзвона.
+   - **[EN]:** In 90 seconds, take the left exit onto Route 203 north of Kirkjubæjarklaustur. Look toward 10 o'clock: emerging from the verdant birch-lined slopes, observe the charming, bell-shaped symmetry of Stjórnarfoss waterfall.
+
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Водоспад заввишки близько 15 метрів на річці Стйорн (Stjórn). Геологічно цікавий своєю формою: струмінь падає на куполоподібний базальтовий виступ, розтікаючись симетричним віялом або «водяним дзвоном» перед падінням у кришталево чисту глибоку кам'яну чашу. Ложе складене міжльодовиковими базальтами, оточеними рідкісними для півдня реліктовими насадженнями ісландської берези (*Betula pubescens*).
+   - **[EN]:** A 15-meter waterfall formed along the Stjórn river. Distinctive for its elegant geometric morphology: the descending torrent cascades over a smooth, domed basalt outcrop, flaring outward into a symmetrical aqueous fan into a crystal-clear plunge basin. Cut through interglacial lava flows, framed by remnants of native birch woods (*Betula pubescens*).
+
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** Долина водоспаду тісно пов'язана з історією монастиря Клаустюр. За переказами, монахині брали тут чисту воду для випікання монастирського хліба. У літню спеку це улюблене місце відпочинку та купання місцевих жителів, оскільки захищена від вітру улоговина прогрівається значно тепліше за навколишні рівнини.
+   - **[EN]:** Historically connected to the medieval Benedictine convent at Klaustur. Oral traditions record that nuns sourced pristine water here for brewing and baking. In modern times, the sun-trapping microclimate of the enclosed basin makes this one of the favorite local wild-swimming spots in southern Iceland.
+
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Короткий асфальтований під'їзд, безкоштовний паркінг із кемпінгом поруч. Лише 2 хвилини пішки до чаші водоспаду. Ідеальне місце для сімейного пікніка без туристичних натовпів. Каміння біля води вкрите тонким шаром слизьких водоростей — будьте обережні, ступаючи біля краю басейну.
+   - **[EN]:** Paved access road with free parking by the local campsite. Short 2-minute level walk to the pool. A peaceful haven devoid of tour crowds. Slipping hazard: submerged stones along the pool rim are coated in slick aquatic moss.
+
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Перед вами Стйорнарфосс — неймовірно затишний і витончений водоспад, який ісландці вважають одним із найгармонійніших на півдні! Його форма нагадує купол або дзвін: вода річки Стйорн плавно обтікає гладенький базальтовий камінь, розлітаючись сріблястим віялом бризок у спокійну прозору лагуну. Завдяки пагорбам тут практично ніколи не буває пронизливого вітру, а береги вкриті низькорослими березами. У сонячні дні місцеві жителі приходять сюди на пікніки, а найсміливіші навіть занурюються у крижану річкову воду. Зупиніться тут на кілька хвилин, щоб перепочити від довгих кілометрів траси номер один і відчути лагідну тишу ісландського оазису!
+   - **[EN]:** Welcome to Stjórnarfoss, a wonderfully intimate and symmetrical hidden jewel near Kirkjubæjarklaustur! Spilling fifteen meters over a convex basalt dome, the crystalline stream fans gracefully outward like a bridal veil into a pristine plunge pool. Sheltered by surrounding hills and dwarf birch woods, this peaceful gorge traps the sunshine and deflects harsh coastal winds. Far from crowded tour bus stops, Stjórnarfoss is cherished by locals as a favorite secluded picnic retreat. Step down to the water’s edge, breathe in the crisp scent of arctic greenery, and enjoy the delicate harmony of this southern sanctuary!
+
+---
+
+### 27. Systrafoss & Systrastapi / Сюстрафосс та Сюстрастапі (Nuns' Falls & Rock)
+- **GPS & Route:** 63.7862, -18.0601 • Дорога № 1 (Центр Кірк'юбайярклейстюра)
+- **Category:** Waterfall / Saga & UNESCO / Rock
+
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** За 90 секунд до в'їзду в центр селища Кірк'юбайярклейстюр. Подивіться на 9-ту годину: на високому темному базальтовому плато спадають дві тонкі паралельні стрічки водоспаду Сюстрафосс, а на захід височіє пласка скеля-останець Сюстрастапі.
+   - **[EN]:** In 90 seconds, approaching the town of Kirkjubæjarklaustur on Route 1. Look toward 9 o'clock: cascading down the sheer basalt scarp flow the twin parallel white ribbons of Systrafoss, framed to the west by the solitary flat-topped butte of Systrastapi.
+
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Водоспад заввишки понад 80 метрів, що витікає з високогірного кратерного озера Сюстраватн (Systravatn), розташованого на плато над селищем. Потік розділяється на два паралельні рукави, які збігають крутим схилом колишнього морського базальтового кліфу. Поруч розташований Сюстрастапі — базальтовий останець (butte) столоподібної форми, виточений льодовиками та ерозією талих вод під час відступу льодовикового покриву.
+   - **[EN]:** An 80-meter cascade issuing from the alpine lake Systravatn perched atop the highland plateau above the town. The waters split into two parallel white ribbons streaming down the basalt cliffscarp. Nearby stands Systrastapi, a steep-sided tabular basalt butte isolated by glacial meltwater erosion during the late Pleistocene.
+
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** Назва перекладається як «Водоспад сестер» та «Скеля сестер» на честь черниць бенедиктинського монастиря (Kirkjubæjarklaustur, 1186–1544 рр.). З цими місцями пов'язана темна середньовічна легенда: дві черниці уклали договір із дияволом (одна продала душу за багатство, а інша богохульствувала проти папи). Після церковного суду обох спалили на вогнищі та поховали на вершині скелі Сюстрастапі. За переказом, на могилі праведної сестри зацвіли прекрасні квіти, тоді як могила грішниці назавжди заросла чорним бур'яном.
+   - **[EN]:** Commemorating the Benedictine nuns (*systur*) of the convent active here from 1186 to the Reformation in 1544. Rich in grim medieval lore: local annals recount that two nuns were accused of heresy and consorting with the Devil—one for selling her soul for gold, the other for insulting the Pope. Both were burned at the stake and buried atop the summit of Systrastapi. Folklore held that the grave of the repentant sister bloomed with wild flowers, while the unrepentant nun's mound grew only poisonous weeds.
+
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Безкоштовний паркінг у центрі містечка біля парку. Від підніжжя водоспаду веде чудово облаштована стежка через найвищий в Ісландії лісовий масив (модрини та смереки заввишки понад 20 м) на вершину плато до озера Сюстраватн. На скелю Сюстрастапі веде крута стежка з канатами — підйом дозволений лише в суху погоду через небезпеку зриву.
+   - **[EN]:** Free parking within the municipal park area. A scenic woodland trail (passing through Iceland's tallest planted spruce forests) climbs to the top of the cliff and Lake Systravatn. Ascent to the summit of Systrastapi rock involves a steep scramble aided by fixed ropes—attempt only in dry, calm weather.
+
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Ласкаво просимо до Кірк'юбайярклейстюра — історичного серця південного сходу, де оживають таємничі середньовічні легенди! Подивіться на скелю: двома срібними косами з вісімдесятиметрової висоти спадає водоспад Сюстрафосс, або «Водоспад сестер». Ця назва нагадує про бенедиктинський жіночий монастир, що діяв тут понад триста років. А праворуч у долині височіє самітна скеля Сюстрастапі, де, за легендою, поховані дві черниці після суворого інквізиційного суду. Між водоспадом і скелею росте один із найгустіших хвойних лісів Ісландії, що є рідкістю для острова. Прогуляйтеся лісовими стежками до озера на вершині або помилуйтеся водоспадом знизу — тут минуле нерозривно сплелося з вічною красою природи!
+   - **[EN]:** Welcome to Kirkjubæjarklaustur, an ancient monastic sanctuary draped in evocative medieval lore! Look up at the cliffs to spot Systrafoss, the "Sisters' Waterfall," plunging eighty meters in two graceful ribbons from Lake Systravatn above. Its name honors the Benedictine convent that stood here from 1186 until the Reformation. Flanking the plain rises the tabular mesa of Systrastapi, the fabled burial ground of two medieval nuns judged by local tribunals. Below the cliff stretches one of Iceland's most surprising anomalies—a towering grove of planted conifers thriving in the sub-arctic air. Stroll along the forest paths, take in the legends, and enjoy the tranquil heritage of Klaustur!
+
+---
+
+### 28. Lómagnúpur Palisade / Ломаґнупюр (Giant Basalt Palisade)
+- **GPS & Route:** 63.8941, -17.5255 • Дорога № 1 (прямо біля шосе)
+- **Category:** Coastal Cliff / Volcano / Mountain
+
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** За 90 секунд до оглядової кишені на трасі № 1. Подивіться на 11-ту годину: перед вами прямо з чорної пустелі підіймається колосальний, прямовисний базальтовий мис Ломаґнупюр заввишки 671 метр, що домінує над усім південним горизонтом.
+   - **[EN]:** In 90 seconds, approach the roadside turnout on Route 1. Look toward 11 o'clock: rising sheer and solitary out of the black sand desert, behold the colossal 671-meter basalt palisade cliff of Mount Lómagnúpur dominating the horizon.
+
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Один із найвищих прямовисних скельних кліфів у Європі (абсолютна висота 671 м). Складений товщею субгоризонтальних шарів пліоценових та плейстоценових базальтів віком від 1 до 2,5 мільйонів років, що перешаровуються з вулканічними туфами та осадовими моренами. Нижня частина скелі підмивалася хвилями дольодовикового океану. У 1789 році внаслідок потужного землетрусу південно-західний край гори зазнав гігантського каменепаду: мільйони тонн базальту обвалилися в долину, утворивши конус виносу та кам'яний хаос біля підніжжя.
+   - **[EN]:** One of the most imposing sheer coastal headlands in Europe, rising 671 meters vertically from the sandur. Formed by layered strata of Pliocene to Pleistocene flood basalts (dated 1–2.5 million years old) interleaved with hyaloclastite tuffs and subglacial sediments. Formerly an active oceanic sea cliff before coastal retreat. In 1789, a catastrophic earthquake caused a monumental rock avalanche on the western precipice, dumping millions of tons of shattered basalt into the desert.
+
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** Центральний міфологічний образ у найвидатнішій пам'ятці літератури Ісландії — «Сазі про Ньяла» (*Brennu-Njáls saga*). Герою Флосі наснився віщий сон, у якому з кам'яної стіни Ломаґнупюра вийшов велетень у козячій шкурі із залізним посохом у руках і вигукнув імена двадцяти п'яти людей, приречених на смерть у кривавій помсті. Ломаґнупюр є одним із чотирьох священних Духів-Покровителів Ісландії (*Landvættir*) — саме його уособлює Велетень Скель (Bergrisi), зображений на гербі та монетах Ісландії.
+   - **[EN]:** Featured prominently in the epic *Brennu-Njáls saga*: chieftain Flosi has a terrifying prophetic dream wherein the cliff wall of Lómagnúpur opens and a massive mountain giant (*Bergrisi*) clad in goatskins steps forth with an iron staff, calling out the names of twenty-five men doomed to die in blood feud. The Mountain Giant of Lómagnúpur is revered as one of the four legendary Guardian Spirits (*Landvættir*) protecting Iceland, enshrined permanently on Iceland's National Coat of Arms and currency.
+
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Спеціальний асфальтований майданчик біля траси 1 з оглядовим дзеркалом та стендом. СУВОРА НЕБЕЗПЕКА КАМЕНЕПАДІВ: підходити впритул до вертикальної стіни гори суворо заборонено через регулярне осипання скельних уламків. На ділянці шосе перед Ломаґнупюром діють небезпечні бокові вітрові шквали — міцно тримайте кермо!
+   - **[EN]:** Dedicated paved roadside pullout on Route 1 with photography mirrors and historical panels. CRITICAL ROCKFALL WARNING: Never hike directly beneath the vertical base due to unstable scree and frequent rockfall. Extreme crosswind warning: the desert stretch fronting Lómagnúpur is notorious for violent wind funnels—maintain a firm grip on the steering wheel!
+
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Погляньте вперед — перед вами височіє Ломаґнупюр, грандіозний кам'яний страж південного узбережжя, чия прямовисна стіна сягає шестисот сімдесяти одного метра над чорною пустелею! Цей гігантський базальтовий мис пам'ятає мільйони років вивержень, коли його підніжжя омивали шторми льодовикового океану. У давній «Сазі про Ньяла» Ломаґнупюр описується як домівка грізного Гірського Велетня Берґрісі. За сагами, саме з цієї скелі велетень виходив із залізним посохом, провіщаючи долю вікінгів. Сьогодні цей Велетень скель прикрашає офіційний герб Ісландії, охороняючи південні кордони острова. Зупиніться на паркінгу і відчуйте мовчазну, величну міць цього вічного кам'яного титана!
+   - **[EN]:** Gaze ahead at Mount Lómagnúpur, the supreme basalt colossus standing guard over Iceland’s southern desert! Plunging six hundred and seventy-one vertical meters straight down onto the black sands, this monumental palisade is one of the most commanding coastal precipices in Europe. In the legendary *Njál’s Saga*, Lómagnúpur was the dwelling of the formidable Rock Giant, the *Bergrisi*, who stepped from the stone ramparts with an iron staff to herald the fate of doomed warriors. Today, that very Mountain Giant stands immortalized as one of the four sacred Land Guardians on Iceland’s official coat of arms. Pull over at the scenic turnout, behold the sheer scale of the rock face, and revere one of the most awe-inspiring sights along the entire Ring Road!
+
+---
+
+### 29. Dverghamrar / Дверґхамрар (Dwarf Cliffs Hexagonal Basalt)
+- **GPS & Route:** 63.8504, -17.8592 • Дорога № 1 (на схід від Кірк'юбайярклейстюра)
+- **Category:** Coastal Cliff / Saga & UNESCO / Geology
+
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** Через 90 секунд плавний поворот праворуч із траси № 1 до оглядового майданчика Дверґхамрар. Подивіться на 2-гу годину: серед пагорбів ви побачите дивовижну підковоподібну огорожу з ідеальних шестикутних базальтових колон, що утворюють природний кам'яний амфітеатр.
+   - **[EN]:** In 90 seconds, prepare to turn right off Route 1 into the Dverghamrar turnout. Look toward 2 o'clock: nestled against the roadside hills, observe a striking natural horseshoe formation of perfectly shaped hexagonal columnar basalt cliffs.
+
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Унікальний геологічний пам'ятник природи стовпчастої базальтової окремості (columnar basalt jointing). Утворений під час міжльодовикового виливу густої лави, яка повільно охолоджувалася під шаром льодовика або морської води наприкінці плейстоцену. Під час стиснення лави утворилися правильні геометричні призми діаметром 30–50 см. Пізніше наступаючий льодовик та океанічні шторми відполірували колони, сформувавши дві напівкруглі кам'яні стіни, розділені затишним трав'янистим проходом.
+   - **[EN]:** A protected national geological monument showcasing immaculate columnar basalt jointing. Extruded as a thick subaerial basalt flow that cooled exceptionally slowly and evenly during an interglacial epoch. Cooling contraction pulled the rock inward, creating pristine hexagonal and pentagonal prisms 30–50 cm across. Subsequent marine waves and glaciers scoured the formation into two distinct curved, amphitheater-like natural ramparts.
+
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** Назва буквально перекладається як «Скелі гномів» (*dvergar* — гноми, дверґи; *hamrar* — скелі). За народними віруваннями, ця базальтова фортеця є священним житлом і храмом ісландських карликів і прихованого народу (*huldufólk*). Найвідоміший переказ датується 1904 роком: молода дівчина на ім'я Олоф проходила повз скелі і раптом почула дивовижний, неземний спів, що лунав ізсередини каменю. Це був християнський гімн «Fadir vor» (Отче наш), який співали гноми на знак визнання Божої благодаті.
+   - **[EN]:** Named directly from Icelandic folklore: "The Dwarf Cliffs" (*dvergar* = dwarves/gnomes; *hamrar* = rocks). Lore revered these columnar basalt ramparts as a sacred habitat and church of the benevolent dwarves and *huldufólk*. The most famous folk account occurred in 1904, when a local farm girl named Ólöf passed the cliffs and heard magnificent angelic singing resonating from inside the solid stone—the dwarves were singing the hymn "Our Father" in sweet, melodious voices.
+
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Безкоштовний паркінг прямо біля шосе. Коротка легка пішохідна кругова стежка (близько 5–10 хвилин). Скелі є заповідником природи — категорично заборонено видряпуватися на колони або відколювати базальт на сувеніри. Навпроти через дорогу розташований водоспад Фосс а Сіду.
+   - **[EN]:** Free roadside parking off Route 1. A short, easy 5–10 minute looped footpath meanders through the columns. Conservation rule: climbing atop the columnar prisms or chipping basalt specimens is strictly prohibited. Conveniently paired with viewing Foss á Síðu directly across the highway.
+
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Перед вами Дверґхамрар — казкові «Скелі гномів», що виглядають як залишки стародавнього храму, збудованого міфічними істотами! Подивіться на ці дивовижні шестикутні колони з темного базальту: природа витесала їх із геометричною точністю під час повільного охолодження розжареної лави, а льодовики пізніше зрізали їх верхівки, створивши цей затишний кам'яний амфітеатр. З давніх-давен ісландці вірили, що всередині цих скель живуть дверґи — вправні ковалі та мудрі гноми. Навіть на початку двадцятого століття місцеві жителі стверджували, що чули, як із кам'яних колон лунає ніжний небесний спів. Прогуляйтеся цією стежкою, торкніться прохолодного базальту і прислухайтеся до таємничого подиху ісландських легенд!
+   - **[EN]:** Welcome to Dverghamrar, the enchanting "Dwarf Cliffs," evoking the ruins of an ancient mythological citadel! Notice the breathtaking hexagonal columns of dark volcanic basalt standing in a curved natural colonnade: as cooling lava contracted millennia ago, nature cleaved the rock into precise geometric prisms, subsequently polished by glacial retreat. For centuries, Icelanders have considered this secluded sanctuary home to benevolent dwarves and elves skilled in magical metalcraft. Local accounts from a century ago even speak of travelers hearing sweet, harmonious choral hymns whispering directly from within the solid stone. Take a peaceful walk along the short path, run your hand across the smooth basalt angles, and savor the timeless magic of Icelandic folklore!
+
+---
+
+### 30. Foss á Síðu / Фосс а Сіду (Wind-Defying Inverted Waterfall)
+- **GPS & Route:** 63.8542, -17.8681 • Дорога № 1 (навпроти Дверґхамрара)
+- **Category:** Waterfall / Coastal Cliff
+
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** За 90 секунд до ферми Сіда (Síða) на трасі № 1 прямо навпроти Дверґхамрара. Подивіться ліворуч на 9-ту годину: зі скелястого обриву стрімко спадає тонкий струмінь води заввишки 82 метри, який у вітряні дні дивовижним чином летить угору в небо!
+   - **[EN]:** In 90 seconds while passing Dverghamrar along Route 1, look across the road toward 9 o'clock: plunging 82 meters off the basalt cliff plateau stands Foss á Síðu, famous for flowing backwards straight into the sky during strong southerly winds!
+
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Високий водоспад вільного падіння висотою 82 метри на річці Тверá (Þverá), що витікає з озера Твераурватн на плато. Геологічний уступ складений щільними палеозойсько-базальтовими шарами стародавнього кліфу. Аеродинамічний феномен: через помірний об'єм води та орієнтацію скелі прямо на південь назустріч відкритому океану, сильні атлантичні штормові вітри створюють колосальний висхідний потік повітря, який підхоплює струмінь водоспаду і змушує його текти назад угору, розсіюючи воду хмарою над плато без досягнення землі.
+   - **[EN]:** A slender 82-meter plunge waterfall on the Þverá stream descending from Lake Þverárvatn on the basalt highlands. Renowned for its rare aerodynamic phenomenon: because the southern cliff face confronts open oceanic winds across unobstructed sandur plains, fierce gale gusts generate immense vertical updrafts that catch the slender stream mid-fall, blowing the entire water column backwards and spraying it upwards across the highland plateau without touching the ground.
+
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** Район Сіда згадується ще в *Landnámabók*. У середньовічних анналах ця ферма була відомою садибою вождів. З водоспадом пов'язана романтична легенда про зачарованого пса з золотим нашийником (Móri), який охороняв ферму від грабіжників і попереджав господарів гавкотом, коли вода у водоспаді починала підійматися до неба, що віщувало наближення лютого шторму з океану.
+   - **[EN]:** Mentioned in the *Landnámabók* as part of the early settlement estates. Folklore surrounding the falls centers on a spectral fairy hound with a golden collar named Móri, said to guard the farmstead and howl loudly whenever the waterfall blew backwards, serving as a reliable omen that a ferocious maritime tempest was about to strike the south coast.
+
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Огляд здійснюється з паркінгу біля Дверґхамрара або з кишені навпроти садиби. УВАГА: земля безпосередньо під водоспадом є приватною територією діючої ферми — заходити на подвір'я хутора без дозволу заборонено. Найкращий ракурс для фотографування — через телеоб'єктив з оглядового майданчика біля шосе.
+   - **[EN]:** Best viewed safely from the parking lot at Dverghamrar across the road. PRIVATE PROPERTY NOTICE: The meadow directly under the falls belongs to a private residence—do not trespass into the farmyard. Outstanding telephoto photo opportunity from the roadside observation bay.
+
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Подивіться ліворуч — перед вами Фосс а Сіду, один із найдивовижніших та найфотогенічніших водоспадів Південної Ісландії! Ця тонка струнка стрічка води спадає з висоти вісімдесяти двох метрів над старовинним фермерським хутором. Але справжня магія відбувається тут під час сильного південного вітру. Коли люті океанські шквали вдаряють у прямовисну стіну скелі, висхідний потік повітря стає настільки потужним, що підхоплює струмінь води і змушує водоспад текти вгору прямо в хмари! Вода просто розчиняється в небі, так і не торкнувшись землі. Якщо вам пощастило застати вітряну погоду, ви станете свідком цього дивовижного порушення законів гравітації, створеного чистою енергією ісландської стихії!
+   - **[EN]:** Look across the road to your left—behold Foss á Síðu, one of the most mesmerizing natural spectacles in southern Iceland! Plunging eighty-two meters straight down from the high basalt plateau, this graceful waterfall cascades directly above a historic farmstead. But Foss á Síðu holds a world-famous secret: when powerful southern gales barrel in from the open Atlantic, the updraft against the vertical cliff becomes so colossal that it actually reverses the waterfall, blowing the stream completely backward and scattering it into the sky! The water vanishes into thin air before ever hitting the ground. If you are traveling on a windy day, keep your eyes peeled for this surreal defiance of gravity, choreographed by the raw elemental forces of Iceland!
+
+---
+
+### 31. Svartifoss / Свартіфосс (Basalt Organ Pipe Waterfall (Skaftafell))
+- **GPS & Route:** 64.0275, -16.9753 • Національний парк Ватнайокюдль (Скафтафетль) • Дорога № 998
+- **Category:** Waterfall / Volcano / National Park
+
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** За 90 секунд до з'їзду з траси № 1 на дорогу № 998 до Центру відвідувачів Скафтафетль (Skaftafell). Подивіться на 11-ту годину: над зеленим оазисом березового лісу здіймаються величні льодові язики льодовика Ватнайокюдль, а вглибині ущелини захований легендарний чорний водоспад Свартіфосс.
+   - **[EN]:** In 90 seconds, take the turnoff onto Route 998 toward the Skaftafell Visitor Centre in Vatnajökull National Park. Look toward 11 o'clock: rising above the green birch sanctuary appear the towering white glaciers, concealing the world-famous black basalt amphitheater of Svartifoss.
+
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Водоспад заввишки 20 метрів на річці Сторлакюр (Stórilækur). Всесвітній еталон базальтової стовпчастої окремості: водоспад спадає з центру підковоподібного амфітеатру, складеного чорними шестикутними базальтовими колонами, які звисають зі склепіння у вигляді гігантського кам'яного органу. Колони сформувалися всередині товстого потоку лави, що охолоджувався вкрай повільно, даючи змогу термічним тріщинам проростати вертикально вниз. Біля підніжжя лежать уламки шестикутних призм, що обламалися під власною вагою через ерозію м'якшої основи.
+   - **[EN]:** A 20-meter waterfall on the Stórilækur stream representing the global gold standard of columnar basalt formation. Cascading from the center of an amphitheater lined with dark, hanging hexagonal basalt prisms resembling the pipes of a cathedral organ. Formed within a thick basaltic lava flow that cooled at an exceptionally sluggish rate, allowing thermal contraction fractures to propagate downwards. The base of the fall is strewn with fallen polygonal column segments snapped off as undercutting eroded softer substrata.
+
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** Свартіфосс справив визначальний вплив на національну культуру та архітектуру Ісландії. Саме геометрична форма звисаючих чорних базальтових колон Свартіфосса надихнула видатного ісландського державного архітектора Ґудйона Самуельссона (Guðjón Samúelsson) на створення проєкту найзнаменитішої церкви країни — Хатльґрімскірк'я (Hallgrímskirkja) у Рейк'явіку, а також Національного театру Ісландії.
+   - **[EN]:** Svartifoss holds immense cultural and artistic stature in Iceland. The geometric rhythm of its hanging hexagonal columns directly inspired state architect Guðjón Samúelsson in designing Iceland’s most iconic modern architectural monuments, including the soaring facade of Hallgrímskirkja cathedral in Reykjavík and the National Theatre.
+
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Великий офіційний платний паркінг Національного парку Ватнайокюдль (Parka.is, зона Skaftafell, 1000 ISK). Від Центру відвідувачів веде пішохідний підйом у гору (1,5 км, близько 35–45 хвилин пішки в один бік) через ліс із оглядом водоспадів Hundafoss та Magnúsarfoss. Стежка чудово облаштована гравієм та сходами. Біля водоспаду споруджено місток; сходити за огородження та підходити під навислі колони суворо заборонено через ризик раптового падіння важких базальтових брил!
+   - **[EN]:** Large paid parking facility at Skaftafell Visitor Centre (Parka.is, ~1,000 ISK) with café and exhibition halls. Reachable via a 1.5 km scenic uphill hike (35–45 minutes each way) through birch woods past Hundafoss and Magnúsarfoss. Well-maintained path. Safety warning: crossing the footbridge fences to scramble beneath the hanging columns is strictly forbidden due to acute rockfall hazard from overhead basalts.
+
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Вітаємо у національному парку Скафтафетль біля Свартіфосса — легендарного «Чорного водоспаду», що став архітектурним символом усієї Ісландії! Погляньте на ці неймовірні чорні колони, що оточують двадцятиметровий водоспад: вони виглядають настільки досконало, ніби їх витесав геніальний скульптор. Але це шедевр природи, утворений мільйони років тому при надзвичайно повільному охолодженні розжареної лави, яка розкололася на правильні шестикутні призми. Саме ці кам'яні колони надихнули архітектора на створення знаменитого фасаду собору Хатльґрімскірк'я в центрі Рейк'явіка! Прогуляйтеся лісовою стежкою вгору, насолодіться контрастом темного каменю, білосніжної води та смарагдового моху і торкніться серця ісландської художньої спадщини!
+   - **[EN]:** Welcome to Skaftafell and the incomparable Svartifoss, the "Black Falls," universally hailed as the architectural muse of Iceland! Plunging twenty meters into a serene canyon, Svartifoss is framed by a majestic amphitheater of dark, hexagonal columnar basalt hanging like the pipes of a celestial pipe organ. When basaltic lava cooled slowly deep within the earth, physical contraction fractured the stone into immaculate geometric pillars. This natural masterpiece profoundly moved Iceland's master architect, Guðjón Samúelsson, inspiring the soaring wings of Reykjavík’s famous Hallgrímskirkja cathedral. Embark on the forty-minute trail from the visitor center, admire the striking contrast between white water and black basalt, and witness the very birthplace of Icelandic national design!
+
+---
+
+### 32. Svínafellsjökull Glacier / Свінафедльсйокюдль (Svínafellsjökull Glacier Tongue)
+- **GPS & Route:** 64.0081, -16.8805 • Дорога № 1 (З'їзд на схід від Скафтафетля)
+- **Category:** Glacier / Volcano / Hollywood Filming
+
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** Через 90 секунд плавний поворот ліворуч із траси № 1 до гравійної дороги на Свінафедльсйокюдль. Подивіться на 10-ту годину: перед вами відкривається масивний, гостроверхий крижаний язик, що спускається прямо з найвищого хребта Ісландії, виблискуючи неоново-синім льодом серед темних скель.
+   - **[EN]:** In 90 seconds, take the left turnoff from Route 1 onto the access track for Svínafellsjökull. Look toward 10 o'clock: behold the dramatically crevassed, razor-sharp glacier tongue descending from Iceland's highest mountain massif, glowing electric blue amidst dark jagged moraines.
+
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Один із найстрімкіших і найбільш розтрісканих вивідних льодовиків шапки Ватнайокюдль, що спускається зі схилів найвищої вершини Ісландії — Хваннадальсхнукюр (Hvannadalshnúkur, 2110 м). Складений тисячолітнім ущільненим льодом, позбавленим бульбашок повітря, що надає йому насиченого глибокого синього кольору завдяки поглинанню червоного спектра світла. У верхній частині схилу гори Тордарфінна виявлено гігантську тектонічну тріщину розкриттям у кілька метрів, що свідчить про активний рух схилу масиву та потенційну загрозу зсуву гірської породи.
+   - **[EN]:** An exceptionally steep and heavily fractured outlet glacier of Vatnajökull ice cap, descending from the slopes of Iceland's highest peak, Hvannadalshnúkur (2,110 m). Composed of ancient, ultra-dense recrystallized glacier ice devoid of air bubbles, producing intense deep-blue optical hues via red light absorption. Volcanologists and geologists have identified massive tension fractures along the flanking ridge of Mount Þórðarfjall, monitoring slow-moving slope deformation for rockslide potential.
+
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** Згадується в «Сазі про людей із Свінафедлі» (*Svínfellinga saga*). Маєток Свінафедль був родовим гніздом могутнього роду Свінфедлінґарів у добу міжусобиць Стурлунґів у XIII столітті. У сучасній поп-культурі Свінафедльсйокюдль здобув всесвітню славу як знімальний майданчик культових блокбастерів: саме тут Крістофер Нолан знімав крижану планету Манна у фільмі «Інтерстеллар» (Interstellar), а також сцени «Бетмен: Початок» та битви за Стіною у серіалі «Гра престолів» (Game of Thrones).
+   - **[EN]:** Documented in the 13th-century *Svínfellinga saga*, the nearby farmstead was the stronghold of the powerful Svínfellingar clan during the bloody Age of the Sturlungs. In cinematic history, Svínafellsjökull earned worldwide fame as Hollywood's premier alien landscape: director Christopher Nolan filmed the ice planet Mann here for the sci-fi epic *Interstellar*, as well as training sequences for *Batman Begins*, and northern skirmishes for HBO’s *Game of Thrones*.
+
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Гравійний паркінг наприкінці під'їзної дороги. УВАГА: через загрозу зсуву скельного масиву на горі Тордарфінна та гігантські приховані тріщини, вихід на поверхню льодовика дозволений виключно в супроводі акредитованих гідів із повним альпіністським спорядженням! Для самостійних мандрівників доступна безпечна кам'яниста стежка вздовж краю морени з неймовірним панорамним видом на крижані сераки.
+   - **[EN]:** Gravel parking lot at track's end. CRITICAL SAFETY NOTICE: Due to geological monitoring of bedrock fracture zones above the glacier and bottomless crevasses, stepping onto the glacier tongue without a certified alpine guide and technical ice gear is strictly prohibited. Independent travelers can safely walk the crest of the lateral moraine trail for breathtaking, elevated views across the bristling ice spires.
+
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Перед вами Свінафедльсйокюдль — один із найвеличніших та найдраматичніших льодовикових язиків планети! Подивіться на цей хаос крижаних пірамід та глибоких тріщин: льодовик виглядає настільки фантастично, що саме тут голлівудський режисер Крістофер Нолан вирішив знімати загадкову крижану планету для свого фільму «Інтерстеллар», а творці «Гри престолів» знімали битви на північ від Стіни. Завдяки тисячолітньому тиску крига тут настільки щільна, що поглинає всі кольори спектра, окрім чистого сапфірово-синього, створюючи сюрреалістичне сяйво. Пройдіться стежкою вздовж морени, відчуйте подих вічного арктичного холоду і пориньте у справжню космічну велич ісландських льодовиків!
+   - **[EN]:** You have arrived at Svínafellsjökull, one of the most visually jaw-dropping glacial spectacles on planet Earth! Gaze across this chaotic labyrinth of razor-sharp ice seracs and yawning crevasses: the landscape is so utterly extraterrestrial that visionary director Christopher Nolan chose this very glacier to represent the frozen planet Mann in his cinematic masterpiece *Interstellar*. Deep compression over thousands of years has squeezed every air molecule out of the ice, creating an ethereal, glowing electric-blue radiance that seems almost digital. Follow the trail along the lateral moraine ridge, listen to the profound groaning of the ice mass, and stand face to face with the primeval forces that shaped our world!
+
+---
+
+### 33. Múlagljúfur Canyon & Hangandifoss / Мулаґльюфюр (Múlagljúfur Canyon & 123m Cascade)
+- **GPS & Route:** 63.9886, -16.4369 • Дорога № 1 (непозначений з'їзд на ґрунтовку між Скафтафетлем та Йокульсарлоном)
+- **Category:** Canyon / Waterfall / Wilderness
+
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** За 90 секунд до непомітного гравійного з'їзду ліворуч із траси № 1 (між Hof та Fjallsárlón). Подивіться на 10-ту годину: серед високих смарагдових схилів гір ховається вузька розколина грандіозного каньйону Мулаґльюфюр, звідки над прірвою зривається високий водоспад Ханґандіфосс.
+   - **[EN]:** In 90 seconds, watch carefully for an unmarked gravel track turning left off Route 1 between Hof and Fjallsárlón. Look toward 10 o'clock: carved deep into the green alpine slopes lies the breathtaking chasm of Múlagljúfur Canyon, guarding the soaring 123-meter drop of Hangandifoss.
+
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Грандіозний палео-льодовиковий каньйон глибиною понад 300 метрів і завдовжки близько 4 км, прорізаний у базальтово-палагонітовому масиві південно-східного краю Ватнайокюдля. У каньйоні шумить один із найвищих водоспадів Ісландії — Ханґандіфосс (Hangandifoss — «Висячий водоспад») заввишки 123 метри, а поруч у бічній розколині спадає другий водоспад Мулафосс (Múlafoss). Стіни каньйону формують величні базальтові стовпи та вежі, що здіймаються над вузьким дном ущелини, порослі арктичною папороттю та мохом.
+   - **[EN]:** A colossal glacial canyon plunging over 300 meters deep and winding 4 km into the sub-volcanic mountain plateau flanking Vatnajökull. Features one of Iceland’s tallest waterfalls, Hangandifoss ("The Hanging Waterfall"), with a breathtaking sheer leap of 123 meters, paired with the cascading torrent of Múlafoss in a tributary cleft. The canyon walls showcase dramatic pinnacles and columnar basalt buttresses towering vertically above a lush gorge floor.
+
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** Мулаґльюфюр століттями залишався практично невідомим зовнішньому світу через повну відсутність доріг і вважався священною долиною духів гір. Назва походить від слова *múli* (гірський виступ, мис). Місцеві пастухи вірили, що в недоступних гротах на прямовисних стінах каньйону гніздяться велетенські міфічні соколи, які охороняють спокій льодовикових вершин.
+   - **[EN]:** For centuries, Múlagljúfur remained an obscure pastoral secret known solely to local farmers gathering stray sheep from alpine ledges. Named after the towering headland (*múli*). Mountain legends held that giant gyrfalcons with supernatural wisdom nested in the inaccessible cavities of Hangandifoss, safeguarding the sacred gateway to the Vatnajökull ice cap.
+
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Ґрунтова дорога від шосе до невеликого паркінгу потребує повільного руху (яли та каміння; влітку проходима для звичайного авто з обережністю, взимку 4x4 обов'язковий). Безкоштовний паркінг без сервісів. ЕКСПЕДИЦІЙНИЙ ХАЙКІНГ: пішохідний підйом стежкою на гребінь каньйону займає близько 1,5–2 годин в один бік (набір висоти ~300 м). СУВОРА НЕБЕЗПЕКА ВІТРУ: гребінь відкритий усім вітрам; підходити до краю обриву за сильного вітру чи туману смертельно небезпечно через відсутність огороджень!
+   - **[EN]:** Bumpy gravel access road to a small rough parking area (drive slowly; high clearance recommended, 4WD in winter). No facilities. EXPEDITION HIKE: The ascending ridgeline trail requires a moderate 1.5 to 2 hour hike each way (~300m elevation gain). SEVERE CLIFF & GALE HAZARD: The upper ridge drops hundreds of meters sheer into the abyss with zero guardrails. Never walk near the edge during high winds or dense fog.
+
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Перед вами Мулаґльюфюр — одна з найбільш вражаючих, диких та кінематографічних таємниць усієї Ісландії! Схований від поглядів усього за кілька хвилин від головного шосе, цей грандіозний трисотметровий каньйон відкривається лише тим, хто готовий пройтися пішки гірською стежкою. Коли ви вийдете на гребінь, у вас перехопить подих: прямо перед вами в бездонну прірву зривається стодвадцятитриметровий водоспад Ханґандіфосс, його сусід Мулафосс розсікає сусідні скелі, а навколо височіють гострі базальтові вежі, вкриті смарагдовим мохом. Цей краєвид настільки первозданний і величний, ніби ви перенеслися на мільйони років назад у добу створення Землі. Підніміться на оглядовий хребет і насолодіться абсолютною, недоторканою магією дикої Ісландії!
+   - **[EN]:** Welcome to Múlagljúfur, an awe-inspiring, jaw-dropping canyon heralded by seasoned explorers as the ultimate hidden wonderland of Iceland! Concealed behind an unassuming gravel turnoff, this colossal 300-meter-deep canyon reveals its grandeur only to those who hike the scenic ridge trail. As you reach the panoramic vantage point, an unbelievable spectacle unfolds: the soaring 123-meter ribbon of Hangandifoss plunges into the abyss, accompanied by twin waterfalls cascading over jagged volcanic buttresses cloaked in vivid emerald moss. The scale and sheer primeval majesty feel plucked directly from the age of myths. Conquer the ridge trail, gaze into the boundless volcanic depths, and experience one of the most sublime vistas on the planet!
+
+### 34. Fjallsárlón Glacier Lagoon / Фьядльсарлон (Glacial Iceberg Lagoon)
+- **GPS & Route:** 64.0145, -16.3685 • Дорога № 1 (10 км на захід від Йокульсарлона)
+- **Category:** Glacier / River / Lagoon
+
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** За 90 секунд до повороту ліворуч із траси № 1 до лагуни Фьядльсарлон. Подивіться на 11-ту годину: прямо перед вами відкривається масивна льодова стіна вивідного льодовика Фьядльсьйокюдль, що обривається прямо у тихі дзеркальні води лагуни з айсбергами.
+   - **[EN]:** In 90 seconds, take the left exit off Route 1 toward Fjallsárlón. Look toward 11 o'clock: observe the immense ice cliff of the Fjallsjökull outlet glacier terminating directly into the tranquil iceberg-studded lagoon beneath Mount Öræfajökull.
+
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Прильодовикова лагуна площею близько 4 км², утворена внаслідок відступу льодовикового язика Фьядльсьйокюдль, що спускається з кальдери стратовулкана Ерайвайокюдль (Öræfajökull). На відміну від Йокульсарлона, лагуна Фьядльсарлон не має прямого сполучення з океаном і припливів морської води, тому її поверхня спокійна, дзеркальна, без сильних течій. Льодовикова стіна висотою до 20–30 метрів підходить безпосередньо до протилежного берега лагуни, що дозволяє спостерігати регулярне відколювання (calving) велетенських блоків льоду.
+   - **[EN]:** A proglacial iceberg lagoon encompassing ~4 km², formed by the rapid retreat of the Fjallsjökull glacier tongue originating from the massive Öræfajökull caldera. Unlike Jökulsárlón, Fjallsárlón has no direct oceanic inlet or tidal exchange, yielding glassy, mirror-like waters without strong marine currents. The towering glacier terminus rises 20–30 meters sheer out of the water along the far shoreline, providing intimate vantage points for witnessing thunderous glacial calving events.
+
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** Район Ерайві (Öræfi — буквально «Пустеля / Пустка») до катастрофічного виверження вулкана Ерайвайокюдль у 1362 році називався Літнагерад (Litlahérað — «Малий квітучий край»). Виверження 1362 року було найбільшим вибуховим риолітовим виверженням в історії Європи за останні тисячоліття: колосальні пірокластичні потоки та селі йокюдльхльойп повністю знищили понад 40 хуторів, а край знелюднив на століття. Спокій лагуни Фьядльсарлон — це відродження природи після найбільшої вулканічної трагедії Середньовіччя.
+   - **[EN]:** The surrounding district was known in medieval chronicles as Litlahérað ("The Little Flourishing Settlement") until the cataclysmic 1362 eruption of volcano Öræfajökull—the largest explosive rhyolitic eruption in historical European records. Towering pyroclastic surges and devastating jökulhlaups wiped over forty Norse settlements off the map, leaving the region barren and christened as Öræfi ("The Wasteland"). Today's serene lagoon stands as a peaceful monument of nature's rebirth.
+
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Асфальтований під'їзд до паркінгу з сучасним бістро та прокатом човнів-зодіаків (Frost Restaurant). Безкоштовний паркінг. Коротка стежка (5 хвилин) веде на пагорб із оглядовим майданчиком. ЗНАЧНО МЕНШЕ ТУРИСТІВ, ніж на Йокульсарлоні! СУВОРА ЗАБОРОНА: ніколи не намагайтеся ступати на айсберги чи підходити до краю обривистого берега з танучим льодом.
+   - **[EN]:** Paved access road leading to modern visitor facilities and the Frost Restaurant bistro (zodiac boat tour departures). Free parking. Short 5-minute walk to the hillcrest viewing terrace. FAR FEWER CROWDS than neighboring Jökulsárlón! CRITICAL RULE: Never step onto shore-fast ice or attempt to climb icebergs—ice blocks flip without warning with lethal force.
+
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Ласкаво просимо до Фьядльсарлона — неймовірно тихої, величної льодовикової лагуни, яку часто називають молодшим, але значно затишнішим братом Йокульсарлона! Тут гігантський крижаний язик льодовика Фьядльсьйокюдль спускається прямо зі схилів найвищого діючого вулкана Ісландії Ерайвайокюдль і стрімкою тридцятиметровою стіною обривається прямо у воду. На дзеркальній поверхні лагуни дрейфують тисячі химерних айсбергів найрізноманітніших відтінків — від сліпучо-білого до глибокого індиго та чорного від вулканічного попелу. Тут немає метушні великих туристичних автобусів: ви можете підійти до самої кромки води і на самоті почути, як у крижаній тиші з гуркотом народжуються нові айсберги!
+   - **[EN]:** Welcome to Fjallsárlón, the intimate, tranquil glacial jewel resting gracefully at the foot of Iceland’s highest volcanic giant, Öræfajökull! While international fame often draws crowds to nearby Jökulsárlón, Fjallsárlón offers a far more peaceful and up-close encounter with the glacier. Here, the frozen face of the Fjallsjökull glacier tongue drops thirty meters directly into the calm lagoon waters, creating a serene sanctuary where sculptured icebergs drift weightlessly. Because there is no outlet to the sea, the lagoon surface is glass-still, perfectly reflecting the soaring icy peaks above. Stand along the shoreline, listen to the crackle of ancient air bubbles escaping from the ice, and savor this timeless Nordic wonder in awe-inspiring stillness!
+
+---
+
+### 35. Jökulsárlón Glacier Lagoon / Йокульсарлон (Jökulsárlón Glacial Lagoon)
+- **GPS & Route:** 64.0784, -16.2306 • Дорога № 1 (прямо на Кільцевій дорозі біля підвісного мосту)
+- **Category:** Glacier / Coastal Cliff / Ocean / Lagoon
+
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** За 90 секунд до підвісного мосту через протоку Йокульсау на трасі № 1. Подивіться на 10-ту годину: перед вами відкривається неосяжна водна чаша лагуни Йокульсарлон, де дрейфують гігантські крижані айсберги розміром із багатоповерхові будинки!
+   - **[EN]:** In 90 seconds, approach the historic suspension bridge spanning the Jökulsá river channel on Route 1. Look toward 10 o'clock: behold the colossal, breathtaking expanse of Jökulsárlón Glacier Lagoon, dotted with floating cathedral-sized blue icebergs!
+
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Найглибше озеро Ісландії (максимальна глибина сягає 284 метрів нижче рівня моря) площею близько 18 км². Лагуна утворилася в середині 1930-х років, коли вивідний льодовик Брейдамеркюрйокюдль (Breiðamerkurjökull) почав стрімко танути й відступати вглиб долини через потепління клімату. Льодовиковий язик розмив глибоку подвійну підлідну депресію. Оскільки коротка річка Йокульсау (завдовжки всього 1,5 км) з'єднує лагуну з відкритим океаном, під час припливів у лагуну заходить тепла солона морська вода, що прискорює танення айсбергів та створює унікальний солонуватоводний біоценоз, багатий на рибу та тюленів.
+   - **[EN]:** The deepest lake in Iceland, plunging to an astonishing 284 meters below sea level, encompassing roughly 18 km². Born in the mid-1930s as the massive Breiðamerkurjökull glacier began retreating from the Atlantic coastline due to rising temperatures. The glacier gouged an immense over-deepened subglacial trench. Because the short Jökulsá channel connects the lagoon directly to the ocean, twice-daily marine tides force warm saltwater into the basin, accelerating calving and sustaining a rich brackish ecosystem abundant in krill, capelin, and Atlantic harbor seals.
+
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** У добу заселення острова на місці сучасної лагуни росли густі ліси та процвітали ферми. Наступ льодовика в XIV–XIX століттях (Малий льодовиковий період) повністю поховав під кілометровою товщею льоду давні хутори. У кінематографі Йокульсарлон став легендарною локацією Бондіани: тут знімали погоні на снігоходах та льоду для двох фільмів про Джеймса Бонда — «Вид на вбивство» (A View to a Kill, 1985) та «Помри, але не зараз» (Die Another Day, 2002), для чого інженери тимчасово перекривали морську протоку дамбою, щоб заморозити солону воду! Тут також знімали сцени «Лари Крофт: Розкрадачки гробниць».
+   - **[EN]:** During the early Norse settlement, lush grasslands covered the plain. During the Little Ice Age (1300–1900), the surging glacier crushed and submerged medieval farms under kilometers of solid ice. In cinematic history, Jökulsárlón is legendary: it starred in two James Bond blockbusters—*A View to a Kill* (1985) and *Die Another Day* (2002), for which producers dammed the sea outlet to freeze the lagoon into solid ice for high-speed supercar chases! It also featured prominently in *Lara Croft: Tomb Raider*.
+
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Великі офіційні паркінги по обидва боки мосту (P1 біля кафе, P2 на східному березі; оплата через Parka.is, 1000 ISK). Центр екскурсій на амфібіях та катерах. СУВОРА ЗАБОРОНА: категорично заборонено спускатися у воду, плисти до айсбергів або ступати на лід! Сильні припливні течії в протоці затягують у відкритий океан за лічені хвилини. Температура води становить +1...+3°C.
+   - **[EN]:** Extensive parking zones on both sides of the suspension bridge (P1 Main & P2 East, managed via Parka.is, ~1,000 ISK) with café and boat tour operators. CRITICAL SAFETY LAW: Never enter the water, climb on floating icebergs, or attempt to cross the sea mouth. Riptides in the river channel run at highway speeds straight into the freezing North Atlantic (+1°C to +3°C).
+
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Ласкаво просимо до Йокульсарлона — справжньої перлини в короні ісландської природи та одного з найвідоміших чудес світу! Перед вами розгортається фантастична лагуна завглибшки майже триста метрів, на поверхні якої велично дрейфують крижані колоси віком понад тисячу років. Подивіться на їхні неймовірні кольори: від сліпучо-білого до глибокого сапфірового та чорного, поцяткованого шарами вулканічного попелу. У воді часто можна побачити мордочки допитливих тюленів, які відпочивають на плавучих крижинах або полюють на рибу. Ця лагуна настільки кінематографічна, що саме тут знімали погоні Джеймса Бонда та фільми про Лару Крофт. Зупиніться на березі, вдихніть морозне повітря і відчуйте магію вічного льоду, що повільно прямує до океану!
+   - **[EN]:** Welcome to Jökulsárlón, the crown jewel of Iceland and undisputedly one of the most spellbinding natural wonders on planet Earth! Spreading across eighteen square kilometers and plunging nearly three hundred meters deep, this majestic amphitheater is dotted with ancient, drifting icebergs carved directly from the Vatnajökull ice cap. Notice the extraordinary palette of colors: luminous electric blues caused by compressed millennia-old ice, pure crystal whites, and striated black seams of volcanic ash from prehistoric eruptions. Keep a watchful eye on the floating ice floes to spot playful Atlantic harbor seals sunning themselves or diving for fish. Take a stroll along the shoreline, listen to the whisper of melting millennium-old air bubbles, and marvel at nature’s peerless frozen sculpture garden!
+
+---
+
+### 36. Diamond Beach / Діамантовий пляж (Breiðamerkursandur Crystal Icebergs)
+- **GPS & Route:** 64.0442, -16.1778 • Дорога № 1 (обидва боки морської протоки Йокульсау)
+- **Category:** Glacier / Coastal Cliff / Ocean / Beach
+
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** За 90 секунд після проїзду мосту Йокульсарлон з'їзд на паркінг з боку океану. Подивіться на 2-гу годину: на вугільно-чорному вулканічному піску прибережної смуги виблискують сотні прозорих айсбергів, схожих на велетенські ограновані діаманти під променями сонця!
+   - **[EN]:** In 90 seconds, right after crossing the Jökulsárlón bridge, turn toward the ocean side parking. Look toward 2 o'clock: scattered across the pitch-black volcanic sand of the beach glisten hundreds of crystalline icebergs, glittering like colossal raw diamonds in the sub-arctic sunlight!
+
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Прибережний океанічний пляж на чорних пісках Брейдамеркюрсандур (Breiðamerkursandur). Айсберги, що відколюються від льодовика в лагуні Йокульсарлон, течією річки виносяться у відкриту Атлантику. Там потужні океанічні хвилі та прибій шліфують лід, розбивають його на менші уламки і викидають назад на чорний базальтовий берег. Завдяки інтенсивному поліруванню солоною морською водою лід втрачає пухку поверхню і стає абсолютно оптично прозорим, створюючи разючий контраст між сяючими кристалами льоду та матовим чорним лавовим піском.
+   - **[EN]:** A world-famous oceanic black sand coastline flanking the mouth of the Jökulsá channel. Icebergs drifting out of Jökulsárlón enter the turbulent North Atlantic, where crashing oceanic breakers sculpt and tumble the calved ice before casting polished, crystalline fragments back onto the black basalt sandur beach. The relentless marine wave action polishes the dense, bubble-free glacial ice to gemstone-like optical clarity, generating a breathtaking aesthetic juxtaposition of glittering ice diamonds against velvet-black sand.
+
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** Ісландська назва узбережжя — Брейдамеркюрсандур (Breiðamerkursandur — «Широкий лісовий пісок»). Саги свідчать, що у IX столітті тут росли розкішні березові праліси, які перші поселенці використовували для будівництва дракарів. «Діамантовий пляж» — це сучасна поетична назва, яка виникла завдяки фотографам та мандрівникам і стала офіційним туристичним брендом Ісландії, визнаним у всьому світі.
+   - **[EN]:** The historical geographical name is Breiðamerkursandur ("Broad Forest Sand"), recalling ancient medieval sagas when dense birch woodlands covered the plain before glaciers advanced. The moniker "Diamond Beach" arose organically in modern times among nature photographers and world travelers, quickly evolving into one of Iceland’s most globally recognized geographical wonders.
+
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Паркінги по обидва боки протоки (Західний та Східний паркінги Діамантового пляжу; Parka.is, 1000 ISK). СУВОРА НЕБЕЗПЕКА ПРИБОЮ: ніколи не намагайтеся залізти на крижані брили біля води! Раптова хвиля може миттєво зрушити багатотонний айсберг, перекинути його на людину або збити з ніг і затягнути в океан. Тримайте дистанцію від прибою під час фотографування.
+   - **[EN]:** Dedicated parking lots on both the West and East sides of the channel (Parka.is, ~1,000 ISK). CRITICAL SURF WARNING: Never sit, climb, or stand on icebergs near the shoreline breakers! A sudden wave can lift a multi-ton iceberg in an instant, crushing legs or knocking visitors into powerful offshore undertows. Maintain safe distance from incoming breakers when framing macro photos.
+
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Перед вами Діамантовий пляж — одне з найказковіших та найдивовижніших видовищ у всій світовій природі! Подивіться на цей неймовірний контраст: глибокий, вугільно-чорний вулканічний пісок усіяний сотнями прозорих айсбергів, які сяють на сонці наче справжні діаманти королівської корони. Ці шматки льодовика пропливли крізь лагуну Йокульсарлон, вийшли у бурхливий океан, де хвилі відшліфували їх до кришталевого блиску і викинули назад на чорний берег. Кожен кристал тут неповторний: одні виблискують небесно-блакитним сяйвом, інші кришталево прозорі, немов найчистіше скло. Прогуляйтеся вздовж прибою, торкніться тисячолітнього льоду і зробіть найдивовижніші кадри у вашому житті!
+   - **[EN]:** Welcome to Diamond Beach, universally celebrated as one of the most mesmerizing and photogenic shores in the world! Behold the breathtaking visual contrast: against a vast expanse of pitch-black volcanic sand lie hundreds of pure, glistening icebergs polished by the Atlantic surf to gemstone perfection. Calved from the Vatnajökull ice cap and flushed out to sea via the river mouth, these ancient ice fragments were swept back onto the sand by powerful breakers. Each piece is an individual sculpted jewel—some glowing with deep electric blue light, others sparkling transparent like pure crystal. Take a walk along the shore, admire the dazzling ice sculptures, and experience nature’s most magnificent jewel box!
+
+---
+
+### 37. Vestrahorn & Stokksnes / Вестрахорн (Batman Mountain & Black Dunes)
+- **GPS & Route:** 64.2438, -14.9652 • Дорога № 990 (півострів Стоккснес біля Гебна)
+- **Category:** Coastal Cliff / Volcano / Mountain / Photography
+
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** За 90 секунд до повороту праворуч на дорогу № 990 перед в'їздом у тунель Almannaskarð. Подивіться на 2-гу годину: над темними піщаними дюнами півострова Стоккснес у небо злітають гострі, демонічні зубчасті шпилі гори Вестрахорн заввишки 454 метри, відомої у світі як «Гора Бетмена».
+   - **[EN]:** In 90 seconds, take the gravel exit onto Route 990 just before the Almannaskarð tunnel near Höfn. Look toward 2 o'clock: soaring dramatically out of the ebony coastal dunes stands the jagged, razor-sharp silhouette of Mount Vestrahorn (454 m), globally revered as the "Batman Mountain."
+
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Рідкісний для Ісландії плутонічний інтрузивний масив віком 8–11 мільйонів років (міоцен). На відміну від більшості вулканічних порід Ісландії, що є виливними лавами (ефузивами), Вестрахорн утворився під землею шляхом повільного застигання магми в глибині кори: основа гори складена залізистим габро (gabbro), а верхні гострі шпилі — кислим гранофіром (granophyre). Мільйони років льодовикової екзорації та морської абразії змили верхні породи, оголивши тверде інтрузивне ядро з неймовірними гострими зубцями. Перед горою лежать широкі чорні лавові дюни, порослі пучками золотої піщаної трави (*Leymus arenarius*).
+   - **[EN]:** An exceptionally rare plutonic intrusive massif dating to 8–11 million years BP (Miocene epoch). Unlike typical Icelandic flood basalts, Vestrahorn crystallized slowly at depth as an unroofed magma chamber: the dark base consists of coarse-grained mafic gabbro, capped by pale silica-rich granophyre pinnacles. Relentless glacial gouging and Atlantic wave erosion stripped away the overlying volcano, exposing the razor-sharp intrusive core. Flanked by dramatic black sand dunes tufted with golden lyme-grass (*Leymus arenarius*) and mirror-like tidal flats.
+
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** На півострові Стоккснес оселився один із перших норвезьких поселенців IX століття Хролльйоуґур (Hrollaugur Rögnvaldsson), син ярла Регнвальда з Мьоре. У роки Другої світової війни британська армія збудувала тут секретну радіолокаційну станцію Horn, яка згодом використовувалася НАТО в роки Холодної війни. Біля підніжжя гори збудовано повномасштабне автентичне «Село вікінгів» (Viking Village) з дерев'яними та дерновими садибами, зведене як кінодекорація для голлівудського фільму.
+   - **[EN]:** Claimed during the 9th-century Norse settlement by Hrollaugur, son of the celebrated Earl of Møre. In World War II, British forces constructed an airbase and radar station at Stokksnes, later repurposed by NATO during the Cold War. Nestled directly beneath the towering crags rests a full-scale, authentic sod-and-timber "Viking Village" built as a permanent film set for an Icelandic movie production.
+
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Дорога 990 веде до Viking Café (приватна територія ферми). Вхідний квиток (близько 1000 ISK з особи) оплачується в кафе або на автоматичному шлагбаумі, відкриваючи доступ до маяка, дюн та селища вікінгів. ГОЛОВНИЙ ФОТОГРАФІЧНИЙ ІНСАЙД: під час відпливу на мілководній піщаній косі утворюється тонкий шар води товщиною 1–2 см, який перетворює чорний пляж на велетенське дзеркало, створюючи всесвітньо відомі віддзеркалення гори Вестрахорн!
+   - **[EN]:** Gravel Route 990 leads to the Viking Café trailhead. Access pass (~1,000 ISK per person) payable at the café counter or automated barcode barrier to open gate to Stokksnes dunes, lighthouse, and Viking Village. WORLD-CLASS PHOTOGRAPHY SECRET: During low tide, shallow seawater sheets the flat black sand flats (1–2 cm depth), transforming the beach into a flawless giant mirror reflecting the spires of Vestrahorn!
+
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Ласкаво просимо до Вестрахорна на півострові Стоккснес — культової гори, що стала світовою меккою пейзажної фотографії! Погляньте на ці гострі, темні зубчасті піки, що злітають прямо з океану на висоту понад чотириста п'ятдесят метрів: за характерну форму цей масив прозвали «Горою Бетмена». На відміну від більшості вулканів Ісландії, Вестрахорн утворився з рідкісних глибинних порід габро та гранофіру, які мільйони років застигали в надрах землі. Попереду розкинулися хвилясті чорні дюни, вкриті золотистою травою, а поруч заховане автентичне кінематографічне село вікінгів. Під час відпливу вода перетворює цей пляж на гігантське дзеркало, в якому небо зливається з землею. Відчуйте драматичну, містичну атмосферу цього краю, де закінчується південь і починаються Східні фіорди!
+   - **[EN]:** Welcome to Vestrahorn on the Stokksnes peninsula, the legendary cinematic crown of southeastern Iceland! Soaring four hundred and fifty-four meters sheer out of the rolling black sand dunes, this jagged, fearsome massif is globally renowned among photographers as the "Batman Mountain." Geologically unique, Vestrahorn is an ancient plutonic intrusion composed of dark gabbro and pale granophyre, carved by ice age glaciers into dramatic gothic pinnacles. Across the tidal flats, rolling ebony dunes tufted with golden grass meet the Atlantic surf, alongside an authentic wooden Viking movie village tucked beneath the cliffs. During low tide, the wet sands become a flawless mirror reflecting the brooding spires into infinity. Behold one of the most hypnotic coastal landscapes in the world!
+
+---
+
+### 38. Hjálparfoss Waterfall / Хьяльпарфосс (Twin Basalt Split Waterfall)
+- **GPS & Route:** 64.1147, -19.8512 • Дорога № 32 (долина Тьоурсаурдалюр)
+- **Category:** Waterfall / Volcano / Highlands Gateway
+
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** За 90 секунд до з'їзду праворуч із траси № 32 у долині річки Фоссау (Fossá). Подивіться на 2-гу годину: серед дикого лавового плато відкривається затишна ущелина, де річка роздвоюється на два паралельні потоки, що падають назустріч один одному в одну кришталеву чашу.
+   - **[EN]:** In 90 seconds, take the signed turnoff off Route 32 into the upper Þjórsárdalur valley. Look toward 2 o'clock: observe a sheltered volcanic hollow where the Fossá river divides into twin symmetrical streams plunging toward each other into a serene turquoise basin.
+
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Унікальний спарений роздвоєний водоспад (twin waterfall) заввишки близько 10 метрів. Річка Фоссау розділяється виступом скелі на два симетричні рукави, що падають під кутом 45 градусів назустріч один одному. Ложе водоспаду складене викривленими стовпчастими базальтами та палагонітовими туфами лавового поля Búrfellshraun, утвореного виверженнями стратовулкана Гекла (Hekla). Базальтові колони тут мають химерні зігнуті та радіальні форми через нерівномірне охолодження розплаву навколо стародавнього льоду.
+   - **[EN]:** A rare split twin cascade tumbling 10 meters over folded basalt. The Fossá river divides around a sharp volcanic prow, cascading in two parallel streams that merge at an angle into a deep, circular plunge pool. Formed within the Búrfellshraun lava field erupted from the volcanic domain of Mount Hekla. The surrounding basalt showcases warped, twisted, and radiating columnar jointing formed by rapid cooling against Pleistocene glacier ice.
+
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** Назва буквально означає «Водоспад допомоги / порятунку» (*hjálп* — допомога). У часи Середньовіччя мандрівники, які перетинали безплідний, холодний та небезпечний гірський перевал Спренґісандюр (Sprengisandur) через центральний Хайлендс, діставалися цієї долини виснаженими. Тут коні знаходили першу свіжу траву та чисту воду, а люди — порятунок від загибелі. Неподалік розташовані розкопки середньовічної ферми Стьонґ (Stöng), похованої попелом виверження Гекли у 1104 році.
+   - **[EN]:** The name translates directly as "The Waterfall of Help / Relief" (*hjálp* = aid/help). In medieval centuries, travelers braving the brutal, waterless Sprengisandur highland route from the north arrived here half-starved; this verdant river oasis provided the first grazing grass and fresh water for their horses, giving salvation to weary travelers. Nearby lies the Pompeii of Iceland—the medieval manor of Stöng, buried by Hekla's catastrophic ash eruption in 1104 AD.
+
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Асфальтований під'їзд із траси 32. Безкоштовний паркінг із дерев'яною оглядовою платформою. Легка стежка (3 хвилини) веде до самої чаші водоспаду. Чудове місце для спокійного перепочинку біля підніжжя вулкана Гекла.
+   - **[EN]:** Paved access off Route 32 with ample free parking and an accessible viewing platform. An easy 3-minute walk leads down to the tranquil shoreline. Ideal peaceful detour on the scenic route beneath Mount Hekla.
+
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Перед вами Хьяльпарфосс — дивовижний «Водоспад порятунку», прихований у мальовничій долині біля підніжжя грізного вулкана Гекла! Його форма абсолютно унікальна: скелястий лавовий мис розділяє річку Фоссау на два окремі водоспади, які зливаються воєдино в глибокій смарагдовій чаші. Своє ім'я водоспад отримав не випадково: у давнину відважні мандрівники, які днями блукали суворими безводними пустелями Центрального Хайлендсу, нарешті знаходили тут порятунок, свіжу воду та соковиту траву для своїх коней. Зверніть увагу на химерні базальтові колони навколо: вони вигнуті дивовижними дугами від колишнього вулканічного жару. Відпочиньте біля цієї спокійної оази та відчуйте благословенний спокій стародавньої Ісландії!
+   - **[EN]:** Welcome to Hjálparfoss, the serene "Waterfall of Help," nestled in the lush Þjórsárdalur valley beneath Mount Hekla! Its architecture is wonderfully rare: a dark volcanic ridge splits the Fossá river into two distinct streams that cascade symmetrically toward one another into a peaceful turquoise pool. Its name commemorates medieval travelers who, after weeks of braving the perilous, desolate Sprengisandur highland track, reached this river valley exhausted; here their horses found fresh mountain water and grazing pasture, bringing life-saving relief. Notice the twisted, radiating basalt columns lining the amphitheater, sculpted by ancient lava cooling against glacial ice. Enjoy this tranquil highland gateway oasis!
+
+---
+
+### 39. Þjófafoss Waterfall / Тйовафосс (Thieves' Fall on Þjórsá)
+- **GPS & Route:** 64.0569, -19.8674 • Дорога № 32 -> Гравійний з'їзд біля гори Бурфедль
+- **Category:** Waterfall / Volcano / River
+
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** За 90 секунд до повороту на південь із траси № 32 біля підніжжя гори Бурфедль (Búrfell). Подивіться на 1-шу годину: серед чорних вулканічних пісків та полів ріпаку шумить широкий водоспад на річці Тьоурсау на тлі засніженого конуса вулкана Гекла.
+   - **[EN]:** In 90 seconds, take the gravel trail heading south off Route 32 near Mount Búrfell. Look toward 1 o'clock: across the black gravel flats stands the broad, churning falls of Þjófafoss on the Þjórsá river, framed by the majestic conical silhouette of Mount Hekla.
+
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Потужний водоспад на річці Тьоурсау шириною близько 40 метрів і висотою падіння 11 метрів. Вода переливається через край масивного лавового щита Бурфедльсхраун (Búrfellshraun), утвореного близько 3000 років тому. Річка несе льодовиковий мул із купола Гофсйокюдль (Hofsjökull), що надає воді молочно-бірюзового відтінку. Унікальність локації — прямий відкритий панорамний вид на вершину діючого стратовулкана Гекла (Hekla), одного з найактивніших вулканів Європи.
+   - **[EN]:** A broad, powerful 11-meter waterfall on the Þjórsá glacial river spanning roughly 40 meters across. The river cascades over the dense Búrfellshraun basalt flow extruded ~3,000 years ago. Suspended glacial rock flour originating from the Hofsjökull ice cap infuses the water with milky-turquoise colors. The site commands an unobstructed, sublime panorama of Mount Hekla, one of Iceland’s most historically violent volcanoes.
+
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** Назва буквально перекладається як «Водоспад злодіїв» (*þjófur* — злодій). Згідно з середньовічними правовими кодексами Ісландії (Jónsbók), у часи Альтингу крадіжка коней чи овець каралася смертною карою. Спійманих на гарячому крадіїв приводили на цей високий скелястий уступ, зв'язували їм руки й ноги і скидали з обриву у вир водоспаду Тьовафосс, звідки неможливо було виплисти.
+   - **[EN]:** Translates as "The Waterfall of the Thieves" (*þjófur* = thief). Under medieval Commonwealth legal codes (*Jónsbók*), livestock and horse theft were considered unforgivable crimes punished by execution. Convicted thieves were brought to the basalt cliffs above the foaming rapids, bound hand and foot, and hurled into the churning plunge pool to drown.
+
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Ґрунтова дорога (близько 4 км від траси 32; влітку проходима з обережністю, після дощів або взимку бажано 4x4). Безкоштовний паркінг без огорож. СУВОРИЙ РИЗИК ОБРИВУ: берег утворений пухким вулканічним шлаком і піском; не підходьте до краю обриву ближче ніж на 3 метри!
+   - **[EN]:** Accessible via a 4 km gravel track off Route 32 (navigable by 2WD in dry summer, 4WD recommended). Unfenced wilderness parking. SEVERE CLIFF EDGE HAZARD: The river banks consist of loose volcanic gravel and undercut basalt; stay back at least 3 meters from the precipice.
+
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Перед вами Тйовафосс — грізний і величний «Водоспад злодіїв», що шумить на найдовшій річці Ісландії Тьоурсау! Його бірюзово-молочні води з гуркотом спадають з одинадцятиметрового лавового порогу, а прямо за ним на горизонті велично височіє вулкан Гекла, який у Середньовіччі вважали брамою до пекла. Свою похмуру назву водоспад отримав через суворі закони вікінгів: у давні часи з цих базальтових скель у вир скидали спійманих конокрадів та розбійників. Тут практично не буває натовпів туристів: лише первозданна тиша лавових пустель, шум потужної річки та відчуття безмежного простору дикої ісландської землі!
+   - **[EN]:** Welcome to Þjófafoss, the rugged "Waterfall of the Thieves," thundering across Iceland’s longest river! Spilling eleven meters over an ancient lava shelf, its milky glacial currents churn violently against dark basalt bedrocks, crowned by the towering snow-capped peak of Mount Hekla on the horizon—a volcano medieval monks called the Gateway to Hell. The waterfall earned its grim name from Viking justice: medieval assemblies sentenced convicted horse thieves to be bound and cast from these very cliffs into the raging abyss. With zero tourist commercialization, Þjófafoss offers an authentic encounter with Iceland’s untamed southern frontier!
+
+---
+
+### 40. Vestmannaeyjar / Eldfell / Вестманнаейяр (Heimaey Pompeii of the North 1973)
+- **GPS & Route:** 63.4371, -20.2692 • Поромна переправа Landeyjahöfn -> Острів Геймаей
+- **Category:** Volcano / Island / Adventure
+
+1. 👁️ SPATIAL VECTOR HOOK (Просторовий гачок водія):
+   - **[UA]:** За 90 секунд до прибуття порома Herjólfur до гавані острова Геймаей (Heimaey). Подивіться на 2-гу годину: над рибальським містечком височіє червоно-чорний вулканічний конус Ельдфетль (Eldfell), чия свіжа лава ледь не знищила життєво важливу гавань острова.
+   - **[EN]:** In 90 seconds, as the Herjólfur ferry glides through the towering sea cliffs into Heimaey harbour. Look toward 2 o'clock: dominating the town rises the crimson volcanic cone of Mount Eldfell ("Fire Mountain"), born in the dramatic 1973 eruption.
+
+2. 🌋 SCIENTIFIC GEOLOGY & VOLCANOLOGY (Наукова геологія):
+   - **[UA]:** Молодий вулканічний конус шлаку та попелу заввишки 205 метрів, що утворився під час несподіваного виверження 23 січня 1973 року. Виверження почалося з відкриття тріщини завдовжки 1,6 км усього за кількасот метрів від житлових будинків острова. За 5 місяців вулкан виверг понад 0,25 км³ базальтової лави та попелу, поховавши під шаром шлаку понад 400 будинків («Помпеї Півночі»). Унікальний прецедент в історії інженерії: щоб врятувати вхід до гавані від перекриття лавовим потоком, ісландські рятувальники безперервно качали морську воду потужними насосами прямо на край розпеченої лави (використано понад 7,3 млн м³ морської води), зупинивши фронт лави та створивши ще кращий захисний мол для порту.
+   - **[EN]:** A pristine 205-meter volcanic scoria cone created during the surprise eruption of January 23, 1973. A 1.6 km fissure opened mere yards from town without seismic forewarning. Over five months, Eldfell extruded 0.25 km³ of basaltic lava and tephra, burying more than 400 homes beneath volcanic ash ("Pompeii of the North"). The eruption is world-famous for the legendary "Battle for the Harbour": engineers and emergency teams pumped over 7.3 million cubic meters of cold seawater directly onto advancing molten lava fronts, halting the flow and saving Iceland's premier fishing port.
+
+3. 📜 MEDIEVAL SAGAS, HISTORY & FOLKLORE (Саги, історія та фольклор):
+   - **[UA]:** Назва архіпелагу походить від «ірландських рабів» (*Vestmenn* — «Західні люди»): за *Landnámabók*, у IX столітті раби вбили поселенця Хьорлейва і втекли на ці острови, де їх згодом наздогнав і покарав Інгольв Арнарсон. У 1627 році острови зазнали кривавого рейду османських корсарів (Турецький рейд / *Tyrkjaránið*), коли пірати викрали в рабство понад 240 жителів. Сьогодні на місці розкопаних з-під попелу будинків діє вражаючий музей «Ельдгеймар» (Eldheimar).
+   - **[EN]:** Named after Irish thralls (*Vestmenn*, "Westmen"): recorded in *Landnámabók* that in the 9th century, Irish thralls killed settler Hjörleifr and fled to the islands before being executed by Ingólfr Arnarson. In 1627, Barbary corsairs raided the archipelago in the infamous "Turkish Abductions" (*Tyrkjaránið*), capturing hundreds into North African slavery. Today, the world-class Eldheimar Museum stands over houses excavated directly from the 1973 ash layer.
+
+4. 🛡️ DRIVER SAFETY, PARKING & INSIDER TIPS (Безпека водія, паркінг та інсайд):
+   - **[UA]:** Переправа на автопоромі Herjólfur з порту Landeyjahöfn (тривалість 40 хв; бронювання квитків для авто заздалегідь обов'язкове на herjolfur.is). У зимові місяці через шторми або наноси піску пором може перенаправлятися до дальнього порту Þorlákshöfn (тривалість переправи 3 години). Підйом на вершину кратера Ельдфетль займає 25–30 хвилин; на вершині земля досі тепла на дотик!
+   - **[EN]:** Accessible via the Herjólfur car ferry from Landeyjahöfn (40-minute scenic sailing; vehicle booking essential in advance via herjolfur.is). Weather note: in heavy winter storms, ferries divert to Þorlákshöfn (3-hour passage). The ascent to Eldfell's summit takes ~25 minutes along a gravel footpath; the ground at the summit crater still radiates geothermal warmth from 1973!
+
+5. 🎙️ COMPLETE TURNKEY SPOKEN GUIDE SCRIPT (Готовий 75-секундний дикторський скрипт):
+   - **[UA]:** Ласкаво просимо до Вестманнаейяра — архіпелагу дивовижних вулканічних островів та легендарного острова Геймаей! У січні 1973 року тут розігралася одна з найдраматичніших битв в історії людства: прямо на околиці міста розверзлася земля і народився вулкан Ельдфетль. Палаюча лава та тонни чорного шлаку поховали сотні будинків, перетворивши острів на «Помпеї Півночі». Але жителі острова здійснили неможливе: вони поливали розпечену лаву мільйонами тонн морської води і зупинили стихію, врятувавши свою гавань! Підніміться на вершину кратера Ельдфетль, де земля під вашими ногами досі тепла, відвідайте музей Ельдгеймар і відчуйте неймовірну силу духу та незламність ісландських рибалок!
+   - **[EN]:** Welcome to Vestmannaeyjar and the legendary island of Heimaey, home to one of the most astonishing stories of human courage against planetary forces! In January 1973, without warning, the earth split open on the edge of town, giving birth to the fiery volcano Eldfell. Rivers of lava and suffocating ash buried four hundred homes, turning the island into the "Pompeii of the North." But islanders fought back with heroic defiance: pumping millions of tons of ocean water onto the glowing lava front, they froze the molten rock and saved their vital harbor. Ascend the crimson crest of Eldfell, touch the volcanic ground that still radiates heat fifty years later, and marvel at the invincible spirit of this volcanic community!

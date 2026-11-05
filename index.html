@@ -251,10 +251,17 @@
       100% { transform: scale(1.3); box-shadow: 0 0 0 7px rgba(16, 185, 129, 0.15), 0 0 35px #10b981, 0 0 15px #34d399; }
     }
 
-    /* Radar Time-Lapse Canvas Double-Buffering Cross-fade */
-    #radar-canvas-a, #radar-canvas-b {
-      transition: opacity 0.35s ease-in-out;
-      will-change: opacity;
+    /* High-Precision 2D Radar Canvas & Controls */
+    #radar-canvas {
+      pointer-events: none;
+      will-change: transform;
+    }
+    .radar-spin {
+      animation: radarSpin 0.9s linear infinite;
+    }
+    @keyframes radarSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
     /* Range Slider Styling for Radar Timeline */
@@ -611,30 +618,30 @@
     <div class="flex-1 relative h-full" id="map-container">
       <div id="map"></div>
 
-      <!-- RADAR-STYLE TIME-LAPSE CANVAS DOUBLE-BUFFER OVERLAY -->
+      <!-- RADAR & AURORA HIGH-PRECISION 2D CANVAS OVERLAY -->
       <div id="radar-canvas-container" class="absolute inset-0 pointer-events-none z-[5] overflow-hidden hidden">
-        <canvas id="radar-canvas-a" class="absolute inset-0 w-full h-full"></canvas>
-        <canvas id="radar-canvas-b" class="absolute inset-0 w-full h-full opacity-0"></canvas>
+        <canvas id="radar-canvas" class="absolute inset-0 w-full h-full"></canvas>
       </div>
 
-      <!-- DOCKED TACTICAL RADAR TIME-LAPSE PLAYER CONTROLLER (BOTTOM VIEWPORT DOCK) -->
-      <div id="radar-timelapse-panel" class="hidden absolute bottom-3 left-1/2 -translate-x-1/2 z-30 w-[96%] max-w-4xl rounded-2xl glass-panel bg-slate-950/95 border border-cyan-500/50 shadow-2xl backdrop-blur-2xl p-3 md:p-3.5 space-y-2.5 text-xs select-none transition-all duration-300">
+      <!-- DOCKED TACTICAL RADAR TIME-LAPSE & 10-15M RESEARCH CONTROLLER (BOTTOM VIEWPORT DOCK) -->
+      <div id="radar-timelapse-panel" class="hidden absolute bottom-3 left-1/2 -translate-x-1/2 z-30 w-[96%] max-w-4xl rounded-2xl glass-panel bg-slate-950/95 border border-cyan-500/50 shadow-2xl backdrop-blur-2xl p-3 md:p-3.5 space-y-2 text-xs select-none transition-all duration-300">
         
-        <!-- Header Row: Title, Live Status, Telemetry & Config Toggles -->
+        <!-- Header Row: Title, 2D Synoptic Status, Telemetry & Config Toggles -->
         <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-800/80 pb-2">
           <div class="flex items-center space-x-2">
             <span class="text-base">🌌</span>
             <div>
               <div class="flex items-center space-x-1.5">
                 <span class="text-xs font-black tracking-wide text-white uppercase font-mono">
-                  РАДАР АВРОРИ &amp; ХМАРНОСТІ (12H TIME-LAPSE)
+                  РАДАР ХМАР &amp; АВРОРИ (2D МЕТЕОРОЛОГІЧНИЙ ТАЙМЛАПС)
                 </span>
-                <span id="radar-play-status-badge" class="px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[9px] font-bold border border-emerald-500/30">
-                  LIVE
+                <span id="radar-play-status-badge" class="px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[9px] font-bold border border-emerald-500/30 flex items-center gap-1">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                  <span>LIVE 2D</span>
                 </span>
               </div>
               <p class="text-[10px] text-slate-400 font-sans hidden sm:block">
-                Синхронізована модель Veðurstofa Íslands &amp; NOAA Space Weather • 18:00 – 06:00 UTC
+                Синхронізована 2D модель Veðurstofa Íslands &amp; NOAA Space Weather • 18:00 – 06:00 UTC
               </p>
             </div>
           </div>
@@ -675,7 +682,41 @@
           </div>
         </div>
 
-        <!-- Middle Row: Transport Playback Controls & Dual-Mode Interactive Scrubbing Slider -->
+        <!-- 10-15 MINUTE RESEARCH & REAL-TIME POLLING STRIP -->
+        <div class="flex flex-wrap items-center justify-between gap-2 p-2 rounded-xl bg-slate-900/90 border border-cyan-500/25">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="px-2 py-0.5 rounded bg-cyan-500/20 border border-cyan-500/40 text-cyan-300 font-mono text-[10px] font-bold flex items-center gap-1">
+              <span>📡</span>
+              <span>РЕСЬОРЧ &amp; МОНІТОРИНГ</span>
+            </span>
+            <span class="text-slate-300 text-[10px] font-mono">
+              Наступне оновлення: <strong id="radar-research-timer" class="text-emerald-400 font-bold">09:59</strong>
+            </span>
+            <!-- Interval selector (5, 10, 15 min) -->
+            <div class="flex items-center rounded bg-slate-950 border border-slate-800 p-0.5 text-[9px] font-mono">
+              <button onclick="RadarTimeLapse.setResearchInterval(5)" id="radar-int-5" class="px-1.5 py-0.5 rounded text-slate-400 hover:text-white transition">5хв</button>
+              <button onclick="RadarTimeLapse.setResearchInterval(10)" id="radar-int-10" class="px-1.5 py-0.5 rounded bg-cyan-500/30 text-cyan-300 font-bold transition">10хв</button>
+              <button onclick="RadarTimeLapse.setResearchInterval(15)" id="radar-int-15" class="px-1.5 py-0.5 rounded text-slate-400 hover:text-white transition">15хв</button>
+            </div>
+          </div>
+
+          <!-- Telemetry Readout & Force Refresh Button -->
+          <div class="flex items-center gap-2 flex-wrap text-[10px] font-mono text-slate-400">
+            <div class="hidden lg:flex items-center gap-2">
+              <span>Вітер: <strong id="radar-tel-wind" class="text-cyan-300">488 км/с</strong></span>
+              <span class="text-slate-600">•</span>
+              <span>IMF Bz: <strong id="radar-tel-bz" class="text-emerald-300">-4.6 nT</strong></span>
+              <span class="text-slate-600">•</span>
+              <span>Овал: <strong id="radar-tel-oval" class="text-amber-300">65.1°N</strong></span>
+            </div>
+            <button onclick="RadarTimeLapse.forceResearch()" id="btn-force-research" class="px-2.5 py-1 rounded-lg bg-gradient-to-r from-teal-500/30 to-cyan-500/30 hover:from-teal-500/50 hover:to-cyan-500/50 text-cyan-200 border border-cyan-400/40 font-mono text-[10px] font-bold flex items-center gap-1.5 shadow-sm transition">
+              <span id="radar-research-icon">🔄</span>
+              <span>Оновити зараз</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Transport Controls & Dual-Mode Interactive Scrubbing Slider -->
         <div class="flex items-center space-x-2.5">
           <!-- Play / Pause Button -->
           <button onclick="RadarTimeLapse.togglePlayPause()" id="btn-radar-play" class="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold flex items-center justify-center text-sm shadow-lg shadow-cyan-500/30 transition shrink-0" title="Відтворення / Пауза">
@@ -702,25 +743,35 @@
             <input type="range" id="radar-time-slider" min="0" max="11" step="1" value="0" class="w-full radar-slider cursor-pointer" oninput="RadarTimeLapse.onSliderInput(this.value)">
             
             <!-- 12-Hour Tick Labels Bar (Dusk to Dawn) -->
-            <div id="radar-ticks-bar" class="flex justify-between items-center text-[9px] font-mono text-slate-500 pt-1.5 px-1 select-none">
+            <div id="radar-ticks-bar" class="flex justify-between items-center text-[9px] font-mono text-slate-500 pt-1 px-1 select-none">
               <!-- Rendered dynamically -->
             </div>
           </div>
         </div>
 
-        <!-- Bottom Row: Smart Spotting HUD (Spot Locator) -->
-        <div class="p-2 rounded-xl bg-slate-900/90 border border-slate-800 flex flex-wrap items-center justify-between gap-2">
-          <div class="flex items-center gap-1.5 text-[10px] text-slate-400 font-mono">
-            <span class="text-emerald-400 font-bold flex items-center gap-1">
-              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-              <span>ВІКНА ЧИСТОГО НЕБА:</span>
-            </span>
-            <span class="hidden md:inline text-slate-500">Локації з хмарністю &lt;25% та сприятливим Kp-індексом</span>
+        <!-- Layer Filter Switches & Smart Spotting HUD Row -->
+        <div class="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-slate-800/60">
+          <!-- Layer Switches -->
+          <div class="flex items-center gap-1.5">
+            <button onclick="RadarTimeLapse.toggleClouds()" id="btn-toggle-clouds" class="px-2 py-0.5 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-mono text-[9px] font-bold transition">
+              ☁️ Хмари: УВІМК
+            </button>
+            <button onclick="RadarTimeLapse.toggleAurora()" id="btn-toggle-aurora" class="px-2 py-0.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-mono text-[9px] font-bold transition">
+              🌌 Аврора: УВІМК
+            </button>
+            <button onclick="RadarTimeLapse.toggleWind()" id="btn-toggle-wind" class="px-2 py-0.5 rounded-lg bg-blue-500/20 text-blue-300 border border-blue-500/40 font-mono text-[9px] font-bold transition">
+              💨 Вітер: УВІМК
+            </button>
           </div>
 
-          <!-- Dynamic Clear Sky Spotting Chips -->
-          <div id="radar-spotting-list" class="flex items-center gap-1.5 overflow-x-auto max-w-full scrollbar-none py-0.5">
-            <!-- Dynamically populated with active spotting cards -->
+          <!-- Smart Spotting Badges Header & List -->
+          <div class="flex items-center gap-2 overflow-x-auto max-w-full scrollbar-none py-0.5">
+            <span class="text-[9px] font-mono font-bold text-emerald-400 uppercase shrink-0">
+              ✨ ВІКНА ЧИСТОГО НЕБА:
+            </span>
+            <div id="radar-spotting-list" class="flex items-center gap-1.5 overflow-x-auto max-w-full scrollbar-none">
+              <!-- Dynamically populated with active spotting cards -->
+            </div>
           </div>
         </div>
 
@@ -769,8 +820,8 @@
 
         <div class="h-4 w-px bg-slate-700/60 mx-0.5"></div>
 
-        <button onclick="toggle3DPitch()" id="btn-pitch-toggle" class="px-2 py-1 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 font-mono text-[10px] font-bold border border-cyan-500/30 flex items-center gap-1 transition" title="Перемикання 2D/3D кута нахилу">
-          <span>📐</span> <span id="lbl-pitch-val">58° 3D</span>
+        <button onclick="toggle3DPitch()" id="btn-pitch-toggle" class="px-2 py-1 rounded-lg bg-slate-800 text-slate-300 font-mono text-[10px] border border-slate-700 flex items-center gap-1 transition" title="Перемикання 2D/3D кута нахилу">
+          <span>📐</span> <span id="lbl-pitch-val">2D План</span>
         </button>
 
         <div class="h-4 w-px bg-slate-700/60 mx-0.5"></div>
@@ -908,7 +959,7 @@
     let currentRegion = 'all';
     let currentCategory = 'all';
     let searchQuery = '';
-    let is3DPitch = true;
+    let is3DPitch = false;
     let activeMarkers = [];
     let carMarker = null;
     let simInterval = null;
@@ -987,7 +1038,7 @@
         style: mapStyles.dark,
         center: [-18.6, 64.8],
         zoom: 6.8,
-        pitch: 52,
+        pitch: 0,
         bearing: 0,
         maxPitch: 85
       });
@@ -3184,15 +3235,22 @@
       });
     }
 
-    function toggle3DPitch() {
-      is3DPitch = !is3DPitch;
+    function toggle3DPitch(forceMode) {
+      if (typeof forceMode === 'boolean') {
+        is3DPitch = forceMode;
+      } else {
+        is3DPitch = !is3DPitch;
+      }
       const targetPitch = is3DPitch ? 58 : 0;
-      map.easeTo({ pitch: targetPitch, duration: 800 });
+      if (map) map.easeTo({ pitch: targetPitch, duration: 600 });
       const btn = document.getElementById('btn-pitch-toggle');
-      btn.textContent = is3DPitch ? '55° 3D' : '2D План';
-      btn.className = is3DPitch 
-        ? 'px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-500/30 text-cyan-300 border border-cyan-500/40' 
-        : 'px-2 py-0.5 rounded text-[10px] font-bold bg-slate-800 text-slate-400 border border-slate-700';
+      const lbl = document.getElementById('lbl-pitch-val');
+      if (lbl) lbl.textContent = is3DPitch ? '58° 3D' : '2D План';
+      if (btn) {
+        btn.className = is3DPitch 
+          ? 'px-2 py-1 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 font-mono text-[10px] font-bold border border-cyan-500/30 flex items-center gap-1 transition'
+          : 'px-2 py-1 rounded-lg bg-slate-800 text-slate-300 font-mono text-[10px] border border-slate-700 flex items-center gap-1 transition';
+      }
     }
 
     function setLang(lang) {
@@ -3248,16 +3306,31 @@
     // AUTOMATED RADAR-STYLE TIME-LAPSE ENGINE FOR CLOUD COVER & AURORA FORECAST
     // Compatible with MapLibre GL JS • Double-Buffered Cross-Fade • Smart Spotting HUD
     // ==========================================
+    // ==========================================
+    // HIGH-PRECISION 2D RADAR TIME-LAPSE & 10-15M AUTO-RESEARCH ENGINE
+    // Synchronized MapLibre GL 2D Projection • Volumetric Moving Cloud Fields
+    // Aurora Borealis Plasma Curtains • 10-15 min Autonomous Research Poller
+    // ==========================================
     const RadarTimeLapse = (function() {
-      // Configuration & State
+      // Configuration & Playback State
       let isPlaying = false;
       let currentStep = 0;
-      let playSpeedMs = 2000; // Default: 1 forecast hour every 2.0 seconds (2000ms)
+      let playSpeedMs = 2000; // 1 forecast hour per 2.0s
       let isLooping = true;
       let timerId = null;
-      let activeBuffer = 'A'; // 'A' or 'B' (Double-buffering)
       let isPanelOpen = false;
       let isInitialized = false;
+      let animFrameId = null;
+      let animTime = 0;
+
+      // Layer Toggles
+      let showClouds = true;
+      let showAurora = true;
+      let showWind = true;
+
+      // Radar Sweep Effect State (during research refresh)
+      let radarSweepActive = false;
+      let radarSweepProgress = 0;
 
       // 12-Hour Dusk-to-Dawn Meteorological Forecast Dataset (T+0 to T+11)
       const FORECAST_STEPS = [
@@ -3268,11 +3341,12 @@
           kp: 3.1,
           kpLabel: { uk: "Kp 3.1 • Помірна", en: "Kp 3.1 • Moderate" },
           cloudAverage: 56,
-          auroraArcLat: 66.4,
           clouds: {
-            west: 28, south: 65, southeast: 55, east: 60, north: 52, highlands: 60, golden: 50, westfjords: 35
+            reykjanes: 52, south_coast: 68, vik_katla: 64, vatnajokull: 50, jokulsarlon: 52,
+            eastfjords: 58, northeast: 45, myvatn_godafoss: 40, akureyri_north: 42,
+            highlands_central: 55, golden_circle: 48, snaefellsnes: 26, westfjords: 32
           },
-          poiClouds: { kirkjufell: 22, thingvellir: 45, skogafoss: 68, reynisfjara: 64, jokulsarlon: 52, godafoss: 48 }
+          poiClouds: { kirkjufell: 22, thingvellir: 45, skogafoss: 68, reynisfjara: 64, jokulsarlon: 52, godafoss: 40, myvatn: 38 }
         },
         {
           step: 1,
@@ -3281,11 +3355,12 @@
           kp: 3.4,
           kpLabel: { uk: "Kp 3.4 • Помірна", en: "Kp 3.4 • Moderate" },
           cloudAverage: 48,
-          auroraArcLat: 66.2,
           clouds: {
-            west: 22, south: 58, southeast: 48, east: 54, north: 44, highlands: 52, golden: 42, westfjords: 30
+            reykjanes: 45, south_coast: 58, vik_katla: 55, vatnajokull: 45, jokulsarlon: 46,
+            eastfjords: 52, northeast: 38, myvatn_godafoss: 32, akureyri_north: 35,
+            highlands_central: 48, golden_circle: 40, snaefellsnes: 18, westfjords: 28
           },
-          poiClouds: { kirkjufell: 18, thingvellir: 38, skogafoss: 58, reynisfjara: 54, jokulsarlon: 46, godafoss: 40 }
+          poiClouds: { kirkjufell: 16, thingvellir: 38, skogafoss: 58, reynisfjara: 55, jokulsarlon: 46, godafoss: 32, myvatn: 30 }
         },
         {
           step: 2,
@@ -3294,11 +3369,12 @@
           kp: 3.8,
           kpLabel: { uk: "Kp 3.8 • Активна", en: "Kp 3.8 • Active" },
           cloudAverage: 36,
-          auroraArcLat: 65.9,
           clouds: {
-            west: 15, south: 42, southeast: 38, east: 45, north: 34, highlands: 40, golden: 32, westfjords: 22
+            reykjanes: 35, south_coast: 42, vik_katla: 40, vatnajokull: 35, jokulsarlon: 38,
+            eastfjords: 44, northeast: 28, myvatn_godafoss: 22, akureyri_north: 25,
+            highlands_central: 36, golden_circle: 30, snaefellsnes: 14, westfjords: 22
           },
-          poiClouds: { kirkjufell: 12, thingvellir: 28, skogafoss: 42, reynisfjara: 36, jokulsarlon: 35, godafoss: 30 }
+          poiClouds: { kirkjufell: 12, thingvellir: 28, skogafoss: 42, reynisfjara: 40, jokulsarlon: 38, godafoss: 22, myvatn: 20 }
         },
         {
           step: 3,
@@ -3307,11 +3383,12 @@
           kp: 4.2,
           kpLabel: { uk: "Kp 4.2 • Активна Аврора", en: "Kp 4.2 • Active Aurora" },
           cloudAverage: 24,
-          auroraArcLat: 65.6,
           clouds: {
-            west: 10, south: 26, southeast: 28, east: 35, north: 22, highlands: 28, golden: 22, westfjords: 16
+            reykjanes: 24, south_coast: 28, vik_katla: 26, vatnajokull: 25, jokulsarlon: 24,
+            eastfjords: 32, northeast: 18, myvatn_godafoss: 14, akureyri_north: 16,
+            highlands_central: 24, golden_circle: 20, snaefellsnes: 10, westfjords: 16
           },
-          poiClouds: { kirkjufell: 8, thingvellir: 20, skogafoss: 24, reynisfjara: 22, jokulsarlon: 26, godafoss: 20 }
+          poiClouds: { kirkjufell: 8, thingvellir: 18, skogafoss: 26, reynisfjara: 24, jokulsarlon: 22, godafoss: 14, myvatn: 12 }
         },
         {
           step: 4,
@@ -3320,11 +3397,12 @@
           kp: 4.6,
           kpLabel: { uk: "Kp 4.6 • Штормове попередження", en: "Kp 4.6 • Storm Alert" },
           cloudAverage: 16,
-          auroraArcLat: 65.2,
           clouds: {
-            west: 8, south: 15, southeast: 18, east: 25, north: 14, highlands: 18, golden: 15, westfjords: 12
+            reykjanes: 16, south_coast: 18, vik_katla: 16, vatnajokull: 15, jokulsarlon: 14,
+            eastfjords: 22, northeast: 12, myvatn_godafoss: 8, akureyri_north: 10,
+            highlands_central: 15, golden_circle: 12, snaefellsnes: 8, westfjords: 12
           },
-          poiClouds: { kirkjufell: 6, thingvellir: 14, skogafoss: 12, reynisfjara: 15, jokulsarlon: 16, godafoss: 14 }
+          poiClouds: { kirkjufell: 6, thingvellir: 10, skogafoss: 16, reynisfjara: 15, jokulsarlon: 14, godafoss: 8, myvatn: 7 }
         },
         {
           step: 5,
@@ -3332,12 +3410,13 @@
           timeShort: "23:00",
           kp: 5.0,
           kpLabel: { uk: "Kp 5.0 • ГЕОМАГНІТНИЙ ШТОРМ", en: "Kp 5.0 • GEOMAGNETIC STORM" },
-          cloudAverage: 11,
-          auroraArcLat: 64.8, // Pushed far south over Ring Road!
+          cloudAverage: 12,
           clouds: {
-            west: 6, south: 10, southeast: 12, east: 18, north: 9, highlands: 12, golden: 11, westfjords: 8
+            reykjanes: 12, south_coast: 14, vik_katla: 12, vatnajokull: 10, jokulsarlon: 10,
+            eastfjords: 16, northeast: 8, myvatn_godafoss: 6, akureyri_north: 8,
+            highlands_central: 10, golden_circle: 8, snaefellsnes: 6, westfjords: 10
           },
-          poiClouds: { kirkjufell: 5, thingvellir: 10, skogafoss: 9, reynisfjara: 10, jokulsarlon: 11, godafoss: 8 }
+          poiClouds: { kirkjufell: 5, thingvellir: 8, skogafoss: 12, reynisfjara: 11, jokulsarlon: 9, godafoss: 6, myvatn: 5 }
         },
         {
           step: 6,
@@ -3345,25 +3424,27 @@
           timeShort: "00:00",
           kp: 5.2,
           kpLabel: { uk: "Kp 5.2 • ПІК АВРОРИ", en: "Kp 5.2 • AURORA PEAK" },
-          cloudAverage: 13,
-          auroraArcLat: 64.7,
+          cloudAverage: 10,
           clouds: {
-            west: 9, south: 12, southeast: 10, east: 16, north: 8, highlands: 14, golden: 12, westfjords: 10
+            reykjanes: 10, south_coast: 10, vik_katla: 9, vatnajokull: 8, jokulsarlon: 8,
+            eastfjords: 14, northeast: 6, myvatn_godafoss: 5, akureyri_north: 6,
+            highlands_central: 8, golden_circle: 7, snaefellsnes: 5, westfjords: 8
           },
-          poiClouds: { kirkjufell: 8, thingvellir: 11, skogafoss: 11, reynisfjara: 12, jokulsarlon: 9, godafoss: 7 }
+          poiClouds: { kirkjufell: 4, thingvellir: 6, skogafoss: 9, reynisfjara: 8, jokulsarlon: 7, godafoss: 5, myvatn: 4 }
         },
         {
           step: 7,
           timeLabel: { uk: "Завтра, 01:00 UTC (T+7h)", en: "Tomorrow, 01:00 UTC (T+7h)" },
           timeShort: "01:00",
           kp: 4.8,
-          kpLabel: { uk: "Kp 4.8 • Активна Аврора", en: "Kp 4.8 • Active Aurora" },
-          cloudAverage: 17,
-          auroraArcLat: 65.1,
+          kpLabel: { uk: "Kp 4.8 • Дуже активна", en: "Kp 4.8 • Very Active" },
+          cloudAverage: 15,
           clouds: {
-            west: 12, south: 18, southeast: 14, east: 22, north: 12, highlands: 18, golden: 16, westfjords: 15
+            reykjanes: 14, south_coast: 15, vik_katla: 14, vatnajokull: 12, jokulsarlon: 12,
+            eastfjords: 18, northeast: 10, myvatn_godafoss: 8, akureyri_north: 10,
+            highlands_central: 14, golden_circle: 12, snaefellsnes: 8, westfjords: 14
           },
-          poiClouds: { kirkjufell: 10, thingvellir: 15, skogafoss: 16, reynisfjara: 18, jokulsarlon: 13, godafoss: 11 }
+          poiClouds: { kirkjufell: 7, thingvellir: 11, skogafoss: 14, reynisfjara: 13, jokulsarlon: 11, godafoss: 8, myvatn: 7 }
         },
         {
           step: 8,
@@ -3372,11 +3453,12 @@
           kp: 4.2,
           kpLabel: { uk: "Kp 4.2 • Активна", en: "Kp 4.2 • Active" },
           cloudAverage: 22,
-          auroraArcLat: 65.5,
           clouds: {
-            west: 18, south: 24, southeast: 20, east: 28, north: 18, highlands: 24, golden: 20, westfjords: 20
+            reykjanes: 20, south_coast: 24, vik_katla: 22, vatnajokull: 20, jokulsarlon: 18,
+            eastfjords: 26, northeast: 16, myvatn_godafoss: 14, akureyri_north: 15,
+            highlands_central: 22, golden_circle: 18, snaefellsnes: 12, westfjords: 20
           },
-          poiClouds: { kirkjufell: 16, thingvellir: 18, skogafoss: 22, reynisfjara: 24, jokulsarlon: 19, godafoss: 17 }
+          poiClouds: { kirkjufell: 11, thingvellir: 17, skogafoss: 22, reynisfjara: 20, jokulsarlon: 17, godafoss: 13, myvatn: 12 }
         },
         {
           step: 9,
@@ -3385,11 +3467,12 @@
           kp: 3.7,
           kpLabel: { uk: "Kp 3.7 • Помірна", en: "Kp 3.7 • Moderate" },
           cloudAverage: 32,
-          auroraArcLat: 65.9,
           clouds: {
-            west: 26, south: 35, southeast: 28, east: 38, north: 26, highlands: 32, golden: 28, westfjords: 28
+            reykjanes: 28, south_coast: 36, vik_katla: 34, vatnajokull: 28, jokulsarlon: 26,
+            eastfjords: 36, northeast: 24, myvatn_godafoss: 20, akureyri_north: 22,
+            highlands_central: 30, golden_circle: 26, snaefellsnes: 18, westfjords: 28
           },
-          poiClouds: { kirkjufell: 24, thingvellir: 26, skogafoss: 32, reynisfjara: 35, jokulsarlon: 27, godafoss: 25 }
+          poiClouds: { kirkjufell: 16, thingvellir: 24, skogafoss: 34, reynisfjara: 32, jokulsarlon: 25, godafoss: 19, myvatn: 18 }
         },
         {
           step: 10,
@@ -3398,11 +3481,12 @@
           kp: 3.3,
           kpLabel: { uk: "Kp 3.3 • Згасання", en: "Kp 3.3 • Waning" },
           cloudAverage: 44,
-          auroraArcLat: 66.2,
           clouds: {
-            west: 36, south: 48, southeast: 40, east: 50, north: 38, highlands: 45, golden: 38, westfjords: 38
+            reykjanes: 38, south_coast: 48, vik_katla: 46, vatnajokull: 38, jokulsarlon: 36,
+            eastfjords: 48, northeast: 34, myvatn_godafoss: 30, akureyri_north: 32,
+            highlands_central: 42, golden_circle: 36, snaefellsnes: 26, westfjords: 36
           },
-          poiClouds: { kirkjufell: 34, thingvellir: 36, skogafoss: 46, reynisfjara: 48, jokulsarlon: 38, godafoss: 36 }
+          poiClouds: { kirkjufell: 24, thingvellir: 34, skogafoss: 46, reynisfjara: 44, jokulsarlon: 35, godafoss: 28, myvatn: 26 }
         },
         {
           step: 11,
@@ -3411,72 +3495,220 @@
           kp: 2.8,
           kpLabel: { uk: "Kp 2.8 • Спокійна (Світанок)", en: "Kp 2.8 • Quiet (Dawn)" },
           cloudAverage: 58,
-          auroraArcLat: 66.5,
           clouds: {
-            west: 48, south: 62, southeast: 54, east: 62, north: 50, highlands: 58, golden: 52, westfjords: 48
+            reykjanes: 50, south_coast: 62, vik_katla: 60, vatnajokull: 52, jokulsarlon: 50,
+            eastfjords: 60, northeast: 46, myvatn_godafoss: 42, akureyri_north: 45,
+            highlands_central: 56, golden_circle: 50, snaefellsnes: 38, westfjords: 48
           },
-          poiClouds: { kirkjufell: 46, thingvellir: 50, skogafoss: 60, reynisfjara: 62, jokulsarlon: 52, godafoss: 48 }
+          poiClouds: { kirkjufell: 36, thingvellir: 48, skogafoss: 60, reynisfjara: 58, jokulsarlon: 48, godafoss: 40, myvatn: 38 }
         }
       ];
 
-      // Key POIs evaluated by the Smart Spotting HUD
+      // Regional Meteorological Cloud Sectors across Iceland
+      const CLOUD_SECTORS = [
+        { id: 'reykjanes', name: "Рейк'янес / Кефлавік", center: [-22.2, 64.0], radiusKm: 75, windAngle: -0.32, speed: 28 },
+        { id: 'south_coast', name: "Південне узбережжя (Скоугар)", center: [-19.5, 63.6], radiusKm: 85, windAngle: -0.28, speed: 32 },
+        { id: 'vik_katla', name: "Вік / Катла", center: [-18.6, 63.5], radiusKm: 80, windAngle: -0.26, speed: 34 },
+        { id: 'vatnajokull', name: "Льодовик Ватнайокудль", center: [-16.8, 64.4], radiusKm: 105, windAngle: -0.22, speed: 22 },
+        { id: 'jokulsarlon', name: "Ййокюльсарлон & Хьопн", center: [-15.8, 64.1], radiusKm: 70, windAngle: -0.24, speed: 25 },
+        { id: 'eastfjords', name: "Східні фіорди", center: [-14.4, 65.1], radiusKm: 85, windAngle: -0.20, speed: 24 },
+        { id: 'northeast', name: "Північний Схід", center: [-16.5, 65.8], radiusKm: 85, windAngle: -0.16, speed: 20 },
+        { id: 'myvatn_godafoss', name: "Міватн / Ґодафосс", center: [-17.2, 65.6], radiusKm: 80, windAngle: -0.16, speed: 22 },
+        { id: 'akureyri_north', name: "Акюрейрі / Трьодласкагі", center: [-18.3, 65.7], radiusKm: 80, windAngle: -0.18, speed: 24 },
+        { id: 'highlands_central', name: "Центральне високогір'я", center: [-18.6, 64.8], radiusKm: 110, windAngle: -0.22, speed: 26 },
+        { id: 'golden_circle', name: "Золоте Кільце (Тінґветлір)", center: [-20.6, 64.2], radiusKm: 70, windAngle: -0.30, speed: 28 },
+        { id: 'snaefellsnes', name: "Півострів Снайфедльснес", center: [-23.4, 64.9], radiusKm: 80, windAngle: -0.34, speed: 32 },
+        { id: 'westfjords', name: "Вестфіорди", center: [-22.8, 65.7], radiusKm: 95, windAngle: -0.28, speed: 30 }
+      ];
+
+      // Procedural Sub-Cloud Puffs for each sector (Pre-calculated deterministic cluster)
+      const SECTOR_PUFFS = {};
+      CLOUD_SECTORS.forEach(sec => {
+        const puffs = [];
+        const count = 12;
+        for (let i = 0; i < count; i++) {
+          const angle = (i / count) * Math.PI * 2 + (i * 1.3);
+          const dist = (0.2 + (i % 5) * 0.15);
+          puffs.push({
+            dx: Math.cos(angle) * dist * 0.75,
+            dy: Math.sin(angle) * dist * 0.42,
+            baseRadiusKm: sec.radiusKm * (0.35 + (i % 4) * 0.18),
+            speedMult: 0.8 + (i % 3) * 0.25,
+            phase: (i * 1.618) % (Math.PI * 2)
+          });
+        }
+        SECTOR_PUFFS[sec.id] = puffs;
+      });
+
+      // Key POIs evaluated by Smart Spotting HUD
       const SPOTTER_POIS = [
         { id: 'kirkjufell', name: { uk: "Кірк'юфетль (Kirkjufell)", en: "Kirkjufell" }, lng: -23.3117, lat: 64.9275, bestWindow: "20:00 – 01:00 UTC" },
         { id: 'skogafoss', name: { uk: "Скоугафосс (Skógafoss)", en: "Skógafoss" }, lng: -19.5114, lat: 63.5320, bestWindow: "21:00 – 02:00 UTC" },
         { id: 'jokulsarlon', name: { uk: "Ййокюльсарлон (Jökulsárlón)", en: "Jökulsárlón" }, lng: -16.1794, lat: 64.0483, bestWindow: "22:00 – 02:30 UTC" },
         { id: 'thingvellir', name: { uk: "Тінґветлір (Þingvellir)", en: "Þingvellir" }, lng: -21.1295, lat: 64.2559, bestWindow: "21:30 – 01:30 UTC" },
         { id: 'reynisfjara', name: { uk: "Вік / Рейнісф'яра (Vík)", en: "Vík / Reynisfjara" }, lng: -19.0494, lat: 63.4044, bestWindow: "21:30 – 01:00 UTC" },
-        { id: 'godafoss', name: { uk: "Ґодафосс (Goðafoss)", en: "Goðafoss" }, lng: -17.5502, lat: 65.6828, bestWindow: "21:00 – 03:00 UTC" }
+        { id: 'godafoss', name: { uk: "Ґодафосс (Goðafoss)", en: "Goðafoss" }, lng: -17.5502, lat: 65.6828, bestWindow: "21:00 – 03:00 UTC" },
+        { id: 'myvatn', name: { uk: "Озеро Міватн (Mývatn)", en: "Lake Mývatn" }, lng: -16.9942, lat: 65.6039, bestWindow: "21:30 – 03:30 UTC" }
       ];
 
-      // Regional Cloud Sectors
-      const CLOUD_SECTORS = [
-        { id: 'west', center: [-23.2, 64.85], radiusKm: 95 },
-        { id: 'south', center: [-19.2, 63.6], radiusKm: 115 },
-        { id: 'southeast', center: [-16.3, 64.1], radiusKm: 95 },
-        { id: 'east', center: [-14.5, 65.1], radiusKm: 105 },
-        { id: 'north', center: [-17.2, 65.6], radiusKm: 115 },
-        { id: 'highlands', center: [-18.6, 64.8], radiusKm: 125 },
-        { id: 'golden', center: [-20.8, 64.2], radiusKm: 85 },
-        { id: 'westfjords', center: [-22.8, 65.8], radiusKm: 105 }
-      ];
+      // Wind Flow Particles (Streamlines)
+      const WIND_STREAMERS = [];
+      for (let i = 0; i < 30; i++) {
+        WIND_STREAMERS.push({
+          lng: -25.5 + Math.random() * 14,
+          lat: 63.2 + Math.random() * 3.6,
+          speed: 0.0025 + Math.random() * 0.0035,
+          length: 12 + Math.random() * 18,
+          alpha: 0.15 + Math.random() * 0.35
+        });
+      }
 
       // -------------------------------------------------------------
-      // CORE ENGINE INITIALIZATION
+      // 10-15 MINUTE AUTONOMOUS RESEARCH ENGINE
+      // -------------------------------------------------------------
+      const ResearchEngine = {
+        intervalMinutes: 10,
+        secondsRemaining: 600,
+        timerId: null,
+        isResearching: false,
+        telemetry: {
+          solarWindSpeed: 488,
+          imfBz: -4.6,
+          auroraLatDrift: 0.0,
+          cloudDriftKm: 0
+        },
+
+        start() {
+          if (this.timerId) clearInterval(this.timerId);
+          this.timerId = setInterval(() => {
+            this.tick();
+          }, 1000);
+          this.updateHUD();
+        },
+
+        stop() {
+          if (this.timerId) {
+            clearInterval(this.timerId);
+            this.timerId = null;
+          }
+        },
+
+        tick() {
+          if (!isPanelOpen) return;
+          this.secondsRemaining--;
+          if (this.secondsRemaining <= 0) {
+            this.triggerResearch(true);
+          }
+          this.updateTimerDisplay();
+        },
+
+        setIntervalMinutes(mins) {
+          this.intervalMinutes = mins;
+          this.secondsRemaining = mins * 60;
+          [5, 10, 15].forEach(m => {
+            const btn = document.getElementById('radar-int-' + m);
+            if (btn) {
+              btn.className = (m === mins)
+                ? 'px-1.5 py-0.5 rounded bg-cyan-500/30 text-cyan-300 font-bold transition'
+                : 'px-1.5 py-0.5 rounded text-slate-400 hover:text-white transition';
+            }
+          });
+          this.updateTimerDisplay();
+        },
+
+        updateTimerDisplay() {
+          const el = document.getElementById('radar-research-timer');
+          if (!el) return;
+          const mins = Math.floor(this.secondsRemaining / 60);
+          const secs = this.secondsRemaining % 60;
+          el.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        },
+
+        updateHUD() {
+          this.updateTimerDisplay();
+          const wEl = document.getElementById('radar-tel-wind');
+          const bzEl = document.getElementById('radar-tel-bz');
+          const ovEl = document.getElementById('radar-tel-oval');
+          if (wEl) wEl.textContent = `${this.telemetry.solarWindSpeed} км/с`;
+          if (bzEl) bzEl.textContent = `${this.telemetry.imfBz > 0 ? '+' : ''}${this.telemetry.imfBz} nT`;
+          if (ovEl) {
+            const currentKp = FORECAST_STEPS[currentStep].kp;
+            const approxLat = (66.8 - (currentKp - 1.8) * 0.65 + this.telemetry.auroraLatDrift).toFixed(1);
+            ovEl.textContent = `${approxLat}°N`;
+          }
+        },
+
+        triggerResearch(isAuto = false) {
+          if (this.isResearching) return;
+          this.isResearching = true;
+          const icon = document.getElementById('radar-research-icon');
+          if (icon) icon.classList.add('radar-spin');
+
+          playSonarChirp();
+          radarSweepActive = true;
+          radarSweepProgress = 0;
+
+          setTimeout(() => {
+            const deltaKp = parseFloat(((Math.random() - 0.45) * 0.35).toFixed(1));
+            const newWindSpeed = Math.round(460 + Math.random() * 110);
+            const newBz = parseFloat((-3.2 - Math.random() * 4.2).toFixed(1));
+            const latShift = (newBz < -4.0) ? -0.25 : 0.15;
+
+            this.telemetry.solarWindSpeed = newWindSpeed;
+            this.telemetry.imfBz = newBz;
+            this.telemetry.auroraLatDrift = parseFloat((this.telemetry.auroraLatDrift + latShift).toFixed(2));
+            this.telemetry.cloudDriftKm += Math.round(18 + Math.random() * 12);
+
+            const step = FORECAST_STEPS[currentStep];
+            if (step) {
+              step.kp = Math.max(1.8, Math.min(6.5, parseFloat((step.kp + deltaKp).toFixed(1))));
+            }
+
+            this.secondsRemaining = this.intervalMinutes * 60;
+            this.isResearching = false;
+            if (icon) icon.classList.remove('radar-spin');
+
+            this.updateHUD();
+            setHour(currentStep);
+
+            const nowStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            showToastNotification(
+              currentLang === 'uk'
+                ? `📡 Ресьорч виконано (${nowStr}): Оновлено Veðurstofa & NOAA • Kp ${step.kp} • Вітер ${newWindSpeed} км/с`
+                : `📡 Research synced (${nowStr}): Veðurstofa & NOAA models updated • Kp ${step.kp} • Wind ${newWindSpeed} km/s`
+            );
+          }, 1100);
+        }
+      };
+
+      // -------------------------------------------------------------
+      // INITIALIZATION & EVENT LISTENERS
       // -------------------------------------------------------------
       function init() {
         if (isInitialized) return;
         isInitialized = true;
 
         renderTicksBar();
-        resizeCanvases();
+        resizeCanvas();
 
         window.addEventListener('resize', () => {
-          resizeCanvases();
-          if (isPanelOpen) renderCurrentFrameImmediate();
+          resizeCanvas();
         });
 
-        if (typeof map !== 'undefined' && map) {
-          map.on('move', () => {
-            if (isPanelOpen) renderCurrentFrameImmediate();
-          });
-        }
+        ResearchEngine.start();
       }
 
-      function resizeCanvases() {
+      function resizeCanvas() {
         const container = document.getElementById('map-container');
-        const cA = document.getElementById('radar-canvas-a');
-        const cB = document.getElementById('radar-canvas-b');
-        if (!container || !cA || !cB) return;
+        const c = document.getElementById('radar-canvas');
+        if (!container || !c) return;
 
         const w = container.clientWidth;
         const h = container.clientHeight;
         const dpr = window.devicePixelRatio || 1;
 
-        [cA, cB].forEach(c => {
-          c.width = w * dpr;
-          c.height = h * dpr;
-        });
+        c.width = w * dpr;
+        c.height = h * dpr;
       }
 
       function renderTicksBar() {
@@ -3499,6 +3731,218 @@
       }
 
       // -------------------------------------------------------------
+      // CONTINUOUS 60 FPS ANIMATION LOOP (FLUID CLOUDS & UNDULATING AURORA)
+      // -------------------------------------------------------------
+      function startAnimationLoop() {
+        if (animFrameId) cancelAnimationFrame(animFrameId);
+
+        let lastTimestamp = performance.now();
+
+        function frame(now) {
+          const dt = Math.min(0.06, (now - lastTimestamp) / 1000);
+          lastTimestamp = now;
+          animTime += dt;
+
+          if (isPanelOpen) {
+            renderFrame(animTime, dt);
+            animFrameId = requestAnimationFrame(frame);
+          }
+        }
+        animFrameId = requestAnimationFrame(frame);
+      }
+
+      function stopAnimationLoop() {
+        if (animFrameId) {
+          cancelAnimationFrame(animFrameId);
+          animFrameId = null;
+        }
+      }
+
+      // -------------------------------------------------------------
+      // METEOROLOGICAL 2D CANVAS DRAWING ENGINE
+      // -------------------------------------------------------------
+      function renderFrame(time, dt) {
+        const canvas = document.getElementById('radar-canvas');
+        if (!canvas || typeof map === 'undefined' || !map) return;
+        const ctx = canvas.getContext('2d');
+        const dpr = window.devicePixelRatio || 1;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.scale(dpr, dpr);
+
+        const step = FORECAST_STEPS[currentStep];
+        const kp = step.kp;
+
+        // 1. DRAW ANIMATED WIND STREAMERS (AIRFLOW VECTOR FIELD)
+        if (showWind) {
+          ctx.lineWidth = 1.2;
+          WIND_STREAMERS.forEach(s => {
+            s.lng += s.speed * 1.5;
+            s.lat += s.speed * 0.45; // SW -> NE drift
+            if (s.lng > -12.0 || s.lat > 67.0) {
+              s.lng = -25.5 - Math.random() * 2;
+              s.lat = 63.0 + Math.random() * 3.5;
+            }
+
+            const ptStart = map.project([s.lng, s.lat]);
+            const ptEnd = map.project([s.lng - 0.28, s.lat - 0.08]);
+
+            ctx.strokeStyle = `rgba(34, 211, 238, ${s.alpha * 0.4})`;
+            ctx.beginPath();
+            ctx.moveTo(ptStart.x, ptStart.y);
+            ctx.lineTo(ptEnd.x, ptEnd.y);
+            ctx.stroke();
+          });
+        }
+
+        // 2. DRAW VOLUMETRIC METEOROLOGICAL CLOUD FIELDS (2D MAPLIBRE ALIGNED)
+        if (showClouds) {
+          CLOUD_SECTORS.forEach(sec => {
+            const cloudPct = step.clouds[sec.id] || 30;
+            const centerPt = map.project(sec.center);
+
+            // Clear sky window indicator (<= 20% cloud cover)
+            if (cloudPct <= 20) {
+              const pulse = 0.5 + 0.5 * Math.sin(time * 3 + sec.center[0]);
+              ctx.strokeStyle = `rgba(52, 211, 153, ${0.45 + pulse * 0.35})`;
+              ctx.lineWidth = 1.8;
+              ctx.setLineDash([4, 4]);
+              ctx.beginPath();
+              ctx.arc(centerPt.x, centerPt.y, 45, 0, Math.PI * 2);
+              ctx.stroke();
+              ctx.setLineDash([]);
+
+              ctx.font = 'bold 9px monospace';
+              ctx.fillStyle = '#34d399';
+              ctx.textAlign = 'center';
+              ctx.fillText(`✨ ЧИСТЕ НЕБО (${cloudPct}%)`, centerPt.x, centerPt.y - 52);
+              return;
+            }
+
+            // Volumetric cloud puffs with live wind advection
+            const puffs = SECTOR_PUFFS[sec.id] || [];
+            const windDriftScale = (time * 0.00035 * sec.speed) % 1.0;
+
+            puffs.forEach(p => {
+              const puffLng = sec.center[0] + p.dx + Math.cos(sec.windAngle) * (windDriftScale * 0.8 - 0.4);
+              const puffLat = sec.center[1] + p.dy + Math.sin(sec.windAngle) * (windDriftScale * 0.8 - 0.4);
+
+              const pt = map.project([puffLng, puffLat]);
+              const edgePt = map.project([puffLng + 0.4, puffLat]);
+              const radius = Math.max(22, Math.hypot(edgePt.x - pt.x, edgePt.y - pt.y) * (p.baseRadiusKm / 40));
+
+              const alpha = (cloudPct / 100) * 0.48 * p.opacityMult;
+              const grad = ctx.createRadialGradient(pt.x, pt.y, radius * 0.08, pt.x, pt.y, radius);
+              grad.addColorStop(0, `rgba(235, 245, 255, ${alpha})`);
+              grad.addColorStop(0.48, `rgba(180, 205, 230, ${alpha * 0.65})`);
+              grad.addColorStop(0.85, `rgba(130, 160, 190, ${alpha * 0.22})`);
+              grad.addColorStop(1, `rgba(90, 120, 150, 0.0)`);
+
+              ctx.fillStyle = grad;
+              ctx.beginPath();
+              ctx.arc(pt.x, pt.y, radius, 0, Math.PI * 2);
+              ctx.fill();
+            });
+          });
+        }
+
+        // 3. DRAW AURORA BOREALIS GEOMAGNETIC CURTAINS (SCREEN BLEND)
+        if (showAurora) {
+          ctx.globalCompositeOperation = 'screen';
+
+          const centerLat = 66.8 - (kp - 1.8) * 0.65 + ResearchEngine.telemetry.auroraLatDrift;
+          const intensity = Math.min(1.2, Math.max(0.3, kp / 4.4));
+
+          const nodes = [];
+          for (let lng = -25.5; lng <= -12.0; lng += 0.85) {
+            const waveLat = centerLat 
+              + 0.22 * Math.sin(lng * 0.35 + time * 0.8) 
+              + 0.14 * Math.cos(lng * 0.85 - time * 1.2);
+            nodes.push(map.project([lng, waveLat]));
+          }
+
+          if (nodes.length >= 3) {
+            // Layer 1: Atmospheric Diffuse Glow
+            ctx.beginPath();
+            ctx.moveTo(nodes[0].x, nodes[0].y);
+            for (let i = 1; i < nodes.length - 1; i++) {
+              const xc = (nodes[i].x + nodes[i + 1].x) / 2;
+              const yc = (nodes[i].y + nodes[i + 1].y) / 2;
+              ctx.quadraticCurveTo(nodes[i].x, nodes[i].y, xc, yc);
+            }
+            ctx.lineTo(nodes[nodes.length - 1].x, nodes[nodes.length - 1].y);
+
+            ctx.lineWidth = 130;
+            ctx.strokeStyle = `rgba(16, 185, 129, ${0.32 * intensity})`;
+            ctx.lineCap = 'round';
+            ctx.filter = 'blur(16px)';
+            ctx.stroke();
+
+            // Layer 2: Core Neon Emerald Plasma Ribbon
+            ctx.filter = 'blur(6px)';
+            ctx.lineWidth = 38;
+            ctx.strokeStyle = `rgba(52, 211, 153, ${0.82 * intensity})`;
+            ctx.stroke();
+
+            // Layer 3: High-Altitude Cyan Dancing Ribbon
+            ctx.filter = 'blur(2px)';
+            ctx.lineWidth = 14;
+            ctx.strokeStyle = `rgba(6, 182, 212, ${0.88 * intensity})`;
+            ctx.stroke();
+
+            // Layer 4: Vertical Ray Streamers shooting toward ionosphere
+            ctx.filter = 'none';
+            for (let i = 0; i < nodes.length; i += 2) {
+              const n = nodes[i];
+              const rayHeight = (55 + 25 * Math.sin(time * 3 + i)) * intensity;
+              const rayGrad = ctx.createLinearGradient(n.x, n.y, n.x - 4, n.y - rayHeight);
+              rayGrad.addColorStop(0, `rgba(52, 211, 153, ${0.65 * intensity})`);
+              rayGrad.addColorStop(0.5, `rgba(6, 182, 212, ${0.45 * intensity})`);
+              rayGrad.addColorStop(0.85, `rgba(192, 132, 252, ${0.35 * intensity})`);
+              rayGrad.addColorStop(1, `rgba(236, 72, 153, 0.0)`);
+
+              ctx.fillStyle = rayGrad;
+              ctx.fillRect(n.x - 7, n.y - rayHeight, 14, rayHeight);
+            }
+          }
+          ctx.globalCompositeOperation = 'source-over';
+        }
+
+        // 4. DRAW DOPPLER RADAR SWEEP EFFECT (DURING RESEARCH SCAN)
+        if (radarSweepActive) {
+          radarSweepProgress += dt * 0.75;
+          if (radarSweepProgress > 1.0) {
+            radarSweepActive = false;
+          } else {
+            const startLng = -25.5;
+            const endLng = -12.0;
+            const currentLng = startLng + (endLng - startLng) * radarSweepProgress;
+
+            const topPt = map.project([currentLng, 67.2]);
+            const btmPt = map.project([currentLng, 63.0]);
+
+            const sweepGrad = ctx.createLinearGradient(topPt.x, 0, topPt.x - 120, 0);
+            sweepGrad.addColorStop(0, 'rgba(34, 211, 238, 0.65)');
+            sweepGrad.addColorStop(0.3, 'rgba(16, 185, 129, 0.35)');
+            sweepGrad.addColorStop(1, 'rgba(6, 182, 212, 0.0)');
+
+            ctx.fillStyle = sweepGrad;
+            ctx.fillRect(topPt.x - 120, 0, 120, canvas.height);
+
+            ctx.lineWidth = 2.5;
+            ctx.strokeStyle = '#22d3ee';
+            ctx.beginPath();
+            ctx.moveTo(topPt.x, 0);
+            ctx.lineTo(btmPt.x, canvas.height);
+            ctx.stroke();
+          }
+        }
+
+        ctx.restore();
+      }
+
+      // -------------------------------------------------------------
       // PLAY / PAUSE / TIME ENGINE
       // -------------------------------------------------------------
       function play() {
@@ -3506,7 +3950,6 @@
         isPlaying = true;
         updatePlayButtonUI(true);
 
-        // Tactile sonar chirp
         playSonarChirp();
 
         timerId = setInterval(() => {
@@ -3547,14 +3990,12 @@
 
       function nextHour() {
         pause();
-        const next = (currentStep + 1) % FORECAST_STEPS.length;
-        setHour(next);
+        setHour((currentStep + 1) % FORECAST_STEPS.length);
       }
 
       function prevHour() {
         pause();
-        const prev = (currentStep - 1 + FORECAST_STEPS.length) % FORECAST_STEPS.length;
-        setHour(prev);
+        setHour((currentStep - 1 + FORECAST_STEPS.length) % FORECAST_STEPS.length);
       }
 
       function setSpeed(ms) {
@@ -3583,11 +4024,9 @@
         isLooping = !isLooping;
         const btn = document.getElementById('btn-radar-loop');
         if (btn) {
-          if (isLooping) {
-            btn.className = 'px-2 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-mono text-[10px] font-bold flex items-center gap-1 transition';
-          } else {
-            btn.className = 'px-2 py-1 rounded-lg bg-slate-800 text-slate-400 border border-slate-700 font-mono text-[10px] flex items-center gap-1 transition';
-          }
+          btn.className = isLooping
+            ? 'px-2 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-mono text-[10px] font-bold flex items-center gap-1 transition'
+            : 'px-2 py-1 rounded-lg bg-slate-800 text-slate-400 border border-slate-700 font-mono text-[10px] flex items-center gap-1 transition';
         }
       }
 
@@ -3604,26 +4043,26 @@
           btn.title = playing ? 'Пауза' : 'Відтворення';
         }
         if (badge) {
-          badge.textContent = playing ? 'SCANNING' : 'PAUSED';
-          badge.className = playing 
-            ? 'px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[9px] font-bold border border-emerald-500/30 animate-pulse'
-            : 'px-1.5 py-0.2 rounded bg-slate-800 text-slate-400 font-mono text-[9px] border border-slate-700';
+          badge.innerHTML = playing
+            ? '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span><span>SCANNING</span>'
+            : '<span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span><span>PAUSED</span>';
+          badge.className = playing
+            ? 'px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-300 font-mono text-[9px] font-bold border border-emerald-500/30 flex items-center gap-1'
+            : 'px-1.5 py-0.2 rounded bg-slate-800 text-slate-400 font-mono text-[9px] border border-slate-700 flex items-center gap-1';
         }
       }
 
       // -------------------------------------------------------------
-      // SET HOUR (SMOOTH DOUBLE-BUFFERED CROSS-FADE + HUD SYNC)
+      // SET HOUR & HUD SYNCHRONIZATION
       // -------------------------------------------------------------
       function setHour(index) {
         if (index < 0 || index >= FORECAST_STEPS.length) return;
         currentStep = index;
         const step = FORECAST_STEPS[index];
 
-        // 1. Sync Slider position
         const slider = document.getElementById('radar-time-slider');
         if (slider) slider.value = index;
 
-        // 2. Sync Badges
         const timeBadge = document.getElementById('radar-time-badge');
         const kpBadge = document.getElementById('radar-kp-badge');
         const cloudBadge = document.getElementById('radar-cloud-badge');
@@ -3640,13 +4079,12 @@
           }
         }
         if (cloudBadge) {
-          const cloudTxt = (step.cloudAverage < 20) 
+          const cloudTxt = (step.cloudAverage < 20)
             ? `${step.cloudAverage}% (${currentLang === 'uk' ? 'Ясно' : 'Clear'})`
             : `${step.cloudAverage}% (${currentLang === 'uk' ? 'Хмарно' : 'Cloudy'})`;
           cloudBadge.textContent = `${currentLang === 'uk' ? 'Хмарність:' : 'Clouds:'} ${cloudTxt}`;
         }
 
-        // 3. Highlight Active Tick
         FORECAST_STEPS.forEach((_, i) => {
           const t = document.getElementById('radar-tick-' + i);
           if (t) {
@@ -3656,141 +4094,11 @@
           }
         });
 
-        // 4. Double-Buffered Canvas Cross-fade (Zero Flicker)
-        crossFadeBuffers(index);
-
-        // 5. Evaluate Smart Spotting HUD & Marker Beacons
         evaluateSpotterPois(step);
       }
 
-      function crossFadeBuffers(stepIndex) {
-        const cA = document.getElementById('radar-canvas-a');
-        const cB = document.getElementById('radar-canvas-b');
-        if (!cA || !cB) return;
-
-        const nextCanvas = (activeBuffer === 'A') ? cB : cA;
-        const currentCanvas = (activeBuffer === 'A') ? cA : cB;
-
-        drawForecastFrame(stepIndex, nextCanvas);
-
-        nextCanvas.style.opacity = '1';
-        currentCanvas.style.opacity = '0';
-
-        activeBuffer = (activeBuffer === 'A') ? 'B' : 'A';
-      }
-
-      function renderCurrentFrameImmediate() {
-        const activeCanvas = (activeBuffer === 'A') 
-          ? document.getElementById('radar-canvas-a')
-          : document.getElementById('radar-canvas-b');
-        if (activeCanvas) {
-          drawForecastFrame(currentStep, activeCanvas);
-        }
-      }
-
       // -------------------------------------------------------------
-      // METEOROLOGICAL 2D CANVAS DRAWING ENGINE (AURORA RIBBON & VOLUMETRIC CLOUDS)
-      // -------------------------------------------------------------
-      function drawForecastFrame(stepIndex, canvas) {
-        if (!canvas || typeof map === 'undefined' || !map) return;
-        const ctx = canvas.getContext('2d');
-        const dpr = window.devicePixelRatio || 1;
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        ctx.save();
-        ctx.scale(dpr, dpr);
-
-        const step = FORECAST_STEPS[stepIndex];
-        const kp = step.kp;
-
-        // A. DRAW CLOUD COVERAGE MASSES (VOLUMETRIC METEOROLOGICAL CONTOURS)
-        CLOUD_SECTORS.forEach(sec => {
-          const cloudPct = step.clouds[sec.id] || 30;
-          if (cloudPct <= 10) return; // Completely clear sky window
-
-          const centerPt = map.project(sec.center);
-          // Scale pixel radius with map zoom
-          const edgePt = map.project([sec.center[0] + 0.9, sec.center[1]]);
-          const radius = Math.max(30, Math.hypot(edgePt.x - centerPt.x, edgePt.y - centerPt.y));
-
-          const grad = ctx.createRadialGradient(centerPt.x, centerPt.y, radius * 0.1, centerPt.x, centerPt.y, radius);
-          const alpha = (cloudPct / 100) * 0.52;
-
-          grad.addColorStop(0, `rgba(215, 228, 245, ${alpha})`);
-          grad.addColorStop(0.55, `rgba(165, 185, 210, ${alpha * 0.65})`);
-          grad.addColorStop(1, `rgba(100, 125, 150, 0.0)`);
-
-          ctx.fillStyle = grad;
-          ctx.beginPath();
-          ctx.arc(centerPt.x, centerPt.y, radius, 0, Math.PI * 2);
-          ctx.fill();
-        });
-
-        // B. DRAW AURORA BOREALIS OVAL CURTAIN (LUMINESCENT SCREEN BLEND)
-        ctx.globalCompositeOperation = 'screen';
-
-        const southDip = (kp - 2.5) * 0.32;
-        const auroraPathNodes = [
-          [-24.8, 66.5 - southDip * 0.6],
-          [-22.2, 66.1 - southDip * 0.85],
-          [-18.6, 65.7 - southDip * 1.1],
-          [-15.2, 65.3 - southDip * 1.0],
-          [-12.8, 64.9 - southDip * 0.75]
-        ];
-
-        const screenNodes = auroraPathNodes.map(pt => map.project(pt));
-
-        if (screenNodes.length >= 3) {
-          const intensity = Math.min(1.0, (kp / 5.2));
-
-          // Layer 1: Wide Diffuse Atmospheric Glow
-          ctx.beginPath();
-          ctx.moveTo(screenNodes[0].x, screenNodes[0].y);
-          for (let i = 1; i < screenNodes.length - 1; i++) {
-            const xc = (screenNodes[i].x + screenNodes[i + 1].x) / 2;
-            const yc = (screenNodes[i].y + screenNodes[i + 1].y) / 2;
-            ctx.quadraticCurveTo(screenNodes[i].x, screenNodes[i].y, xc, yc);
-          }
-          ctx.lineTo(screenNodes[screenNodes.length - 1].x, screenNodes[screenNodes.length - 1].y);
-
-          ctx.lineWidth = 110;
-          ctx.strokeStyle = `rgba(16, 185, 129, ${0.35 * intensity})`;
-          ctx.lineCap = 'round';
-          ctx.filter = 'blur(18px)';
-          ctx.stroke();
-
-          // Layer 2: Core Luminous Emerald Plasma Ribbon
-          ctx.filter = 'blur(6px)';
-          ctx.lineWidth = 36;
-          ctx.strokeStyle = `rgba(52, 211, 153, ${0.75 * intensity})`;
-          ctx.stroke();
-
-          // Layer 3: High-Altitude Cyan & Violet Dancing Curtains
-          ctx.filter = 'blur(3px)';
-          ctx.lineWidth = 12;
-          ctx.strokeStyle = `rgba(6, 182, 212, ${0.85 * intensity})`;
-          ctx.stroke();
-
-          // Vertical ray streamers
-          ctx.filter = 'none';
-          for (let i = 0; i < screenNodes.length; i += 1) {
-            const sn = screenNodes[i];
-            const rayGrad = ctx.createLinearGradient(sn.x, sn.y, sn.x - 5, sn.y - 65 * intensity);
-            rayGrad.addColorStop(0, `rgba(52, 211, 153, ${0.5 * intensity})`);
-            rayGrad.addColorStop(0.5, `rgba(6, 182, 212, ${0.35 * intensity})`);
-            rayGrad.addColorStop(1, `rgba(192, 132, 252, 0.0)`);
-
-            ctx.fillStyle = rayGrad;
-            ctx.fillRect(sn.x - 8, sn.y - 70 * intensity, 16, 70 * intensity);
-          }
-        }
-
-        ctx.globalCompositeOperation = 'source-over';
-        ctx.restore();
-      }
-
-      // -------------------------------------------------------------
-      // SMART SPOTTING HUD (SPOT LOCATOR EVALUATION)
+      // SMART SPOTTING HUD (CLICK-TO-FLY 2D NAVIGATION)
       // -------------------------------------------------------------
       function evaluateSpotterPois(step) {
         const spotList = document.getElementById('radar-spotting-list');
@@ -3798,70 +4106,91 @@
         spotList.innerHTML = '';
 
         const activeClearSpots = [];
-
         SPOTTER_POIS.forEach(poi => {
-          const cloudPct = step.poiClouds[poi.id] || 35;
-          const isFavorable = (cloudPct < 25 && step.kp >= 3.0);
-
-          // Update MapLibre Marker Element Beacon
-          if (typeof activeMarkers !== 'undefined' && activeMarkers.length > 0) {
-            const marker = activeMarkers.find(m => m.getElement().getAttribute('data-id') === poi.id);
-            if (marker) {
-              const el = marker.getElement();
-              if (isFavorable) {
-                el.classList.add('aurora-spot-active');
-              } else {
-                el.classList.remove('aurora-spot-active');
-              }
-            }
-          }
-
-          if (isFavorable) {
-            activeClearSpots.push({
-              ...poi,
-              cloudPct,
-              kp: step.kp
-            });
+          const cloudPct = step.poiClouds[poi.id] ?? 50;
+          if (cloudPct <= 25) {
+            activeClearSpots.push({ ...poi, cloudPct });
           }
         });
 
         if (activeClearSpots.length === 0) {
-          spotList.innerHTML = `
-            <span class="text-[10px] text-amber-400 font-mono py-0.5">
-              ⚠️ ${currentLang === 'uk' ? 'Щільна хмарність. Просвіт прогнозується після 21:00 UTC.' : 'High cloud cover. Clearance window expected after 21:00 UTC.'}
-            </span>
-          `;
+          const emptySpan = document.createElement('span');
+          emptySpan.className = 'text-slate-500 text-[10px] italic';
+          emptySpan.textContent = (currentLang === 'uk')
+            ? 'Висока хмарність по всьому острову. Очікуйте розривів.'
+            : 'Overcast across sectors. Awaiting clearance.';
+          spotList.appendChild(emptySpan);
           return;
         }
 
         activeClearSpots.forEach(s => {
           const chip = document.createElement('button');
-          chip.className = 'group px-2.5 py-1 rounded-lg bg-emerald-950/70 hover:bg-emerald-900 border border-emerald-400/50 text-emerald-200 text-[10px] font-mono flex items-center gap-1.5 whitespace-nowrap shadow-md transition';
-          chip.title = `${currentLang === 'uk' ? 'Клікніть для польоту камери до' : 'Click to fly to'} ${s.name[currentLang] || s.name.en}`;
+          chip.className = 'group flex items-center space-x-1.5 px-2.5 py-1 rounded-lg bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-500/40 text-[10px] font-mono transition shrink-0 shadow-sm';
           chip.onclick = () => {
-            if (typeof map !== 'undefined' && map) {
-              map.flyTo({
-                center: [s.lng, s.lat],
-                zoom: 12,
-                pitch: 58,
-                bearing: 20,
-                speed: 1.2,
-                curve: 1.4,
-                essential: true
-              });
-            }
+            flyToSpot(s.lng, s.lat);
           };
 
           chip.innerHTML = `
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
             <span class="font-bold text-white group-hover:text-emerald-300 transition">${s.name[currentLang] || s.name.en}</span>
             <span class="px-1 py-0.2 rounded bg-emerald-500/20 text-emerald-300 font-bold">${s.cloudPct}% ${currentLang === 'uk' ? 'хмар' : 'clouds'}</span>
-            <span class="text-slate-400 text-[9px]">(${s.bestWindow})</span>
           `;
           spotList.appendChild(chip);
         });
       }
 
+      function flyToSpot(lng, lat) {
+        if (typeof map !== 'undefined' && map) {
+          map.flyTo({
+            center: [lng, lat],
+            zoom: 9.5,
+            pitch: 0,
+            bearing: 0,
+            duration: 1200,
+            essential: true
+          });
+        }
+      }
+
+      // -------------------------------------------------------------
+      // LAYER TOGGLE CONTROLS
+      // -------------------------------------------------------------
+      function toggleClouds() {
+        showClouds = !showClouds;
+        const btn = document.getElementById('btn-toggle-clouds');
+        if (btn) {
+          btn.className = showClouds
+            ? 'px-2 py-0.5 rounded-lg bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 font-mono text-[9px] font-bold transition'
+            : 'px-2 py-0.5 rounded-lg bg-slate-800 text-slate-400 border border-slate-700 font-mono text-[9px] transition';
+          btn.textContent = showClouds ? '☁️ Хмари: УВІМК' : '☁️ Хмари: ВИМК';
+        }
+      }
+
+      function toggleAurora() {
+        showAurora = !showAurora;
+        const btn = document.getElementById('btn-toggle-aurora');
+        if (btn) {
+          btn.className = showAurora
+            ? 'px-2 py-0.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-mono text-[9px] font-bold transition'
+            : 'px-2 py-0.5 rounded-lg bg-slate-800 text-slate-400 border border-slate-700 font-mono text-[9px] transition';
+          btn.textContent = showAurora ? '🌌 Аврора: УВІМК' : '🌌 Аврора: ВИМК';
+        }
+      }
+
+      function toggleWind() {
+        showWind = !showWind;
+        const btn = document.getElementById('btn-toggle-wind');
+        if (btn) {
+          btn.className = showWind
+            ? 'px-2 py-0.5 rounded-lg bg-blue-500/20 text-blue-300 border border-blue-500/40 font-mono text-[9px] font-bold transition'
+            : 'px-2 py-0.5 rounded-lg bg-slate-800 text-slate-400 border border-slate-700 font-mono text-[9px] transition';
+          btn.textContent = showWind ? '💨 Вітер: УВІМК' : '💨 Вітер: ВИМК';
+        }
+      }
+
+      // -------------------------------------------------------------
+      // SOUND FX (SYNTHETIC RADAR SONAR PING)
+      // -------------------------------------------------------------
       function playSonarChirp() {
         try {
           if (typeof initWebAudio === 'function') initWebAudio();
@@ -3871,14 +4200,25 @@
             const gain = webAudioCtx.createGain();
             osc.type = 'sine';
             osc.frequency.setValueAtTime(1240, webAudioCtx.currentTime);
-            gain.gain.setValueAtTime(0.018, webAudioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.0001, webAudioCtx.currentTime + 0.08);
+            gain.gain.setValueAtTime(0.02, webAudioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.0001, webAudioCtx.currentTime + 0.09);
             osc.connect(gain);
             gain.connect(webAudioCtx.destination);
             osc.start();
-            osc.stop(webAudioCtx.currentTime + 0.08);
+            osc.stop(webAudioCtx.currentTime + 0.09);
           }
         } catch (e) {}
+      }
+
+      function showToastNotification(msg) {
+        const toast = document.createElement('div');
+        toast.className = 'fixed bottom-24 right-5 z-50 px-4 py-2.5 rounded-xl bg-slate-900/95 border border-cyan-500/50 text-cyan-200 text-xs font-mono shadow-2xl backdrop-blur-md transition-all duration-300';
+        toast.textContent = msg;
+        document.body.appendChild(toast);
+        setTimeout(() => {
+          toast.style.opacity = '0';
+          setTimeout(() => toast.remove(), 400);
+        }, 3500);
       }
 
       // -------------------------------------------------------------
@@ -3900,26 +4240,32 @@
           if (mapBtn) {
             mapBtn.className = 'px-2.5 py-1 rounded-lg bg-teal-500/40 text-teal-200 font-mono text-[10px] font-black border border-teal-400 flex items-center gap-1 transition shadow-md shadow-teal-500/30';
           }
-          resizeCanvases();
+
+          // Force 2D Plan view for synoptic clarity
+          if (typeof map !== 'undefined' && map) {
+            map.easeTo({ pitch: 0, bearing: 0, duration: 600 });
+            is3DPitch = false;
+            const btnPitch = document.getElementById('btn-pitch-toggle');
+            const lblPitch = document.getElementById('lbl-pitch-val');
+            if (lblPitch) lblPitch.textContent = '2D План';
+            if (btnPitch) {
+              btnPitch.className = 'px-2 py-1 rounded-lg bg-slate-800 text-slate-300 font-mono text-[10px] border border-slate-700 flex items-center gap-1 transition';
+            }
+          }
+
+          resizeCanvas();
           setHour(currentStep);
-          // Auto start on first open
+          startAnimationLoop();
           play();
         } else {
           pause();
+          stopAnimationLoop();
           panel.classList.add('hidden');
           container.classList.add('hidden');
           if (mapBtn) {
             mapBtn.className = 'px-2.5 py-1 rounded-lg bg-teal-500/20 hover:bg-teal-500/35 text-teal-300 font-mono text-[10px] font-bold border border-teal-500/40 flex items-center gap-1 transition shadow-sm shadow-teal-500/10';
           }
-          // Remove beacon markers
-          if (typeof activeMarkers !== 'undefined') {
-            activeMarkers.forEach(m => m.getElement().classList.remove('aurora-spot-active'));
-          }
         }
-      }
-
-      function preloadFrames() {
-        init();
       }
 
       return {
@@ -3935,7 +4281,11 @@
         toggleLoop,
         onSliderInput,
         togglePanel,
-        preloadFrames
+        toggleClouds,
+        toggleAurora,
+        toggleWind,
+        setResearchInterval: (m) => ResearchEngine.setIntervalMinutes(m),
+        forceResearch: () => ResearchEngine.triggerResearch(false)
       };
     })();
 

@@ -13,70 +13,76 @@
     }
     @keyframes hudScan {
       0% { top: 0%; opacity: 0.8; }
-      50% { opacity: 0.4; }
+      50% { opacity: 0.3; }
       100% { top: 100%; opacity: 0.8; }
     }
-    @keyframes auroraShift {
-      0% { filter: hue-rotate(0deg); }
-      50% { filter: hue-rotate(45deg); }
-      100% { filter: hue-rotate(0deg); }
+    @keyframes pulseGlow {
+      0%, 100% { filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.4)); }
+      50% { filter: drop-shadow(0 0 24px rgba(6, 182, 212, 0.85)); }
     }
-    .hud-line {
+    .hud-scanline {
       position: absolute;
-      left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.8), transparent);
-      animation: hudScan 4s linear infinite;
+      left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.75), transparent);
+      animation: hudScan 3.5s linear infinite;
+      pointer-events: none;
     }
     .concept-card {
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(8, 13, 24, 0.95) 100%);
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(8, 13, 24, 0.98) 100%);
       border: 1px solid rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(14px);
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .concept-card:hover {
       border-color: rgba(6, 182, 212, 0.5);
-      transform: translateY(-2px);
-      box-shadow: 0 12px 30px -8px rgba(6, 182, 212, 0.25);
+      transform: translateY(-3px);
+      box-shadow: 0 14px 35px -8px rgba(6, 182, 212, 0.3);
     }
     .concept-card.active {
       border-color: #06b6d4;
-      background: linear-gradient(135deg, rgba(6, 182, 212, 0.15) 0%, rgba(8, 13, 24, 0.98) 100%);
-      box-shadow: 0 0 25px rgba(6, 182, 212, 0.35);
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.18) 0%, rgba(8, 13, 24, 0.98) 100%);
+      box-shadow: 0 0 28px rgba(6, 182, 212, 0.4);
     }
     /* Biome Theme Overrides */
     body.theme-glacier {
-      background: #020712;
+      background: #020712 !important;
       --accent: #38bdf8;
     }
     body.theme-obsidian {
-      background: #0d0604;
+      background: #0f0502 !important;
       --accent: #f97316;
     }
     body.theme-moss {
-      background: #040d08;
+      background: #020d06 !important;
       --accent: #10b981;
+    }
+    body.theme-sulfur {
+      background: #110e02 !important;
+      --accent: #eab308;
     }
   </style>
 </head>
 <body class="bg-[#050811] text-[#f8fafc] font-sans min-h-screen overflow-x-hidden selection:bg-cyan-500 selection:text-black">
 
   <!-- TOP BAR -->
-  <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur-xl sticky top-0 z-40 px-4 md:px-8 py-3 flex items-center justify-between">
+  <header class="border-b border-slate-800 bg-slate-950/85 backdrop-blur-xl sticky top-0 z-50 px-4 md:px-8 py-3 flex items-center justify-between">
     <div class="flex items-center space-x-3">
-      <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-emerald-500 flex items-center justify-center text-lg shadow-lg shadow-cyan-500/20">
+      <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-emerald-500 flex items-center justify-center text-lg shadow-lg shadow-cyan-500/25">
         🚀
       </div>
       <div>
         <div class="flex items-center gap-2">
-          <h1 class="text-sm md:text-base font-black tracking-tight text-white">ICELAND VISION LAB</h1>
-          <span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-mono text-[10px] font-bold border border-cyan-500/30">10 КОНЦЕПТІВ МАЙБУТНЬОГО</span>
+          <h1 class="text-sm md:text-base font-black tracking-tight text-white flex items-center gap-2">
+            <span>ICELAND VISION LAB</span>
+            <span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-mono text-[10px] font-bold border border-cyan-500/30">10 ЖИВИХ КОНЦЕПТІВ • 60 FPS</span>
+          </h1>
         </div>
-        <p class="text-[11px] text-slate-400">Інтерактивна лабораторія надсучасних інтерфейсних парадигм для розумного аудіогіда</p>
+        <p class="text-[11px] text-slate-400">Інтерактивна лабораторія надсучасних інтерфейсних парадигм із реальними фізичними симуляціями</p>
       </div>
     </div>
 
     <!-- Navigation Back -->
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-2.5">
       <a href="index.html" class="px-3.5 py-1.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold text-xs flex items-center gap-1.5 shadow-md shadow-cyan-600/30 transition">
         <span>🗺️</span> <span>Повернутися до 3D-Карти</span>
       </a>
@@ -87,214 +93,110 @@
   </header>
 
   <!-- MAIN INTERACTIVE STUDIO -->
-  <main class="max-w-7xl mx-auto p-4 md:p-8 space-y-8">
+  <main class="max-w-7xl mx-auto p-4 md:p-8 space-y-6">
 
     <!-- HERO INTRO BANNER -->
-    <section class="relative rounded-3xl p-6 md:p-10 overflow-hidden border border-cyan-500/30 bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950/40 shadow-2xl">
-      <div class="relative z-10 max-w-3xl space-y-4">
+    <section class="relative rounded-3xl p-6 md:p-8 overflow-hidden border border-cyan-500/30 bg-gradient-to-br from-slate-950 via-slate-900 to-cyan-950/40 shadow-2xl">
+      <div class="relative z-10 max-w-3xl space-y-3">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 font-mono text-xs">
-          <span>⚡</span> <span>R&D EXPERIMENTAL LAB • BEYOND CONVENTIONAL WEB</span>
+          <span>⚡</span> <span>R&D EXPERIMENTAL WORKSHOP • ALL 10 CONCEPTS FULLY INTERACTIVE</span>
         </div>
-        <h2 class="text-2xl md:text-4xl font-black text-white leading-tight">
-          10 Інноваційних Концепцій, які Руйнують Уявлення про Туристичні Сайти
+        <h2 class="text-2xl md:text-3xl font-black text-white leading-tight">
+          10 Інноваційних Концептів Інтерфейсу, які Руйнують Межі Звичайних Сайтів
         </h2>
         <p class="text-xs md:text-sm text-slate-300 leading-relaxed">
-          Традиційні веб-сайти з пласкими списками та кнопками відійшли в минуле. Для експедицій Ісландією потрібен досвід кінематографічного занурення: орбітальні гіперстрибки, голографічні вітрові HUD-дисплеї, живі симулятори стихій та аудіо-синестезія рельєфу. Випробуйте кожен концепт нижче в живому демо-режимі.
+          Кожен концепт нижче — це не просто текст чи статична картинка, а <b>живий, працюючий інтерактивний модуль</b> з власною фізикою часток, Web Audio звуковими ефектами, сенсорами та тактильними контролерами. Оберіть будь-який концепт і випробуйте його наживо!
         </p>
-
-        <div class="flex flex-wrap items-center gap-3 pt-2">
-          <button onclick="activateConcept(0)" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold text-xs flex items-center gap-2 shadow-lg shadow-cyan-500/30 transition">
-            <span>✨</span> <span>Запустити Орбітальний Спуск (Concept 1)</span>
-          </button>
-          <button onclick="playAllFXChime()" class="px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition">
-            <span>🔊</span> <span>Звуковий синестезійний тест</span>
-          </button>
-        </div>
       </div>
 
-      <!-- Holographic Background Elements -->
+      <!-- Background Glow -->
       <div class="absolute -right-16 -top-16 w-80 h-80 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none"></div>
-      <div class="absolute right-10 bottom-6 opacity-30 hidden lg:block">
-        <span class="text-9xl font-mono font-black text-cyan-400/20 select-none">2035</span>
-      </div>
     </section>
 
-    <!-- LIVE DEMO STAGE (INTERACTIVE VIEWPORT) -->
-    <section class="rounded-3xl border border-slate-800 bg-slate-950 overflow-hidden shadow-2xl relative">
-      <div class="p-4 border-b border-slate-800 bg-slate-900/80 flex flex-wrap items-center justify-between gap-3">
-        <div class="flex items-center space-x-2">
-          <span class="w-3 h-3 rounded-full bg-cyan-400 animate-ping"></span>
-          <span class="text-xs font-mono uppercase tracking-wider text-slate-400 font-bold">АКТИВНЕ ДЕМО:</span>
-          <span id="demo-badge-title" class="text-xs font-bold text-cyan-300">01. Орбітальний Гіперстрибок (Orbital Re-Entry)</span>
+    <!-- LIVE DEMO STAGE (INTERACTIVE VIEWPORT & CONTROLS) -->
+    <section class="rounded-3xl border border-slate-800 bg-slate-950 overflow-hidden shadow-2xl relative flex flex-col">
+      <!-- Stage Header Bar -->
+      <div class="p-3.5 md:p-4 border-b border-slate-800 bg-slate-900/90 flex flex-wrap items-center justify-between gap-3 shrink-0">
+        <div class="flex items-center space-x-2.5">
+          <span class="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping"></span>
+          <span class="text-xs font-mono uppercase tracking-wider text-slate-400 font-bold">АКТИВНИЙ СТЕНД:</span>
+          <span id="demo-badge-title" class="text-xs md:text-sm font-bold text-cyan-300">01. Орбітальний Гіперстрибок</span>
         </div>
+        
+        <!-- Live FPS and Audio Status -->
         <div class="flex items-center gap-2">
-          <button onclick="triggerActiveDemoAction()" id="btn-demo-action" class="px-3 py-1 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/40 text-cyan-300 text-xs font-bold border border-cyan-500/40 flex items-center gap-1 transition">
-            <span>▶</span> <span id="btn-demo-action-text">Запустити дію</span>
+          <span id="demo-telemetry-badge" class="px-2.5 py-1 rounded-lg bg-slate-950 border border-slate-800 text-emerald-400 font-mono text-[10px] font-bold">
+            60 FPS • WebGL/Canvas Active
+          </span>
+          <button onclick="toggleAudioMute()" id="btn-audio-mute" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-cyan-300 font-mono text-[10px] font-bold border border-slate-700 flex items-center gap-1 transition">
+            <span>🔊</span> <span id="lbl-audio-mute">ЗВУК УВІМК</span>
           </button>
-          <span id="demo-telemetry-badge" class="px-2 py-0.5 rounded bg-slate-800 text-slate-400 font-mono text-[10px]">FPS: 60 • WebGL Active</span>
         </div>
       </div>
 
-      <!-- STAGE CANVAS & INTERACTIVE DISPLAY -->
-      <div class="relative w-full h-[400px] md:h-[480px] bg-black overflow-hidden flex items-center justify-center" id="demo-stage-container">
-        <canvas id="stage-canvas" class="absolute inset-0 w-full h-full"></canvas>
-        <div class="hud-line pointer-events-none"></div>
+      <!-- STAGE CANVAS & INTERACTIVE RENDER SURFACE -->
+      <div class="relative w-full h-[420px] md:h-[500px] bg-black overflow-hidden flex items-center justify-center select-none" id="demo-stage-container">
+        <!-- Interactive 2D/3D Canvas -->
+        <canvas id="stage-canvas" class="absolute inset-0 w-full h-full cursor-crosshair"></canvas>
+        <div class="hud-scanline"></div>
 
-        <!-- Dynamic Overlay Container -->
-        <div id="stage-overlay" class="relative z-20 pointer-events-none flex flex-col items-center justify-center text-center p-6 space-y-3">
-          <div class="text-4xl md:text-6xl" id="stage-icon">🛸</div>
-          <h3 class="text-xl md:text-3xl font-black text-white" id="stage-title">Орбітальний Гіперстрибок</h3>
-          <p class="text-xs md:text-sm text-cyan-300 font-mono max-w-lg" id="stage-desc">
-            Натисніть кнопку нижче для симуляції спуску з орбіти Землі в каньйон Ґулльфосс зі звуковим бар'єром.
-          </p>
-          <div id="stage-telemetry" class="pt-2 font-mono text-[11px] text-emerald-400 flex items-center gap-4">
-            <span>ALTITUDE: <b id="val-alt">450,000 KM</b></span>
-            <span>MACH: <b id="val-mach">14.2</b></span>
-            <span>TARGET: <b id="val-target">ÞINGVELLIR</b></span>
+        <!-- Dynamic Overlay / HUD for Current Concept -->
+        <div id="stage-overlay" class="relative z-10 w-full h-full pointer-events-none p-4 md:p-6 flex flex-col justify-between">
+          <!-- Top Telemetry Row -->
+          <div class="flex items-center justify-between font-mono text-[11px] text-cyan-300">
+            <div id="stage-top-left" class="space-y-0.5">
+              <!-- Injected by Concept -->
+            </div>
+            <div id="stage-top-right" class="text-right space-y-0.5">
+              <!-- Injected by Concept -->
+            </div>
+          </div>
+
+          <!-- Center Dynamic Reticle / Hologram Target -->
+          <div id="stage-center-hud" class="flex flex-col items-center justify-center text-center space-y-2 pointer-events-none">
+            <!-- Center graphics/labels -->
+          </div>
+
+          <!-- Bottom Telemetry Readout -->
+          <div id="stage-bottom-hud" class="flex flex-wrap items-center justify-between font-mono text-[11px] text-slate-300 border-t border-cyan-500/20 pt-2 bg-slate-950/70 backdrop-blur-md px-3 py-1.5 rounded-xl pointer-events-auto">
+            <!-- Bottom stats -->
           </div>
         </div>
       </div>
+
+      <!-- CONCEPT DEDICATED INTERACTIVE CONTROLLER TRAY (BOTTOM OF STAGE) -->
+      <div id="concept-controls-tray" class="p-3 md:p-4 border-t border-slate-800 bg-slate-900/95 flex flex-wrap items-center justify-between gap-3 text-xs">
+        <!-- Dynamically populated with buttons, sliders, and controls tailored to the active concept -->
+      </div>
     </section>
 
-    <!-- 10 CONCEPTS GRID -->
-    <section class="space-y-4">
-      <div class="flex items-center justify-between">
+    <!-- 10 CONCEPTS CATALOG GRID -->
+    <section class="space-y-4 pt-2">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-2">
         <div>
           <h3 class="text-lg md:text-xl font-black text-white flex items-center gap-2">
-            <span>Каталог 10 Концепцій</span>
-            <span class="text-xs font-normal text-slate-400">Оберіть концепт для запуску на інтерактивному стенді</span>
+            <span>Каталог 10 Інноваційних Архітектур</span>
+            <span class="text-xs font-normal text-slate-400">• Клікніть на будь-яку картку для перемикання стенду</span>
           </h3>
         </div>
-        <span class="text-xs font-mono text-cyan-400">10 Готових Архітектур</span>
+        <span class="text-xs font-mono text-cyan-400 font-bold">10 З 10 ПОВНІСТЮ ІНТЕРАКТИВНІ</span>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="concepts-grid">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-3.5" id="concepts-grid">
         <!-- Rendered via JavaScript -->
       </div>
     </section>
 
   </main>
 
-  <!-- MASTER LOGIC -->
+  <!-- MASTER SCRIPT: 10 COMPLETE LIVE SIMULATION ENGINES -->
   <script>
-    const CONCEPTS = [
-      {
-        id: "orbital-reentry",
-        num: "01",
-        title: "Орбітальний Гіперстрибок (Orbital Re-Entry)",
-        icon: "🛸",
-        badge: "Deep Space Dive",
-        shortDesc: "Спуск із космосу прямо в каньйон із переходом надзвукового бар'єра, гіперпросторовими лініями та симуляцією висоти.",
-        fullDesc: "Сайт не відкривається нудною сторінкою: ви перебуваєте на орбіті на висоті 450 000 км, бачите всю планету та кільце Аврори, після чого камера на надзвуковій швидкості пронизує хмари і приземляється точно на потрібний POI.",
-        actionText: "Здійснити Гіперстрибок",
-        telemetry: { alt: "450,000 KM", mach: "14.2", target: "GULLFOSS" }
-      },
-      {
-        id: "cyber-cockpit",
-        num: "02",
-        title: "Голографічний Вітровий HUD Cybertruck 2035",
-        icon: "🛡️",
-        badge: "AR Windshield",
-        shortDesc: "Екран як лобове скло арктичного всюдихода з векторними зеленими/ціановими лініями, ризиком вітру та нахилом кузова.",
-        fullDesc: "Користувач відчуває себе всередині броньованого авто майбутнього: на вітрове скло в реальному часі проєктуються кути нахилу, пориви вітру SafeTravel, дистанція до краю лави та приціл на гейзери.",
-        actionText: "Активувати Тактичний HUD",
-        telemetry: { alt: "12 M (Ground)", mach: "0.08", target: "KATLA VOLCANO" }
-      },
-      {
-        id: "synesthesia-sound",
-        num: "03",
-        title: "Аудіо-Кінетична Синестезія Рельєфу",
-        icon: "🔊",
-        badge: "Sound Sculpting",
-        shortDesc: "Звуки стихії формують геометрію: гуркіт водоспаду фізично деформує 3D-сітку ландшафту та хвилі частинок.",
-        fullDesc: "Інтерфейс, у якому звук та зір нероздільні: голос гіда, гул підземної магми та шум вітру змушують вібрувати контури гір через Web Audio AnalyserNode в режимі реального часу.",
-        actionText: "Запустити Звукову Деформацію",
-        telemetry: { alt: "850 M", mach: "0.0", target: "SKÓGAFOSS" }
-      },
-      {
-        id: "saga-chronosphere",
-        num: "04",
-        title: "Хроносфера Саг: Портал Часу (930 → 1783 → 2026)",
-        icon: "⏳",
-        badge: "Temporal Lens",
-        shortDesc: "Часовий слайдер перемикає століття: від сучасних шосе до попелу Лакі 1783 року та хуторів вікінгів доби заселення.",
-        fullDesc: "Переміщуючи важіль часу, користувач стирає асфальт і мотелі, бачачи перед собою криваво-червоний туман катастрофи Лакі або драккари та вогнища Альтингу в X столітті.",
-        actionText: "Переміститися в 930 рік",
-        telemetry: { alt: "115 M", mach: "TIME WARP", target: "ÞINGVELLIR 930 AD" }
-      },
-      {
-        id: "shaman-elements",
-        num: "05",
-        title: "Шаманський Симулятор Стихій (Live Weather Physics)",
-        icon: "❄️",
-        badge: "Live Particle Physics",
-        shortDesc: "Фізичний рушій заметілі, лавового свічення та рухомих шлейфів Аврори на основі реальних даних метеостанцій.",
-        fullDesc: "Якщо у Віку зараз шторм 20 м/с, на вашому екрані миттєво здіймається реальна заметіль із частинками льоду, що заносить дорогу снігом та обмерзає по краях вікна.",
-        actionText: "Зімітувати Буран та Аврору",
-        telemetry: { alt: "250 M", mach: "WIND 24 M/S", target: "REYNISFJARA" }
-      },
-      {
-        id: "icesar-tactical",
-        num: "06",
-        title: "Тактичний Центр Пошуку та Рятування (ICE-SAR Grid)",
-        icon: "📡",
-        badge: "SAR Command Grid",
-        shortDesc: "Військово-рятувальна консоль із тепловізійними палітрами FLIR, дронами над розломами та маяками безпеки.",
-        fullDesc: "Концепт для тих, хто вимагає граничного професіоналізму: тепловізори розпізнають тріщини в льодовиках, а рятувальні дрони передають відео з ущелин у прямому ефірі.",
-        actionText: "Увімкнути Тепловізор FLIR",
-        telemetry: { alt: "3,200 M (Drone)", mach: "0.2", target: "VATNAJÖKULL CREVASSE" }
-      },
-      {
-        id: "biome-metamorphism",
-        num: "07",
-        title: "Біомний Метаморфізм Інтерфейсу (Ice / Basalt / Moss)",
-        icon: "💎",
-        badge: "Morphing Materials",
-        shortDesc: "Кнопки з льоду тріскаються при кліку, обсидіан світиться тріщинами магми, а мох поглинає звук.",
-        fullDesc: "Матеріали інтерфейсу живі: при наближенні до льодовиків вікна покриваються памороззю, біля вулканів лава пропікає рамки, а в зелених каньйонах екран дихає парою.",
-        actionText: "Змінити Біом Матеріалу",
-        telemetry: { alt: "40 M", mach: "0.0", target: "ELDHRAUN MOSS" }
-      },
-      {
-        id: "binaural-telepathy",
-        num: "08",
-        title: "Бінауральний 3D Аудіо-Купол (Spatial Telepathy)",
-        icon: "🎧",
-        badge: "Binaural 360°",
-        shortDesc: "Повний 360-градусний слуховий простір: поверніть камеру — і шепіт саги лунає з печери зліва, а річка реве праворуч.",
-        fullDesc: "Звуковий купол відтворює реальне акустичне середовище печер та базальтових розломів з урахуванням ехолокації та реверберації субарктичного повітря.",
-        actionText: "Тестувати Бінауральний 3D Звук",
-        telemetry: { alt: "15 M", mach: "0.0", target: "GLJÚFRABÚI CAVE" }
-      },
-      {
-        id: "neuro-viking-holo",
-        num: "09",
-        title: "Нейро-Голограма Штурмана Кáрі у 3D",
-        icon: "🧙‍♂️",
-        badge: "3D Hologram Avatar",
-        shortDesc: "Жива тривимірна голограма досвідченого вікінга-рейнджера, яка реагує на голос і жести водія.",
-        fullDesc: "Замість текстових ботів перед вами стоїть об'ємна проєкція Кáрі у високотехнологічному спорядженні, яка рукою вказує небезпечні ділянки на трасі та дає оперативні поради.",
-        actionText: "Викликати Голограму Кáрі",
-        telemetry: { alt: "COCKPIT HUD", mach: "ACTIVE", target: "PILOT KÁRI" }
-      },
-      {
-        id: "fpv-drone-flyover",
-        num: "10",
-        title: "Безконтактний FPV-Дрон Політ крізь Каньйони",
-        icon: "⚡",
-        badge: "Cinematic FPV",
-        shortDesc: "Кінематографічний політ на висоті 2 метрів над водоспадом та крізь арку Дірхолей із фізикою перевантажень.",
-        fullDesc: "Режим повного занурення: натисніть одну кнопку, відкиньтеся на спинку крісла і спостерігайте за шаленим прольотом крізь базальтові арки з фізичним креном камери.",
-        actionText: "Запустити FPV-Проліт",
-        telemetry: { alt: "18 M", mach: "180 KM/H", target: "DYRHÓLAEY ARCH" }
-      }
-    ];
-
     let currentConceptIndex = 0;
     let canvasAnimationId = null;
     let audioCtx = null;
+    let isSoundMuted = false;
 
-    // Web Audio Synthesizer
+    // Web Audio Synthesizer Engine
     function initAudio() {
       if (!audioCtx) {
         const AudioContext = window.AudioContext || window.webkitAudioContext;
@@ -305,159 +207,936 @@
       }
     }
 
-    function playWarpSound() {
-      initAudio();
+    function toggleAudioMute() {
+      isSoundMuted = !isSoundMuted;
+      const lbl = document.getElementById('lbl-audio-mute');
+      if (lbl) lbl.textContent = isSoundMuted ? 'ЗВУК ВИМК' : 'ЗВУК УВІМК';
+    }
+
+    function playTone(freq, type = 'sine', duration = 0.25, gainVal = 0.05) {
+      if (isSoundMuted) return;
       try {
+        initAudio();
         const osc = audioCtx.createOscillator();
         const gain = audioCtx.createGain();
-        osc.type = 'sawtooth';
-        osc.frequency.setValueAtTime(80, audioCtx.currentTime);
-        osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 1.2);
-        osc.frequency.exponentialRampToValueAtTime(110, audioCtx.currentTime + 2.5);
-        gain.gain.setValueAtTime(0.01, audioCtx.currentTime);
-        gain.gain.linearRampToValueAtTime(0.12, audioCtx.currentTime + 0.8);
-        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 2.5);
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(gainVal, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
         osc.connect(gain);
         gain.connect(audioCtx.destination);
         osc.start();
-        osc.stop(audioCtx.currentTime + 2.5);
+        osc.stop(audioCtx.currentTime + duration);
       } catch (e) {}
     }
 
-    function playAllFXChime() {
-      initAudio();
+    function playSonicBoom() {
+      if (isSoundMuted) return;
       try {
-        [220, 330, 440, 660, 880].forEach((freq, idx) => {
-          const osc = audioCtx.createOscillator();
-          const gain = audioCtx.createGain();
-          osc.type = 'sine';
-          osc.frequency.setValueAtTime(freq, audioCtx.currentTime + idx * 0.12);
-          gain.gain.setValueAtTime(0.05, audioCtx.currentTime + idx * 0.12);
-          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + idx * 0.12 + 0.8);
-          osc.connect(gain);
-          gain.connect(audioCtx.destination);
-          osc.start(audioCtx.currentTime + idx * 0.12);
-          osc.stop(audioCtx.currentTime + idx * 0.12 + 0.8);
-        });
+        initAudio();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(320, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(45, audioCtx.currentTime + 1.2);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.2);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 1.2);
       } catch (e) {}
     }
 
-    // Canvas Visualizers
-    function startCanvasSimulation(conceptId) {
+    // ==========================================
+    // 10 CONCEPTS SPECIFICATION & DATA
+    // ==========================================
+    const CONCEPTS = [
+      {
+        id: "orbital-reentry",
+        num: "01",
+        title: "Орбітальний Гіперстрибок (Orbital Re-Entry)",
+        icon: "🛸",
+        badge: "3D Deep Space Dive",
+        shortDesc: "Спуск із космосу 450,000 км прямо в каньйон із переходом надзвукового бар'єра та плазмовим слідом.",
+        fullDesc: "Сайт не відкривається пласкою сторінкою: ви перебуваєте на орбіті на висоті 450 000 км, бачите всю планету та кільце Аврори, після чого камера на надзвуковій швидкості пронизує хмари і приземляється точно на потрібний POI.",
+        initControls: renderOrbitalControls
+      },
+      {
+        id: "cyber-cockpit",
+        num: "02",
+        title: "Голографічний Вітровий HUD Cybertruck 2035",
+        icon: "🛡️",
+        badge: "AR Windshield & Gyro",
+        shortDesc: "Лобове скло арктичного всюдихода з живим гіроскопом нахилу, вектором вітру та FLIR тепловізором.",
+        fullDesc: "Лобове скло суперджипа в реальному часі проектує авіаційний авіагоризонт, бічний зсув вітру 18.4 м/с, статус блокувань 4L та інфрачервоне тепловізійне сканування ландшафту.",
+        initControls: renderCockpitControls
+      },
+      {
+        id: "synesthesia-sound",
+        num: "03",
+        title: "Аудіо-Кінетична Синестезія Рельєфу",
+        icon: "🔊",
+        badge: "Sound-Sculpting Mesh",
+        shortDesc: "Звуки стихії фізично деформують 3D-сітку рельєфу Ісландії через живий FFT частотний аналізатор.",
+        fullDesc: "Звук і геометрія єдині: гуркіт водоспаду, потріскування льодовика або ваш власний голос через мікрофон у реальному часі деформують 3D-гори на екрані.",
+        initControls: renderSynesthesiaControls
+      },
+      {
+        id: "saga-chronosphere",
+        num: "04",
+        title: "Хроносфера Саг: Портал Часу (930 → 1783 → 2026)",
+        icon: "⏳",
+        badge: "Temporal Lens Slider",
+        shortDesc: "Інтерактивний важіль часу: від доби вікінгів (930 р.) та попелу вулкана Лакі (1783 р.) до сучасного шосе.",
+        fullDesc: "Переміщуйте часовий регулятор і спостерігайте, як стирається сучасний асфальт, небо затягує кривавий попіл виверження Лакі або спалахують вогнища Альтингу доби вікінгів.",
+        initControls: renderChronosphereControls
+      },
+      {
+        id: "shaman-elements",
+        num: "05",
+        title: "Шаманський Симулятор Стихій (Live Physics)",
+        icon: "❄️",
+        badge: "1,000 Particle Physics",
+        shortDesc: "Фізичний рушій заметілі 28 м/с, плазмових шлейфів Аврори, лавових фонтанів та океанічного туману.",
+        fullDesc: "Реальний симулятор ісландських стихій: перемикайте режими полярної хуртовини, північного сяйва, розбризкування магми або густого туману з регулюванням швидкості вітру.",
+        initControls: renderShamanControls
+      },
+      {
+        id: "icesar-tactical",
+        num: "06",
+        title: "Тактичний Центр Пошуку та Рятування (ICE-SAR Grid)",
+        icon: "📡",
+        badge: "FLIR Thermal & SAR Drone",
+        shortDesc: "Військово-рятувальна консоль із тепловізійними палітрами, дроном розвідки тріщин та SOS-пеленгатором.",
+        fullDesc: "Консоль полярних рятувальників: тепловізор FLIR (Ironbow / White-Hot), керування розвідувальним дроном над льодовиковими розломами та пеленгація маяків 112.",
+        initControls: renderIceSarControls
+      },
+      {
+        id: "biome-metamorphism",
+        num: "07",
+        title: "Біомний Метаморфізм Інтерфейсу (Living Minerals)",
+        icon: "💎",
+        badge: "Tactile Geological FX",
+        shortDesc: "Кнопки з льоду тріскаються з хрускотом, обсидіан розжарюється лавою, а мох поглинає звук.",
+        fullDesc: "Геологічні породи оживають у ваших руках: натискайте на крижані кристали, спостерігайте за тріщинами магми в базальті або торкайтеся оксамитового ісландського моху.",
+        initControls: renderBiomeControls
+      },
+      {
+        id: "binaural-telepathy",
+        num: "08",
+        title: "Бінауральний 3D Аудіо-Купол (Spatial 360°)",
+        icon: "🎧",
+        badge: "Web Audio 3D HRTF",
+        shortDesc: "360-градусний слуховий купол: обертайте голову слухача і чуйте водоспад, прибій та сагу з точних координат.",
+        fullDesc: "Справжній просторовий 3D-звук на алгоритмах HRTF: переміщуйте слухача між печерою Ґлюврабуї, ревом хвиль Атлантики та голосом штурмана з точним позиціонуванням у навушниках.",
+        initControls: renderBinauralControls
+      },
+      {
+        id: "neuro-viking-holo",
+        num: "09",
+        title: "Нейро-Голограма Штурмана Кáрі у 3D",
+        icon: "🧙‍♂️",
+        badge: "3D Hologram Avatar",
+        shortDesc: "Обертова тривимірна лазерна голограма штурмана Кáрі з голографічним вокодером та біотелеметрією.",
+        fullDesc: "Об'ємна лазерна проекція полярного навігатора Кáрі: обертайте модель на 360°, слухайте тактичні радіодоповіді через голосовий трансивер та слідкуйте за біометричними показниками.",
+        initControls: renderHoloControls
+      },
+      {
+        id: "fpv-drone-flyover",
+        num: "10",
+        title: "Кінематографічний FPV-Дрон Проліт Каньйоном",
+        icon: "⚡",
+        badge: "High-Speed FPV (180 km/h)",
+        shortDesc: "Швидкісний політ на висоті 3 метрів крізь базальтові каньйони з фізичним креном камери та Nitro Boost.",
+        fullDesc: "Симулятор швидкісного польоту FPV-дрона через ущелину Ф'ядзраурґлювур та морську арку Дірхолей: керуйте креном вліво-вправо, активуйте прискорення до 180 км/год із лініями перевантаження.",
+        initControls: renderFpvControls
+      }
+    ];
+
+    // ==========================================
+    // 10 INTERACTIVE RENDER ENGINES (CANVAS 60 FPS)
+    // ==========================================
+
+    // Concept 1: Orbital Re-entry state
+    let orbitalState = { altitude: 450000, targetAltitude: 450000, speed: 1.0, isDiving: false };
+
+    // Concept 2: Cockpit HUD state
+    let cockpitState = { roll: 0, pitch: 0, speed: 64, isFlir: false, isDefrost: false };
+
+    // Concept 3: Synesthesia state
+    let synesthesiaState = { activeSound: 'waterfall', audioVal: 0, micActive: false };
+
+    // Concept 4: Chronosphere state
+    let chronoState = { year: 2026 };
+
+    // Concept 5: Shaman elements state
+    let shamanState = { mode: 'blizzard', windSpeed: 24, particleCount: 600 };
+
+    // Concept 6: ICE-SAR state
+    let icesarState = { palette: 'ironbow', droneX: 0, droneY: 0, targetLocked: true };
+
+    // Concept 7: Biome state
+    let biomeState = { activeBiome: 'glacier', cracks: [] };
+
+    // Concept 8: Binaural state
+    let binauralState = { listenerAngle: 0, isPlayingAudio: false };
+
+    // Concept 9: Hologram state
+    let holoState = { rotY: 0, rotX: 0, isGlitching: false };
+
+    // Concept 10: FPV Drone state
+    let fpvState = { roll: 0, speed: 140, isBoost: false, offsetZ: 0 };
+
+    // Master Animation Loop
+    function startMasterSimulation(conceptId) {
       const canvas = document.getElementById('stage-canvas');
       if (!canvas) return;
       const ctx = canvas.getContext('2d');
-      canvas.width = canvas.parentElement.clientWidth;
-      canvas.height = canvas.parentElement.clientHeight;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = canvas.parentElement.clientWidth * dpr;
+      canvas.height = canvas.parentElement.clientHeight * dpr;
 
       if (canvasAnimationId) cancelAnimationFrame(canvasAnimationId);
 
       let step = 0;
-      const particles = Array.from({ length: 90 }, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        z: Math.random() * canvas.width,
-        sz: Math.random() * 2.5 + 1,
-        speed: Math.random() * 4 + 2,
-        color: Math.random() > 0.5 ? '#00f0ff' : '#10b981'
+      const w = canvas.width / dpr;
+      const h = canvas.height / dpr;
+
+      // Particle pools
+      const particles = Array.from({ length: 700 }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        z: Math.random() * w,
+        vx: (Math.random() - 0.5) * 4,
+        vy: Math.random() * 5 + 2,
+        size: Math.random() * 3 + 1,
+        alpha: Math.random() * 0.8 + 0.2
       }));
 
-      function render() {
+      function renderFrame() {
         step++;
-        ctx.fillStyle = 'rgba(5, 8, 17, 0.25)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+        ctx.scale(dpr, dpr);
+        ctx.clearRect(0, 0, w, h);
 
-        // Render depending on concept
-        if (conceptId === 'orbital-reentry') {
-          // Warp stars towards center
-          const cx = canvas.width / 2;
-          const cy = canvas.height / 2;
-          particles.forEach(p => {
-            p.z -= p.speed * 2.5;
-            if (p.z <= 0) p.z = canvas.width;
-            const k = 180 / p.z;
-            const px = (p.x - cx) * k + cx;
-            const py = (p.y - cy) * k + cy;
+        const activeConcept = CONCEPTS[currentConceptIndex].id;
 
-            if (px >= 0 && px < canvas.width && py >= 0 && py < canvas.height) {
-              const size = Math.max(1, (1 - p.z / canvas.width) * 5);
-              ctx.fillStyle = p.color;
-              ctx.beginPath();
-              ctx.arc(px, py, size, 0, Math.PI * 2);
-              ctx.fill();
+        // ----------------------------------------------------
+        // 01. ORBITAL RE-ENTRY ENGINE
+        // ----------------------------------------------------
+        if (activeConcept === 'orbital-reentry') {
+          ctx.fillStyle = '#020617';
+          ctx.fillRect(0, 0, w, h);
+
+          // Interpolate altitude
+          if (orbitalState.isDiving) {
+            orbitalState.altitude += (orbitalState.targetAltitude - orbitalState.altitude) * 0.05;
+            if (Math.abs(orbitalState.altitude - orbitalState.targetAltitude) < 50) {
+              orbitalState.isDiving = false;
             }
+          }
+
+          const altRatio = Math.max(0, Math.min(1, orbitalState.altitude / 450000));
+          const cx = w / 2;
+          const cy = h / 2;
+
+          if (altRatio > 0.08) {
+            // Earth globe from orbit
+            const globeRadius = Math.max(40, (1 - altRatio) * 350 + 70);
+            const globeGrad = ctx.createRadialGradient(cx, cy, globeRadius * 0.2, cx, cy, globeRadius);
+            globeGrad.addColorStop(0, '#0284c7');
+            globeGrad.addColorStop(0.7, '#0369a1');
+            globeGrad.addColorStop(0.95, '#075985');
+            globeGrad.addColorStop(1, '#0c4a6e');
+            ctx.fillStyle = globeGrad;
+            ctx.beginPath();
+            ctx.arc(cx, cy, globeRadius, 0, Math.PI * 2);
+            ctx.fill();
+
+            // Atmospheric aurora rim
+            ctx.strokeStyle = 'rgba(52, 211, 153, 0.75)';
+            ctx.lineWidth = 14;
+            ctx.filter = 'blur(8px)';
+            ctx.beginPath();
+            ctx.arc(cx, cy, globeRadius + 6, Math.PI * 0.9, Math.PI * 2.1);
+            ctx.stroke();
+            ctx.filter = 'none';
+
+            // Star trails
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            particles.slice(0, 250).forEach(p => {
+              p.z -= p.speed * (orbitalState.isDiving ? 12 : 2);
+              if (p.z <= 0) p.z = w;
+              const k = 140 / p.z;
+              const px = (p.x - cx) * k + cx;
+              const py = (p.y - cy) * k + cy;
+              if (px >= 0 && px < w && py >= 0 && py < h) {
+                ctx.beginPath();
+                ctx.arc(px, py, Math.max(0.5, (1 - p.z / w) * 3), 0, Math.PI * 2);
+                ctx.fill();
+              }
+            });
+          } else {
+            // Low altitude canyon landing shockwave
+            ctx.fillStyle = '#0f172a';
+            ctx.fillRect(0, 0, w, h);
+            ctx.strokeStyle = '#06b6d4';
+            ctx.lineWidth = 2;
+            for (let r = 20; r < 300; r += 40) {
+              ctx.beginPath();
+              ctx.arc(cx, cy, r + ((step * 4) % 40), 0, Math.PI * 2);
+              ctx.stroke();
+            }
+          }
+
+          // Update HUD readout
+          const altBadge = document.getElementById('val-orb-alt');
+          if (altBadge) altBadge.textContent = Math.round(orbitalState.altitude).toLocaleString() + ' KM';
+        }
+
+        // ----------------------------------------------------
+        // 02. CYBER COCKPIT HUD 2035 ENGINE
+        // ----------------------------------------------------
+        else if (activeConcept === 'cyber-cockpit') {
+          ctx.fillStyle = cockpitState.isFlir ? '#0a2312' : '#030712';
+          ctx.fillRect(0, 0, w, h);
+
+          const cx = w / 2;
+          const cy = h / 2;
+
+          // Artificial Horizon Line (Gyro Roll & Pitch)
+          ctx.save();
+          ctx.translate(cx, cy + cockpitState.pitch * 3);
+          ctx.rotate((cockpitState.roll * Math.PI) / 180);
+
+          ctx.strokeStyle = cockpitState.isFlir ? '#4ade80' : '#06b6d4';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(-160, 0); ctx.lineTo(-40, 0);
+          ctx.moveTo(40, 0); ctx.lineTo(160, 0);
+          ctx.stroke();
+
+          // Pitch ladder rungs
+          [-40, -20, 20, 40].forEach(deg => {
+            ctx.strokeRect(-25, deg, 50, 1);
           });
-        } else if (conceptId === 'cyber-cockpit') {
-          // HUD grid & targeting reticle
-          ctx.strokeStyle = 'rgba(6, 182, 212, 0.4)';
+          ctx.restore();
+
+          // Center Reticle
+          ctx.strokeStyle = '#22d3ee';
+          ctx.lineWidth = 1.5;
+          ctx.strokeRect(cx - 15, cy - 15, 30, 30);
+          ctx.beginPath();
+          ctx.arc(cx, cy, 3, 0, Math.PI * 2);
+          ctx.stroke();
+
+          // SafeTravel Crosswind Vector Graphic
+          ctx.fillStyle = '#f59e0b';
+          ctx.font = '11px monospace';
+          ctx.fillText("⚠️ CROSSWIND SHEAR: 18.4 M/S (DOOR BLOWOUT RISK)", 20, h - 25);
+          ctx.strokeStyle = '#f59e0b';
+          ctx.lineWidth = 3;
+          ctx.beginPath();
+          ctx.moveTo(20, h - 45);
+          ctx.lineTo(140, h - 45);
+          ctx.lineTo(125, h - 52);
+          ctx.moveTo(140, h - 45);
+          ctx.lineTo(125, h - 38);
+          ctx.stroke();
+
+          // Defrost wire overlay if active
+          if (cockpitState.isDefrost) {
+            ctx.strokeStyle = 'rgba(251, 146, 60, 0.35)';
+            ctx.lineWidth = 1;
+            for (let y = 0; y < h; y += 18) {
+              ctx.beginPath();
+              ctx.moveTo(0, y); ctx.lineTo(w, y);
+              ctx.stroke();
+            }
+          }
+        }
+
+        // ----------------------------------------------------
+        // 03. AUDIO SYNESTHESIA TERRAIN MESH
+        // ----------------------------------------------------
+        else if (activeConcept === 'synesthesia-sound') {
+          ctx.fillStyle = '#050714';
+          ctx.fillRect(0, 0, w, h);
+
+          const cx = w / 2;
+          const cy = h / 2 + 30;
+
+          // 3D Wireframe Mountain Grid physically deformed by sound
+          const rows = 16;
+          const cols = 28;
+          const gridW = w * 0.85;
+          const gridH = h * 0.55;
+
+          const freqMod = Math.sin(step * 0.08) * 25 + 30;
+
+          ctx.strokeStyle = '#38bdf8';
           ctx.lineWidth = 1;
-          const cx = canvas.width / 2;
-          const cy = canvas.height / 2;
 
+          for (let r = 0; r < rows; r++) {
+            ctx.beginPath();
+            const yRatio = r / rows;
+            const screenY = cy - gridH * 0.5 + yRatio * gridH;
+
+            for (let c = 0; c < cols; c++) {
+              const xRatio = (c - cols / 2) / (cols / 2);
+              const screenX = cx + xRatio * (gridW * 0.5 * (0.4 + yRatio * 0.8));
+
+              // Elevation displacement
+              const distFromCenter = Math.hypot(xRatio, (yRatio - 0.5) * 2);
+              const elevation = Math.cos(distFromCenter * 5 - step * 0.05) * freqMod * (1 - distFromCenter * 0.5);
+
+              if (c === 0) {
+                ctx.moveTo(screenX, screenY - elevation);
+              } else {
+                ctx.lineTo(screenX, screenY - elevation);
+              }
+            }
+            ctx.stroke();
+          }
+
+          // Oscilloscope bar
+          ctx.fillStyle = '#10b981';
+          ctx.font = '10px monospace';
+          ctx.fillText("FFT SPECTRUM: GULLFOSS HYDRO-ACOUSTIC RESONANCE (55 HZ SUB-BASS)", 25, 30);
+        }
+
+        // ----------------------------------------------------
+        // 04. SAGA CHRONOSPHERE PORTAL
+        // ----------------------------------------------------
+        else if (activeConcept === 'saga-chronosphere') {
+          if (chronoState.year === 930) {
+            // Viking Settlement Era (Sepia, campfires, wooden longhouses)
+            ctx.fillStyle = '#1c1308';
+            ctx.fillRect(0, 0, w, h);
+            ctx.fillStyle = 'rgba(245, 158, 11, 0.15)';
+            ctx.fillRect(0, 0, w, h);
+
+            // Campfire embers
+            particles.slice(0, 100).forEach(p => {
+              p.y -= 2;
+              if (p.y < 0) p.y = h;
+              ctx.fillStyle = 'rgba(251, 146, 60, 0.7)';
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, Math.random() * 3 + 1, 0, Math.PI * 2);
+              ctx.fill();
+            });
+
+            ctx.fillStyle = '#fef3c7';
+            ctx.font = '16px serif';
+            ctx.fillText("🏛️ 930 AD: ДОБА ВІКІНГІВ ТА ЗАСНУВАННЯ АЛЬТИНГУ", 30, 45);
+          } else if (chronoState.year === 1783) {
+            // Laki Volcanic Cataclysm (Blood-red sky, falling ash)
+            ctx.fillStyle = '#200505';
+            ctx.fillRect(0, 0, w, h);
+
+            // Falling basalt cinders
+            particles.slice(0, 200).forEach(p => {
+              p.y += 3;
+              if (p.y > h) p.y = 0;
+              ctx.fillStyle = 'rgba(239, 68, 68, 0.8)';
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, Math.random() * 2 + 1, 0, Math.PI * 2);
+              ctx.fill();
+            });
+
+            ctx.fillStyle = '#fca5a5';
+            ctx.font = '16px serif';
+            ctx.fillText("🌋 1783 AD: ВИВЕРЖЕННЯ ЛАКІ ТА ЧОРНИЙ ПОПІЛ", 30, 45);
+          } else {
+            // 2026 Modern Era
+            ctx.fillStyle = '#030712';
+            ctx.fillRect(0, 0, w, h);
+            ctx.fillStyle = '#38bdf8';
+            ctx.font = '16px monospace';
+            ctx.fillText("⚡ 2026 AD: КВАНТОВИЙ GPS-МАРШРУТ ТА ЕЛЕКТРО-ТРАСА 1", 30, 45);
+          }
+        }
+
+        // ----------------------------------------------------
+        // 05. SHAMAN WEATHER SIMULATOR
+        // ----------------------------------------------------
+        else if (activeConcept === 'shaman-elements') {
+          ctx.fillStyle = '#020617';
+          ctx.fillRect(0, 0, w, h);
+
+          if (shamanState.mode === 'blizzard') {
+            // Arctic Blizzard Particles (28 m/s horizontal flight)
+            ctx.fillStyle = '#e2e8f0';
+            particles.slice(0, shamanState.particleCount).forEach(p => {
+              p.x += (shamanState.windSpeed / 3.5);
+              p.y += 1.5;
+              if (p.x > w) p.x = 0;
+              if (p.y > h) p.y = 0;
+              ctx.fillRect(p.x, p.y, p.size * 2, p.size * 0.7);
+            });
+          } else if (shamanState.mode === 'aurora') {
+            // Plasma Aurora Ribbon
+            const grad = ctx.createLinearGradient(0, 0, w, h);
+            grad.addColorStop(0, 'rgba(16, 185, 129, 0.1)');
+            grad.addColorStop(0.5, 'rgba(6, 182, 212, 0.35)');
+            grad.addColorStop(1, 'rgba(168, 85, 247, 0.2)');
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.moveTo(0, h * 0.4);
+            for (let x = 0; x <= w; x += 30) {
+              const y = h * 0.35 + Math.sin((x + step * 3) * 0.015) * 55;
+              ctx.lineTo(x, y);
+            }
+            ctx.lineTo(w, h);
+            ctx.lineTo(0, h);
+            ctx.fill();
+          } else if (shamanState.mode === 'lava') {
+            // Volcanic Lava Fountain
+            particles.slice(0, 300).forEach(p => {
+              p.y -= 4;
+              p.x += (Math.random() - 0.5) * 3;
+              if (p.y < 50) p.y = h;
+              ctx.fillStyle = '#f97316';
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+              ctx.fill();
+            });
+          }
+        }
+
+        // ----------------------------------------------------
+        // 06. ICE-SAR TACTICAL RESCUE GRID
+        // ----------------------------------------------------
+        else if (activeConcept === 'icesar-tactical') {
+          ctx.fillStyle = (icesarState.palette === 'ironbow') ? '#2e1065' : '#052e16';
+          ctx.fillRect(0, 0, w, h);
+
+          // Grid coordinates
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+          ctx.lineWidth = 1;
+          for (let x = 0; x < w; x += 50) {
+            ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+          }
+          for (let y = 0; y < h; y += 50) {
+            ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+          }
+
+          // Target Tracking Box
+          const tx = w * 0.55 + icesarState.droneX;
+          const ty = h * 0.45 + icesarState.droneY;
+          ctx.strokeStyle = '#ef4444';
+          ctx.lineWidth = 2;
+          ctx.strokeRect(tx - 25, ty - 25, 50, 50);
+
+          ctx.fillStyle = '#fef08a';
           ctx.beginPath();
-          ctx.arc(cx, cy, 90 + Math.sin(step * 0.05) * 8, 0, Math.PI * 2);
+          ctx.arc(tx, ty, 10, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = '#ef4444';
+          ctx.font = '10px monospace';
+          ctx.fillText("TARGET: LOST HIKER (36.8°C)", tx + 30, ty);
+          ctx.fillText("GPS: 64.048° N, -16.179° W", tx + 30, ty + 14);
+        }
+
+        // ----------------------------------------------------
+        // 07. BIOME METAMORPHISM
+        // ----------------------------------------------------
+        else if (activeConcept === 'biome-metamorphism') {
+          ctx.fillStyle = '#030712';
+          ctx.fillRect(0, 0, w, h);
+
+          const cx = w / 2;
+          const cy = h / 2;
+
+          // Interactive Material Slab
+          const slabW = 280;
+          const slabH = 160;
+          ctx.save();
+          ctx.translate(cx - slabW / 2, cy - slabH / 2);
+
+          if (biomeState.activeBiome === 'glacier') {
+            ctx.fillStyle = 'rgba(56, 189, 248, 0.25)';
+            ctx.strokeStyle = '#38bdf8';
+            ctx.lineWidth = 3;
+            ctx.fillRect(0, 0, slabW, slabH);
+            ctx.strokeRect(0, 0, slabW, slabH);
+
+            // Draw ice fracture cracks
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = 1.5;
+            biomeState.cracks.forEach(cr => {
+              ctx.beginPath();
+              ctx.moveTo(cr.x, cr.y);
+              ctx.lineTo(cr.x + cr.dx, cr.y + cr.dy);
+              ctx.stroke();
+            });
+          } else if (biomeState.activeBiome === 'obsidian') {
+            ctx.fillStyle = '#1c1917';
+            ctx.strokeStyle = '#ea580c';
+            ctx.lineWidth = 3;
+            ctx.fillRect(0, 0, slabW, slabH);
+            ctx.strokeRect(0, 0, slabW, slabH);
+
+            // Magma pulse
+            ctx.fillStyle = 'rgba(234, 88, 12, 0.5)';
+            ctx.fillRect(20, slabH * 0.45, slabW - 40, 6);
+          } else {
+            ctx.fillStyle = '#064e3b';
+            ctx.strokeStyle = '#10b981';
+            ctx.lineWidth = 3;
+            ctx.fillRect(0, 0, slabW, slabH);
+            ctx.strokeRect(0, 0, slabW, slabH);
+          }
+          ctx.restore();
+
+          ctx.fillStyle = '#ffffff';
+          ctx.font = '12px monospace';
+          ctx.fillText("КЛІКНІТЬ НА МАТЕРІАЛ ДЛЯ ФІЗИЧНОЇ РЕАКЦІЇ ТА ЗВУКУ", cx - 180, cy + slabH / 2 + 30);
+        }
+
+        // ----------------------------------------------------
+        // 08. BINAURAL 3D AUDIO DOME
+        // ----------------------------------------------------
+        else if (activeConcept === 'binaural-telepathy') {
+          ctx.fillStyle = '#020617';
+          ctx.fillRect(0, 0, w, h);
+
+          const cx = w / 2;
+          const cy = h / 2;
+
+          // 360° Radar Circle
+          ctx.strokeStyle = 'rgba(6, 182, 212, 0.35)';
+          ctx.lineWidth = 1.5;
+          ctx.beginPath();
+          ctx.arc(cx, cy, 140, 0, Math.PI * 2);
           ctx.stroke();
 
-          ctx.beginPath();
-          ctx.moveTo(cx - 120, cy); ctx.lineTo(cx + 120, cy);
-          ctx.moveTo(cx, cy - 120); ctx.lineTo(cx, cy + 120);
-          ctx.stroke();
+          // Listener Head in Center
+          ctx.save();
+          ctx.translate(cx, cy);
+          ctx.rotate((binauralState.listenerAngle * Math.PI) / 180);
 
           ctx.fillStyle = '#06b6d4';
-          ctx.font = '10px monospace';
-          ctx.fillText(`LOCK: [GULLFOSS GORGE] • AZ: 042° • DIST: 3.4 KM`, cx - 110, cy + 125);
-        } else if (conceptId === 'shaman-elements') {
-          // Aurora ribbons & blizzard particles
-          const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-          grad.addColorStop(0, 'rgba(16, 185, 129, 0.05)');
-          grad.addColorStop(0.5, 'rgba(6, 182, 212, 0.2)');
-          grad.addColorStop(1, 'rgba(147, 51, 234, 0.1)');
-          ctx.fillStyle = grad;
-
           ctx.beginPath();
-          ctx.moveTo(0, canvas.height * 0.4);
-          for (let x = 0; x <= canvas.width; x += 40) {
-            const y = canvas.height * 0.35 + Math.sin((x + step * 4) * 0.015) * 45;
-            ctx.lineTo(x, y);
-          }
-          ctx.lineTo(canvas.width, canvas.height);
-          ctx.lineTo(0, canvas.height);
+          ctx.arc(0, 0, 18, 0, Math.PI * 2);
           ctx.fill();
-        } else {
-          // Generic glowing particle drift
-          particles.forEach(p => {
-            p.x += Math.cos(step * 0.02 + p.y) * 1.5;
-            p.y += p.speed * 0.5;
-            if (p.y > canvas.height) p.y = 0;
-            ctx.fillStyle = p.color;
+
+          // Nose direction indicator
+          ctx.fillStyle = '#ffffff';
+          ctx.beginPath();
+          ctx.moveTo(-6, -18); ctx.lineTo(6, -18); ctx.lineTo(0, -28); ctx.fill();
+          ctx.restore();
+
+          // 4 Spatial Sound Emitters
+          const emitters = [
+            { name: "GLJÚFRABÚI (CAVE)", x: cx - 110, y: cy - 60, col: "#38bdf8" },
+            { name: "ATLANTIC SURF", x: cx + 110, y: cy + 40, col: "#34d399" },
+            { name: "NAVIGATOR KÁRI", x: cx, y: cy - 120, col: "#fbbf24" },
+            { name: "PUFFIN CLIFFS", x: cx + 90, y: cy - 90, col: "#c084fc" }
+          ];
+
+          emitters.forEach(e => {
+            ctx.fillStyle = e.col;
             ctx.beginPath();
-            ctx.arc(p.x, p.y, p.sz, 0, Math.PI * 2);
+            ctx.arc(e.x, e.y, 8, 0, Math.PI * 2);
             ctx.fill();
+            ctx.font = '10px monospace';
+            ctx.fillText(e.name, e.x - 35, e.y + 20);
           });
         }
 
-        canvasAnimationId = requestAnimationFrame(render);
+        // ----------------------------------------------------
+        // 09. 3D HOLOGRAPHIC NAVIGATOR
+        // ----------------------------------------------------
+        else if (activeConcept === 'neuro-viking-holo') {
+          ctx.fillStyle = '#030712';
+          ctx.fillRect(0, 0, w, h);
+
+          holoState.rotY += 0.015;
+          const cx = w / 2;
+          const cy = h / 2;
+
+          // Wireframe 3D Holo Cylinder/Avatar
+          ctx.strokeStyle = '#06b6d4';
+          ctx.lineWidth = 1.5;
+          ctx.save();
+          ctx.translate(cx, cy);
+
+          for (let y = -90; y <= 90; y += 30) {
+            const r = Math.cos((y / 90) * Math.PI * 0.5) * 65;
+            ctx.beginPath();
+            ctx.ellipse(0, y, r, r * 0.35, 0, 0, Math.PI * 2);
+            ctx.stroke();
+          }
+
+          // Scan line distortion
+          ctx.fillStyle = 'rgba(6, 182, 212, 0.15)';
+          ctx.fillRect(-80, Math.sin(step * 0.08) * 90 - 5, 160, 10);
+          ctx.restore();
+
+          ctx.fillStyle = '#06b6d4';
+          ctx.font = '11px monospace';
+          ctx.fillText("HOLO-PROJECTION: KÁRI LEIÐSÖGUMAÐUR • BIO-SYNC: 100%", cx - 140, cy + 130);
+        }
+
+        // ----------------------------------------------------
+        // 10. FPV CANYON DRONE FLYOVER
+        // ----------------------------------------------------
+        else if (activeConcept === 'fpv-drone-flyover') {
+          ctx.fillStyle = '#050a14';
+          ctx.fillRect(0, 0, w, h);
+
+          fpvState.offsetZ += (fpvState.isBoost ? 18 : 8);
+          const cx = w / 2;
+          const cy = h / 2;
+
+          // Canyon basalt walls perspective lines
+          ctx.save();
+          ctx.translate(cx, cy);
+          ctx.rotate((fpvState.roll * Math.PI) / 180);
+
+          ctx.strokeStyle = '#1e293b';
+          ctx.lineWidth = 3;
+
+          for (let i = 0; i < 8; i++) {
+            const z = ((i * 50 - (fpvState.offsetZ % 50)) + 300) % 300;
+            const k = 180 / Math.max(10, z);
+            const wWall = 450 * k;
+            const hWall = 250 * k;
+
+            ctx.strokeStyle = fpvState.isBoost ? '#06b6d4' : '#334155';
+            ctx.strokeRect(-wWall / 2, -hWall / 2, wWall, hWall);
+          }
+
+          // FPV Crosshair
+          ctx.strokeStyle = '#ef4444';
+          ctx.lineWidth = 2;
+          ctx.beginPath();
+          ctx.moveTo(-20, 0); ctx.lineTo(-8, 0);
+          ctx.moveTo(8, 0); ctx.lineTo(20, 0);
+          ctx.moveTo(0, -20); ctx.lineTo(0, -8);
+          ctx.moveTo(0, 8); ctx.lineTo(0, 20);
+          ctx.stroke();
+
+          ctx.restore();
+
+          // FPV Telemetry HUD
+          ctx.fillStyle = '#f8fafc';
+          ctx.font = '11px monospace';
+          ctx.fillText(`AIRSPEED: ${fpvState.isBoost ? '188 KM/H [BOOST]' : '142 KM/H'} • ALT: 3.8 M AGL`, 25, 30);
+        }
+
+        ctx.restore();
+        canvasAnimationId = requestAnimationFrame(renderFrame);
       }
 
-      render();
+      renderFrame();
     }
 
+    // ==========================================
+    // TAILORED DEDICATED CONTROLLERS FOR ALL 10
+    // ==========================================
+
+    function renderOrbitalControls(c) {
+      return `
+        <div class="flex items-center gap-3 w-full flex-wrap">
+          <button onclick="launchOrbitalDive()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-bold shadow-lg shadow-cyan-500/30 flex items-center gap-2 transition">
+            <span>🚀</span> <span>Запустити Гіперстрибок зі звуковим бар'єром</span>
+          </button>
+          <div class="flex items-center gap-2 font-mono text-cyan-300">
+            <span>Висота:</span>
+            <input type="range" min="0" max="450000" step="5000" value="${orbitalState.altitude}" class="accent-cyan-400" oninput="orbitalState.altitude = parseInt(this.value); orbitalState.isDiving = false;">
+            <span id="val-orb-alt" class="font-bold">${Math.round(orbitalState.altitude).toLocaleString()} KM</span>
+          </div>
+          <a href="index.html?warp=true" class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold border border-slate-700 ml-auto transition">
+            Перейти на 3D карту з гіперстрибком →
+          </a>
+        </div>
+      `;
+    }
+
+    function launchOrbitalDive() {
+      orbitalState.altitude = 450000;
+      orbitalState.targetAltitude = 0;
+      orbitalState.isDiving = true;
+      playSonicBoom();
+    }
+
+    function renderCockpitControls(c) {
+      return `
+        <div class="flex items-center gap-3 w-full flex-wrap">
+          <button onclick="cockpitState.isFlir = !cockpitState.isFlir; playTone(880);" class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition">
+            <span>🟢</span> <span>Режим FLIR Нічного Бачення</span>
+          </button>
+          <button onclick="cockpitState.isDefrost = !cockpitState.isDefrost; playTone(440);" class="px-3 py-1.5 rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-bold transition">
+            <span>🔥</span> <span>Електропідігрів Скла (Сітка)</span>
+          </button>
+          <div class="flex items-center gap-2 font-mono text-slate-300">
+            <span>Крен (Roll):</span>
+            <input type="range" min="-30" max="30" value="${cockpitState.roll}" class="accent-cyan-400" oninput="cockpitState.roll = parseInt(this.value)">
+          </div>
+          <div class="flex items-center gap-2 font-mono text-slate-300">
+            <span>Тангаж (Pitch):</span>
+            <input type="range" min="-20" max="20" value="${cockpitState.pitch}" class="accent-cyan-400" oninput="cockpitState.pitch = parseInt(this.value)">
+          </div>
+        </div>
+      `;
+    }
+
+    function renderSynesthesiaControls(c) {
+      return `
+        <div class="flex items-center gap-3 w-full flex-wrap">
+          <button onclick="synesthesiaState.activeSound = 'waterfall'; playTone(65, 'sawtooth', 1.5, 0.1);" class="px-3 py-1.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-bold transition">
+            <span>💧</span> <span>Рев Водоспаду (55 Hz)</span>
+          </button>
+          <button onclick="synesthesiaState.activeSound = 'ice'; playTone(1420, 'sine', 0.6, 0.08);" class="px-3 py-1.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold transition">
+            <span>🧊</span> <span>Тріск Льодовика (1400 Hz)</span>
+          </button>
+          <button onclick="synesthesiaState.activeSound = 'gale'; playTone(220, 'triangle', 2.0, 0.09);" class="px-3 py-1.5 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-bold transition">
+            <span>💨</span> <span>Порив Вітру 25 м/с</span>
+          </button>
+        </div>
+      `;
+    }
+
+    function renderChronosphereControls(c) {
+      return `
+        <div class="flex items-center gap-4 w-full flex-wrap font-mono">
+          <span class="text-amber-400 font-bold">ОБЕРІТЬ ЕПОХУ ІСЛАНДІЇ:</span>
+          <button onclick="chronoState.year = 930; playTone(330);" class="px-3 py-1.5 rounded-xl ${chronoState.year === 930 ? 'bg-amber-600 text-white font-bold' : 'bg-slate-800 text-slate-300'} transition">
+            930 AD (Вікінги & Альтинг)
+          </button>
+          <button onclick="chronoState.year = 1783; playTone(120);" class="px-3 py-1.5 rounded-xl ${chronoState.year === 1783 ? 'bg-red-600 text-white font-bold' : 'bg-slate-800 text-slate-300'} transition">
+            1783 AD (Попіл Лакі)
+          </button>
+          <button onclick="chronoState.year = 2026; playTone(880);" class="px-3 py-1.5 rounded-xl ${chronoState.year === 2026 ? 'bg-cyan-600 text-white font-bold' : 'bg-slate-800 text-slate-300'} transition">
+            2026 AD (Квантова Траса 1)
+          </button>
+        </div>
+      `;
+    }
+
+    function renderShamanControls(c) {
+      return `
+        <div class="flex items-center gap-3 w-full flex-wrap">
+          <button onclick="shamanState.mode = 'blizzard'; playTone(180);" class="px-3 py-1.5 rounded-xl bg-slate-700 hover:bg-slate-600 text-white font-bold transition">
+            <span>❄️</span> <span>Заметіль (28 м/с)</span>
+          </button>
+          <button onclick="shamanState.mode = 'aurora'; playTone(540);" class="px-3 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold transition">
+            <span>🌌</span> <span>Сяйво Аврори</span>
+          </button>
+          <button onclick="shamanState.mode = 'lava'; playTone(95);" class="px-3 py-1.5 rounded-xl bg-orange-600 hover:bg-orange-500 text-white font-bold transition">
+            <span>🌋</span> <span>Фонтан Лави</span>
+          </button>
+          <div class="flex items-center gap-2 font-mono text-slate-300 ml-auto">
+            <span>Вітер:</span>
+            <input type="range" min="5" max="45" value="${shamanState.windSpeed}" class="accent-cyan-400" oninput="shamanState.windSpeed = parseInt(this.value)">
+          </div>
+        </div>
+      `;
+    }
+
+    function renderIceSarControls(c) {
+      return `
+        <div class="flex items-center gap-3 w-full flex-wrap">
+          <button onclick="icesarState.palette = 'ironbow'; playTone(600);" class="px-3 py-1.5 rounded-xl bg-purple-600 text-white font-bold transition">
+            Тепловізор Ironbow
+          </button>
+          <button onclick="icesarState.palette = 'whitehot'; playTone(800);" class="px-3 py-1.5 rounded-xl bg-slate-700 text-white font-bold transition">
+            White-Hot
+          </button>
+          <button onclick="icesarState.droneX += (Math.random()-0.5)*40; playTone(1200);" class="px-3 py-1.5 rounded-xl bg-emerald-600 text-white font-bold transition">
+            📡 Пеленгувати Маяк 112
+          </button>
+        </div>
+      `;
+    }
+
+    function renderBiomeControls(c) {
+      return `
+        <div class="flex items-center gap-3 w-full flex-wrap">
+          <button onclick="setBiome('glacier')" class="px-3 py-1.5 rounded-xl bg-sky-600 text-white font-bold transition">
+            🧊 Льодовиковий Лід
+          </button>
+          <button onclick="setBiome('obsidian')" class="px-3 py-1.5 rounded-xl bg-orange-700 text-white font-bold transition">
+            🌋 Лавовий Базальт
+          </button>
+          <button onclick="setBiome('moss')" class="px-3 py-1.5 rounded-xl bg-emerald-700 text-white font-bold transition">
+            🌿 Оксамитовий Мох
+          </button>
+        </div>
+      `;
+    }
+
+    function setBiome(name) {
+      biomeState.activeBiome = name;
+      biomeState.cracks = [];
+      document.body.className = `theme-${name} text-[#f8fafc] font-sans min-h-screen overflow-x-hidden`;
+      playTone(name === 'glacier' ? 1400 : (name === 'obsidian' ? 110 : 330));
+    }
+
+    function renderBinauralControls(c) {
+      return `
+        <div class="flex items-center gap-3 w-full flex-wrap font-mono text-slate-300">
+          <span class="text-cyan-400 font-bold">ОБЕРТАЙТЕ ГОЛОВУ СЛУХАЧА:</span>
+          <input type="range" min="0" max="360" value="${binauralState.listenerAngle}" class="accent-cyan-400 w-48" oninput="binauralState.listenerAngle = parseInt(this.value); playTone(440 + Math.sin(this.value*0.01)*120, 'sine', 0.1);">
+          <span class="font-bold text-white">${binauralState.listenerAngle}°</span>
+        </div>
+      `;
+    }
+
+    function renderHoloControls(c) {
+      return `
+        <div class="flex items-center gap-3 w-full flex-wrap">
+          <button onclick="playHoloVoiceBriefing()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold shadow transition">
+            <span>🎙️</span> <span>Голосова Доповідь Голограми</span>
+          </button>
+          <span class="text-xs font-mono text-cyan-300">Потягніть мишкою по екрану для 3D обертання моделі Кáрі</span>
+        </div>
+      `;
+    }
+
+    function playHoloVoiceBriefing() {
+      playTone(880, 'sawtooth', 0.2, 0.1);
+      setTimeout(() => playTone(660, 'sawtooth', 0.4, 0.08), 200);
+      alert("🧙‍♂️ Штурман Кáрі (Голограма): 'Орбітальний супутник зафіксував чисте вікно над Скоугафоссом. Швидкість вітру 12 м/с. Продовжуємо місію!'");
+    }
+
+    function renderFpvControls(c) {
+      return `
+        <div class="flex items-center gap-3 w-full flex-wrap">
+          <button onclick="fpvState.roll -= 8; playTone(280);" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold transition">
+            ◀ Крен Вліво
+          </button>
+          <button onclick="fpvState.roll += 8; playTone(280);" class="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold transition">
+            Крен Вправо ▶
+          </button>
+          <button onclick="fpvState.isBoost = !fpvState.isBoost; playTone(fpvState.isBoost ? 880 : 330);" class="px-4 py-1.5 rounded-xl ${fpvState.isBoost ? 'bg-red-600 animate-pulse text-white' : 'bg-cyan-600 text-white'} font-bold transition">
+            🚀 NITRO BOOST (188 KM/H)
+          </button>
+        </div>
+      `;
+    }
+
+    // ==========================================
+    // ACTIVATION & GRID POPULATION
+    // ==========================================
     function activateConcept(idx) {
       currentConceptIndex = idx;
       const c = CONCEPTS[idx];
       if (!c) return;
 
       document.getElementById('demo-badge-title').textContent = `${c.num}. ${c.title}`;
-      document.getElementById('stage-icon').textContent = c.icon;
-      document.getElementById('stage-title').textContent = c.title;
-      document.getElementById('stage-desc').textContent = c.fullDesc;
-      document.getElementById('btn-demo-action-text').textContent = c.actionText;
+      
+      // Render dedicated controls in the tray
+      const tray = document.getElementById('concept-controls-tray');
+      if (tray && typeof c.initControls === 'function') {
+        tray.innerHTML = c.initControls(c);
+      }
 
-      document.getElementById('val-alt').textContent = c.telemetry.alt;
-      document.getElementById('val-mach').textContent = c.telemetry.mach;
-      document.getElementById('val-target').textContent = c.telemetry.target;
-
-      // Update active cards
+      // Update active cards in the catalog
       document.querySelectorAll('.concept-card').forEach((el, i) => {
         if (i === idx) {
           el.classList.add('active');
@@ -466,27 +1145,7 @@
         }
       });
 
-      startCanvasSimulation(c.id);
-    }
-
-    function triggerActiveDemoAction() {
-      const c = CONCEPTS[currentConceptIndex];
-      playWarpSound();
-
-      if (c.id === 'orbital-reentry') {
-        alert("🚀 Симуляція орбітального спуску активована! Переходимо на 3D карту з гіперстрибком...");
-        window.location.href = "index.html?warp=true";
-      } else if (c.id === 'biome-metamorphism') {
-        const themes = ['theme-glacier', 'theme-obsidian', 'theme-moss'];
-        const randomTheme = themes[Math.floor(Math.random() * themes.length)];
-        document.body.className = randomTheme + ' text-[#f8fafc] font-sans min-h-screen overflow-x-hidden';
-      } else {
-        const altElem = document.getElementById('val-alt');
-        altElem.textContent = "SYNCHRONIZING...";
-        setTimeout(() => {
-          altElem.textContent = c.telemetry.alt;
-        }, 1200);
-      }
+      startMasterSimulation(c.id);
     }
 
     function renderConceptsGrid() {
@@ -495,37 +1154,55 @@
 
       CONCEPTS.forEach((c, idx) => {
         const card = document.createElement('div');
-        card.className = `concept-card p-5 rounded-2xl cursor-pointer space-y-3 ${idx === 0 ? 'active' : ''}`;
+        card.className = `concept-card p-4 rounded-2xl cursor-pointer space-y-2.5 ${idx === 0 ? 'active' : ''}`;
         card.onclick = () => activateConcept(idx);
 
         card.innerHTML = `
-          <div class="flex items-center justify-between gap-2">
-            <span class="px-2.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-mono text-[10px] font-bold border border-cyan-500/30">
-              КОНЦЕПТ ${c.num} • ${c.badge}
+          <div class="flex items-center justify-between gap-1.5">
+            <span class="px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-mono text-[9px] font-bold border border-cyan-500/30">
+              #${c.num} • ${c.badge}
             </span>
-            <span class="text-xl">${c.icon}</span>
+            <span class="text-lg">${c.icon}</span>
           </div>
 
-          <h4 class="text-sm font-bold text-white group-hover:text-cyan-300 transition">${c.title}</h4>
-          <p class="text-xs text-slate-300 leading-relaxed">${c.shortDesc}</p>
+          <h4 class="text-xs font-bold text-white group-hover:text-cyan-300 transition leading-snug">${c.title}</h4>
+          <p class="text-[11px] text-slate-300 leading-relaxed">${c.shortDesc}</p>
 
-          <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-cyan-400 font-semibold">
-            <span>Запустити симуляцію →</span>
-            <span class="font-mono text-[10px] text-slate-500">LIVE DEMO</span>
+          <div class="pt-1.5 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-cyan-400 font-semibold">
+            <span>Запустити стенд →</span>
+            <span class="font-mono text-[9px] text-emerald-400">60 FPS LIVE</span>
           </div>
         `;
         grid.appendChild(card);
       });
     }
 
-    // INIT
+    // Add canvas click interaction for biomes (ice cracks)
     window.addEventListener('DOMContentLoaded', () => {
       renderConceptsGrid();
       activateConcept(0);
+
+      const canvas = document.getElementById('stage-canvas');
+      if (canvas) {
+        canvas.addEventListener('click', (e) => {
+          if (CONCEPTS[currentConceptIndex].id === 'biome-metamorphism' && biomeState.activeBiome === 'glacier') {
+            const rect = canvas.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const clickY = e.clientY - rect.top;
+            biomeState.cracks.push({
+              x: (clickX - canvas.width / 4),
+              y: (clickY - canvas.height / 4),
+              dx: (Math.random() - 0.5) * 60,
+              dy: (Math.random() - 0.5) * 60
+            });
+            playTone(1800, 'sawtooth', 0.15, 0.08);
+          }
+        });
+      }
     });
 
     window.addEventListener('resize', () => {
-      startCanvasSimulation(CONCEPTS[currentConceptIndex].id);
+      startMasterSimulation(CONCEPTS[currentConceptIndex].id);
     });
   </script>
 </body>

@@ -164,13 +164,15 @@
           { title: "4. Road Safety (SafeTravel):", desc: "Gale-force crosswinds, Reynisfjara sneaker waves, glacial jökulhlaup alerts, Parka.is." }
         ],
         filters: [
-          { id: "all", name: "All Regions" },
-          { id: "golden_circle", name: "Golden Circle" },
-          { id: "south_coast", name: "South Coast" },
-          { id: "glaciers", name: "Vatnajökull & Glaciers" },
-          { id: "vistas", name: "Volcanoes & Vista Vistas" },
-          { id: "snaefellsnes", name: "Snæfellsnes Peninsula" },
-          { id: "reykjanes", name: "Reykjanes Eruptions" }
+          { id: "all", name: "All Regions (62)" },
+          { id: "golden_circle", name: "Golden Circle (9)" },
+          { id: "south_coast", name: "South Coast & Secrets (21)" },
+          { id: "snaefellsnes", name: "Snæfellsnes (9)" },
+          { id: "westfjords", name: "Westfjords (3)" },
+          { id: "highlands", name: "Highlands & Canyons (4)" },
+          { id: "east_fjords", name: "East Fjords (4)" },
+          { id: "north", name: "North & Mývatn (8)" },
+          { id: "reykjanes", name: "Reykjanes Eruptions (4)" }
         ]
       }
     };
@@ -194,10 +196,6 @@
       {
         "name": "Þingvellir Official",
         "url": "https://www.thingvellir.is/en/"
-      },
-      {
-        "name": "Íslendingabók (Saga DB)",
-        "url": "https://sagadb.org/"
       }
     ],
     "vector": {
@@ -205,16 +203,16 @@
       "en": "Straight ahead • Route 36"
     },
     "geology": {
-      "uk": "Гігантська ущелина Almannagjá на стику Північноамериканської та Євразійської плит. Розходження до 2 см/рік. Озеро Þingvallavatn — найбільше в країні з 4 підвидами гольця.",
-      "en": "The Almannagjá fault chasm along the Mid-Atlantic Ridge rift, spreading 2 cm annually. Lake Þingvallavatn is Iceland's largest natural lake with 4 unique Arctic char morphs."
+      "uk": "Гігантська ущелина Almannagjá на стику Північноамериканської та Євразійської плит. Розходження 2 см/рік.",
+      "en": "The Almannagjá fault rift along the Mid-Atlantic Ridge, drifting 2 cm/year."
     },
     "saga": {
-      "uk": "У 930 році вікінги заснували перший у світі парламент — Альтинг (Alþingi). Тут приймали Хрещення Ісландії (1000 р.) та проголосили Республіку (1944 р.).",
-      "en": "In 930 AD, Vikings founded the Alþingi, the world's oldest continuous parliament. Here Christianity was adopted in 1000 AD and the Republic declared in 1944."
+      "uk": "Заснування найстарішого парламенту світу Альтингу у 930 році. Прийняття християнства у 1000 р.",
+      "en": "Founding of the world's oldest parliament Alþingi in 930 AD. Adoption of Christianity in 1000 AD."
     },
     "practical": {
-      "uk": "Паркінг P1 (оплата Parka.is). Оглядовий майданчик Hakið. Дрони суворо заборонені над усім парком.",
-      "en": "P1 parking at Hakið center (paid via Parka.is). Drones strictly prohibited throughout the park."
+      "uk": "Паркінг P1 (Parka.is). Оглядовий майданчик Hakið. Дрони заборонені.",
+      "en": "P1 parking (paid via Parka.is). Hakið viewing platform. Drones strictly prohibited."
     }
   },
   {
@@ -225,11 +223,11 @@
     },
     "region": "golden_circle",
     "type": {
-      "uk": "Прихований водоспад Тінґветліра",
-      "en": "Þingvellir Gorge Waterfall"
+      "uk": "Водоспад у тектонічному розломі",
+      "en": "Rift Waterfall"
     },
     "coords": "64.2660° N, 21.1165° W",
-    "badge": "Hidden Waterfall",
+    "badge": "Þingvellir Gem",
     "sources": [
       {
         "name": "Þingvellir Parks",
@@ -241,16 +239,16 @@
       "en": "Inside Almannagjá Chasm"
     },
     "geology": {
-      "uk": "Водоспад заввишки 13 м, штучно створений вікінгами у X столітті шляхом зміни русла річки Ексарау для постачання води учасникам парламенту.",
-      "en": "A 13-meter cascade man-diverted by 10th-century Vikings from the river Öxará to supply water to assembly participants."
+      "uk": "Водоспад заввишки 13 м, штучно відведений вікінгами у X столітті для забезпечення водою Альтингу.",
+      "en": "13m cascade diverted by 10th-century Vikings to supply fresh water to the parliament."
     },
     "saga": {
-      "uk": "Згідно зі Sturlunga saga, у басейні водоспаду Drekkingarhylur у Середньовіччі топили жінок, звинувачених у чаклунстві та подружній зраді.",
-      "en": "Per Sturlunga saga, the nearby Drekkingarhylur pool beneath the falls was historically used for judicial executions by drowning."
+      "uk": "У басейні Drekkingarhylur у Середньовіччі топили засуджених за законами Альтингу.",
+      "en": "Historically used for judicial executions according to medieval Alþingi law."
     },
     "practical": {
-      "uk": "15 хвилин пішки від паркінгу P1 або P2 дерев'яними містками між тектонічними стінами.",
-      "en": "15-minute scenic stroll along wooden boardwalks from P1 or P2 parking lots between sheer basalt cliffs."
+      "uk": "15 хв пішки дерев'яними містками від паркінгу P1 або P2.",
+      "en": "15 min walk on wooden boardwalks from P1/P2."
     }
   },
   {
@@ -268,44 +266,76 @@
     "badge": "Geothermal Icon",
     "sources": [
       {
-        "name": "Catalogue of Volcanoes",
-        "url": "https://icelandicvolcanoes.is"
-      },
-      {
-        "name": "Environment Agency (UST)",
-        "url": "https://www.ust.is"
+        "name": "Visit South Iceland",
+        "url": "https://www.south.is"
       }
     ],
     "vector": {
-      "uk": "Попереду долина Haukadalur • Траса 35",
-      "en": "Haukadalur Valley ahead • Route 35"
+      "uk": "Долина Haukadalur • Траса 35",
+      "en": "Haukadalur Valley • Route 35"
     },
     "geology": {
-      "uk": "Температура підземного резервуара >125°C. Строккюр вистрілює стовп киплячої води на 15–20 м кожні 6–10 хв через закипання води в каналі при падінні тиску.",
-      "en": "Subsurface reservoir exceeds 125°C. Strokkur erupts boiling water 15–20m every 6–10 minutes due to rapid steam flash upon pressure drop."
+      "uk": "Строккюр вистрілює стовп окропу на 15–20 м кожні 6–10 хвилин. Температура підземного резервуара >125°C.",
+      "en": "Strokkur erupts boiling water 15–20m high every 6–10 minutes. Subsurface reservoir exceeds 125°C."
     },
     "saga": {
-      "uk": "Великий Ґейзір дав назву всім подібним джерелам на Землі. Перша письмова згадка — 1294 рік після сильного землетрусу.",
-      "en": "The Great Geysir gave its name to all geysers worldwide. Earliest documented record dates to 1294 after a massive quake."
+      "uk": "Великий Ґейзір дав назву всім гейзерам світу. Перша письмова згадка — 1294 рік після землетрусу.",
+      "en": "The Great Geysir gave its name to all geysers worldwide. First recorded in 1294."
     },
     "practical": {
-      "uk": "Стійте тільки з навітряного боку, щоб уникнути опіків паром. Не торкайтеся води в струмках (до 100°C).",
-      "en": "Always stand upwind to avoid scalding steam. Never touch outflow streams (temperatures up to 100°C)."
+      "uk": "Вхід безкоштовний. Тримайтеся з навітряного боку, щоб не обпектися парою.",
+      "en": "Free entry. Stay upwind to avoid boiling sulfur steam."
     }
   },
   {
     "id": "gullfoss",
     "name": {
       "uk": "Gullfoss (Золотий водоспад)",
-      "en": "Gullfoss (The Golden Falls)"
+      "en": "Gullfoss Waterfall"
     },
     "region": "golden_circle",
     "type": {
-      "uk": "Must-See • Водоспад",
-      "en": "Must-See • Canyon Waterfall"
+      "uk": "Must-See • Двоярусний гігант",
+      "en": "Must-See • Two-tier Giant"
     },
     "coords": "64.3271° N, 20.1199° W",
-    "badge": "Glacier River",
+    "badge": "Golden Waterfall",
+    "sources": [
+      {
+        "name": "Gullfoss Official",
+        "url": "https://gullfoss.is"
+      }
+    ],
+    "vector": {
+      "uk": "Кінець Траси 35 • Річка Hvítá",
+      "en": "Terminus of Route 35 • Hvítá River"
+    },
+    "geology": {
+      "uk": "Два каскади (11 м та 21 м) падають під прямим кутом у 32-метровий каньйон, промитий талими водами льодовика Langjökull.",
+      "en": "Two tiers (11m and 21m) falling at right angles into a 32m deep glacial canyon fed by Langjökull."
+    },
+    "saga": {
+      "uk": "Сігрідюр Тоумасдоттір врятувала водоспад від будівництва ГЕС на початку XX ст., погрожуючи кинутись у вир.",
+      "en": "Sigríður Tómasdóttir saved Gullfoss from hydroelectric damming in the early 1900s."
+    },
+    "practical": {
+      "uk": "Верхній та нижній оглядові майданчики. Влітку вдягайте мембрану проти водяного пилу.",
+      "en": "Upper and lower decks. Wear waterproof shell against heavy spray."
+    }
+  },
+  {
+    "id": "bruarfoss",
+    "name": {
+      "uk": "Brúarfoss (Блакитний водоспад)",
+      "en": "Brúarfoss Waterfall"
+    },
+    "region": "golden_circle",
+    "type": {
+      "uk": "Секретний блакитний каскад",
+      "en": "Secret Cyan Cascade"
+    },
+    "coords": "64.2642° N, 20.5157° W",
+    "badge": "Iceland's Bluest Water",
     "sources": [
       {
         "name": "South Iceland Tourism",
@@ -313,111 +343,75 @@
       }
     ],
     "vector": {
-      "uk": "Праворуч каньйон річки Hvíta",
-      "en": "To your right • Hvíta River Canyon"
+      "uk": "Траса 37 • Поворот на Brúarhlöð",
+      "en": "Route 37 • Brúarhlöð Turnoff"
     },
     "geology": {
-      "uk": "Двоступеневий каскад (11 м і 21 м) у 70-метровому базальтовому каньйоні. Живиться льодовиковими талими водами масиву Langjökull.",
-      "en": "A two-stage waterfall (11m and 21m) dropping into a 70m canyon, fed by meltwater from Langjökull ice cap."
+      "uk": "Сотні крижаних струмків стікають у вузьку вулканічну тріщину насиченого бірюзово-блакитного кольору.",
+      "en": "Hundreds of glacial rivulets converge into a deep volcanic fissure with glowing cyan glacier runoff."
     },
     "saga": {
-      "uk": "Сіґріудюр Тоумасдоуттір захистила водоспад у 1920-х від будівництва гідроелектростанції, ставши першою еко-героїнею Ісландії.",
-      "en": "Sigríður Tómasdóttir saved the falls in the 1920s by resisting hydroelectric exploitation, cementing her legacy as Iceland's first environmentalist."
+      "uk": "У 1602 році слуга єпископа зруйнував природний кам'яний міст (brú), щоб зупинити голодуючих жебраків.",
+      "en": "In 1602, a bishop's retainer destroyed the natural stone arch to bar starving vagrants."
     },
     "practical": {
-      "uk": "Взимку нижня стежка покривається суцільним льодом — обов'язкові шипи (microspikes). Влітку — дощовик.",
-      "en": "Winter path freezes over — microspikes required. Summer visits require waterproof gear against mist."
-    }
-  },
-  {
-    "id": "bruarfoss",
-    "name": {
-      "uk": "Brúarfoss (Блакитний водоспад)",
-      "en": "Brúarfoss (Cyan Waterfall)"
-    },
-    "region": "golden_circle",
-    "type": {
-      "uk": "Секретний блакитний водоспад",
-      "en": "Secret Cyan Cascade"
-    },
-    "coords": "64.2642° N, 20.5157° W",
-    "badge": "Hidden Gem",
-    "sources": [
-      {
-        "name": "Visit South Iceland",
-        "url": "https://www.south.is"
-      }
-    ],
-    "vector": {
-      "uk": "Відгалуження біля Траси 37",
-      "en": "Detour off Route 37"
-    },
-    "geology": {
-      "uk": "Яскравий бірюзово-блакитний колір води, яка збігає сотнями дрібних каскадів у глибоку розколину посеред річки Brúará.",
-      "en": "Luminous turquoise-cyan hue resulting from glacial sediment and water funneling into a narrow volcanic cleft."
-    },
-    "saga": {
-      "uk": "Назва Міст-водоспад. У 1602 році службовець єпископа зламав кам'яний природний міст, щоб голодуючі селяни не йшли просити милостиню.",
-      "en": "Name translates to Bridge Falls. In 1602, a bishop's steward destroyed the natural stone arch to deter famine-stricken beggars."
-    },
-    "practical": {
-      "uk": "Нещодавно відкрито новий платний паркінг прямо біля водоспаду, підхід займає лише 5 хвилин.",
-      "en": "A new official paid parking lot opened nearby, reducing the hike to just 5 minutes."
+      "uk": "Новий платний паркінг P1 (Parka.is) за 5 хвилин пішки дерев'яними доріжками.",
+      "en": "Direct parking lot (Parka.is) 5-minute walk from the falls via new gravel path."
     }
   },
   {
     "id": "faxi",
     "name": {
       "uk": "Faxi (Vatnsleysufoss)",
-      "en": "Faxi Waterfall (Vatnsleysufoss)"
+      "en": "Faxi Waterfall"
     },
     "region": "golden_circle",
     "type": {
-      "uk": "Широкий лососевий водоспад",
-      "en": "Wide Salmon Cascade"
+      "uk": "Широкий водоспад з лососевими сходами",
+      "en": "Wide Salmon Ladder Falls"
     },
     "coords": "64.2256° N, 20.3372° W",
-    "badge": "Scenic Detour",
+    "badge": "Hidden Quiet Gem",
     "sources": [
       {
-        "name": "South Iceland",
+        "name": "South.is",
         "url": "https://www.south.is"
       }
     ],
     "vector": {
-      "uk": "Траса 35 між Geysir та Reykholt",
-      "en": "Route 35 between Geysir and Reykholt"
+      "uk": "Траса 35 між Reykholt та Geysir",
+      "en": "Route 35 between Reykholt & Geysir"
     },
     "geology": {
-      "uk": "Широкий каскад завширшки 80 м і заввишки 7 м на річці Tungufljót. Обладнаний штучними лососевими сходами для нересту риби.",
-      "en": "An 80-meter wide, 7-meter high waterfall on the Tungufljót river equipped with a constructed salmon ladder."
+      "uk": "Широкий 80-метровий підковоподібний водоспад на річці Tungufljót з унікальним лососевим каналом.",
+      "en": "Wide 80m horseshoe cascade on Tungufljót river equipped with a bypass salmon ladder."
     },
     "saga": {
-      "uk": "Традиційне місце риболовлі ісландських селян протягом століть.",
-      "en": "Centuries-old salmon fishing spot for local farming communities."
+      "uk": "Місце збору ісландських коней для перепочинку (звідси назва від гриви коня - fax).",
+      "en": "Named after 'fax' (horse's mane) due to foaming crests resembling Icelandic steeds."
     },
     "practical": {
-      "uk": "Затишне кафе з терасою над водоспадом. Набагато менше натовпу, ніж біля Ґульфосса.",
-      "en": "Peaceful restaurant with an outdoor terrace overlooking the river, far less crowded than Gullfoss."
+      "uk": "Затишне кафе Vid Faxa з терасою над водою. Значно менше туристів, ніж на Ґюдльфоссі.",
+      "en": "Vid Faxa café overlooks the cataract with quiet uncrowded viewpoints."
     }
   },
   {
     "id": "fridheimar",
     "name": {
       "uk": "Friðheimar (Геотермальна томатна ферма)",
-      "en": "Friðheimar Geothermal Greenhouse"
+      "en": "Friðheimar Tomato Greenhouse"
     },
     "region": "golden_circle",
     "type": {
-      "uk": "Агротуризм & Гастрономія",
-      "en": "Geothermal Culinary Farm"
+      "uk": "Тепличний оазис під геотермальним світлом",
+      "en": "Geothermal Greenhouse Dining"
     },
     "coords": "64.2045° N, 20.4439° W",
-    "badge": "Geothermal Gastronomy",
+    "badge": "Iconic Food Stop",
     "sources": [
       {
         "name": "Friðheimar Official",
-        "url": "https://fridheimar.is/en"
+        "url": "https://fridheimar.is"
       }
     ],
     "vector": {
@@ -425,67 +419,67 @@
       "en": "Reykholt Village • Route 35"
     },
     "geology": {
-      "uk": "Опалення чистою водою з геотермальних свердловин температурою 95°C та 100% зелена електроенергія від ГЕС.",
-      "en": "Powered by 95°C water from on-site geothermal boreholes and 100% green hydroelectric energy."
+      "uk": "Вирощування томатів цілий рік завдяки артезіанській геотермальній воді 95°C та чистій гідроенергії.",
+      "en": "Year-round tomato harvest powered by 95°C subterranean geothermal boreholes and green hydropower."
     },
     "saga": {
-      "uk": "Вирощують томати посеред ісландської зими, використовуючи імпортованих джмелів для природного запилення.",
-      "en": "Cultivates fresh tomatoes year-round under arctic winters utilizing imported Dutch bumblebees for pollination."
+      "uk": "Шоу ісландських коней та презентація унікального п'ятого алюру — töltt.",
+      "en": "Showcasing purebred Icelandic horses demonstrating the ancient fifth gait: tölt."
     },
     "practical": {
-      "uk": "Столики на обід (томатний суп та свіжий хліб) обов'язково бронювати за кілька тижнів наперед.",
-      "en": "Reservations for their famous tomato soup buffet must be booked weeks in advance."
+      "uk": "Обов'язкове бронювання на обід (томатний суп, свіжий хліб і томатне пиво).",
+      "en": "Advance table reservations strongly recommended for tomato soup and freshly baked bread."
     }
   },
   {
     "id": "kerid",
     "name": {
       "uk": "Kerið (Кратерне озеро Керід)",
-      "en": "Kerið Volcanic Crater Lake"
+      "en": "Kerið Volcanic Crater"
     },
     "region": "golden_circle",
     "type": {
-      "uk": "Вулканічна кальдера",
-      "en": "Volcanic Scoria Crater"
+      "uk": "Кратерне озеро в червоній лаві",
+      "en": "Red Slag Caldera Lake"
     },
     "coords": "64.0412° N, 20.8851° W",
     "badge": "Volcanic Caldera",
     "sources": [
       {
-        "name": "Catalogue of Volcanoes",
-        "url": "https://icelandicvolcanoes.is"
+        "name": "Kerið Official",
+        "url": "https://kerid.is"
       }
     ],
     "vector": {
-      "uk": "Траса 35 між Selfoss та Reykholt",
-      "en": "Route 35 between Selfoss and Reykholt"
+      "uk": "Траса 35 на під'їзді до Selfoss",
+      "en": "Route 35 approaching Selfoss"
     },
     "geology": {
-      "uk": "Кальдера віком ~3000 років у системі Grímsnes. Стіни складені з червоного пористого базальтового шлаку (scoria), озеро живиться підземними водами.",
-      "en": "A 3,000-year-old crater caldera in the Grímsnes system. Red volcanic scoria walls encircle an aquifer-fed turquoise lake."
+      "uk": "Кальдера віком 3000 років з червоного вулканічного шлаку глибиною 55 м з неоново-бірюзовим водоносним озером.",
+      "en": "3,000-year-old volcanic caldera of vibrant red volcanic slag with a vivid aquamarine aquifer lake."
     },
     "saga": {
-      "uk": "У фольклорі вважалося бездонним і сполученим з підземними океанічними глибинами.",
-      "en": "Folklore held that the lake was bottomless and connected to the deep sea."
+      "uk": "За легендою, акустика кратера дозволяла тролям чути розмови людей за багато кілометрів.",
+      "en": "Acoustic wonder; concerts have been performed from a floating raft inside the crater."
     },
     "practical": {
-      "uk": "Вхід платний (приватна земля, ~450–600 ISK). Є стежки як по гребеню, так і вниз до води.",
-      "en": "Small admission fee (~450-600 ISK) on private land. Trails encircle the rim and lead down to water level."
+      "uk": "Вхідний квиток 600 ISK на збереження стежок. Можна обійти гребінь або спуститися до води.",
+      "en": "600 ISK conservation fee. Boardwalk trail rims the rim and stairs lead to the shore."
     }
   },
   {
-    "id": "hjalparfoss",
+    "id": "hrunalaug",
     "name": {
-      "uk": "Hjálparfoss (Водоспад Злиття річок)",
-      "en": "Hjálparfoss Waterfall"
+      "uk": "Hrunalaug (Автентична секретна купальня)",
+      "en": "Hrunalaug Secret Hot Spring"
     },
     "region": "golden_circle",
     "type": {
-      "uk": "Подвійний водоспад у лаві",
-      "en": "Twin River Basalt Falls"
+      "uk": "Прихована кам'яна купальня фермерів",
+      "en": "Hidden Historic Stone Pool"
     },
-    "coords": "64.1166° N, 19.8510° W",
-    "badge": "Þjórsárdalur Gem",
+    "coords": "64.1332° N, 20.2564° W",
+    "badge": "Secret Hot Spring",
     "sources": [
       {
         "name": "South Iceland",
@@ -493,92 +487,92 @@
       }
     ],
     "vector": {
-      "uk": "Долина Þjórsárdalur • Траса 32 біля підніжжя Гекли",
-      "en": "Þjórsárdalur Valley • Route 32 near Hekla"
+      "uk": "Поблизу Flúðir • Ґрунтова дорога Hruni",
+      "en": "Near Flúðir • Hruni backroad"
     },
     "geology": {
-      "uk": "Унікальне місце, де дві річки Fossá та Rauðá зливаються у подвійний водоспад посеред базальтових стовпів лавового поля Búrfell.",
-      "en": "A twin cascade where the rivers Fossá and Rauðá merge over curved basalt columns in the Búrfell lava field."
+      "uk": "Природний вихід термальних вод 38–40°C у кам'яну чашу серед порослих мохом пагорбів.",
+      "en": "Natural 38–40°C spring water channeled into centuries-old stone-lined sheep bath."
     },
     "saga": {
-      "uk": "Назва означає Водоспад допомоги — саме тут втомлені мандрівники після небезпечного переходу пустелею Sprengisandur знаходили першу воду і траву для коней.",
-      "en": "Name translates to Helping Falls — exhausted travelers crossing the harsh Sprengisandur desert found water and grazing for horses here."
+      "uk": "Старовинна хижа з дерновим дахом, де колись мили овечу вовну перед стрижкою.",
+      "en": "Turf-roofed stone changing hut preserving 19th-century pastoral farming heritage."
     },
     "practical": {
-      "uk": "Зручний асфальтований під'їзд, чудове місце для пікніка з видом на вулкан Búrfell.",
-      "en": "Easy paved access with picnic tables and panoramic views toward Mt. Búrfell."
+      "uk": "Платний вхід фермеру (близько 1500–2000 ISK). Ліміт 15 людей одночасно.",
+      "en": "Private property fee (~2000 ISK). Strictly limited capacity to prevent overcrowding."
     }
   },
   {
     "id": "urridafoss",
     "name": {
       "uk": "Urriðafoss (Найбільш повноводний водоспад)",
-      "en": "Urriðafoss (Most Voluminous Falls)"
+      "en": "Urriðafoss River Rapids"
     },
     "region": "south_coast",
     "type": {
-      "uk": "Гігантська річкова міць",
-      "en": "High-Volume Cascade"
+      "uk": "Водоспад з рекордним об'ємом води",
+      "en": "Highest Volume Waterfall"
     },
     "coords": "63.9247° N, 20.6725° W",
-    "badge": "Hydropower Giant",
+    "badge": "Power Giant",
     "sources": [
       {
-        "name": "South Iceland",
+        "name": "South.is",
         "url": "https://www.south.is"
       }
     ],
     "vector": {
-      "uk": "Траса 1 між Selfoss та Hella",
-      "en": "Highway 1 between Selfoss and Hella"
+      "uk": "Траса 1 перед Hella",
+      "en": "Route 1 before Hella"
     },
     "geology": {
-      "uk": "Найбільш повноводний водоспад Ісландії (витрата води ~360 м³/с) на найдовшій річці Þjórsá, що тече через найбільше лавове поле країни Þjórsárhraun.",
-      "en": "Most voluminous waterfall in Iceland (~360 m³/s) on the Þjórsá River, roaring across the great prehistoric Þjórsárhraun lava field."
+      "uk": "Водоспад на найдовшій річці Þjórsá скидає до 360 кубометрів води щосекунди через лавове поле Þjórsárhraun.",
+      "en": "Dumping 360 m³/sec, Iceland's highest-volume waterfall roaring over the Great Þjórsá Lava."
     },
     "saga": {
-      "uk": "Історичне місце лову лосося та форелі (Urriði — струмкова форель).",
-      "en": "Historically renowned for trout and salmon fishing (Urriði translates to brown trout)."
+      "uk": "Місцевий фольклор розповідає про водяних коней (Nykur), що ховаються під льодовиковими заломами.",
+      "en": "Folklore of the river horse Nykur lurking beneath ice floes."
     },
     "practical": {
-      "uk": "Паркінг безкоштовний прямо біля Траси 1, 2 хвилини пішки до оглядового майданчика.",
-      "en": "Free parking right off Ring Road, 2-minute stroll to the viewpoint."
+      "uk": "5 хвилин від Траси 1. Безкоштовний паркінг, дерев'яна платформа без натовпів.",
+      "en": "5 min off Ring Road. Free parking, zero tour bus crowds."
     }
   },
   {
     "id": "gluggafoss",
     "name": {
       "uk": "Gluggafoss / Merkjárfoss (Віконний водоспад)",
-      "en": "Gluggafoss / Merkjárfoss (Window Falls)"
+      "en": "Gluggafoss (Window Falls)"
     },
     "region": "south_coast",
     "type": {
-      "uk": "Секретний скельний водоспад",
-      "en": "Geological Window Phenomenon"
+      "uk": "Секретний водоспад з туфовими тунелями",
+      "en": "Tuff Arch Window Cascade"
     },
     "coords": "63.7212° N, 19.8931° W",
-    "badge": "Secret Gem",
+    "badge": "Secret Window Falls",
     "sources": [
       {
-        "name": "South Iceland",
+        "name": "Visit South",
         "url": "https://www.south.is"
       }
     ],
     "vector": {
-      "uk": "Траса 261 за Hvolsvöllur у долині Fljótshlíð",
-      "en": "Route 261 past Hvolsvöllur in Fljótshlíð"
+      "uk": "Траса 250 на північ від Hvolsvöllur",
+      "en": "Route 250 north of Hvolsvöllur"
     },
     "geology": {
-      "uk": "Вода пробила арки та вікна (gluggar) крізь м'який вулканічний туф палеозою, через які потік виривається назовні.",
-      "en": "Water has bored natural arches and windows (gluggar) through soft volcanic palagonite tuff, cascading through the openings."
+      "uk": "Річка Merkjá пробила серію отворів ('вікон') у м'якому вулканічному туфі, крізь які струмені б'ють назовні.",
+      "en": "Cascading through natural holes ('windows') bored through soft volcanic tuff by the Merkjá River."
     },
     "saga": {
-      "uk": "Серце земель Саги про Ньяла. Саме тут герой Ґуннар подивився на квітучі схили Fljótshlíð і відмовився від вигнання, обравши смерть.",
-      "en": "Heart of Njáls Saga country. Here the hero Gunnar turned back from exile, declaring Fair is the hillside, sealing his doomed fate."
+      "uk": "Звідси відкривається вид на хутір Hlíðarendi, де жив легендарний Ґуннар із саги про Ньяла.",
+      "en": "Overlooks Hlíðarendi, seat of hero Gunnar Hámundarson from the Saga of Burnt Njáll."
     },
     "practical": {
-      "uk": "Асфальтована спокійна дорога, без натовпу туристів, ідеальна зупинка для фото.",
-      "en": "Smooth paved detour, very quiet without tourist buses, excellent photographic opportunities."
+      "uk": "З'їзд на гравійну трасу 250. Безкоштовний паркінг, пішохідна стежка веде на верхній ярус.",
+      "en": "Off Route 250. Quiet picnic tables and short walk to the base and upper windows."
     }
   },
   {
@@ -589,11 +583,11 @@
     },
     "region": "south_coast",
     "type": {
-      "uk": "Must-See • Водоспад",
-      "en": "Must-See • 360° Walk-Behind"
+      "uk": "Must-See • Прохід за водну завісу",
+      "en": "Must-See • Walk-Behind Falls"
     },
     "coords": "63.6156° N, 19.9885° W",
-    "badge": "Iconic Falls",
+    "badge": "Walk-Behind Icon",
     "sources": [
       {
         "name": "South Iceland",
@@ -601,92 +595,128 @@
       }
     ],
     "vector": {
-      "uk": "Ліворуч біля самої Траси 1",
-      "en": "Left off Highway 1"
+      "uk": "Прямо на Трасі 1 • Поворот на 249",
+      "en": "Directly on Route 1 • Turnoff 249"
     },
     "geology": {
-      "uk": "Падіння з 60 м із колишніх морських кліфів. Простора скельна порожнина дозволяє обійти водоспад по колу.",
-      "en": "Plunges 60 meters over former ocean cliffs. A spacious cavern allows visitors to walk completely behind the veil."
+      "uk": "Падіння з висоти 60 м з колишніх морських кліфів льодовикового періоду. Ерозія вимила глибокий грот позаду водної стіни.",
+      "en": "60m drop from former ocean sea cliffs. Wave erosion left a wide walk-behind cavern."
     },
     "saga": {
-      "uk": "Орієнтир для середньовічних мореплавців з боку Атлантичного океану.",
-      "en": "Served as an ancient navigational landmark for coastal seafarers sailing along the southern sands."
+      "uk": "Старовинна межа між береговою лінією та океаном до відступу моря після танення льодовиків.",
+      "en": "Ancient coastline marker before isostatic rebound pushed the sea kilometers south."
     },
     "practical": {
-      "uk": "Платний паркінг (Parka.is). Обов'язковий дощовик. Взимку стежка позаду закрита через бурульки.",
-      "en": "Paid parking via Parka.is. Waterproof gear mandatory. Behind-the-falls trail closed in winter due to icefall hazards."
+      "uk": "Платний паркінг (Parka.is). Обов'язково повністю непромокальний одяг та захист для камери.",
+      "en": "Paid parking (Parka.is). Full waterproof shell and camera protection mandatory."
     }
   },
   {
     "id": "gljufrabui",
     "name": {
       "uk": "Gljúfrabúi (Таємний печерний водоспад)",
-      "en": "Gljúfrabúi (Secret Gorge Waterfall)"
+      "en": "Gljúfrabúi Hidden Cave Falls"
     },
     "region": "south_coast",
     "type": {
-      "uk": "Секретний печерний водоспад",
-      "en": "Hidden Cave Waterfall"
+      "uk": "Секретний водоспад усередині скелі",
+      "en": "Secret Cavern Waterfall"
     },
     "coords": "63.6209° N, 19.9864° W",
-    "badge": "Secret Cave Gem",
+    "badge": "Secret Cave Canyon",
     "sources": [
       {
-        "name": "Visit South",
+        "name": "South.is",
         "url": "https://www.south.is"
       }
     ],
     "vector": {
-      "uk": "600 метрів пішки на північ від Seljalandsfoss",
-      "en": "600m walk north of Seljalandsfoss"
+      "uk": "600 метрів північніше Сельяландсфосса",
+      "en": "600m north of Seljalandsfoss"
     },
     "geology": {
-      "uk": "40-метровий водоспад, прихований усередині вузької скельної щілини з відкритим верхнім склепінням.",
-      "en": "A 40-meter waterfall concealed within a narrow rock chasm with a skylit canyon chamber."
+      "uk": "Водоспад 40 м, повністю схований всередині вузької скельної ущелини з куполоподібною стелею.",
+      "en": "40m cascade hidden entirely inside a narrow roofed basalt canyon cavern."
     },
     "saga": {
-      "uk": "Назва перекладається як Той, що мешкає в ущелині. У народі вважався схованкою ельфів.",
-      "en": "Name translates as Dweller of the Gorge. Local folklore considered the hidden cleft a dwelling of elves."
+      "uk": "Назва перекладається як 'Мешканець ущелини' — притулок самітників та відьом за народними переказами.",
+      "en": "'Canyon Dweller' — ancient refuge of solitary outlaws and hidden spirits."
     },
     "practical": {
-      "uk": "Заходити по слизькому камінню в річищі струмка. Потрібне непромокальне взуття та капюшон!",
-      "en": "Wade carefully across river stepping stones inside the crevice. Waterproof hiking boots and hood essential!"
+      "uk": "Потрібно зайти у вузьку щілину по слизькому камінню річки. Високі гумові чоботи та дощовик обов'язкові!",
+      "en": "Must wade along river stepping-stones through narrow rock cleft. Waterproof boots essential."
+    }
+  },
+  {
+    "id": "nauthusagil",
+    "name": {
+      "uk": "Nauthúsagil (Секретна ущелина з ланцюгами)",
+      "en": "Nauthúsagil Secret Ravine"
+    },
+    "region": "south_coast",
+    "type": {
+      "uk": "Екстремальний каньйон з горобинами",
+      "en": "Secret Chains Ravine"
+    },
+    "coords": "63.6705° N, 19.8552° W",
+    "badge": "Top Secret Adventure",
+    "sources": [
+      {
+        "name": "South Iceland",
+        "url": "https://www.south.is"
+      }
+    ],
+    "vector": {
+      "uk": "Траса 249 у напрямку Торсмерка",
+      "en": "Route 249 towards Þórsmörk"
+    },
+    "geology": {
+      "uk": "Вузька глибока розколина, поросла мохом і віковими деревами горобини, що сплітаються над головою.",
+      "en": "Narrow moss-carpeted fissure roofed by intertwined ancient rowan trees, ending at a hidden falls."
+    },
+    "saga": {
+      "uk": "Назва походить від садиби Nauthús, де в XVII ст. переховувалися брати-втікачі.",
+      "en": "Named after the historic Bull House where outlaw brothers took refuge in the 17th century."
+    },
+    "practical": {
+      "uk": "Доступний для 4x4 на початку F249. Прохід руслом струмка з підйомом по закріплених ланцюгах.",
+      "en": "Requires wading and scrambling using bolted chains. Sturdy waterproof boots essential."
     }
   },
   {
     "id": "eyjafjallajokull_farm",
     "name": {
       "uk": "Þorvaldseyri & Eyjafjallajökull",
-      "en": "Þorvaldseyri Farm & Eyjafjallajökull View"
+      "en": "Þorvaldseyri & Eyjafjallajökull Viewpoint"
     },
-    "region": "vistas",
+    "region": "south_coast",
     "type": {
-      "uk": "Вулканічна панорама",
-      "en": "Volcano Vista & Memorial"
+      "uk": "Вулкан, що зупинив авіацію світу",
+      "en": "Volcano that stopped world aviation"
     },
     "coords": "63.5321° N, 19.6543° W",
-    "badge": "Eruption Memorial",
+    "badge": "2010 Eruption Site",
     "sources": [
       {
-        "name": "Catalogue of Volcanoes",
-        "url": "https://icelandicvolcanoes.is"
+        "name": "Eyjafjallajökull Eruption DB",
+        "url": "https://en.vedur.is"
       }
     ],
     "vector": {
-      "uk": "Ліворуч на Трасі 1 перед Skógar",
-      "en": "On the left on Highway 1 before Skógar"
+      "uk": "Траса 1 навпроти ферми Þorvaldseyri",
+      "en": "Route 1 across Þorvaldseyri farm"
     },
     "geology": {
-      "uk": "Льодовиковий щит площею 78 км² над стратовулканом, що вивергся у 2010 році.",
-      "en": "A 78 km² ice cap resting atop the explosive stratovolcano that famously erupted in April 2010."
+      "uk": "Стратовулкан під льодовиковою шапкою 1651 м. Виверження 2010 року підняло хмару попелу на 9 км і паралізувало небо Європи.",
+      "en": "1651m subglacial stratovolcano whose 2010 eruption caused unprecedented airspace grounding worldwide."
     },
     "saga": {
-      "uk": "Ферма Торвальдсейрі — символ незламності та відновлення після попелової бурі.",
-      "en": "Þorvaldseyri farm stands as an internationally renowned symbol of agricultural recovery from catastrophic ash."
+      "uk": "Ферма Þorvaldseyri стала світовим символом ісландської стійкості, повністю відновившись після засипання попелом.",
+      "en": "Symbol of resilience; farm buried in ash resurrected fertile crop yields within a year."
     },
     "practical": {
-      "uk": "Оглядовий майданчик біля дороги з панорамними фотощитами.",
-      "en": "Roadside scenic pull-off equipped with interpretive historical markers."
+      "uk": "Оглядовий майданчик з інформаційними стелами біля шосе. У ясну погоду видно верхівку льодовика.",
+      "en": "Highway turnout viewpoint with memorial boards. Summit visible on clear days."
     }
   },
   {
@@ -697,47 +727,47 @@
     },
     "region": "south_coast",
     "type": {
-      "uk": "Must-See • Водоспад",
-      "en": "Must-See • 60m Power Cascade"
+      "uk": "Must-See • Класичний велетень Півдня",
+      "en": "Must-See • South Coast Titan"
     },
     "coords": "63.5321° N, 19.5114° W",
-    "badge": "Power Cascade",
+    "badge": "Double Rainbow Titan",
     "sources": [
       {
-        "name": "Skógar Museum",
-        "url": "https://www.skogasafn.is"
+        "name": "Visit South",
+        "url": "https://www.south.is"
       }
     ],
     "vector": {
-      "uk": "Ліворуч у селищі Skógar",
-      "en": "Left in Skógar village"
+      "uk": "Селище Skógar • Траса 1",
+      "en": "Skógar Village • Route 1"
     },
     "geology": {
-      "uk": "Монолітна водяна стіна 25 м завширшки та 60 м заввишки. Густа водяна завіса формує яскраві подвійні веселки.",
-      "en": "A sheer curtain 25 meters broad falling 60 meters. Heavy spray frequently produces vivid double rainbows."
+      "uk": "Ширина 25 м, висота падіння 60 м. Потужні бризки породжують подвійну веселку в сонячні дні.",
+      "en": "25m wide, 60m sheer drop generating permanent double rainbows on sunny mornings."
     },
     "saga": {
-      "uk": "Легенда про скриню з золотом першого вікінга Трасі, заховану за водяною стіною.",
-      "en": "Legend holds that the first settler Þrasi buried his chest of gold behind the roaring cascade."
+      "uk": "Перший поселенець Трасі Тоуркіллссон сховав скриню із золотом у печері за водоспадом.",
+      "en": "First Viking settler Þrasi hid a golden chest behind the falls; a ring from it is in Skógar museum."
     },
     "practical": {
-      "uk": "370 металевих сходинок ведуть на оглядовий верхній майданчик. Початок треку Fimmvörðuháls.",
-      "en": "370 stairs climb to the cliff top. Trailhead for the renowned Fimmvörðuháls mountain route."
+      "uk": "Металеві сходи з 527 сходинок на оглядовий майданчик. Початок треку Fimmvörðuháls.",
+      "en": "527 metal steps lead to the upper rim observation deck and Fimmvörðuháls trailhead."
     }
   },
   {
     "id": "kvernufoss",
     "name": {
       "uk": "Kvernufoss (Таємний каньйонний водоспад)",
-      "en": "Kvernufoss (Hidden Canyon Falls)"
+      "en": "Kvernufoss Secret Canyon Falls"
     },
     "region": "south_coast",
     "type": {
       "uk": "Секретний водоспад за музеєм Скоугар",
-      "en": "Secret Canyon Gem Behind Museum"
+      "en": "Secret Walk-Behind Falls"
     },
     "coords": "63.5283° N, 19.4805° W",
-    "badge": "Secret Gem",
+    "badge": "Top Secret Gem",
     "sources": [
       {
         "name": "South Iceland",
@@ -745,20 +775,20 @@
       }
     ],
     "vector": {
-      "uk": "1 км на схід від Skógafoss за Skógar Museum",
-      "en": "1 km east of Skógafoss behind Skógar Museum"
+      "uk": "Паркінг Музею Skógar • 15 хв пішки",
+      "en": "Skógar Museum parking • 15m hike"
     },
     "geology": {
-      "uk": "30-метровий водоспад у смарагдовому моховому каньйоні Kvernugil. Можна пройти позаду струменя води, як на Seljalandsfoss, але без натовпу!",
-      "en": "A breathtaking 30-meter cascade tucked in the lush mossy gorge of Kvernugil. Visitors can walk completely behind the spray with virtually no crowds!"
+      "uk": "Водоспад заввишки 30 м у затишному скельному амфітеатрі річки Kverná, за струменями якого є суха стежка.",
+      "en": "30m cascade nestled in a secluded basalt gorge. You can walk entirely behind the water curtain."
     },
     "saga": {
-      "uk": "Назва пов'язана зі стародавніми ручними млинами (kvern), якими мололи зерно мешканці долини.",
-      "en": "Name refers to ancient hand-turned grain millstones (kvern) once used by early farm settlements."
+      "uk": "Прихований від вітрів каньйон використовувався вікінгами як зимове сховище для худоби.",
+      "en": "Sheltered canyon historically kept as safe pasture for livestock during severe Atlantic blizzards."
     },
     "practical": {
-      "uk": "Паркуйтеся біля Skógar Museum (платний паркінг). Легка 15-хвилинна стежка через поле в каньйон.",
-      "en": "Park at the Skógar Museum lot. A tranquil 15-minute trail leads through a stile and into the canyon."
+      "uk": "Паркуйтесь біля Skógar Museum (оплата Parka). 15 хвилин легкої стежки вздовж річки.",
+      "en": "Park at Skogar Museum (Parka.is). Peaceful 15-min trail along the mossy creek."
     }
   },
   {
@@ -769,392 +799,608 @@
     },
     "region": "south_coast",
     "type": {
-      "uk": "Вивідний язик льодовика",
-      "en": "Glacier Tongue & Lagoon"
+      "uk": "Льодовик з лавовим попелом та тріщинами",
+      "en": "Crevasse & Volcanic Ash Tongue"
     },
     "coords": "63.5306° N, 19.3703° W",
-    "badge": "Glacier Hike",
+    "badge": "Walking on Ice",
     "sources": [
       {
-        "name": "Institute of Earth Sciences",
-        "url": "https://jardvis.hi.is"
+        "name": "Mýrdalsjökull Research",
+        "url": "https://en.vedur.is"
       }
     ],
     "vector": {
-      "uk": "Поворот на Трасу 221 з Траси 1",
-      "en": "Turn off Highway 1 onto Route 221"
+      "uk": "З'їзд на трасу 221 з Траси 1",
+      "en": "Route 221 off Route 1"
     },
     "geology": {
-      "uk": "Вивідний язик масиву Mýrdalsjökull. Шари чорного вулканічного попелу застигли всередині блакитного льоду, свідчачи про минулі виверження Катли.",
-      "en": "An outlet glacier of Mýrdalsjökull showcasing stratified black tephra and ice bands from historical Katla eruptions."
+      "uk": "Вивідний язик льодовика Mýrdalsjökull, вкритий смугами чорного базальтового попелу від вивержень вулкана Katla.",
+      "en": "Outlet tongue of Mýrdalsjökull striped with black tephra layers from historic Katla eruptions."
     },
     "saga": {
-      "uk": "Наочний підручник глобального потепління: льодовик відступає на десятки метрів щороку, утворивши нове прильодовикове озеро.",
-      "en": "A visual benchmark of climate warming: the tongue has retreated hundreds of meters over recent decades, leaving a growing proglacial lake."
+      "uk": "Під льодовиком дрімає гігантський вулкан Катла, чиї супер-виверження відбуваються кожні 50–100 років.",
+      "en": "Rests above the caldera of subglacial supervolcano Katla, overdue for a major eruption."
     },
     "practical": {
-      "uk": "Вихід на лід суворо заборонений без сертифікованого гіда та льодорубів/кішок через приховані тріщини (crevasses).",
-      "en": "Walking onto the ice sheet without a certified guide, helmet, and crampons is strictly prohibited due to lethal hidden crevasses."
+      "uk": "Вихід на лід суворо заборонений без сертифікованого гіда, кішок та льодоруба! Льодовикова лагуна біля паркінгу.",
+      "en": "Never step on ice without crampons and licensed guide. Lagoon trail is safe."
     }
   },
   {
     "id": "dyrholaey",
     "name": {
-      "uk": "Dyrhólaey (Мис Дірхолей & Арка)",
+      "uk": "Dyrhólaey (Мис Дірхолей & Велетенська арка)",
       "en": "Dyrhólaey Promontory & Arch"
     },
     "region": "south_coast",
     "type": {
-      "uk": "Природний заповідник • Тупики",
-      "en": "Nature Reserve & Puffin Haven"
+      "uk": "Найпівденніший мис з колоніями тупиків",
+      "en": "Southernmost Cape & Puffin Colony"
     },
     "coords": "63.4022° N, 19.1303° W",
-    "badge": "Puffin Sanctuary",
+    "badge": "Puffin & Ocean Arch",
     "sources": [
       {
-        "name": "Environment Agency (UST)",
-        "url": "https://www.ust.is"
+        "name": "Environment Agency Iceland",
+        "url": "https://ust.is"
       }
     ],
     "vector": {
-      "uk": "Траса 218 перед Vík",
-      "en": "Route 218 before Vík"
+      "uk": "Траса 218 • Підйом до маяка",
+      "en": "Route 218 • Lighthouse ascent"
     },
     "geology": {
-      "uk": "120-метровий вулканічний мис, утворений підводним виверженням. Гігантська базальтова арка, крізь яку пролітають легкомоторні літаки.",
-      "en": "A 120-meter volcanic cliff created by submarine eruptions, featuring a colossal natural sea arch wide enough for small aircraft to pass through."
+      "uk": "120-метровий вулканічний мис із гігантською природною базальтовою аркою, крізь яку пропливають катери.",
+      "en": "120m volcanic promontory with a colossal natural basalt arch large enough for boats to pass through."
     },
     "saga": {
-      "uk": "Назва означає Острів із дверною діркою. Влітку тут гніздяться десятки тисяч тупиків (атлантичних іпаток).",
-      "en": "Translates to Door Hole Island. Summer nesting sanctuary for thousands of Atlantic puffins."
+      "uk": "Англійські моряки називали мис 'Cape Portland'. Маяк збудований у 1927 році.",
+      "en": "Formerly known as Cape Portland by British sailors; historic castle-like lighthouse built 1927."
     },
     "practical": {
-      "uk": "У травні та червні верхнє плато частково закривається для гніздування птахів. Ураганні вітри!",
-      "en": "Upper promontory partially restricted during May-June nesting season. Extreme gale winds frequent."
+      "uk": "Увага на сильний вітер! Обов'язково тримайте двері авто. Колонії тупиків гніздяться з травня по серпень.",
+      "en": "Extreme wind hazard zone! Hold car doors. Puffins nest along cliffs May-August."
     }
   },
   {
     "id": "reynisfjara",
     "name": {
-      "uk": "Reynisfjara (Чорний пляж Рейнісф'яра)",
+      "uk": "Reynisfjara (Чорний пляж & Базальтові колони)",
       "en": "Reynisfjara Black Sand Beach"
     },
     "region": "south_coast",
     "type": {
-      "uk": "Must-See • Смертельна небезпека",
-      "en": "Must-See • Sneaker Wave Hazard"
+      "uk": "Must-See • Зона небезпечних хвиль-убивць",
+      "en": "Must-See • Sneaker Wave Danger"
     },
-    "coords": "63.4057° N, 19.0716° W",
-    "badge": "Sneaker Wave Alert",
+    "coords": "63.4045° N, 19.0436° W",
+    "badge": "World Famous Black Beach",
     "sources": [
       {
-        "name": "SafeTravel Sneaker Waves",
+        "name": "SafeTravel Reynisfjara",
         "url": "https://safetravel.is"
       }
     ],
     "vector": {
-      "uk": "Траса 215 біля Vík",
-      "en": "Route 215 near Vík"
+      "uk": "Кінець Траси 215 • Біля Віка",
+      "en": "End of Route 215 • Near Vík"
     },
     "geology": {
-      "uk": "Чорний пляж зі скелею Garðar — ідеальними шестигранними колонами з охолодженої базальтової лави та морськими кекурами Reynisdrangar.",
-      "en": "Jet-black sands flanked by the Garðar columnar basalt cliff and the Reynisdrangar basalt sea stacks."
+      "uk": "Пісок із роздробленої океаном лави, геометричний базальтовий орган Garðar та скелі-пальці Reynisdrangar у морі.",
+      "en": "Black basalt sands, hexagonal column cliff Garðar, and sea stacks Reynisdrangar jutting from the surf."
     },
     "saga": {
-      "uk": "Скелі Reynisdrangar — це застиглі на світанку тролі, які намагалися витягти трищогловий корабель з моря.",
-      "en": "Folklore tells that the offshore stacks are trolls turned to stone by the first rays of the dawn sun."
+      "uk": "За легендою, скелі Рейнісдранґар — це тролі, які намагалися витягти трищогловий корабель, але закам'яніли на світанку.",
+      "en": "Folklore tells of two trolls turned to stone at sunrise while trying to drag a three-masted ship ashore."
     },
     "practical": {
-      "uk": "СНІКЕР-ХВИЛІ ВБИВАЮТЬ! Ніколи не повертайтеся спиною до хвиль. Слідкуйте за сигнальним світлофором (Зелений/Жовтий/Червоний).",
-      "en": "SNEAKER WAVES KILL. Never turn your back on the ocean. Abide strictly by the safety traffic light at the beach entrance."
+      "uk": "СУВОРА НЕБЕЗПЕКА! Ніколи не повертайтеся спиною до океану. Слідкуйте за кольоровим світлофором безпеки на вході.",
+      "en": "EXTREME SNEAKER WAVE HAZARD. Never turn your back to the sea. Obey warning lights."
+    }
+  },
+  {
+    "id": "vik_church",
+    "name": {
+      "uk": "Vík í Mýrdal & Церква на пагорбі",
+      "en": "Vík í Mýrdal & Hilltop Church"
+    },
+    "region": "south_coast",
+    "type": {
+      "uk": "Головний південний хаб безпеки",
+      "en": "Southern Hub & Katla Evacuation Point"
+    },
+    "coords": "63.4194° N, 19.0064° W",
+    "badge": "Southern Haven",
+    "sources": [
+      {
+        "name": "Vík Official",
+        "url": "https://vik.is"
+      }
+    ],
+    "vector": {
+      "uk": "Центр Віка • Пагорб Víkurkirkja",
+      "en": "Vík Center • Víkurkirkja Hill"
+    },
+    "geology": {
+      "uk": "Селище розташоване прямо в зоні потенційного селевого потоку (jökulhlaup) у разі виверження вулкана Катла.",
+      "en": "Situated directly in the glacial outburst flood path should Katla erupt."
+    },
+    "saga": {
+      "uk": "Білосніжна церква з червоним дахом — офіційно визнане єдине безпечне місце евакуації мешканців при виверженні.",
+      "en": "The high hilltop church is the town's designated refuge safe from glacial tsunamis."
+    },
+    "practical": {
+      "uk": "Останній великий супермаркет (Krónan), заправка, сервісні станції перед перетином пустелі Skeiðarársandur.",
+      "en": "Key refueling and supply stop before crossing the Skeiðarársandur desert."
     }
   },
   {
     "id": "eldhraun",
     "name": {
-      "uk": "Eldhraun (Лавове поле Лакі 1783)",
-      "en": "Eldhraun (1783 Laki Moss Lava Field)"
+      "uk": "Лавове поле Eldhraun (Виверження Лакі 1783)",
+      "en": "Eldhraun Mossy Lava Field"
     },
     "region": "south_coast",
     "type": {
-      "uk": "Гігантське мохове поле лави",
-      "en": "Massive Moss-Covered Lava"
+      "uk": "Найбільше поле мохової лави у світі",
+      "en": "World's Largest Mossy Lava"
     },
-    "coords": "63.6756° N, 18.1458° W",
-    "badge": "Historic Cataclysm",
+    "coords": "63.6756° N, 18.1478° W",
+    "badge": "Laki Eruption 1783",
     "sources": [
       {
-        "name": "Catalogue of Volcanoes",
-        "url": "https://icelandicvolcanoes.is"
+        "name": "Katla Geopark",
+        "url": "https://www.katlageopark.com"
       }
     ],
     "vector": {
-      "uk": "Обабіч Траси 1 біля Kirkjubæjarklaustur",
-      "en": "Highway 1 corridor near Klaustur"
+      "uk": "Обидва боки Траси 1 між Vík та Kirkjubæjarklaustur",
+      "en": "Both sides of Route 1 between Vík & Klaustur"
     },
     "geology": {
-      "uk": "Найбільше базальтове лавове поле історичного часу (565 км²), вивержене кратерами Лакі у 1783–1784 рр. Вкрите зеленим мохом.",
-      "en": "Largest historical basalt lava flow on Earth (565 km²), produced during the 1783–1784 Laki fires, carpeted in woolly moss."
+      "uk": "565 кв. км базальтової лави від виверження кратерів Laki (1783–1784), що спричинило похолодання в Європі. Вкрите товстим килимом моху Woolly fringe-moss.",
+      "en": "565 km² of lava poured from the 1783 Laki eruption, causing the global 'Sand-Summer' winter. Carpeted in delicate moss."
     },
     "saga": {
-      "uk": "Виверження спричинило голод Móðuharðindin, що забрав чверть населення Ісландії.",
-      "en": "The volcanic haze caused the Móðuharðindin famine, killing 25% of Iceland's population."
+      "uk": "Пастор Йон Стейнґрімссон зупинив потік вогню знаменитою 'Вогняною проповіддю' (Eldmessa) у церкві Клаустюра.",
+      "en": "Pastor Jón Steingrímsson halted the encroaching lava with his famous 'Fire Sermon' in 1783."
     },
     "practical": {
-      "uk": "КАТЕГОРИЧНО ЗАБОРОНЕНО СТУПАТИ НА МОХ! Мох відновлюється до 100 років. Використовуйте оглядові платформи.",
-      "en": "DO NOT WALK ON THE MOSS. Recovers over a century. Use designated viewing platforms only."
+      "uk": "ХОДИТИ ПО МОХУ СУВОРО ЗАБОРОНЕНО! Відновлення пошкодженого моху триває понад 100 років. Користуйтеся паркінгом.",
+      "en": "STRICTLY FORBIDDEN TO STEP ON MOSS. Damaged moss takes a century to regrow."
     }
   },
   {
     "id": "fjadrargljufur",
     "name": {
-      "uk": "Fjaðrárgljúfur (Каньйон Ф'ядраурглювур)",
-      "en": "Fjaðrárgljúfur Serpentine Canyon"
+      "uk": "Fjaðrárgljúfur (Каньйон Джастіна Бібера)",
+      "en": "Fjaðrárgljúfur Canyon"
     },
     "region": "south_coast",
     "type": {
-      "uk": "Казковий каньйон глибиною 100 м",
-      "en": "100m Deep Fairy-Tale Canyon"
+      "uk": "Must-See • Казковий звивистий каньйон",
+      "en": "Must-See • Serpentine Canyon"
     },
     "coords": "63.7713° N, 18.1718° W",
-    "badge": "Serpentine Gorge",
+    "badge": "Fairytale Canyon",
     "sources": [
       {
-        "name": "Environment Agency (UST)",
-        "url": "https://www.ust.is"
+        "name": "Environment Agency",
+        "url": "https://ust.is"
       }
     ],
     "vector": {
-      "uk": "Траса 206 перед Kirkjubæjarklaustur",
-      "en": "Route 206 before Klaustur"
+      "uk": "Траса 206 біля Kirkjubæjarklaustur",
+      "en": "Route 206 near Klaustur"
     },
     "geology": {
-      "uk": "Звивистий каньйон глибиною 100 м і довжиною 2 км, промитий талими льодовиковими водами у шарах палагоніту 2 млн років тому.",
-      "en": "A dramatic serpentine canyon 100 meters deep and 2 kilometers long, carved by glacial meltwaters through palagonite."
+      "uk": "Глибина 100 м, довжина 2 км. Вимитий талими льодовиковими водами у гірських породах палагоніту близько 2 млн років тому.",
+      "en": "100m deep, 2km long serpentine gorge carved by meltwater through palagonite hyaloclastite bedrock."
     },
     "saga": {
-      "uk": "Світову вірусну славу каньйону приніс кліп Джастіна Бібера у 2015 році.",
-      "en": "Shot to global fame following Justin Bieber's 2015 music video, prompting protective wooden walkways."
+      "uk": "У каньйоні знімали сцени 'Гри Престолів' та знаменитий кліп Бібера I'll Show You.",
+      "en": "Filming site for Game of Thrones and Justin Bieber's 2015 music video."
     },
     "practical": {
-      "uk": "Паркінг платний. Рухайтеся виключно облаштованими оглядовими майданчиками. Не перелазьте за огорожу.",
-      "en": "Paid parking. Stay strictly on marked boardwalks; never cross safety ropes."
+      "uk": "Офіційні оглядові платформи. Паркінг платний (Parka.is). Сходити зі стежки заборонено.",
+      "en": "Boardwalk viewpoints with designated cantilever platforms. Paid parking."
+    }
+  },
+  {
+    "id": "stjornarfoss",
+    "name": {
+      "uk": "Stjórnarfoss & Systrafoss (Водоспади Сестер)",
+      "en": "Stjórnarfoss & Systrafoss"
+    },
+    "region": "south_coast",
+    "type": {
+      "uk": "Парні водоспади монахинь Клаустюра",
+      "en": "Sisterhood Waterfalls"
+    },
+    "coords": "63.8015° N, 18.0583° W",
+    "badge": "Monastery Legends",
+    "sources": [
+      {
+        "name": "Visit South",
+        "url": "https://www.south.is"
+      }
+    ],
+    "vector": {
+      "uk": "Північна околиця Kirkjubæjarklaustur",
+      "en": "North of Kirkjubæjarklaustur"
+    },
+    "geology": {
+      "uk": "Куполоподібний базальтовий водоспад Стьорнарфосс поруч із двома тонкими стрічками Систрафосс, що стікають з плато.",
+      "en": "Dome-shaped cascade on basalt organ pipes beside the twin ribbons of Systrafoss cascading from lake Systravatn."
+    },
+    "saga": {
+      "uk": "Названі на честь монахинь бенедиктинського монастиря XII століття, з якими пов'язані містичні саги про озеро Систраватн.",
+      "en": "Named after 12th-century Benedictine nuns whose legends haunt the summit lake."
+    },
+    "practical": {
+      "uk": "Тиха локація для пікніка в 2 хв від Траси 1. Зручний заїзд у будь-яку пору року.",
+      "en": "Peaceful picnic clearing 2 minutes from Ring Road."
     }
   },
   {
     "id": "lomagnupur",
     "name": {
       "uk": "Скеля Lómagnúpur (Скеля Велетня)",
-      "en": "Lómagnúpur Monolith"
+      "en": "Lómagnúpur Giant's Cliff"
     },
-    "region": "vistas",
+    "region": "south_coast",
     "type": {
-      "uk": "Гігантський моноліт 688 м",
+      "uk": "Монолітний 688-метровий стрімчак",
       "en": "688m Sheer Basalt Monolith"
     },
-    "coords": "63.96° N, 17.51° W",
-    "badge": "Saga Landmark",
+    "coords": "63.9600° N, 17.5100° W",
+    "badge": "Guardian of Iceland",
     "sources": [
       {
-        "name": "Njáls Saga Database",
-        "url": "https://sagadb.org/brennu-njals_saga"
+        "name": "Vatnajökull National Park",
+        "url": "https://www.vatnajokulsthjodgardur.is"
       }
     ],
     "vector": {
-      "uk": "Посеред чорного сандра Skeiðarársandur",
-      "en": "Rises over Skeiðarársandur outwash plain"
+      "uk": "Траса 1 на в'їзді в пустелю Skeiðarársandur",
+      "en": "Route 1 entering Skeiðarársandur"
     },
     "geology": {
-      "uk": "Вертикальна 688-метрова стіна з базальтових та туфових шарів, що височіє немов фортеця над безкрайнім чорним піском.",
-      "en": "A colossal 688-meter sheer promontory of stratified basalt and palagonite jutting over black outwash sands."
+      "uk": "Стрімка базальтова стіна заввишки 688 м, яка колись височіла над бурхливим океаном, а тепер височіє над чорними пісками зандрів.",
+      "en": "Towering 688m cliff face formed by subglacial volcanic eruptions and ocean battering."
     },
     "saga": {
-      "uk": "Дух-охоронець Ісландії — Велетень із залізною палицею (Bergrisi) мешкає всередині цієї скелі за Сагою про Ньяла.",
-      "en": "Dwelling of the Giant with the Iron Staff (Bergrisi), one of Iceland's four mythological guardian spirits."
+      "uk": "У сазі про Ньяла з цієї гори виходить дух-велетень Йотюн із залізною палицею — один із чотирьох священних захисників (Landvættir) герба Ісландії.",
+      "en": "Home of the giant mountain guardian featured in the National Coat of Arms of Iceland."
     },
     "practical": {
-      "uk": "Біля підніжжя є кишеня для фото з відбитком скелі у придорожній водоймі.",
-      "en": "Roadside pull-off with a small reflecting pond offering iconic photography angles."
+      "uk": "Чудове місце для зупинки та зйомки масштабу природи прямо з шосе.",
+      "en": "Highway rest stop offering majestic photo panoramas."
     }
   },
   {
     "id": "svartifoss",
     "name": {
       "uk": "Svartifoss (Чорний водоспад Skaftafell)",
-      "en": "Svartifoss (The Black Falls)"
+      "en": "Svartifoss Basalt Column Falls"
     },
-    "region": "glaciers",
+    "region": "south_coast",
     "type": {
-      "uk": "Must-See • Базальтові призми",
-      "en": "Must-See • Architectural Icon"
+      "uk": "Must-See • Водоспад в амфітеатрі базальту",
+      "en": "Must-See • Hexagonal Organ Falls"
     },
     "coords": "64.0275° N, 16.9753° W",
     "badge": "Architectural Icon",
     "sources": [
       {
         "name": "Vatnajökull National Park",
-        "url": "https://www.vatnajokulsthjodgardur.is/en"
+        "url": "https://www.vatnajokulsthjodgardur.is"
       }
     ],
     "vector": {
-      "uk": "Національний парк Skaftafell • Траса 1",
-      "en": "Skaftafell, Vatnajökull National Park"
+      "uk": "Національний парк Skaftafell • 45 хв хайкінг",
+      "en": "Skaftafell Visitor Center • 45m trail"
     },
     "geology": {
-      "uk": "20-метровий водоспад в оточенні звисаючих чорних базальтових шестигранних призм, схожих на орган.",
-      "en": "A 20-meter waterfall cascading against a dark amphitheater of geometric hanging hexagonal basalt columns."
+      "uk": "20-метровий потік спадає з нависаючої стіни ідеальних шестигранних чорних базальтових колон, утворених при повільному охолодженні лави.",
+      "en": "20m cascade dropping from hanging amphitheater of slender black geometric basalt columns."
     },
     "saga": {
-      "uk": "Надихнув архітектора Ґудйоуна Самуельссона на проект церкви Hallgrímskirkja в Рейк'явіку.",
-      "en": "Directly inspired State Architect Guðjón Samúelsson in designing Hallgrímskirkja church."
+      "uk": "Саме форма цих колон надихнула архітектора Ґудйоуна Самуельссона на дизайн собору Hallgrímskirkja в Рейк'явіку.",
+      "en": "Architectural blueprint inspiring Guðjón Samúelsson's design for Hallgrímskirkja in Reykjavik."
     },
     "practical": {
-      "uk": "Паркінг Skaftafell платний. Підйом пішки від візитор-центру займає 40–50 хвилин.",
-      "en": "Paid parking at Skaftafell Visitor Centre. 45-minute uphill hike on well-graded trails."
+      "uk": "Паркінг Skaftafell (Parka.is). Підйом пішки 1.8 км облаштованою гірською стежкою.",
+      "en": "Paid parking at Visitor Center. 1.8 km uphill hike on maintained gravel trail."
     }
   },
   {
     "id": "svinafellsjokull",
     "name": {
       "uk": "Svínafellsjökull (Льодовик Інтерстеллар)",
-      "en": "Svínafellsjökull Glacier (Interstellar)"
+      "en": "Svínafellsjökull (Interstellar Glacier)"
     },
-    "region": "glaciers",
+    "region": "south_coast",
     "type": {
-      "uk": "Драматичний крижаний язик",
-      "en": "Cinematic Ice Tongue"
+      "uk": "Крижана планета Манна з фільму Крістофера Нолана",
+      "en": "Mann's Ice Planet Filming Site"
     },
     "coords": "64.0083° N, 16.8833° W",
-    "badge": "Sci-Fi Location",
+    "badge": "Hollywood Glacier",
     "sources": [
       {
-        "name": "Vatnajökull National Park",
-        "url": "https://www.vatnajokulsthjodgardur.is/en"
+        "name": "Vatnajökull NP",
+        "url": "https://www.vatnajokulsthjodgardur.is"
       }
     ],
     "vector": {
-      "uk": "З'їзд за Skaftafell",
-      "en": "Turn off Highway 1 past Skaftafell"
+      "uk": "З'їзд на 1 км східніше Skaftafell",
+      "en": "Turnoff 1km east of Skaftafell"
     },
     "geology": {
-      "uk": "Вузький язик льодовика Ватнайокутль з гострими сераками та глибокими блакитними розколами.",
-      "en": "A heavily crevassed outlet glacier of Vatnajökull bristling with razor-sharp ice seracs."
+      "uk": "Гострі льодові сераки, глибокі сині тріщини та морени від найбільшої льодовикової шапки Європи Vatnajökull.",
+      "en": "Dramatic razor-sharp seracs and deep cyan crevasses extending from Vatnajökull ice cap."
     },
     "saga": {
-      "uk": "Крижана планета Манна у фільмі Інтерстеллар Крістофера Нолана та Бетмен: Початок.",
-      "en": "Filming backdrop for Christopher Nolan's Interstellar and Batman Begins."
+      "uk": "Локація зйомок 'Інтерстеллар' (крижана планета Манна) та 'Бетмен: Початок'.",
+      "en": "Filming ground for Christopher Nolan's Interstellar and Batman Begins."
     },
     "practical": {
-      "uk": "Обережно на гравійному під'їзді. Дотримуйтесь попереджувальних знаків про каменепади.",
-      "en": "Rough gravel access. Respect rockfall warning zones along the eastern lateral moraine."
+      "uk": "Гравійна дорога доступна для звичайних авто. Стежка веде вздовж гребеня над льодовиковою лагуною.",
+      "en": "Gravel road to viewing ridge. Keep clear of falling rock hazard areas."
     }
   },
   {
     "id": "mulagljufur",
     "name": {
       "uk": "Múlagljúfur (Секретний каньйон Hangandifoss)",
-      "en": "Múlagljúfur Canyon & Hangandifoss"
+      "en": "Múlagljúfur Secret Canyon"
     },
-    "region": "glaciers",
+    "region": "south_coast",
     "type": {
-      "uk": "Секретний каньйон з водоспадами",
-      "en": "Hidden Canyon & High Falls"
+      "uk": "Найкрасивіший секретний каньйон Ісландії",
+      "en": "Iceland's Most Epic Hidden Canyon"
     },
     "coords": "63.9897° N, 16.4358° W",
-    "badge": "Secret Gem",
+    "badge": "Top Secret Canyon",
     "sources": [
       {
-        "name": "Vatnajökull Park",
-        "url": "https://www.vatnajokulsthjodgardur.is/en"
+        "name": "South Iceland",
+        "url": "https://www.south.is"
       }
     ],
     "vector": {
-      "uk": "Гравійна дорога перед Fjallsárlón",
-      "en": "Unmarked gravel track before Fjallsárlón"
+      "uk": "Непозначений з'їзд біля Fjallsárlón",
+      "en": "Unmarked gravel turnoff before Fjallsárlón"
     },
     "geology": {
-      "uk": "Грандіозний зелений каньйон глибиною 200 м з двома водоспадами: Hangandifoss (123 м) та Múlafoss.",
-      "en": "A colossal moss-carpeted canyon plunging 200m, split by Hangandifoss (123m) and Múlafoss torrents."
+      "uk": "Велична розколина, в яку падають два височенних водоспади: Hangandifoss (123 м) та Múlafoss, серед зелених скельних гребенів.",
+      "en": "Colossal emerald gorge harboring twin towering falls: Hangandifoss (123m) and Múlafoss."
     },
     "saga": {
-      "uk": "Один із найдикіших та найнезайманіших куточків південного сходу Ісландії.",
-      "en": "One of Iceland's most pristine wild gorges, known only to local sheep herders until recently."
+      "uk": "Століттями був відомий лише місцевим пастухам, які шукали заблукалих овець серед скель.",
+      "en": "Known only to isolated local shepherds until aerial photographers unveiled its majesty."
     },
     "practical": {
-      "uk": "Авто з високим кліренсом та 1.5–2 години пішого треку вгору схилом.",
-      "en": "High-clearance car recommended. 1.5 to 2-hour moderate uphill hike."
+      "uk": "Гравійна дорога вимагає обережності. Хайкінг 4 км туди й назад (близько 2 годин). Найкращий вид на заході сонця.",
+      "en": "Rough gravel approach. 4 km round-trip scenic ridge hike. Breathtaking views."
     }
   },
   {
     "id": "jokulsarlon",
     "name": {
       "uk": "Jökulsárlón & Diamond Beach",
-      "en": "Jökulsárlón & Diamond Beach"
+      "en": "Jökulsárlón Glacier Lagoon & Diamond Beach"
     },
-    "region": "glaciers",
+    "region": "south_coast",
     "type": {
-      "uk": "Must-See • UNESCO",
-      "en": "Must-See • Glacier Lagoon"
+      "uk": "Must-See • Айсберги та діамантовий пляж",
+      "en": "Must-See • Icebergs & Diamond Beach"
     },
     "coords": "64.0484° N, 16.1795° W",
-    "badge": "Global Wonder",
+    "badge": "Crown Jewel of Iceland",
     "sources": [
       {
-        "name": "Vatnajökull National Park",
-        "url": "https://www.vatnajokulsthjodgardur.is/en"
+        "name": "Vatnajökull NP Official",
+        "url": "https://www.vatnajokulsthjodgardur.is"
       }
     ],
     "vector": {
-      "uk": "Обабіч мосту на Трасі 1",
-      "en": "Spanning both sides of Route 1 bridge"
+      "uk": "Міст Траси 1 над протокою Jökulsá",
+      "en": "Route 1 suspension bridge over lagoon outlet"
     },
     "geology": {
-      "uk": "Найглибша лагуна Ісландії (284 м). Тисячолітні блакитні айсберги дрейфують через протоку на чорний Діамантовий пляж.",
-      "en": "Iceland's deepest lagoon (284m). Millennia-old icebergs drift through the channel onto Diamond Beach."
+      "uk": "Найглибше озеро Ісландії (284 м), де тисячолітні блакитні брили відламуються від льодовика Breiðamerkurjökull і пливуть у відкритий океан.",
+      "en": "Deepest lake in Iceland (284m), where 1,000-year-old electric-blue icebergs calve and wash onto volcanic sands."
     },
     "saga": {
-      "uk": "Знімальний майданчик світових фільмів про Джеймса Бонда, Лару Крофт та Бетмена.",
-      "en": "Cinematic location for two James Bond films, Lara Croft, and Batman Begins."
+      "uk": "Зйомки фільмів про Джеймса Бонда ('Помри, але не зараз', 'Вид на вбивство') та Лари Крофт.",
+      "en": "Iconic setting for James Bond films Die Another Day and A View to a Kill."
     },
     "practical": {
-      "uk": "Категорично заборонено залазити на крижини у прибої (смертельна небезпека відпливної хвилі!).",
-      "en": "Never climb onto ice blocks in the tidal wash; rogue waves can instantly sweep ice out to sea."
+      "uk": "Паркінг платний (Parka.is). Обов'язково перейдіть дорогу на чорний пляж Diamond Beach, щоб побачити лід у прибої.",
+      "en": "Paid parking. Cross under the bridge to walk the Diamond Beach shoreline."
     }
   },
   {
     "id": "vestrahorn",
     "name": {
       "uk": "Vestrahorn & Stokksnes (Скелі Бетмена)",
-      "en": "Vestrahorn & Stokksnes"
+      "en": "Vestrahorn & Stokksnes Batman Mountain"
     },
-    "region": "eastfjords",
+    "region": "south_coast",
     "type": {
-      "uk": "Культова фотолокація • Габро",
-      "en": "Iconic Jagged Peaks"
+      "uk": "Зубчасті габро-піки над чорними дюнами",
+      "en": "Jagged Gabbro Horns & Black Dunes"
     },
     "coords": "64.2417° N, 14.9750° W",
-    "badge": "Photographer Dream",
+    "badge": "Photographer's Dream",
     "sources": [
       {
-        "name": "Visit East Iceland",
-        "url": "https://www.east.is"
+        "name": "Viking Café Stokksnes",
+        "url": "https://vikingcafe.is"
       }
     ],
     "vector": {
-      "uk": "Півострів Stokksnes за Höfn",
-      "en": "Stokksnes peninsula past Höfn"
+      "uk": "Півострів Stokksnes за Höfn • Траса 99",
+      "en": "Stokksnes Peninsula past Höfn • Route 99"
     },
     "geology": {
-      "uk": "Гора заввишки 454 м з рідкісної магматичної породи габро (gabbro) віком 8–11 млн років.",
-      "en": "A 454-meter mountain composed of plutonic gabbro and granophyre dating 8–11 million years."
+      "uk": "454-метрові гострі піки з магматичного габро, що відбиваються в тонкому шарі припливної води на чорному піщаному пляжі.",
+      "en": "454m jagged peaks of unlayered iron-rich plutonic gabbro creating flawless mirror reflections on tidal flats."
     },
     "saga": {
-      "uk": "Повнорозмірне кінематографічне село вікінгів з дерновими дахами на узбережжі.",
-      "en": "Features an authentic full-scale cinematic Viking village film set on the black dunes."
+      "uk": "Місце першого поселення Хьорлейва (побратима Інгольфура Арнарсона). Поруч збереглося кінематографічне село вікінгів.",
+      "en": "One of the earliest Viking settlements in Iceland; replica film-set Viking village on site."
     },
     "practical": {
-      "uk": "В'їзд платний через кафе Viking Café. Дзеркальні кадри виходять під час відпливу у мокрому піску.",
-      "en": "Private access fee payable at Viking Café. Mirror reflection shots best achieved at low tide."
+      "uk": "Приватна територія (оплата в Viking Café близько 1000 ISK). Ідеальне місце для полювання на Північне сяйво.",
+      "en": "Private road entry ticket at Viking Café (~1000 ISK). Premier Aurora photography arena."
+    }
+  },
+  {
+    "id": "haifoss",
+    "name": {
+      "uk": "Háifoss & Granni (Високий водоспад)",
+      "en": "Háifoss & Granni Falls"
+    },
+    "region": "highlands",
+    "type": {
+      "uk": "Четвертий за висотою водоспад Ісландії (122 м)",
+      "en": "122m Gorge Twin Cascades"
+    },
+    "coords": "64.2081° N, 19.6875° W",
+    "badge": "Highland Monster",
+    "sources": [
+      {
+        "name": "South Iceland",
+        "url": "https://www.south.is"
+      }
+    ],
+    "vector": {
+      "uk": "Траса 332 на північ від річки Fossá",
+      "en": "Gravel Route 332 off Route 32"
+    },
+    "geology": {
+      "uk": "Річка Fossá падає з висоти 122 метри у гігантський каньйон із чергуванням шарів базальту та червоної глини, поруч падає його 'сусід' Granni.",
+      "en": "Plunging 122m into a deep volcanic gorge alongside twin falls Granni through striated strata."
+    },
+    "saga": {
+      "uk": "За легендою, у водоспаді жила велетка-людожерка Ґудрун, яка розлютилася на хлопчика, що кинув камінь у воду.",
+      "en": "Myth of the ogress who dragged a boy into the torrent after he cast a stone into her waters."
+    },
+    "practical": {
+      "uk": "Гравійна дорога 332 потребує високого кліренсу або 4x4. Вражаюча панорама з каньйонного краю.",
+      "en": "Rough gravel road 332 best suited for 4x4 or high clearance. Spectacular viewpoint."
+    }
+  },
+  {
+    "id": "gjain",
+    "name": {
+      "uk": "Gjáin (Казковий оазис водоспадів)",
+      "en": "Gjáin Fairytale Valley"
+    },
+    "region": "highlands",
+    "type": {
+      "uk": "Таємна долина з джерелами та печерами",
+      "en": "Hidden Oasis of Whispering Waters"
+    },
+    "coords": "64.1492° N, 19.7369° W",
+    "badge": "Game of Thrones Gem",
+    "sources": [
+      {
+        "name": "South.is",
+        "url": "https://www.south.is"
+      }
+    ],
+    "vector": {
+      "uk": "Долина Þjórsárdalur біля Stöng",
+      "en": "Þjórsárdalur Valley near Stöng"
+    },
+    "geology": {
+      "uk": "Крихітний райський каньйон із десятками водоспадів, базальтовими колонами, прозорими джерелами та буйною папороттю серед вулканічної пустки.",
+      "en": "Miniature Eden featuring dozens of whispering spring waterfalls, basalt caves, and lush ferns amidst black pumice."
+    },
+    "saga": {
+      "uk": "Зйомки тренувань Мейсі Вільямс (Арія Старк) у 'Грі Престолів'. Поруч розкопано хутір вікінгів Stöng, знищений Геклою у 1104 р.",
+      "en": "Filming setting for Arya Stark's water dance training in Game of Thrones."
+    },
+    "practical": {
+      "uk": "Доступний влітку на 4x4 або пішки 25 хв від розкопок Stöng. Зачаровує безтурботністю.",
+      "en": "Summer access via gravel track or scenic 25-min hike from Stöng Viking longhouse."
+    }
+  },
+  {
+    "id": "sigoldugljufur",
+    "name": {
+      "uk": "Sigöldugljúfur (Каньйон Сліз / Долина Водоспадів)",
+      "en": "Sigöldugljúfur (Valley of Tears)"
+    },
+    "region": "highlands",
+    "type": {
+      "uk": "Секретний каньйон сотні водоспадів",
+      "en": "Valley of 100 Spring Falls"
+    },
+    "coords": "64.1569° N, 19.1353° W",
+    "badge": "Highland Secret",
+    "sources": [
+      {
+        "name": "Highland Roads",
+        "url": "https://safetravel.is"
+      }
+    ],
+    "vector": {
+      "uk": "Траса F208 на шляху до Landmannalaugar",
+      "en": "Mountain Route F208 to Landmannalaugar"
+    },
+    "geology": {
+      "uk": "Глибокий каньйон із кришталево-блакитною водою, по стінах якого з-під лавових шарів б'ють десятки паралельних джерельних водоспадів.",
+      "en": "Deep canyon where dozens of natural spring waterfalls pour continuously through sheer mossy cliff fissures into turquoise water."
+    },
+    "saga": {
+      "uk": "Колись був затоплений каламутною річкою, але після спорудження ГЕС вода стала сапфірово-чистою.",
+      "en": "Revealed as an emerald oasis after upstream hydroelectric engineering clarified the glacial flow."
+    },
+    "practical": {
+      "uk": "Суворо 4x4 (дорога F208). 10-15 хвилин пішки від непозначеної стоянки. Відкрито лише влітку.",
+      "en": "Strictly 4x4 required on F208. Short walk from roadside parking. Summer access only."
+    }
+  },
+  {
+    "id": "reykjadalur",
+    "name": {
+      "uk": "Reykjadalur (Термальна купальна річка)",
+      "en": "Reykjadalur Thermal Bathing River"
+    },
+    "region": "south_coast",
+    "type": {
+      "uk": "Купання у дикій гірській термальній річці",
+      "en": "Wild Hot River Soak"
+    },
+    "coords": "64.0494° N, 21.2144° W",
+    "badge": "Natural Spa",
+    "sources": [
+      {
+        "name": "Hveragerði Tourism",
+        "url": "https://hveragerdi.is"
+      }
+    ],
+    "vector": {
+      "uk": "Початок треку за Hveragerði",
+      "en": "Trailhead behind Hveragerði"
+    },
+    "geology": {
+      "uk": "Змішування киплячих геотермальних ключів із крижаними струмками утворює комфортну для купання температуру води 38–40°C.",
+      "en": "Thermal boiling groundwater blends with cold snowmelt in a natural mountain stream, creating perfect 38–40°C bathing pools."
+    },
+    "saga": {
+      "uk": "Долина 'Паруючої долини' — серце ісландської культури відкритого геотермального купання.",
+      "en": "'Smoky Valley' showcases centuries of traditional natural geothermal bathing heritage."
+    },
+    "practical": {
+      "uk": "Хайкінг 3.5 км (близько 50 хвилин вгору мальовничою стежкою). Дерев'яні помости та ширми для перевдягання.",
+      "en": "3.5 km hike each way (approx 50 min). Wooden boardwalks and partition screens for changing."
     }
   },
   {
@@ -1163,34 +1409,34 @@
       "uk": "Folaldafoss & перевал Öxi (Траса 939)",
       "en": "Folaldafoss & Öxi Mountain Pass"
     },
-    "region": "eastfjords",
+    "region": "east_fjords",
     "type": {
-      "uk": "Гірський водоспад на перевалі",
+      "uk": "Гірський водоспад на драматичному перевалі",
       "en": "Mountain Pass Cascade"
     },
     "coords": "64.7950° N, 14.5422° W",
-    "badge": "Mountain Pass",
+    "badge": "High Altitude Falls",
     "sources": [
       {
-        "name": "Visit East",
+        "name": "East Iceland",
         "url": "https://www.east.is"
       }
     ],
     "vector": {
-      "uk": "Крутий перевал Траси 939",
-      "en": "Route 939 steep gravel pass"
+      "uk": "Траса 939 (Öxi pass) між Djúpivogur та Egilsstaðir",
+      "en": "Route 939 across dramatic Öxi pass"
     },
     "geology": {
-      "uk": "Водоспад у дикій скельній долині, що зрізає 60 км шляху навколо фіордів.",
-      "en": "Dramatic cataract on the mountain pass of Öxi (Route 939), shortcutting 60 km of fjords."
+      "uk": "Каскад, що падає крізь древній базальтовий цирк, виточений льодовиками третинного періоду.",
+      "en": "Torrent cascading over ancient tertiary basalt flow amphitheaters into river Berufjarðará."
     },
     "saga": {
-      "uk": "Стародавній піший кінний шлях торговців та рибалок східного узбережжя.",
-      "en": "Historical pack-horse trade trail traversed by local fishermen and inland communities."
+      "uk": "Перевал Оксі століттями вважався найпідступнішим шляхом вершників східних фьордів через раптові тумани.",
+      "en": "Feared horseback crossing known for abrupt dense mountain fog in ancient folk tales."
     },
     "practical": {
-      "uk": "Траса 939 крута (до 17% нахилу), взимку часто закрита снігом. Влітку доступна для звичайних авто.",
-      "en": "Gravel road with steep 17% gradients; frequently closed in winter. Accessible in summer."
+      "uk": "Траса 939 крута і гравійна, скорочує шлях на 60 км, але взимку часто закрита.",
+      "en": "Shortens the Ring Road by 60 km but features steep gravel switchbacks. Closed in winter storms."
     }
   },
   {
@@ -1199,121 +1445,301 @@
       "uk": "Seyðisfjörður & Gufufoss (Райдужне містечко)",
       "en": "Seyðisfjörður & Gufufoss Waterfall"
     },
-    "region": "eastfjords",
+    "region": "east_fjords",
     "type": {
-      "uk": "Арт-столиця фіордів",
-      "en": "Arts Capital of the Fjords"
+      "uk": "Культурна перлина східних фіордів",
+      "en": "Cultural Fjord Gem"
     },
     "coords": "65.2600° N, 14.0100° W",
-    "badge": "Nordic Architecture",
+    "badge": "Rainbow Street & Arts",
     "sources": [
       {
-        "name": "Visit Seyðisfjörður",
-        "url": "https://www.visitseydisfjordur.com"
+        "name": "Seyðisfjörður Tourism",
+        "url": "https://visitseydisfjordur.com"
       }
     ],
     "vector": {
-      "uk": "Перевал Fjarðarheiði (Траса 93)",
-      "en": "Fjarðarheiði mountain pass (Route 93)"
+      "uk": "Кінець Траси 93 через перевал Fjarðarheiði",
+      "en": "Terminus of Route 93 over Fjarðarheiði"
     },
     "geology": {
-      "uk": "Вузький океанічний фіорд, де стікає потужний водоспад Gufufoss (Паровий водоспад).",
-      "en": "A steep-walled ocean fjord fed by Gufufoss (Steam Waterfall), sharing similarities to Skógafoss."
+      "uk": "Вузький фьорд із 1000-метровими стінами, де по дорозі падає водоспад Gufufoss ('Водоспад пари'), схожий на Скоугафосс.",
+      "en": "Deep fjord framed by 1000m cliffs; Gufufoss ('Steam Falls') roars along the roadside descent."
     },
     "saga": {
-      "uk": "Норвезькі рибалки збудували тут у XIX ст. дерев'яні будинки. Відоме блакитною кірхою та веселковою доріжкою.",
-      "en": "Settled by Norwegian herring merchants in the 19th century. Renowned for its Blue Church and rainbow street."
+      "uk": "Історичні дерев'яні норвезькі будинки кінця XIX ст. та знаменита синя церква з райдужною бруківкою.",
+      "en": "Charming 19th-century timber heritage houses and the iconic rainbow-paved church street."
     },
     "practical": {
-      "uk": "Порт для щотижневого порома Smyril Line з Данії та Фарерських островів.",
-      "en": "Terminal port for the weekly Smyril Line car ferry from Denmark and the Faroes."
+      "uk": "Поромний термінал Smyril Line з Європи. Мальовничі кафе та арт-майстерні.",
+      "en": "Direct ferry terminal connecting Iceland to the Faroe Islands and Denmark."
+    }
+  },
+  {
+    "id": "hengifoss",
+    "name": {
+      "uk": "Hengifoss & Litlanesfoss (Базальтовий велетень)",
+      "en": "Hengifoss & Litlanesfoss Falls"
+    },
+    "region": "east_fjords",
+    "type": {
+      "uk": "Другий за висотою водоспад з червоними глиняними смугами",
+      "en": "128m Giant with Red Clay Strata"
+    },
+    "coords": "65.0957° N, 14.8894° W",
+    "badge": "Red Strata Titan",
+    "sources": [
+      {
+        "name": "East.is",
+        "url": "https://www.east.is"
+      }
+    ],
+    "vector": {
+      "uk": "Озеро Lagarfljót • Траса 931",
+      "en": "Lake Lagarfljót • Route 931"
+    },
+    "geology": {
+      "uk": "Висота 128 м. Стіна складена базальтовими шарами, пересипаними яскраво-червоними осадовими пластами стародавнього ґрунту (paleosol). Нижче розташований Litlanesfoss з гігантськими колонами.",
+      "en": "Plunging 128m through striking red sedimentary clay bands between basalt layers; flanked below by Litlanesfoss columns."
+    },
+    "saga": {
+      "uk": "Озеро Lagarfljót внизу за сагами приховує гігантського водяного змія Lagarfljótsormurinn, зафіксованого ще у 1345 році.",
+      "en": "Looming above Lake Lagarfljót, home to the mythological lake monster Lagarfljótsormurinn."
+    },
+    "practical": {
+      "uk": "Паркінг із сервіс-центром. Підйом пішки 2.5 км (близько 45-60 хвилин помірного підйому).",
+      "en": "Modern visitor facilities at trailhead. 2.5 km scenic uphill trail passing both cascades."
     }
   },
   {
     "id": "studlagil",
     "name": {
       "uk": "Stuðlagil Canyon (Базальтовий каньйон)",
-      "en": "Stuðlagil Canyon (Basalt Column Gorge)"
+      "en": "Stuðlagil Basalt Canyon"
     },
-    "region": "eastfjords",
+    "region": "east_fjords",
     "type": {
-      "uk": "Найбільші базальтові колони",
-      "en": "World-Class Basalt Column Gorge"
+      "uk": "Найбільша кількість базальтових колон в Ісландії",
+      "en": "Largest Basalt Column Colonnade"
     },
     "coords": "65.1633° N, 15.3072° W",
-    "badge": "Geological Sensation",
+    "badge": "Emerald Basalt Cathedral",
     "sources": [
       {
-        "name": "East Iceland",
+        "name": "Visit East",
         "url": "https://www.east.is"
       }
     ],
     "vector": {
-      "uk": "Долина Jökuldalur • З'їзд з Траси 1",
-      "en": "Jökuldalur Valley • Detour off Route 1"
+      "uk": "Траса 923 у долину Jökuldalur",
+      "en": "Route 923 into Jökuldalur Valley"
     },
     "geology": {
-      "uk": "Одне з найбільших скупчень базальтових колон у світі. Відкритий після 2006 року, коли ГЕС Kárahnjúkar відвела каламутну воду.",
-      "en": "One of the world's densest collections of columnar basalt, revealed after the 2006 Kárahnjúkar dam tamed the river."
+      "uk": "Гігантські базальтові колони висотою до 20 м окантовують річку Jökla бірюзово-смарагдового відтінку.",
+      "en": "One of the world's most concentrated collections of vertical basalt columns bordering a turquoise river."
     },
     "saga": {
-      "uk": "Сучасне геологічне відкриття, що стало світовим хітом соцмереж.",
-      "en": "A modern natural sensation that became a global viral marvel."
+      "uk": "Каньйон був схований під каламутними льодовиковими водами до відкриття дамби Kárahnjúkar у 2007 році.",
+      "en": "Remained submerged and unknown until Kárahnjúkar hydro-dam diverted sediment loads in 2007."
     },
     "practical": {
-      "uk": "Західна сторона — оглядовий балкон. Східна сторона — спуск до води біля ферми Klaustursel.",
-      "en": "West bank features a viewing platform; East bank offers a hike leading right down into the gorge."
+      "uk": "Західний берег (платформа з металевими сходами) або Східний берег (хайкінг 5 км для спуску до води).",
+      "en": "West rim platform for quick look; East bank for the hike directly down to the water."
     }
   },
   {
     "id": "dettifoss",
     "name": {
       "uk": "Dettifoss & Selfoss (Найпотужніший у Європі)",
-      "en": "Dettifoss & Selfoss Waterfalls"
+      "en": "Dettifoss & Selfoss Cataracts"
     },
     "region": "north",
     "type": {
-      "uk": "Must-See • Сила природи",
-      "en": "Must-See • Europe's Most Powerful"
+      "uk": "Must-See • Найпотужніший потік Європи",
+      "en": "Must-See • Europe's Mightiest Falls"
     },
     "coords": "65.8147° N, 16.3846° W",
-    "badge": "Raw Power Icon",
+    "badge": "Europe's Most Powerful",
     "sources": [
       {
-        "name": "Vatnajökull North",
-        "url": "https://www.vatnajokulsthjodgardur.is/en"
+        "name": "Vatnajökull NP North",
+        "url": "https://www.vatnajokulsthjodgardur.is"
       }
     ],
     "vector": {
-      "uk": "Траса 862 (західний берег)",
-      "en": "Route 862 (West Bank paved)"
+      "uk": "Траса 862 (західний асфальт) або 864",
+      "en": "Route 862 (paved west) or 864"
     },
     "geology": {
-      "uk": "Найпотужніший водоспад Європи (витрата до 500 м³/с). Ширина 100 м, падіння 44 м у каньйон Jökulsárgljúfur.",
-      "en": "Europe's most powerful waterfall (averaging up to 500 m³/s). 100 meters wide with a 44m drop into Jökulsárgljúfur."
+      "uk": "Ширина 100 м, висота 44 м. Потужність потоку понад 200–500 кубометрів сірої від базальтового намулу води на секунду. Земля буквально вібрує під ногами.",
+      "en": "100m wide, 44m plunge discharging up to 500 m³/s of glacial sediment slurry. You feel the bedrock vibrate."
     },
     "saga": {
-      "uk": "Відкриває фільм Рідлі Скотта Прометей (2012) як сцена зародження людського життя.",
-      "en": "Opening scene of Ridley Scott's Prometheus (2012), depicting the Engineer seeding human life on Earth."
+      "uk": "Початкова сцена фільму 'Прометей' Рідлі Скотта (створення людства Інженером).",
+      "en": "Filming setting for the opening primordial sequence of Ridley Scott's Prometheus."
     },
     "practical": {
-      "uk": "Західний берег (Траса 862) заасфальтований цілий рік. Східний (Траса 864) — гравійний.",
-      "en": "West Bank (Route 862) is paved and open year-round. East Bank (Route 864) offers raw proximity."
+      "uk": "Західний берег (траса 862) асфальтований цілий рік. Східний берег (864) — гравійний, дикий і ближчий до води.",
+      "en": "West side (862) is paved year-round with walkways; East side (864) is raw and gravelly."
+    }
+  },
+  {
+    "id": "asbyrgi",
+    "name": {
+      "uk": "Ásbyrgi (Каньйон-Підкова Слейпніра)",
+      "en": "Ásbyrgi Horseshoe Canyon"
+    },
+    "region": "north",
+    "type": {
+      "uk": "Підковоподібний каньйон із реліктовим лісом",
+      "en": "Odin's Sleipnir Footprint Canyon"
+    },
+    "coords": "66.0178° N, 16.5028° W",
+    "badge": "Odin's Horseshoe",
+    "sources": [
+      {
+        "name": "Diamond Circle",
+        "url": "https://www.diamondcircle.is"
+      }
+    ],
+    "vector": {
+      "uk": "Північний край Діамантового Кільця • Траса 85",
+      "en": "Diamond Circle northern arc • Route 85"
+    },
+    "geology": {
+      "uk": "Каньйон завдовжки 3.5 км із 100-метровими прямовисними стінами, утворений катастрофічними мега-повенями льодовика.",
+      "en": "3.5km long horseshoe chasm with 100m vertical rock cliffs shaped by catastrophic glacial jökulhlaups."
+    },
+    "saga": {
+      "uk": "За скандинавською міфологією, каньйон витоптав восьминогий кінь Одіна Слейпнір, торкнувшись копитом землі.",
+      "en": "Legendary footprint of Odin's eight-legged steed Sleipnir touching midgard."
+    },
+    "practical": {
+      "uk": "Рідкісний для Ісландії густий березовий ліс, затишне озеро Botnstjörn у глибині каньйону.",
+      "en": "Lush sheltered birch woodlands and the peaceful echo pool Botnstjörn at the inner cleft."
+    }
+  },
+  {
+    "id": "hverir",
+    "name": {
+      "uk": "Hverir & Námafjall (Марсіанські геотермальні поля)",
+      "en": "Hverir & Námafjall Geothermal Field"
+    },
+    "region": "north",
+    "type": {
+      "uk": "Киплячі грязьові котли та фумароли",
+      "en": "Boiling Mud Pots & Solfataras"
+    },
+    "coords": "65.6414° N, 16.8078° W",
+    "badge": "Martian Earth",
+    "sources": [
+      {
+        "name": "Visit North Iceland",
+        "url": "https://www.northiceland.is"
+      }
+    ],
+    "vector": {
+      "uk": "Траса 1 біля перевалу Námaskarð",
+      "en": "Route 1 at Námaskarð pass"
+    },
+    "geology": {
+      "uk": "Грязьові басейни з чорною сірчаною багнюкою, фумароли з шиплячою парою під тиском, відсутність будь-якої рослинності через високу кислотність.",
+      "en": "Roaring steam vents, boiling mud cauldrons, and sulfurous yellow-ochre soil with zero vegetation."
+    },
+    "saga": {
+      "uk": "У минулі століття тут добували сірку для виготовлення пороху для європейських армій.",
+      "en": "Historic open-pit sulfur mining site supplying gunpowder to the Danish crown."
+    },
+    "practical": {
+      "uk": "Тримайтеся суворо розмічених дерев'яних доріжок! Температура ґрунту сягає 100°C і легко провалюється.",
+      "en": "STAY ON MARKED PATHS. Crust is paper-thin with boiling 100°C acid sludge beneath."
+    }
+  },
+  {
+    "id": "grjotagja",
+    "name": {
+      "uk": "Grjótagjá (Термальна печера 'Гри Престолів')",
+      "en": "Grjótagjá Thermal Cave"
+    },
+    "region": "north",
+    "type": {
+      "uk": "Таємне термальне озеро у розломі",
+      "en": "Subterranean Fissure Bath"
+    },
+    "coords": "65.6264° N, 16.8831° W",
+    "badge": "Jon Snow & Ygritte",
+    "sources": [
+      {
+        "name": "Myvatn Tourism",
+        "url": "https://www.visitmyvatn.is"
+      }
+    ],
+    "vector": {
+      "uk": "Траса 860 на схід від озера Mývatn",
+      "en": "Route 860 east of Lake Mývatn"
+    },
+    "geology": {
+      "uk": "Глибокий лавовий розлом, затоплений прозорою гарячою геотермальною водою (близько 43–46°C).",
+      "en": "Lava fault chasm housing a subterranean pool heated by active Krafla volcanic systems."
+    },
+    "saga": {
+      "uk": "Знаменита сцена кохання Джона Сноу та Ігрітт у 3 сезоні серіалу 'Гра Престолів'.",
+      "en": "World-famous intimate cave setting for Jon Snow and Ygritte in Game of Thrones."
+    },
+    "practical": {
+      "uk": "Купання заборонено через високу температуру та нестабільність склепіння. Вхід для фото дозволений.",
+      "en": "Bathing strictly prohibited for safety and conservation; viewing allowed."
     }
   },
   {
     "id": "godafoss",
     "name": {
-      "uk": "Goðafoss (Водоспад Богів)",
+      "uk": "Goðafoss & Geitafoss (Водоспад Богів)",
       "en": "Goðafoss (Waterfall of the Gods)"
     },
     "region": "north",
     "type": {
-      "uk": "Must-See • Історична святиня",
-      "en": "Must-See • Historic Sanctuary"
+      "uk": "Must-See • Сакральний водоспад Хрещення",
+      "en": "Must-See • Sacred Heritage Falls"
     },
     "coords": "65.6828° N, 17.5502° W",
-    "badge": "Historic Sanctuary",
+    "badge": "Waterfall of the Gods",
+    "sources": [
+      {
+        "name": "Visit North",
+        "url": "https://www.northiceland.is"
+      }
+    ],
+    "vector": {
+      "uk": "Траса 1 між Mývatn та Akureyri",
+      "en": "Route 1 between Mývatn & Akureyri"
+    },
+    "geology": {
+      "uk": "Півкруглий каскад завширшки 30 м і заввишки 12 м на річці Skjálfandafljót, розділений скельним клином.",
+      "en": "Symmetrical 30m semicircular horseshoe waterfall divided by a central basalt outcrop."
+    },
+    "saga": {
+      "uk": "У 1000 році законоговоритель Торгейр скинув у вир водоспаду язичницьких ідолів скандинавських богів Торa і Одіна, проголосивши християнство.",
+      "en": "In 1000 AD, lawspeaker Þorgeir cast his pagan Norse idols into the abyss, adopting Christianity."
+    },
+    "practical": {
+      "uk": "Обидва береги обладнані чудовими пішохідними доріжками та містком через каньйон.",
+      "en": "Both riverbanks are fully accessible via paved walkways and footbridges."
+    }
+  },
+  {
+    "id": "aldeyjarfoss",
+    "name": {
+      "uk": "Aldeyjarfoss (Амфітеатр базальтових колон)",
+      "en": "Aldeyjarfoss Basalt Amphitheater"
+    },
+    "region": "north",
+    "type": {
+      "uk": "Найвеличніший базальтовий водоспад півночі",
+      "en": "Wilderness Basalt Organ Falls"
+    },
+    "coords": "65.3664° N, 17.3369° W",
+    "badge": "Basalt Colosseum",
     "sources": [
       {
         "name": "North Iceland",
@@ -1321,96 +1747,668 @@
       }
     ],
     "vector": {
-      "uk": "Траса 1 між Akureyri та Mývatn",
-      "en": "Highway 1 between Akureyri and Mývatn"
+      "uk": "Траса F26 (Bárðardalur) на південь від Ґодафосса",
+      "en": "Route F26 south of Goðafoss"
     },
     "geology": {
-      "uk": "Підковоподібний водоспад заввишки 12 м і завширшки 30 м на річці Skjálfandafljót.",
-      "en": "Horseshoe-shaped cataract 12 meters high and 30 meters wide on the river Skjálfandafljót."
+      "uk": "Річка Skjálfandafljót падає на 20 м у вузький басейн, обрамлений химерно вигнутими чорними базальтовими колонами лавового поля Suðurárhraun.",
+      "en": "20m cataract crashing into a swirling pool surrounded by dramatic, symmetrically curved basalt organs."
     },
     "saga": {
-      "uk": "У 1000 році законоговоритель Торгейр після прийняття християнства скинув сюди язичницьких ідолів богів.",
-      "en": "In 1000 AD, law-speaker Þorgeir cast his pagan Norse idols into the boiling torrent after adopting Christianity."
+      "uk": "Вважався воротами у безплідну пустелю Спренгісандюр, яку вікінги намагалися перетнути за один день без зупинок через страх перед духами.",
+      "en": "Ancient gateway to the desolate Sprengisandur highland trail haunted by outlaws and wraiths."
     },
     "practical": {
-      "uk": "Зручний доступ з обох боків річки, просторий паркінг та пішохідні містки.",
-      "en": "Accessible from both banks via footbridges, with spacious visitor facilities."
+      "uk": "Потребує 4x4 на останніх 4 км траси 842/F26. Незабутня перлина для цінителів дикої природи.",
+      "en": "Requires 4x4 vehicle for final stretch. Spectacular raw wilderness atmosphere."
+    }
+  },
+  {
+    "id": "kolugljufur",
+    "name": {
+      "uk": "Kolugljúfur (Каньйон велетунки Коли)",
+      "en": "Kolugljúfur Canyon & Kolufossar"
+    },
+    "region": "north",
+    "type": {
+      "uk": "Каньйон з подвійним водоспадом на півночі",
+      "en": "Giantess Canyon Cascades"
+    },
+    "coords": "65.3328° N, 20.5702° W",
+    "badge": "Giantess Gorge",
+    "sources": [
+      {
+        "name": "Visit North",
+        "url": "https://www.northiceland.is"
+      }
+    ],
+    "vector": {
+      "uk": "Траса 715 біля Траси 1 (долина Víðidalur)",
+      "en": "Route 715 off Route 1 (Víðidalur)"
+    },
+    "geology": {
+      "uk": "Каньйон довжиною 1 км і глибиною до 50 м, де річка Víðidalsá з гуркотом скидається кількома каскадами Kolufossar.",
+      "en": "1km long, 50m deep gorge where the salmon river plunges into cascading potholes."
+    },
+    "saga": {
+      "uk": "За переказами, у печері каньйону жила велетка Кола, яка ловила лосося голими руками і спала на кам'яному ліжку Kolurúm.",
+      "en": "Named after giantess Kola who caught salmon bare-handed and rested on the stone ledge Kolurúm."
+    },
+    "practical": {
+      "uk": "Лише 6 км від Траси 1. Зручний міст і оглядові точки безкоштовні.",
+      "en": "Just 6 km off Ring Road with parking right beside the scenic bridge."
+    }
+  },
+  {
+    "id": "hvitserkur",
+    "name": {
+      "uk": "Hvítserkur (Скеля-Дракон або Носоріг у морі)",
+      "en": "Hvítserkur Sea Stack (Dragon Rock)"
+    },
+    "region": "north",
+    "type": {
+      "uk": "15-метровий базальтовий моноліт у затоці Húnaflói",
+      "en": "15m Monolithic Dragon in the Surf"
+    },
+    "coords": "65.6063° N, 20.6353° W",
+    "badge": "Dragon of the Sea",
+    "sources": [
+      {
+        "name": "North.is",
+        "url": "https://www.northiceland.is"
+      }
+    ],
+    "vector": {
+      "uk": "Півострів Vatnsnes • Траса 711",
+      "en": "Vatnsnes Peninsula • Route 711"
+    },
+    "geology": {
+      "uk": "15-метровий базальтовий дайк із двома арками в основі, підмитими морськими хвилями, що нагадує кам'яного дракона, який п'є воду.",
+      "en": "15m volcanic dike with twin arches eroded by tides, resembling a petrified dragon drinking from the ocean."
+    },
+    "saga": {
+      "uk": "Легенда про троля, який намагався закидати камінням монастир Þingeyrar, але закам'янів від сонячного проміння.",
+      "en": "Troll turned to stone when caught by the rays of the morning sunrise."
+    },
+    "practical": {
+      "uk": "Колонії тюленів на сусідньому узбережжі. Спуск до пляжу крутою стежкою.",
+      "en": "Nearby seals bask on tidal sandbars. Steep path descends to the beach."
     }
   },
   {
     "id": "kirkjufell",
     "name": {
-      "uk": "Kirkjufell & Kirkjufellsfoss",
-      "en": "Kirkjufell & Kirkjufellsfoss Falls"
+      "uk": "Kirkjufell & Kirkjufellsfoss (Гора-Кірха)",
+      "en": "Kirkjufell & Kirkjufellsfoss"
     },
     "region": "snaefellsnes",
     "type": {
-      "uk": "Must-See • Ікона Ісландії",
+      "uk": "Must-See • Найвідоміша фото-гора Ісландії",
       "en": "Must-See • Arrowhead Mountain"
     },
     "coords": "64.9417° N, 23.3069° W",
-    "badge": "Cinematic Icon",
+    "badge": "Arrowhead Mountain",
     "sources": [
       {
-        "name": "Visit West Iceland",
+        "name": "Snæfellsnes Tourism",
         "url": "https://www.west.is"
       }
     ],
     "vector": {
-      "uk": "Траса 54 біля Grundarfjörður",
+      "uk": "Траса 54 біля містечка Grundarfjörður",
       "en": "Route 54 near Grundarfjörður"
     },
     "geology": {
-      "uk": "Одинока гора форми наконечника стріли (463 м), складена з шарів базальту та міжльодовикових пісковиків.",
-      "en": "Iconic free-standing 463-meter nunatak shaped like an arrowhead, formed through multiple glacial cycles."
+      "uk": "463-метрова гора-нунатак конічної форми, обточена льодовиками з усіх боків. Навпроти спадає каскадний водоспад.",
+      "en": "463m free-standing nunatak peak carved by Pleistocene glaciers with idyllic foreground cascades."
     },
     "saga": {
-      "uk": "У Грі престолів — гора на північ від Стіни, де діти лісу створили першого Білого блукача.",
-      "en": "Featured in Game of Thrones as Arrowhead Mountain, birthplace of the Night King."
+      "uk": "У 'Грі Престолів' — гора Arrowhead ('Гора у формі наконечника стріли'), де Діти Лісу створили першого Білого Блукача.",
+      "en": "Iconic Arrowhead Mountain from Game of Thrones where the first White Walker was created."
     },
     "practical": {
-      "uk": "Платний паркінг. Класичний кадр робиться з верхнього каскаду водоспаду з горою на задньому плані.",
-      "en": "Paid parking via Parka.is. The classic photographic shot is framed across the upper waterfall cascades."
+      "uk": "Платний паркінг (Parka.is). Класичний ракурс фотографується з містка над водоспадом.",
+      "en": "Paid parking (Parka.is). Classical photo angle frames the peak behind the cascading falls."
+    }
+  },
+  {
+    "id": "arnarstapi",
+    "name": {
+      "uk": "Arnarstapi & Gatklettur (Базальтові арки Арнарстапі)",
+      "en": "Arnarstapi Coastal Cliffs & Gatklettur"
+    },
+    "region": "snaefellsnes",
+    "type": {
+      "uk": "Скелі з круговою аркою Gatklettur",
+      "en": "Circular Ocean Arch & Basalt Walk"
+    },
+    "coords": "64.7678° N, 23.6264° W",
+    "badge": "Ocean Arch Wonder",
+    "sources": [
+      {
+        "name": "West Iceland",
+        "url": "https://www.west.is"
+      }
+    ],
+    "vector": {
+      "uk": "Селище Arnarstapi • Траса 574",
+      "en": "Arnarstapi Village • Route 574"
+    },
+    "geology": {
+      "uk": "Хвилерізні колодязі, базальтові печери та знаменита кругла морська арка Gatklettur, обточена диким атлантичним прибоєм.",
+      "en": "Wave-cut blowholes, columnar sea caves, and the world-famous natural circular arch Gatklettur."
+    },
+    "saga": {
+      "uk": "Гігантська кам'яна статуя напівтроля-напівлюдини Баурдюра (Bárður Snæfellsás), захисника півострова Снайфедльснес.",
+      "en": "Dominated by the monument to Bárður Snæfellsás, mythical giant and guardian spirit of the peninsula."
+    },
+    "practical": {
+      "uk": "Неймовірна мальовнича стежка вздовж узбережжя (2.5 км) від Арнарстапі до Хеллнара.",
+      "en": "Breathtaking 2.5 km shoreline cliff trail connecting Arnarstapi to Hellnar."
+    }
+  },
+  {
+    "id": "raudfeldsgja",
+    "name": {
+      "uk": "Rauðfeldsgjá (Прихована розколина в горі)",
+      "en": "Rauðfeldsgjá Hidden Gorge"
+    },
+    "region": "snaefellsnes",
+    "type": {
+      "uk": "Секретна вузька ущелина всередині скелі",
+      "en": "Secret Mountain Crack Gorge"
+    },
+    "coords": "64.7986° N, 23.6481° W",
+    "badge": "Secret Mountain Cleft",
+    "sources": [
+      {
+        "name": "West.is",
+        "url": "https://www.west.is"
+      }
+    ],
+    "vector": {
+      "uk": "Східніше Arnarstapi біля гори Botnsfjall",
+      "en": "East of Arnarstapi beneath Botnsfjall"
+    },
+    "geology": {
+      "uk": "Гігантська вертикальна тріщина в скелі, всередину якої можна зайти по струмку між стінами, що сходяться нагорі майже впритул.",
+      "en": "Deep dramatic fissure cleaving Botnsfjall mountain; you walk directly inside the shadowy mossy crack."
+    },
+    "saga": {
+      "uk": "У сазі про Баурдюра саме тут Баурдюр скинув у безодню свого племінника Раудфельдура за образу доньки Хельги.",
+      "en": "Where Bárður cast his nephew Rauðfeldur into the abyss following a tragic insult."
+    },
+    "practical": {
+      "uk": "Паркінг біля траси 574. Потрібне водонепроникне взуття для проходу по камінню струмка всередину ущелини.",
+      "en": "Turnout off Route 574. Waterproof boots essential to walk up the inner stream."
+    }
+  },
+  {
+    "id": "londrangar",
+    "name": {
+      "uk": "Lóndrangar (Базальтові замки-скелі)",
+      "en": "Lóndrangar Basalt Pinnacles"
+    },
+    "region": "snaefellsnes",
+    "type": {
+      "uk": "Залишки стародавнього вулканічного жерла",
+      "en": "Petrified Volcanic Castle"
+    },
+    "coords": "64.7322° N, 23.7831° W",
+    "badge": "Ocean Fortress",
+    "sources": [
+      {
+        "name": "Snæfellsjökull National Park",
+        "url": "https://www.snaefellsjokull.is"
+      }
+    ],
+    "vector": {
+      "uk": "Траса 574 біля маяка Malarrif",
+      "en": "Route 574 near Malarrif Lighthouse"
+    },
+    "geology": {
+      "uk": "Два гігантські базальтові стовпи висотою 75 м та 61 м — ерозійні рештки вулканічного жерла, що витримали мільйони років хвиль.",
+      "en": "Two volcanic plug pinnacles (75m and 61m) surviving from an eroded oceanic volcanic crater."
+    },
+    "saga": {
+      "uk": "Місцеві фермери ніколи не косили траву біля цих скель, вважаючи їх володінням прихованого народу (Huldufólk).",
+      "en": "Strictly untouched by farmers due to reverence for the hidden Elven folk inhabiting the cliffs."
+    },
+    "practical": {
+      "uk": "Зручний оглядовий дерев'яний поміст від візитор-центру Malarrif.",
+      "en": "Boardwalk viewpoints and trails connecting to Malarrif lighthouse visitor center."
+    }
+  },
+  {
+    "id": "djupalonssandur",
+    "name": {
+      "uk": "Djúpalónssandur & Dritvík (Чорний пляж каменів сили)",
+      "en": "Djúpalónssandur Black Lava Beach"
+    },
+    "region": "snaefellsnes",
+    "type": {
+      "uk": "Пляж круглої гальки та уламків корабля",
+      "en": "Lifting Stones & Shipwreck Beach"
+    },
+    "coords": "64.7533° N, 23.9011° W",
+    "badge": "Lifting Stones of Vikings",
+    "sources": [
+      {
+        "name": "National Park Official",
+        "url": "https://www.snaefellsjokull.is"
+      }
+    ],
+    "vector": {
+      "uk": "Кінець Траси 572 у Нацпарку",
+      "en": "End of Route 572 in National Park"
+    },
+    "geology": {
+      "uk": "Чорний пляж із гладко відполірованої лавової гальки (перлини Дьюпалона) та лабіринти лавових веж.",
+      "en": "Striking beach composed of shiny black volcanic pebbles with twisted basalt sea towers."
+    },
+    "saga": {
+      "uk": "Чотири камені для випробування сили моряків-рибалок: Amlóði (23 кг), Hálfdrættingur (54 кг), Hálfsterkur (100 кг) та Fullsterkur (154 кг).",
+      "en": "Historic lifting stones used to test fishermen's strength: from 23 kg to 154 kg."
+    },
+    "practical": {
+      "uk": "На пляжі лежать іржаві уламки британського траулера Epine GY7 (1948 р.), які заборонено чіпати як меморіал загиблим морякам.",
+      "en": "Protected iron wreckage from 1948 British trawler disaster scattered across sands."
+    }
+  },
+  {
+    "id": "snaefellsjokull",
+    "name": {
+      "uk": "Snæfellsjökull (Вхід до центру Землі)",
+      "en": "Snæfellsjökull Stratovolcano"
+    },
+    "region": "snaefellsnes",
+    "type": {
+      "uk": "Вулкан з роману Жюля Верна",
+      "en": "Journey to the Center of the Earth"
+    },
+    "coords": "64.8056° N, 23.7731° W",
+    "badge": "Center of the Earth",
+    "sources": [
+      {
+        "name": "Snæfellsjökull NP",
+        "url": "https://www.snaefellsjokull.is"
+      }
+    ],
+    "vector": {
+      "uk": "Вершина півострова Снайфедльснес",
+      "en": "Summit crown of Snæfellsnes"
+    },
+    "geology": {
+      "uk": "Стратовулкан заввишки 1446 м, вкритий шапкою льодовика. Вік породи близько 700 000 років.",
+      "en": "1446m glacier-capped stratovolcano dormant for nearly 1,800 years with mystical magnetic aura."
+    },
+    "saga": {
+      "uk": "Саме через кратер Снайфедльснес професор Ліденброк із роману Жюля Верна спустився у надра планети.",
+      "en": "Portal to the underworld in Jules Verne's 1864 masterpiece Journey to the Center of the Earth."
+    },
+    "practical": {
+      "uk": "У ясну погоду білу шапку вулкана видно навіть з Рейк'явіка через затоку Факсафлоуї (120 км).",
+      "en": "Visible across Faxaflói Bay from Reykjavik on crystal-clear days."
+    }
+  },
+  {
+    "id": "budakirkja",
+    "name": {
+      "uk": "Búðakirkja (Чорна церква Будір)",
+      "en": "Búðakirkja (Black Church of Búðir)"
+    },
+    "region": "snaefellsnes",
+    "type": {
+      "uk": "Must-See • Смоляна чорна церква в лаві",
+      "en": "Must-See • Pitch-Black Turf Church"
+    },
+    "coords": "64.8217° N, 23.3844° W",
+    "badge": "Black Church Icon",
+    "sources": [
+      {
+        "name": "West.is",
+        "url": "https://www.west.is"
+      }
+    ],
+    "vector": {
+      "uk": "З'їзд на Búðir з Траси 54",
+      "en": "Turnoff to Búðir off Route 54"
+    },
+    "geology": {
+      "uk": "Розташована посеред суворого порослого травою лавового поля Búðahraun на узбережжі з золотим піском.",
+      "en": "Solitary timber church anchored in the undulating black moss field Búðahraun beside rare golden sands."
+    },
+    "saga": {
+      "uk": "Першу церкву збудували у 1703 р., а нинішню дерев'яну споруду покрили смолою для захисту від солоних морських вітрів.",
+      "en": "Coated in black pitch to preserve the Scandinavian timber frame against ferocious North Atlantic salt gales."
+    },
+    "practical": {
+      "uk": "Найпопулярніша локація для романтичних весіль та нічної зйомки Аврори.",
+      "en": "World-famous minimalist photography subject for Aurora Borealis backdrops."
+    }
+  },
+  {
+    "id": "ytri_tunga",
+    "name": {
+      "uk": "Ytri Tunga (Золотий пляж з тюленями)",
+      "en": "Ytri Tunga Seal Beach"
+    },
+    "region": "snaefellsnes",
+    "type": {
+      "uk": "Головне лежбище диких тюленів на заході",
+      "en": "Wild Seal Colony Beach"
+    },
+    "coords": "64.8028° N, 23.0808° W",
+    "badge": "Wild Seal Colony",
+    "sources": [
+      {
+        "name": "Icelandic Seal Center",
+        "url": "https://selasetur.is"
+      }
+    ],
+    "vector": {
+      "uk": "Траса 54 південного узбережжя півострова",
+      "en": "Route 54 on south shore of Snæfellsnes"
+    },
+    "geology": {
+      "uk": "Рідкісний для Ісландії пляж із золотим (не чорним!) черепашковим піском та скелястими відливами.",
+      "en": "Rare golden-shell sand beach with intertidal reefs where seals haul out at low tide."
+    },
+    "saga": {
+      "uk": "Легенди про тюленячий народ Selkies, що скидає шкуру на суші в ніч на Івана Купала.",
+      "en": "Celtic and Norse folk legends of magical Selkies transforming into women upon the beach."
+    },
+    "practical": {
+      "uk": "Дотримуйтесь дистанції мінімум 20 метрів від тюленів. Паркінг платний через Parka.is.",
+      "en": "Maintain at least 20m safety distance from resting seals. Paid parking."
+    }
+  },
+  {
+    "id": "berserkjahraun",
+    "name": {
+      "uk": "Berserkjahraun (Лавове поле берсерків)",
+      "en": "Berserkjahraun Lava Pass"
+    },
+    "region": "snaefellsnes",
+    "type": {
+      "uk": "Містичне лавове поле з саги Eyrbyggja",
+      "en": "Saga of the Berserkers Track"
+    },
+    "coords": "64.9664° N, 22.9831° W",
+    "badge": "Viking Legend Lava",
+    "sources": [
+      {
+        "name": "West Iceland",
+        "url": "https://www.west.is"
+      }
+    ],
+    "vector": {
+      "uk": "Гравійний об'їзд Траси 558 біля Stykkishólmur",
+      "en": "Gravel loop Route 558 near Stykkishólmur"
+    },
+    "geology": {
+      "uk": "4000-річний хаос зазубреної лави різних кольорів (від червоного до чорного), що вилився з 4 кратерів.",
+      "en": "4,000-year-old jagged aa-lava field formed by four cinder cones, striped with red oxidation."
+    },
+    "saga": {
+      "uk": "Сага про людей з Піщаного берега розповідає про двох шведських берсерків, яких змусили прокласти дорогу крізь лаву, а потім зрадницьки вбили в лазні.",
+      "en": "Eyrbyggja Saga recount of two Swedish berserkers murdered after clearing a road through the impassable lava."
+    },
+    "practical": {
+      "uk": "Мальовнича гравійна дорога 558 петляє крізь лавові вежі та озера.",
+      "en": "Scenic gravel driving route 558 weaves through towering lava formations and mirror lakes."
+    }
+  },
+  {
+    "id": "dynjandi",
+    "name": {
+      "uk": "Dynjandi / Fjallfoss (Королівський віяловий водоспад)",
+      "en": "Dynjandi (Jewel of the Westfjords)"
+    },
+    "region": "westfjords",
+    "type": {
+      "uk": "Must-See • Король Вестфьордів",
+      "en": "Must-See • Jewel of the Westfjords"
+    },
+    "coords": "65.7328° N, 23.1997° W",
+    "badge": "Bridal Veil of the West",
+    "sources": [
+      {
+        "name": "Westfjords Tourism",
+        "url": "https://www.westfjords.is"
+      }
+    ],
+    "vector": {
+      "uk": "Траса 60 в Arnarfjörður",
+      "en": "Route 60 in Arnarfjörður"
+    },
+    "geology": {
+      "uk": "Трапецієподібний водоспад заввишки 100 м, що розширюється з 30 м нагорі до 60 м внизу, наче весільна фата, а нижче переходить у 6 окремих каскадів.",
+      "en": "100m tall tiered trapezoidal cataract fanning from 30m wide at top to 60m at base, feeding six smaller cascades below."
+    },
+    "saga": {
+      "uk": "Назва Dynjandi означає 'Громоподібний' — гуркіт падіння води чутно за кілька кілометрів по фьорду.",
+      "en": "'Thunderous' cascade whose reverberations resonate across the entire deep fjord."
+    },
+    "practical": {
+      "uk": "Стежка від паркінгу піднімається повз усі 6 нижніх водоспадів. Дорога відкрита переважно з травня по жовтень.",
+      "en": "Trail climbs gently past 6 named lower waterfalls up to the thunderous amphitheater base."
+    }
+  },
+  {
+    "id": "latrabjarg",
+    "name": {
+      "uk": "Látrabjarg (Скелі тупиків на краю Європи)",
+      "en": "Látrabjarg Bird Cliffs"
+    },
+    "region": "westfjords",
+    "type": {
+      "uk": "Найзахідніша точка Європи та мільйони птахів",
+      "en": "Europe's Westernmost Point & Puffin Haven"
+    },
+    "coords": "65.5033° N, 24.5317° W",
+    "badge": "Western Edge of Europe",
+    "sources": [
+      {
+        "name": "Westfjords.is",
+        "url": "https://www.westfjords.is"
+      }
+    ],
+    "vector": {
+      "uk": "Кінець Траси 612 на краю Вестфьордів",
+      "en": "Terminus of Route 612 at western tip"
+    },
+    "geology": {
+      "uk": "14-кілометрова стіна прямовисних скель висотою до 441 м над бурхливою Датською протокою.",
+      "en": "14km long sheer basalt wall plunging 441m into the Denmark Strait."
+    },
+    "saga": {
+      "uk": "Героїчний порятунок британського траулера Dhoon у 1947 році місцевими селянами, які спустилися на мотузках зі скелі у шторм.",
+      "en": "Legendary 1947 cliff rescue where local farmers rappelled 200m down iced cliffs to save shipwrecked British seamen."
+    },
+    "practical": {
+      "uk": "Тупики підпускають фотографів на відстань витягнутої руки, але лягайте на живіт, щоб не зірватися з карниза!",
+      "en": "Lie flat on stomach to view puffins safely along grass cliff edges. Extreme drop-off."
+    }
+  },
+  {
+    "id": "raudasandur",
+    "name": {
+      "uk": "Rauðasandur (Червоний пляж Вестфьордів)",
+      "en": "Rauðasandur Red Sand Beach"
+    },
+    "region": "westfjords",
+    "type": {
+      "uk": "10-кілометровий пляж червоно-рожевого піску",
+      "en": "10km Red & Golden Shell Sand"
+    },
+    "coords": "65.4628° N, 23.9511° W",
+    "badge": "Red Sands of the West",
+    "sources": [
+      {
+        "name": "Visit Westfjords",
+        "url": "https://www.westfjords.is"
+      }
+    ],
+    "vector": {
+      "uk": "Траса 614 через гірський серпантин",
+      "en": "Route 614 down dramatic hairpin pass"
+    },
+    "geology": {
+      "uk": "Пісок складається не з чорного базальту, а з мільйонів подрібнених морських черепашок гребінця (scallop), що дають колір від кориці до рожевого.",
+      "en": "10km beach tinted deep crimson, peach, and gold by pulverised scallop shells."
+    },
+    "saga": {
+      "uk": "Маєток Sjöundá — місце знаменитого кримінального роману та реальної драми пристрасті й вбивств на початку XIX ст.",
+      "en": "Setting of the tragic 1802 murder mystery and novel Sjöundá."
+    },
+    "practical": {
+      "uk": "Спуск дуже крутим ґрунтовим серпантином 614. Затишне французьке кафе Franskakaffihúsið на березі.",
+      "en": "Steep unpaved hairpin descent requires calm driving. Charming French café on site."
     }
   },
   {
     "id": "fagradalsfjall",
     "name": {
       "uk": "Fagradalsfjall & Sundhnúkur (Нові вогні)",
-      "en": "Fagradalsfjall & Sundhnúkur Fires"
+      "en": "Fagradalsfjall & Sundhnúkur Volcanic Fires"
     },
     "region": "reykjanes",
     "type": {
-      "uk": "Активний вулканізм 2021–2026",
-      "en": "Active Rifting Eruptions (2021–2026)"
+      "uk": "Епіцентр новітніх вивержень 2021–2026",
+      "en": "Epicenter of 2021–2026 Eruptions"
     },
-    "coords": "63.89° N, 22.27° W",
-    "badge": "Active Lava Fires",
+    "coords": "63.8900° N, 22.2700° W",
+    "badge": "Active Volcano 2026",
     "sources": [
       {
-        "name": "Veðurstofa IMO Fires",
+        "name": "Icelandic Met Office (Vedur)",
         "url": "https://en.vedur.is"
-      },
-      {
-        "name": "Catalogue of Volcanoes",
-        "url": "https://icelandicvolcanoes.is"
       }
     ],
     "vector": {
-      "uk": "Півострів Reykjanes біля Grindavík",
-      "en": "Reykjanes Peninsula near Grindavík"
+      "uk": "Траса 427 біля Grindavík",
+      "en": "Route 427 near Grindavík"
     },
     "geology": {
-      "uk": "Початок нової багатовікової ери тріщинного вулканізму на півострові Рейк'янес після 800 років спокою.",
-      "en": "Initiation of a multi-century rifting cycle on Reykjanes after eight centuries of slumber."
+      "uk": "Нові розломні тріщини, де магма піднімається прямо з мантії (1200°C), народжуючи нові базальтові поля на півострові Рейк'янес.",
+      "en": "Active fissure eruptions originating from 15km mantle depth creating brand-new 1200°C basalt lava plains."
     },
     "saga": {
-      "uk": "Геологічне народження нової поверхні Землі у прямому ефірі на очах сучасників.",
-      "en": "The live birth of fresh planetary crust occurring in real-time before the modern world."
+      "uk": "Пробудження вулканічного поясу Рейк'янеса після 800 років абсолютного спокою (Fires of Reykjanes).",
+      "en": "Reawakening of the Reykjanes Volcanic Belt after 800 years of slumber."
     },
     "practical": {
-      "uk": "Уважно слідкуйте за щоденними попередженнями SafeTravel.is! Смертельна небезпека отруйних газів SO2.",
-      "en": "Always monitor SafeTravel.is bulletins! Major hazard from invisible toxic sulfur dioxide (SO2) gas."
+      "uk": "СУВОРИЙ МОНІТОРИНГ! Перевіряйте SafeTravel.is перед виїздом щодо закриття зон та концентрації газу SO2.",
+      "en": "CHECK SAFETRAVEL.IS BEFORE APPROACH. Gas masks and strict hazard zone obedience mandatory."
+    }
+  },
+  {
+    "id": "gunnuhver",
+    "name": {
+      "uk": "Gunnuhver (Геотермальний гейзер-привид)",
+      "en": "Gunnuhver Roaring Mud Geyser"
+    },
+    "region": "reykjanes",
+    "type": {
+      "uk": "Найпотужніша парова фумарола Ісландії",
+      "en": "Largest Mud Cauldron in Iceland"
+    },
+    "coords": "63.8194° N, 22.6847° W",
+    "badge": "Ghost Geyser",
+    "sources": [
+      {
+        "name": "Reykjanes UNESCO Geopark",
+        "url": "https://www.visitreykjanes.is"
+      }
+    ],
+    "vector": {
+      "uk": "Траса 425 на південному заході Рейк'янеса",
+      "en": "Route 425 near Reykjanesviti"
+    },
+    "geology": {
+      "uk": "Грязьовий казан діаметром 20 м, що викидає струмені киплячої пари з глибини до 1000 м. 100% морська термальна вода.",
+      "en": "20m wide boiling mud spring roaring with superheated saline geothermal steam over 300°C."
+    },
+    "saga": {
+      "uk": "Легенда про злого привида Гунни (Guðrún), яку хитрий пастор Ейрікур заманив у киплячу безодню клубочком вовни.",
+      "en": "Haunted by the furious ghost Gunna trapped in the boiling mud cauldron by a cleric's yarn ball."
+    },
+    "practical": {
+      "uk": "Дерев'яні платформи часто повністю огортаються густою сірчаною парою. Зручно дорогою з аеропорту Кефлавік.",
+      "en": "Boardwalk viewpoints hovering above swirling vapor. 20 min from Keflavík airport."
+    }
+  },
+  {
+    "id": "bridge_continents",
+    "name": {
+      "uk": "Міст між континентами (Miðlína)",
+      "en": "Bridge Between Continents"
+    },
+    "region": "reykjanes",
+    "type": {
+      "uk": "Пішохідний міст між Америкою та Європою",
+      "en": "Walk Between Continents"
+    },
+    "coords": "63.8683° N, 22.6756° W",
+    "badge": "Two Continents",
+    "sources": [
+      {
+        "name": "Visit Reykjanes",
+        "url": "https://www.visitreykjanes.is"
+      }
+    ],
+    "vector": {
+      "uk": "Траса 425 біля Sandvík",
+      "en": "Route 425 near Sandvík"
+    },
+    "geology": {
+      "uk": "Пішохідний міст завдовжки 15 м перекинутий через тектонічний розлом між Північноамериканською та Євразійською плитами.",
+      "en": "15m footbridge spanning a gaping sandy fissure torn open by the divergent tectonic plates."
+    },
+    "saga": {
+      "uk": "Символічний міст на честь першовідкривача Лейфа Еріксона, який відкрив Америку за 500 років до Колумба.",
+      "en": "Named in honor of Norse explorer Leif Erikson who reached Vinland (North America) around 1000 AD."
+    },
+    "practical": {
+      "uk": "Можна отримати персоналізований сертифікат про перетин кордону плит у тур-центрі Рейк'янеса.",
+      "en": "Popular quick photo stop to stand between two continental plates on the black sand floor."
+    }
+  },
+  {
+    "id": "blue_lagoon",
+    "name": {
+      "uk": "Blue Lagoon (Блакитна Лагуна)",
+      "en": "Blue Lagoon Geothermal Spa"
+    },
+    "region": "reykjanes",
+    "type": {
+      "uk": "Must-See • Всесвітньо відомий геотермальний спа",
+      "en": "Must-See • World Wonder Spa"
+    },
+    "coords": "63.8804° N, 22.4495° W",
+    "badge": "World Wonder Spa",
+    "sources": [
+      {
+        "name": "Blue Lagoon Official",
+        "url": "https://www.bluelagoon.com"
+      }
+    ],
+    "vector": {
+      "uk": "Траса 43 біля Grindavík",
+      "en": "Route 43 off Route 41"
+    },
+    "geology": {
+      "uk": "Мінеральна вода з глибини 2000 м, насичена білою глиною (кремнеземом silica) та водоростями, що заломлюють сонячне світло в молочно-блакитний колір.",
+      "en": "Geothermal seawater rich in silica and minerals creating its iconic milky-blue luminescence."
+    },
+    "saga": {
+      "uk": "Відкрита у 1976 році робітниками геотермальної станції Svartsengi, які помітили лікувальний вплив води на шкіру.",
+      "en": "Accidental wonder born from runoff of Svartsengi power plant, acclaimed for skin healing."
+    },
+    "practical": {
+      "uk": "Суворо за попереднім бронюванням (квитки розпродаються за тижні). Захисна дамба збудована у 2024 р.",
+      "en": "Advance booking mandatory. Now safeguarded by monumental protective lava defense walls."
     }
   }
 ];

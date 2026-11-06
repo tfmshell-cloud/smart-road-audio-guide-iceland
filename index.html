@@ -363,6 +363,13 @@
         <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
       </button>
 
+      <!-- SEPARATE PORTAL ENTRANCE: AURORA HUNTER OCCLUSION LAB -->
+      <a href="cloud_radar_lab.html" id="nav-btn-aurora-lab" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-500/20 via-teal-500/20 to-cyan-500/20 hover:from-emerald-500/35 hover:to-cyan-500/35 text-emerald-300 hover:text-white border border-emerald-500/40 hover:border-emerald-400 flex items-center gap-2 shadow-md shadow-emerald-500/20 transition group" title="Відкрити портал Aurora Hunter Occlusion Lab">
+        <span class="text-sm group-hover:scale-110 transition-transform">🌌</span>
+        <span class="font-bold">Aurora Hunter Lab</span>
+        <span class="px-1.5 py-0.2 rounded-full bg-emerald-500/30 text-emerald-300 font-mono text-[9px] font-bold border border-emerald-400/50">10 LIVE</span>
+      </a>
+
       <!-- 2. EXPEDITION POIS & ROUTES (115) -->
       <button onclick="switchAppSection('locations')" id="nav-btn-locations" class="px-3.5 py-1.5 rounded-xl text-slate-300 hover:text-white hover:bg-slate-900 border border-transparent transition flex items-center gap-2">
         <span>📍</span> <span>Локації (115)</span>
@@ -459,6 +466,11 @@
         <button id="btn-lang-en" onclick="setLang('en')" class="px-2.5 py-1 rounded-md text-xs font-semibold text-slate-400 hover:text-white transition">EN</button>
       </div>
 
+      <!-- Quick Aurora Lab Entrance on mobile -->
+      <a href="cloud_radar_lab.html" class="md:hidden px-2 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-xs font-bold flex items-center gap-1">
+        <span>🌌</span> <span>Lab</span>
+      </a>
+
       <!-- Quick Copilot Pill on mobile -->
       <button onclick="openCopilotModal()" class="md:hidden p-2 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-xs">
         🛡️ Штурман
@@ -479,6 +491,25 @@
       
       <!-- Search & Mode Selector Header -->
       <div class="p-3 border-b border-slate-800/80 space-y-2.5 bg-slate-900/40">
+        <!-- LUXURY PORTAL ENTRANCE BANNER: AURORA HUNTER OCCLUSION LAB -->
+        <a href="cloud_radar_lab.html" class="group block p-2.5 rounded-2xl bg-gradient-to-r from-slate-950 via-emerald-950/40 to-slate-950 border border-emerald-500/40 hover:border-emerald-400 shadow-xl shadow-emerald-500/10 transition-all hover:scale-[1.01]">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2.5">
+              <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-emerald-500 to-cyan-500 flex items-center justify-center text-white text-base shadow-md shadow-emerald-500/40 group-hover:rotate-6 transition shrink-0">
+                🌌
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-xs font-black tracking-wide text-white group-hover:text-emerald-300 transition">Aurora Hunter Occlusion Lab</span>
+                  <span class="px-1.5 py-0.2 rounded-full bg-emerald-500/25 text-emerald-300 font-mono text-[9px] font-bold border border-emerald-400/40 animate-pulse">10 LIVE</span>
+                </div>
+                <p class="text-[10px] text-slate-400">Окремий портал: живий метеорадар Північної Атлантики &amp; 10 концептів</p>
+              </div>
+            </div>
+            <span class="px-2 py-1 rounded-lg bg-emerald-500/20 text-emerald-300 text-[10px] font-bold font-mono border border-emerald-500/40 group-hover:bg-emerald-500 group-hover:text-slate-950 transition shrink-0">ВХІД ↗</span>
+          </div>
+        </a>
+
         <!-- Search bar & Collapse Toggle -->
         <div class="flex items-center gap-1.5">
           <div class="relative flex-1">
@@ -888,6 +919,13 @@
       <!-- FLOATING UNIFIED MAP CONTROL DOCK (GLASS ISLAND) -->
       <div class="absolute top-3.5 right-3.5 z-20 flex items-center gap-1.5 p-1.5 rounded-2xl bg-slate-950/90 border border-slate-700/80 shadow-2xl backdrop-blur-xl select-none">
         
+        <!-- Direct Portal Entrance to Aurora Hunter Occlusion Lab -->
+        <a href="cloud_radar_lab.html" class="px-2.5 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white font-bold text-[11px] flex items-center gap-1.5 transition shadow-lg shadow-emerald-500/30 border border-emerald-400/50 group" title="Вхід у портал: Aurora Hunter Occlusion Lab (10 Live Концептів)">
+          <span class="group-hover:scale-110 transition-transform">🌌</span>
+          <span class="hidden sm:inline">Aurora Hunter Lab</span>
+          <span class="text-[10px] font-mono opacity-80">↗</span>
+        </a>
+
         <!-- Live Layer Switches -->
         <button onclick="RadarTimeLapse.toggleClouds()" id="map-pill-clouds" class="px-2.5 py-1.5 rounded-xl bg-cyan-500/25 text-cyan-300 border border-cyan-400/50 text-[11px] font-semibold flex items-center gap-1.5 transition shadow-sm">
           <span>☁️</span> <span class="hidden sm:inline">Хмари HD</span>

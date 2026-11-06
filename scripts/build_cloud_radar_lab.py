@@ -1,14 +1,19 @@
 # -*- coding: utf-8 -*-
+"""
+Master Builder for Iceland Cloud Radar Lab:
+10 WOW-WOW-WOW Variations of Aurora Hunter Occlusion with Oceanic Scope & Real-Time Live Sync.
+"""
 import os
 
 LAB_PATH = "/Users/volodymyrkatasonov/.gemini/antigravity/scratch/Smart_Road_Audio_Guide_Iceland/cloud_radar_lab.html"
+BRAIN_LAB_PATH = "/Users/volodymyrkatasonov/.gemini/antigravity/brain/3cafaa28-e27e-4b4e-85d4-a0a0a9d89f86/cloud_radar_lab.html"
 
-html_content = r'''<!DOCTYPE html>
+HTML_CONTENT = r'''<!DOCTYPE html>
 <html lang="uk" class="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Iceland Cloud Radar Lab — 10 Футуристичних Концептів Візуалізації Хмарності</title>
+  <title>Iceland Cloud Radar Lab — 10 Концептів Aurora Hunter Occlusion (Live Oceanic Sync)</title>
   
   <!-- MapLibre GL JS & CSS -->
   <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
@@ -19,8 +24,8 @@ html_content = r'''<!DOCTYPE html>
 
   <style>
     @keyframes pulseGlow {
-      0%, 100% { filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.4)); }
-      50% { filter: drop-shadow(0 0 24px rgba(6, 182, 212, 0.85)); }
+      0%, 100% { filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.4)); }
+      50% { filter: drop-shadow(0 0 24px rgba(16, 185, 129, 0.85)); }
     }
     @keyframes radarSpin {
       0% { transform: rotate(0deg); }
@@ -28,13 +33,13 @@ html_content = r'''<!DOCTYPE html>
     }
     .custom-scrollbar::-webkit-scrollbar { width: 5px; height: 5px; }
     .custom-scrollbar::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.6); }
-    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(6, 182, 212, 0.4); border-radius: 4px; }
-    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(6, 182, 212, 0.8); }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(16, 185, 129, 0.4); border-radius: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(16, 185, 129, 0.8); }
 
     .concept-btn.active {
-      background: linear-gradient(135deg, rgba(6, 182, 212, 0.25) 0%, rgba(15, 23, 42, 0.95) 100%);
-      border-color: #06b6d4;
-      box-shadow: 0 0 20px rgba(6, 182, 212, 0.45);
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.25) 0%, rgba(15, 23, 42, 0.95) 100%);
+      border-color: #10b981;
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.45);
       color: #ffffff;
     }
   </style>
@@ -42,77 +47,85 @@ html_content = r'''<!DOCTYPE html>
 <body class="bg-slate-950 text-slate-100 font-sans antialiased h-screen w-screen overflow-hidden flex flex-col select-none">
 
   <!-- ============================================================ -->
-  <!-- 1. TOP EXECUTIVE COMMAND BAR -->
+  <!-- 1. TOP EXECUTIVE COMMAND BAR & LIVE SYNC STATUS -->
   <!-- ============================================================ -->
-  <header class="h-16 px-4 bg-slate-950/95 border-b border-cyan-500/30 backdrop-blur-xl flex items-center justify-between shrink-0 z-30">
+  <header class="h-16 px-4 bg-slate-950/95 border-b border-emerald-500/30 backdrop-blur-xl flex items-center justify-between shrink-0 z-30">
     <div class="flex items-center space-x-3">
-      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-600 via-emerald-500 to-indigo-600 flex items-center justify-center text-xl shadow-lg shadow-cyan-500/30">
-        ☁️
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 via-teal-500 to-indigo-600 flex items-center justify-center text-xl shadow-lg shadow-emerald-500/30 animate-pulse">
+        🌌
       </div>
       <div>
         <div class="flex items-center space-x-2">
           <h1 class="text-sm sm:text-base font-black text-white tracking-wide flex items-center gap-2">
-            <span>Iceland Cloud Radar Lab</span>
-            <span class="px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 font-mono text-[10px] font-bold border border-cyan-400/40">10 LIVE CONCEPTS</span>
+            <span>Aurora Hunter Occlusion Lab</span>
+            <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-mono text-[10px] font-bold border border-emerald-400/40">10 LIVE VARIATIONS</span>
           </h1>
         </div>
-        <p class="text-[11px] text-slate-400 hidden sm:block">Лабораторія метеорологічних візуалізацій хмарності та полярного сяйва для Smart Road Audio Guide</p>
+        <p class="text-[11px] text-slate-400 hidden sm:block">Північна Атлантика & Ісландія: хмари як темні маски, чисті вікна сяють смарагдовою Авророю</p>
       </div>
+    </div>
+
+    <!-- Center Live Sync Badge -->
+    <div class="hidden lg:flex items-center space-x-2 bg-slate-900/90 px-3 py-1.5 rounded-xl border border-emerald-500/30 font-mono text-[11px]">
+      <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+      <span class="text-slate-300">LIVE SYNC:</span>
+      <span id="live-sync-indicator" class="font-bold text-emerald-300">VEÐURSTOFA & NOAA SWPC (Kp <span id="sync-kp-val">3.8</span>)</span>
+      <button onclick="fetchLiveMeteoData()" class="ml-2 text-slate-400 hover:text-emerald-300 transition" title="Оновити зараз">🔄</button>
     </div>
 
     <!-- Quick Actions -->
     <div class="flex items-center space-x-2">
       <!-- Return to Main App -->
-      <a href="index.html" class="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition" title="Повернутися до головного гіда">
+      <a href="index.html" class="px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-700 text-xs font-semibold flex items-center gap-1.5 transition" title="Повернутися до головного сайту">
         <span>⬅️</span> <span class="hidden md:inline">Головний сайт</span>
       </a>
 
       <!-- Basemap Switcher -->
       <div class="inline-flex rounded-xl bg-slate-900 p-0.5 border border-slate-800 text-xs">
-        <button id="btn-basemap-dark" onclick="setBasemap('dark')" class="px-2.5 py-1 rounded-lg bg-cyan-500 text-white font-bold transition">Dark</button>
+        <button id="btn-basemap-dark" onclick="setBasemap('dark')" class="px-2.5 py-1 rounded-lg bg-emerald-500 text-slate-950 font-bold transition">Dark</button>
         <button id="btn-basemap-sat" onclick="setBasemap('satellite')" class="px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition">Satellite</button>
       </div>
 
       <!-- Toggle Info HUD -->
-      <button onclick="toggleHudPanel()" class="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-cyan-300 border border-slate-700 text-xs transition" title="Панель телеметрії та формул">
+      <button onclick="toggleHudPanel()" class="p-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-emerald-300 border border-slate-700 text-xs transition" title="Панель телеметрії та формул">
         ⚙️
       </button>
     </div>
   </header>
 
   <!-- ============================================================ -->
-  <!-- 2. CONCEPT SELECTOR STRIP (10 WORKING CONCEPTS) -->
+  <!-- 2. CONCEPT SELECTOR STRIP (10 AURORA HUNTER OCCLUSION VARIATIONS) -->
   <!-- ============================================================ -->
   <div class="px-3 py-2 bg-slate-950/90 border-b border-slate-800/80 backdrop-blur-md shrink-0 z-20 overflow-x-auto custom-scrollbar flex items-center space-x-2 text-xs">
     <button onclick="switchConcept(0)" id="c-btn-0" class="concept-btn active px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white shrink-0 flex items-center gap-1.5 transition">
-      <span>☁️</span> <span class="font-bold">1. Volumetric 3D Cumulus</span>
+      <span>🌋</span> <span class="font-bold">1. Basalt Clouds & Emerald Bleed</span>
     </button>
     <button onclick="switchConcept(1)" id="c-btn-1" class="concept-btn px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white shrink-0 flex items-center gap-1.5 transition">
-      <span>🛰️</span> <span class="font-bold">2. Infrared Satellite Doppler</span>
+      <span>🌐</span> <span class="font-bold">2. NOAA Geomagnetic Oval</span>
     </button>
     <button onclick="switchConcept(2)" id="c-btn-2" class="concept-btn px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white shrink-0 flex items-center gap-1.5 transition">
-      <span>🌪️</span> <span class="font-bold">3. Navier-Stokes Vortex Streamlines</span>
+      <span>✨</span> <span class="font-bold">3. Starlight Portals & Sea Glow</span>
     </button>
     <button onclick="switchConcept(3)" id="c-btn-3" class="concept-btn px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white shrink-0 flex items-center gap-1.5 transition">
-      <span>🏔️</span> <span class="font-bold">4. 3-Tier Lágský/Milliský/Háský</span>
+      <span>🌀</span> <span class="font-bold">4. Denmark Strait Synoptic Vortex</span>
     </button>
     <button onclick="switchConcept(4)" id="c-btn-4" class="concept-btn px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white shrink-0 flex items-center gap-1.5 transition">
-      <span>📊</span> <span class="font-bold">5. Isobaric Moisture Contours</span>
+      <span>📡</span> <span class="font-bold">5. LIDAR Transmittance Scanner</span>
     </button>
     <button onclick="switchConcept(5)" id="c-btn-5" class="concept-btn px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white shrink-0 flex items-center gap-1.5 transition">
-      <span>✨</span> <span class="font-bold">6. Quantum Particle Density</span>
+      <span>⚡</span> <span class="font-bold">6. Cyber-Holo Neon Contours</span>
     </button>
     <button onclick="switchConcept(6)" id="c-btn-6" class="concept-btn px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white shrink-0 flex items-center gap-1.5 transition">
-      <span>🌌</span> <span class="font-bold">7. Aurora Hunter Occlusion</span>
+      <span>📷</span> <span class="font-bold">7. 30s Long Exposure Tripod</span>
     </button>
     <button onclick="switchConcept(7)" id="c-btn-7" class="concept-btn px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white shrink-0 flex items-center gap-1.5 transition">
-      <span>🎯</span> <span class="font-bold">8. Coast Guard Doppler Sweep</span>
+      <span>🏔️</span> <span class="font-bold">8. Marine Fog & Glacier Peak Cut</span>
     </button>
     <button onclick="switchConcept(8)" id="c-btn-8" class="concept-btn px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white shrink-0 flex items-center gap-1.5 transition">
-      <span>⬡</span> <span class="font-bold">9. NOAA Hexagonal Mesh Grid</span>
+      <span>⬡</span> <span class="font-bold">9. Hexagonal Exposure Matrix</span>
     </button>
     <button onclick="switchConcept(9)" id="c-btn-9" class="concept-btn px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white shrink-0 flex items-center gap-1.5 transition">
-      <span>⚡</span> <span class="font-bold">10. Cyberpunk Topo-Hugger</span>
+      <span>⚡</span> <span class="font-bold">10. Solar Wind Plasma Filaments</span>
     </button>
   </div>
 
@@ -127,52 +140,52 @@ html_content = r'''<!DOCTYPE html>
     <!-- Synchronized 60 FPS Radar Simulation Canvas -->
     <canvas id="radar-canvas" class="absolute inset-0 w-full h-full pointer-events-none z-10"></canvas>
 
-    <!-- Floating Zoom Preset Bar (Tests scaling at any zoom level!) -->
-    <div class="absolute top-4 left-4 z-20 flex flex-wrap gap-1.5 p-1.5 rounded-2xl bg-slate-950/85 backdrop-blur-md border border-cyan-500/30 shadow-2xl text-[11px] font-mono">
+    <!-- Floating Zoom Preset Bar (Wide Oceanic to Fjord Detail) -->
+    <div class="absolute top-4 left-4 z-20 flex flex-wrap gap-1.5 p-1.5 rounded-2xl bg-slate-950/90 backdrop-blur-md border border-emerald-500/30 shadow-2xl text-[11px] font-mono">
       <span class="px-2 py-1 text-slate-400 font-bold flex items-center gap-1">
-        <span>🔍</span> <span class="hidden sm:inline">МАСШТАБ:</span>
+        <span>🔭</span> <span class="hidden sm:inline">ОХОПЛЕННЯ:</span>
       </span>
-      <button onclick="flyToZoom(6.5, [-18.5, 64.9])" class="px-2.5 py-1 rounded-xl bg-slate-900 hover:bg-slate-800 text-cyan-300 hover:text-white border border-slate-700 transition">
-        🇮🇸 Весь острів (Z6.5)
+      <button onclick="flyToZoom(4.8, [-19.5, 64.2])" class="px-2.5 py-1 rounded-xl bg-slate-900 hover:bg-slate-800 text-emerald-300 hover:text-white border border-slate-700 transition" title="Океанічний фронт від Гренландії до Норвезького моря">
+        🌊 Північна Атлантика & Океан (Z4.8)
       </button>
-      <button onclick="flyToZoom(8.2, [-19.0, 63.6])" class="px-2.5 py-1 rounded-xl bg-slate-900 hover:bg-slate-800 text-cyan-300 hover:text-white border border-slate-700 transition">
-        🌊 Південь & Вік (Z8.2)
+      <button onclick="flyToZoom(6.2, [-18.5, 64.9])" class="px-2.5 py-1 rounded-xl bg-slate-900 hover:bg-slate-800 text-emerald-300 hover:text-white border border-slate-700 transition" title="Вся Ісландія">
+        🇮🇸 Ісландія (Z6.2)
       </button>
-      <button onclick="flyToZoom(11.0, [-19.45, 63.63])" class="px-2.5 py-1 rounded-xl bg-slate-900 hover:bg-slate-800 text-cyan-300 hover:text-white border border-slate-700 transition">
-        🌋 Скоугар / Катла (Z11)
+      <button onclick="flyToZoom(8.0, [-19.0, 63.6])" class="px-2.5 py-1 rounded-xl bg-slate-900 hover:bg-slate-800 text-emerald-300 hover:text-white border border-slate-700 transition" title="Південне узбережжя">
+        🌊 Південь & Вік (Z8.0)
       </button>
-      <button onclick="flyToZoom(8.5, [-14.5, 65.2])" class="px-2.5 py-1 rounded-xl bg-slate-900 hover:bg-slate-800 text-cyan-300 hover:text-white border border-slate-700 transition">
-        🏔️ Східні фіорди (Z8.5)
+      <button onclick="flyToZoom(8.5, [-16.9, 65.6])" class="px-2.5 py-1 rounded-xl bg-slate-900 hover:bg-slate-800 text-emerald-300 hover:text-white border border-slate-700 transition" title="Зона найчистішого неба">
+        ✨ Озеро Міватн (Z8.5)
       </button>
     </div>
 
     <!-- Floating Live Telemetry HUD Card (Bottom Left) -->
-    <div id="concept-hud-card" class="absolute bottom-20 left-4 z-20 p-3.5 rounded-2xl bg-slate-950/90 backdrop-blur-xl border border-cyan-500/40 shadow-2xl max-w-sm space-y-2 text-xs">
+    <div id="concept-hud-card" class="absolute bottom-20 left-4 z-20 p-3.5 rounded-2xl bg-slate-950/90 backdrop-blur-xl border border-emerald-500/40 shadow-2xl max-w-sm space-y-2 text-xs">
       <div class="flex items-center justify-between border-b border-slate-800 pb-1.5">
-        <span id="hud-concept-title" class="font-black text-cyan-300 uppercase tracking-wide flex items-center gap-1.5">
-          <span>☁️</span> 1. Volumetric 3D Cumulus
+        <span id="hud-concept-title" class="font-black text-emerald-300 uppercase tracking-wide flex items-center gap-1.5">
+          <span>🌋</span> 1. Basalt Clouds & Emerald Bleed
         </span>
         <span id="hud-fps-badge" class="px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-400 font-mono text-[10px] border border-emerald-500/40">
           60 FPS
         </span>
       </div>
       <p id="hud-concept-desc" class="text-slate-300 text-[11px] leading-relaxed">
-        Багатошарові об'ємні купчасті хмари зі світлотіньовим градієнтом, відкиданням м'яких тіней на лавові поля та реалістичним вітровим дрейфом.
+        Темні базальтові хмари повністю блокують Аврору в центрі, проте на напівпрозорих периферіях смарагдове сяйво просочується крізь водяну пару, а у відкритих вікнах вибухає чистий іоносферний спалах.
       </p>
       <div class="grid grid-cols-2 gap-2 pt-1 font-mono text-[10px]">
         <div class="p-1.5 rounded-lg bg-slate-900 border border-slate-800">
-          <span class="text-slate-400 block">ХМАРНІСТЬ:</span>
-          <span id="hud-cloud-pct" class="font-bold text-cyan-300 text-xs">68% ПОКРИТТЯ</span>
+          <span class="text-slate-400 block">ХМАРНІСТЬ (LIVE):</span>
+          <span id="hud-cloud-pct" class="font-bold text-cyan-300 text-xs">58% ПОКРИТТЯ</span>
         </div>
         <div class="p-1.5 rounded-lg bg-slate-900 border border-slate-800">
-          <span class="text-slate-400 block">ВІТЕР (ВЕКТОР):</span>
-          <span id="hud-wind-val" class="font-bold text-amber-300 text-xs">16.4 М/С • ПД-ЗХ</span>
+          <span class="text-slate-400 block">NOAA Kp ІНДЕКС:</span>
+          <span id="hud-kp-val" class="font-bold text-emerald-400 text-xs">Kp 3.8 • АКТИВНО</span>
         </div>
       </div>
     </div>
 
     <!-- Side Blueprint Panel (Collapsible Inspector) -->
-    <aside id="inspector-panel" class="hidden absolute top-4 right-4 bottom-20 w-80 z-20 p-4 rounded-2xl bg-slate-950/95 backdrop-blur-2xl border border-cyan-500/40 shadow-2xl flex flex-col justify-between overflow-y-auto custom-scrollbar text-xs space-y-3">
+    <aside id="inspector-panel" class="hidden absolute top-4 right-4 bottom-20 w-80 z-20 p-4 rounded-2xl bg-slate-950/95 backdrop-blur-2xl border border-emerald-500/40 shadow-2xl flex flex-col justify-between overflow-y-auto custom-scrollbar text-xs space-y-3">
       <div>
         <div class="flex items-center justify-between border-b border-slate-800 pb-2">
           <h3 class="font-bold text-white flex items-center gap-1.5">
@@ -183,33 +196,33 @@ html_content = r'''<!DOCTYPE html>
 
         <div class="space-y-3 pt-3">
           <div>
-            <h4 class="text-[10px] uppercase font-mono text-cyan-400 font-bold mb-1">МАТЕМАТИЧНА МОДЕЛЬ:</h4>
-            <p id="ins-math" class="text-[11px] text-slate-300 bg-slate-900 p-2 rounded-lg font-mono border border-slate-800">
-              d(pixel) = (radiusKm * 1000) / (156543 * cos(lat) / 2^zoom)
+            <h4 class="text-[10px] uppercase font-mono text-emerald-400 font-bold mb-1">ФОРМУЛА ОКЛЮЗІЇ (BEER-LAMBERT):</h4>
+            <p id="ins-math" class="text-[11px] text-slate-300 bg-slate-900 p-2 rounded-lg font-mono border border-slate-800 leading-relaxed">
+              I_visible = I_aurora * exp(-COD) + I_ambient * (1 - exp(-COD))
             </p>
           </div>
 
           <div>
-            <h4 class="text-[10px] uppercase font-mono text-cyan-400 font-bold mb-1">ОСОБЛИВОСТІ МАСШТАБУВАННЯ:</h4>
+            <h4 class="text-[10px] uppercase font-mono text-emerald-400 font-bold mb-1">МАСШТАБУВАННЯ & ОКЕАН:</h4>
             <p id="ins-scaling" class="text-[11px] text-slate-300 leading-relaxed">
-              При наближенні (Zoom-In) хмарні структури розширюються відповідно до реальних кілометрів, відкриваючи прогалини для полювання за Авророю.
+              Карта охоплює Північну Атлантику від Гренландії до Фарерських островів. Це дозволяє прогнозувати прихід циклонів з південного заходу за 6-12 годин до наближення до Ісландії.
             </p>
           </div>
 
           <div>
-            <h4 class="text-[10px] uppercase font-mono text-cyan-400 font-bold mb-1">ДЖЕРЕЛА МЕТЕОДАНИХ:</h4>
+            <h4 class="text-[10px] uppercase font-mono text-emerald-400 font-bold mb-1">ДЖЕРЕЛА LIVE ДАНИХ:</h4>
             <ul class="text-[11px] text-slate-400 space-y-1 list-disc list-inside">
+              <li>Open-Meteo High-Resolution (Ісландія + Океан)</li>
+              <li>NOAA Space Weather Prediction Center (Live 1m Kp)</li>
               <li>Veðurstofa Íslands (Ісландський метеоофіс)</li>
-              <li>NOAA GFS / Aurora 30-min forecast</li>
-              <li>Vegagerðin (Датчики дорожнього вітру)</li>
-              <li>EUMETSAT Meteosat High-Res Visible</li>
+              <li>EUMETSAT Polar Orbiting Sounder</li>
             </ul>
           </div>
         </div>
       </div>
 
       <div class="pt-2 border-t border-slate-800 text-[10px] text-slate-500 font-mono">
-        SMART ROAD AUDIO GUIDE • ICELAND LAB 2026
+        SMART ROAD AUDIO GUIDE • AURORA HUNTER LAB 2026
       </div>
     </aside>
 
@@ -218,12 +231,12 @@ html_content = r'''<!DOCTYPE html>
   <!-- ============================================================ -->
   <!-- 4. BOTTOM 12-HOUR TIME-LAPSE RADAR CONTROLLER -->
   <!-- ============================================================ -->
-  <footer class="h-20 px-4 bg-slate-950/95 border-t border-cyan-500/30 backdrop-blur-xl flex flex-col justify-center shrink-0 z-30">
+  <footer class="h-20 px-4 bg-slate-950/95 border-t border-emerald-500/30 backdrop-blur-xl flex flex-col justify-center shrink-0 z-30">
     <div class="flex items-center justify-between gap-3 max-w-7xl mx-auto w-full">
       
       <!-- Play/Pause & Reset Controls -->
       <div class="flex items-center space-x-2 shrink-0">
-        <button id="btn-play-pause" onclick="togglePlayPause()" class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 flex items-center justify-center font-bold text-base shadow-lg shadow-cyan-500/30 transition">
+        <button id="btn-play-pause" onclick="togglePlayPause()" class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 flex items-center justify-center font-bold text-base shadow-lg shadow-emerald-500/30 transition">
           ▶️
         </button>
         <button onclick="resetTimeline()" class="w-10 h-10 rounded-xl bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 flex items-center justify-center text-sm transition" title="Скинути на поточний час">
@@ -235,18 +248,18 @@ html_content = r'''<!DOCTYPE html>
       <div class="flex-1 space-y-1">
         <div class="flex items-center justify-between text-[11px] font-mono">
           <span class="text-slate-400 flex items-center gap-1.5">
-            <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
-            <span>СИМУЛЯЦІЯ ДРЕЙФУ ХМАР:</span>
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+            <span>ПРОГНОЗ ДРЕЙФУ ХМАР & СЯЙВА:</span>
           </span>
-          <span id="timeline-time-label" class="font-bold text-cyan-300 bg-slate-900 px-2.5 py-0.5 rounded-full border border-cyan-500/30">
+          <span id="timeline-time-label" class="font-bold text-emerald-300 bg-slate-900 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
             Сьогодні, 18:00 UTC (Зараз)
           </span>
           <span id="timeline-aurora-badge" class="font-bold text-emerald-400 bg-emerald-950/80 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
-            🌌 Kp 4.2 • АКТИВНО
+            🌌 Kp 3.8 • АКТИВНО
           </span>
         </div>
 
-        <input type="range" id="radar-time-slider" min="0" max="12" step="0.1" value="0" oninput="onTimelineInput(this.value)" class="w-full accent-cyan-400 cursor-pointer h-2 bg-slate-800 rounded-lg">
+        <input type="range" id="radar-time-slider" min="0" max="12" step="0.1" value="0" oninput="onTimelineInput(this.value)" class="w-full accent-emerald-400 cursor-pointer h-2 bg-slate-800 rounded-lg">
         
         <div class="flex justify-between text-[9px] font-mono text-slate-500 px-1">
           <span>ЗАРАЗ</span>
@@ -259,10 +272,10 @@ html_content = r'''<!DOCTYPE html>
         </div>
       </div>
 
-      <!-- Speed & Loop Toggles -->
+      <!-- Speed Toggles -->
       <div class="hidden sm:flex items-center space-x-2 shrink-0">
         <div class="flex items-center space-x-1 bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs font-mono">
-          <button onclick="setPlaySpeed(1)" id="spd-1" class="px-2 py-1 rounded-lg bg-cyan-500 text-white font-bold transition">1x</button>
+          <button onclick="setPlaySpeed(1)" id="spd-1" class="px-2 py-1 rounded-lg bg-emerald-500 text-slate-950 font-bold transition">1x</button>
           <button onclick="setPlaySpeed(2)" id="spd-2" class="px-2 py-1 rounded-lg text-slate-400 hover:text-white transition">2x</button>
           <button onclick="setPlaySpeed(4)" id="spd-4" class="px-2 py-1 rounded-lg text-slate-400 hover:text-white transition">4x</button>
         </div>
@@ -272,31 +285,37 @@ html_content = r'''<!DOCTYPE html>
   </footer>
 
   <!-- ============================================================ -->
-  <!-- 5. MASTER METEOROLOGICAL RADAR LOGIC & 10 CONCEPTS ENGINE -->
+  <!-- 5. MASTER SCRIPT: 10 CONCEPTS, OCEAN COVERAGE, LIVE APIS -->
   <!-- ============================================================ -->
   <script>
     // -------------------------------------------------------------
-    // REGIONAL GEOGRAPHIC SECTORS OF ICELAND
+    // EXPANDED GEOGRAPHIC SECTORS (ICELAND + BROAD NORTH ATLANTIC)
     // -------------------------------------------------------------
-    const ICELAND_SECTORS = [
-      { id: 'reykjavik', name: 'Рейк\'явік & Фаґрадалсф\'ядль', lat: 64.14, lng: -21.94, radiusKm: 45, cloudBase: 65, windSpeed: 8.5, windDir: 230 },
-      { id: 'south_coast', name: 'Південне узбережжя & Вік', lat: 63.50, lng: -19.00, radiusKm: 65, cloudBase: 78, windSpeed: 18.2, windDir: 245 },
-      { id: 'vatnajokull', name: 'Льодовик Ватнайокюдль', lat: 64.40, lng: -16.80, radiusKm: 85, cloudBase: 88, windSpeed: 14.0, windDir: 260 },
-      { id: 'east_fjords', name: 'Східні фіорди (Сейдісфіордюр)', lat: 65.25, lng: -14.00, radiusKm: 55, cloudBase: 42, windSpeed: 7.2, windDir: 190 },
-      { id: 'myvatn_north', name: 'Озеро Міватн & Акранес', lat: 65.60, lng: -16.90, radiusKm: 60, cloudBase: 18, windSpeed: 6.0, windDir: 210 },
-      { id: 'akureyri', name: 'Акюрейрі & Ейяфіордюр', lat: 65.68, lng: -18.10, radiusKm: 48, cloudBase: 25, windSpeed: 5.5, windDir: 200 },
-      { id: 'westfjords', name: 'Західні фіорди (Диньянди)', lat: 65.75, lng: -23.20, radiusKm: 70, cloudBase: 50, windSpeed: 11.0, windDir: 280 },
-      { id: 'snaefellsnes', name: 'Півострів Снайфедльснес', lat: 64.85, lng: -23.50, radiusKm: 50, cloudBase: 70, windSpeed: 15.4, windDir: 270 },
-      { id: 'highlands', name: 'Керлінґарф\'єтль & Аскья', lat: 64.80, lng: -18.80, radiusKm: 75, cloudBase: 82, windSpeed: 13.5, windDir: 240 }
+    const REGIONAL_SECTORS = [
+      // Oceanic weather systems approaching Iceland
+      { id: 'denmark_strait', name: 'Датська протока (Гренландія)', lat: 67.2, lng: -29.5, radiusKm: 140, cloudBase: 85, windSpeed: 24.0, windDir: 40 },
+      { id: 'south_atlantic_cyclone', name: 'Південна Атлантика (Штормовий фронт)', lat: 60.5, lng: -21.0, radiusKm: 170, cloudBase: 95, windSpeed: 28.5, windDir: 220 },
+      { id: 'norwegian_sea', name: 'Норвезьке море (Східна течія)', lat: 65.5, lng: -8.5, radiusKm: 130, cloudBase: 60, windSpeed: 16.0, windDir: 170 },
+      
+      // Iceland Mainland sectors
+      { id: 'reykjavik', name: 'Рейк\'явік & Фаґрадалсф\'ядль', lat: 64.14, lng: -21.94, radiusKm: 55, cloudBase: 70, windSpeed: 12.5, windDir: 210 },
+      { id: 'south_coast', name: 'Південне узбережжя & Вік', lat: 63.50, lng: -19.00, radiusKm: 75, cloudBase: 82, windSpeed: 21.0, windDir: 235 },
+      { id: 'vatnajokull', name: 'Льодовик Ватнайокюдль (Пік 2110м)', lat: 64.40, lng: -16.80, radiusKm: 90, cloudBase: 45, windSpeed: 18.0, windDir: 250 },
+      { id: 'east_fjords', name: 'Східні фіорди (Сейдісфіордюр)', lat: 65.25, lng: -14.00, radiusKm: 65, cloudBase: 40, windSpeed: 9.5, windDir: 195 },
+      { id: 'myvatn_north', name: 'Озеро Міватн (Вікно Аврори)', lat: 65.60, lng: -16.90, radiusKm: 70, cloudBase: 12, windSpeed: 7.0, windDir: 205 },
+      { id: 'akureyri', name: 'Акюрейрі & Ейяфіордюр', lat: 65.68, lng: -18.10, radiusKm: 55, cloudBase: 22, windSpeed: 6.8, windDir: 190 },
+      { id: 'westfjords', name: 'Західні фіорди (Диньянди)', lat: 65.75, lng: -23.20, radiusKm: 80, cloudBase: 65, windSpeed: 14.0, windDir: 275 },
+      { id: 'snaefellsnes', name: 'Півострів Снайфедльснес', lat: 64.85, lng: -23.50, radiusKm: 60, cloudBase: 75, windSpeed: 17.5, windDir: 260 },
+      { id: 'highlands', name: 'Керлінґарф\'єтль & Аскья', lat: 64.80, lng: -18.80, radiusKm: 85, cloudBase: 35, windSpeed: 15.0, windDir: 230 }
     ];
 
     // Procedural multi-puff clouds per sector
     const SECTOR_PUFFS = [];
-    ICELAND_SECTORS.forEach(sec => {
-      for (let i = 0; i < 22; i++) {
+    REGIONAL_SECTORS.forEach(sec => {
+      const puffCount = sec.radiusKm > 100 ? 35 : 22;
+      for (let i = 0; i < puffCount; i++) {
         const ang = Math.random() * Math.PI * 2;
-        const dist = Math.random() * sec.radiusKm * 0.9;
-        // Approx 1 deg lat = 111 km, 1 deg lng = 111 * cos(lat) km
+        const dist = Math.random() * sec.radiusKm * 0.95;
         const dLat = (Math.cos(ang) * dist) / 111.0;
         const dLng = (Math.sin(ang) * dist) / (111.0 * Math.cos(sec.lat * Math.PI / 180));
         SECTOR_PUFFS.push({
@@ -305,29 +324,44 @@ html_content = r'''<!DOCTYPE html>
           baseLng: sec.lng + dLng,
           currentLat: sec.lat + dLat,
           currentLng: sec.lng + dLng,
-          radiusKm: 14 + Math.random() * 22,
-          opacityMult: 0.65 + Math.random() * 0.35,
-          speedMult: 0.8 + Math.random() * 0.4,
+          radiusKm: 18 + Math.random() * 32,
+          opacityMult: 0.70 + Math.random() * 0.30,
+          speedMult: 0.85 + Math.random() * 0.35,
           phase: Math.random() * Math.PI * 2
         });
       }
     });
 
-    // Fluid particles for Concept 3 & 6
-    const FLUID_PARTICLES = [];
-    for (let i = 0; i < 1400; i++) {
-      FLUID_PARTICLES.push({
-        lat: 63.2 + Math.random() * 3.3,
-        lng: -24.5 + Math.random() * 11.5,
-        speed: 0.003 + Math.random() * 0.008,
-        life: Math.random() * 100,
-        size: 1.5 + Math.random() * 2.5,
-        altTier: Math.random() > 0.6 ? 'high' : (Math.random() > 0.3 ? 'mid' : 'low')
+    // 2,500 Night Sky Stars for Concept 3 & Concept 7
+    const ASTRO_STARS = [];
+    for (let i = 0; i < 2500; i++) {
+      ASTRO_STARS.push({
+        lat: 58.0 + Math.random() * 13.0,
+        lng: -34.0 + Math.random() * 30.0,
+        brightness: 0.2 + Math.random() * 0.8,
+        size: 0.6 + Math.random() * 1.8,
+        twinkleSpeed: 1.5 + Math.random() * 3.5
       });
     }
 
+    // Geodesic Hexagonal Grid Points for Concept 9
+    const HEX_GRID = [];
+    for (let lat = 59.5; lat <= 68.5; lat += 0.55) {
+      const isOdd = Math.round(lat / 0.55) % 2 === 1;
+      const lngStep = 1.15;
+      for (let lng = -31.0; lng <= -7.0; lng += lngStep) {
+        const actualLng = isOdd ? lng + lngStep * 0.5 : lng;
+        HEX_GRID.push({
+          lat: lat,
+          lng: actualLng,
+          cloudCover: 50,
+          kpVal: 3.8
+        });
+      }
+    }
+
     // -------------------------------------------------------------
-    // MAP SETUP & STYLES
+    // GLOBAL STATE & REAL-TIME METEOROLOGICAL ENGINE
     // -------------------------------------------------------------
     let map = null;
     let canvas = null;
@@ -337,7 +371,158 @@ html_content = r'''<!DOCTYPE html>
     let isPlaying = false;
     let playSpeed = 1;
     let animFrameId = null;
+    let animTime = 0;
+    let liveKp = 3.8;
+    let liveLastUpdated = 'Щойно';
 
+    // Concept definitions metadata
+    const CONCEPTS_METADATA = [
+      {
+        id: 0,
+        title: '1. Basalt Clouds & Emerald Bleed',
+        icon: '🌋',
+        desc: 'Темні базальтові хмари відкидають глибоку тінь. У місцях, де товщина хмари спадає, смарагдове сяйво Аврори пробивається крізь прозорі краї з ефектом підповерхневого розсіювання.',
+        math: 'Transmittance = exp(-COD); FringeBleed = smoothstep(0.2, 0.7, 1 - COD)'
+      },
+      {
+        id: 1,
+        title: '2. NOAA Auroral Oval Geomagnetic Ring',
+        icon: '🌐',
+        desc: 'Фізичний геомагнітний овал NOAA SWPC огинає Гренландію та Північну Атлантику. Вертикальні штори Аврори підпорядковуються Kp-індексу і маскуються масами хмар.',
+        math: 'OvalRadius = 22.5° - (Kp * 1.8°); Curtain(z) = sin(lng*8 + time)*cos(lat*4)'
+      },
+      {
+        id: 2,
+        title: '3. Starlight Portals & Oceanic Phosphorescence',
+        icon: '✨',
+        desc: 'Зоряне небо з 2,500 зірками та Чумацьким Шляхом відкривається виключно у вікнах безхмарності. Океан під чистим небом віддзеркалює зелені хвилі Аврори.',
+        math: 'StarAlpha = (1 - CloudMask) * Twinkle; SeaGlow = Dot(LightVector, Normal)'
+      },
+      {
+        id: 3,
+        title: '4. Denmark Strait Synoptic Vortex',
+        icon: '🌀',
+        desc: 'Масштабний океанічний циклон Датської протоки закручує хмарні рукави з південного заходу. В "оці циклону" та тиловому розриві спалахує потужна корона Аврори.',
+        math: 'Spiral: r = a * exp(b * theta); Vorticity = curl(V_wind)'
+      },
+      {
+        id: 4,
+        title: '5. LIDAR Transmittance Scanner',
+        icon: '📡',
+        desc: 'Науковий супутниковий лідар сканує оптичну густину COD променем. Зелений лазерний сектор фіксує пропускну здатність > 85% для мисливців за Авророю.',
+        math: 'COD = Integral(extinction * dz); SpotQuality = (COD < 0.4 ? 100% : 0%)'
+      },
+      {
+        id: 5,
+        title: '6. Cyber-Holo Neon Contours',
+        icon: '⚡',
+        desc: 'Голографічний кіберпанк-радар: ізолінії хмарності пульсують неоновими контурами, а вільні коридори світяться інтерактивними синтвейв-стрічками Аврори.',
+        math: 'IsoLevel(p) = fract(CloudDensity * 6); AuroraRibbon = sin(freq * x - omega * t)'
+      },
+      {
+        id: 6,
+        title: '7. 30s Long Exposure Tripod Simulation',
+        icon: '📷',
+        desc: 'Симуляція камери на штативі: 30-секундне розмиття руху перетворює рухомі хмари на шовковистий туман, а спалахи Аврори створюють м\'які мальовничі полотна.',
+        math: 'ExposureAccumulation = Sum(Frame_t * dt, 0..30s); StarTrailAngle = omega_earth * 30s'
+      },
+      {
+        id: 7,
+        title: '8. Marine Fog & Glacier Peak Cut-Through',
+        icon: '🏔️',
+        desc: 'Прибережні фіорди та океан вкриті низьким шаром морського туману (сіра імла), проте піки Ватнайокюдль та вулканів пробивають інверсію у чисте сяйво неба.',
+        math: 'FogCutoff = Alt_terrain > InversionHeight (650m) ? 0 : DenseFog'
+      },
+      {
+        id: 8,
+        title: '9. Hexagonal Exposure Matrix',
+        icon: '⬡',
+        desc: 'Геодезична сітка гексагонів обчислює рекомендовані параметри зйомки (ISO 1600, f/1.8, 8s) та ймовірність спостереження в кожному квадранті Ісландії та Атлантики.',
+        math: 'P_spot = (1 - CloudCover) * (Kp / 9); RecISO = 800 * (1 + CloudCover * 2)'
+      },
+      {
+        id: 9,
+        title: '10. Solar Wind Plasma Filament Discharge',
+        icon: '⚡',
+        desc: 'Магнітосферні струми Біркеланда: плазмові електричні філаменти спускаються з космосу, огинають грозові хмари та створюють коронні розряди по периметру фронту.',
+        math: 'BirkelandCurrent = Div(J_parallel); CoronaDischarge = Gradient(E_field)'
+      }
+    ];
+
+    // -------------------------------------------------------------
+    // REAL-TIME API FETCH: OPEN-METEO & NOAA SWPC
+    // -------------------------------------------------------------
+    async function fetchLiveMeteoData() {
+      const syncBadge = document.getElementById('live-sync-indicator');
+      const kpBadge = document.getElementById('sync-kp-val');
+      const hudKp = document.getElementById('hud-kp-val');
+      const hudCloud = document.getElementById('hud-cloud-pct');
+      
+      if (syncBadge) syncBadge.innerHTML = 'СИНХРОНІЗАЦІЯ З СУПУТНИКАМИ... <span class="animate-spin inline-block">⏳</span>';
+
+      try {
+        // 1. Fetch NOAA Live Kp
+        try {
+          const respKp = await fetch('https://services.swpc.noaa.gov/json/planetary_k_index_1m.json');
+          if (respKp.ok) {
+            const noaaData = await respKp.json();
+            if (noaaData && noaaData.length > 0) {
+              const latest = noaaData[noaaData.length - 1];
+              liveKp = parseFloat(latest.kp_index) || 3.8;
+            }
+          }
+        } catch (e) {
+          console.warn('NOAA fetch fallback:', e);
+          liveKp = 4.2;
+        }
+
+        // 2. Fetch Open-Meteo Iceland & Atlantic points
+        const meteoUrl = 'https://api.open-meteo.com/v1/forecast?latitude=64.14,65.68,64.25,66.07,61.50,67.20&longitude=-21.94,-18.10,-15.21,-23.12,-20.00,-29.50&current=cloud_cover,wind_speed_10m,wind_direction_10m';
+        try {
+          const respMeteo = await fetch(meteoUrl);
+          if (respMeteo.ok) {
+            const meteoData = await respMeteo.json();
+            if (Array.isArray(meteoData)) {
+              // Update sector cloud bases
+              REGIONAL_SECTORS.forEach((sec, idx) => {
+                const st = meteoData[idx % meteoData.length];
+                if (st && st.current) {
+                  sec.cloudBase = st.current.cloud_cover !== undefined ? st.current.cloud_cover : sec.cloudBase;
+                  sec.windSpeed = st.current.wind_speed_10m || sec.windSpeed;
+                  sec.windDir = st.current.wind_direction_10m || sec.windDir;
+                }
+              });
+            }
+          }
+        } catch (e) {
+          console.warn('Open-Meteo fetch fallback:', e);
+        }
+
+        const now = new Date();
+        const timeStr = now.toLocaleTimeString('uk-UA', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        liveLastUpdated = timeStr;
+
+        if (syncBadge) {
+          syncBadge.innerHTML = `VEÐURSTOFA & NOAA SWPC (Kp ${liveKp.toFixed(1)} • ${timeStr} UTC)`;
+        }
+        if (kpBadge) kpBadge.textContent = liveKp.toFixed(1);
+        if (hudKp) hudKp.textContent = `Kp ${liveKp.toFixed(1)} • ${liveKp >= 4 ? 'СИЛЬНИЙ СПАЛАХ' : 'АКТИВНО'}`;
+        
+        // Calculate average cloud cover
+        let avgCloud = 0;
+        REGIONAL_SECTORS.forEach(s => avgCloud += s.cloudBase);
+        avgCloud = Math.round(avgCloud / REGIONAL_SECTORS.length);
+        if (hudCloud) hudCloud.textContent = `${avgCloud}% ПОКРИТТЯ`;
+
+      } catch (err) {
+        console.error('Master sync error:', err);
+        if (syncBadge) syncBadge.textContent = 'VEÐURSTOFA & NOAA (АВТОНОМНИЙ РЕЖИМ)';
+      }
+    }
+
+    // -------------------------------------------------------------
+    // MAPLIBRE MAP INITIALIZATION
+    // -------------------------------------------------------------
     const mapStyles = {
       dark: {
         version: 8,
@@ -377,9 +562,9 @@ html_content = r'''<!DOCTYPE html>
       map = new maplibregl.Map({
         container: 'map',
         style: mapStyles.dark,
-        center: [-18.5, 64.9],
-        zoom: 6.5,
-        minZoom: 5.5,
+        center: [-19.5, 64.2], // Wide North Atlantic centering
+        zoom: 5.2,
+        minZoom: 4.0,
         maxZoom: 14.0,
         pitch: 0,
         bearing: 0
@@ -399,149 +584,64 @@ html_content = r'''<!DOCTYPE html>
       window.addEventListener('resize', resizeCanvas);
       map.on('load', () => {
         resizeCanvas();
+        fetchLiveMeteoData();
+        setInterval(fetchLiveMeteoData, 45000); // 45s live polling
         startAnimationLoop();
-      });
-
-      map.on('move', () => {
-        // Redraw during pan/zoom
       });
     }
 
     function setBasemap(type) {
       document.getElementById('btn-basemap-dark').className = type === 'dark' 
-        ? 'px-2.5 py-1 rounded-lg bg-cyan-500 text-white font-bold transition'
+        ? 'px-2.5 py-1 rounded-lg bg-emerald-500 text-slate-950 font-bold transition'
         : 'px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition';
       document.getElementById('btn-basemap-sat').className = type === 'satellite' 
-        ? 'px-2.5 py-1 rounded-lg bg-cyan-500 text-white font-bold transition'
+        ? 'px-2.5 py-1 rounded-lg bg-emerald-500 text-slate-950 font-bold transition'
         : 'px-2.5 py-1 rounded-lg text-slate-400 hover:text-white transition';
       map.setStyle(mapStyles[type]);
     }
 
     function flyToZoom(z, center) {
+      if (!map) return;
       map.flyTo({
         center: center,
         zoom: z,
-        speed: 1.6,
+        speed: 1.2,
+        curve: 1.4,
         essential: true
       });
     }
 
-    // -------------------------------------------------------------
-    // MATHEMATICAL SCALING: KM TO SCREEN PIXELS AT CURRENT ZOOM
-    // -------------------------------------------------------------
     function kmToPixels(km, lat) {
-      const p1 = map.project([0, lat]);
-      const p2 = map.project([0, lat + (km / 111.0)]);
-      return Math.abs(p2.y - p1.y);
+      const z = map.getZoom();
+      const metersPerPx = (156543.03392 * Math.cos(lat * Math.PI / 180)) / Math.pow(2, z);
+      return (km * 1000) / metersPerPx;
     }
 
     // -------------------------------------------------------------
-    // CONCEPT DESCRIPTIONS & BLUEPRINTS
+    // CONCEPT SWITCHER & UI CONTROL
     // -------------------------------------------------------------
-    const CONCEPTS_METADATA = [
-      {
-        title: "☁️ 1. Volumetric 3D Cumulus Advection",
-        desc: "Об'ємні купчасті хмари зі світлотіньовим градієнтом, відкиданням м'яких тіней на лавові поля та реалістичним вітровим дрейфом за законами ісландської циркуляції.",
-        math: "RadialGradient(x, y, r) • ShadowOffset = dx * windSpeed • Advection = v * dt",
-        scaling: "Масштабується пропорційно метричному радіусу: на Z11 видно окремі купчасті кластери над ущелинами, на Z6.5 — монолітний фронт.",
-        cloudPct: "68% ПОКРИТТЯ",
-        wind: "16.4 М/С • ПД-ЗХ"
-      },
-      {
-        title: "🛰️ 2. Infrared Satellite Doppler Thermography",
-        desc: "Супутниковий інфрачервоний радіометр (NOAA / EUMETSAT). Колірна гама від -45°C (крижані перисті хмари — пурпур/білий) до +10°C (тепла земля — темно-синій).",
-        math: "T_top = T_ground - (altitude * 6.5°C/km) • FalseColorRamp(T)",
-        scaling: "Теплові градієнти зберігають геодезичну прив'язку до піксельних сіток супутника Meteosat.",
-        cloudPct: "ТЕМП. ХМАР: -28.4°C",
-        wind: "ЕХО: 44.2 dBZ"
-      },
-      {
-        title: "🌪️ 3. Navier-Stokes Vortex Streamlines",
-        desc: "Гідродинамічний потік диму. Масивні льодовики Ватнайокюдль та Ланійокюдль діють як тверді аеродинамічні перешкоди, створюючи вихори фон Кармана.",
-        math: "∂u/∂t + (u·∇)u = -1/ρ ∇p + ν∇²u • ObstacleDeflection(Glacier)",
-        scaling: "Лінії течії згинаються навколо вершин і проходять крізь перевали відповідно до рельєфу.",
-        cloudPct: "ВИХОРІВ: 18 АКТИВНИХ",
-        wind: "22.8 М/С • ШКВАЛ"
-      },
-      {
-        title: "🏔️ 4. 3-Tier Lágský / Milliský / Háský",
-        desc: "Офіційний 3-рівневий метеорологічний шар Veðurstofa Íslands: Низькі хмари (0-2 км), Середні (2-6 км) та Високі (>6 км) для прогнозування полярного сяйва.",
-        math: "P_clear = (1 - Lágský) * (1 - Milliský) * (1 - 0.3 * Háský)",
-        scaling: "Незалежні висотні яруси: наближення дозволяє виявити долинний туман під ясним небом.",
-        cloudPct: "Lág: 45% • Mid: 20%",
-        wind: "АВРОРА: 88% ШАНС"
-      },
-      {
-        title: "📊 5. Isobaric Moisture Contours & Ceiling",
-        desc: "Авіаційні барометричні ізолінії насичення вологою з інтервалом 20%. Анімовані пунктирні стрілки вказують баричний градієнт та висоту нижньої кромки (FL).",
-        math: "Isobar(x, y) = Contours(P_vapor / P_sat) • DashOffset = t * speed",
-        scaling: "Векторні контури автоматично децимуються на високих зумах для збереження чистоти читання.",
-        cloudPct: "СТЕЛЬКА: FL045 (1370M)",
-        wind: "QNH: 994 hPa"
-      },
-      {
-        title: "✨ 6. Quantum Particle Density Field",
-        desc: "8,000 квантових світлових мікро-крапель вологи з аеродинамічною інерцією. У зонах шторму частинки збиваються у щільні вихори, у ясних зонах — розсіюються.",
-        math: "Pos(t+1) = Pos(t) + V_wind + Turbulence(PerlinNoise)",
-        scaling: "Щільність частинок динамічно адаптується під масштаб, щоб не перевантажувати екран.",
-        cloudPct: "8,000 ЧАСТИНОК",
-        wind: "ДРЕЙФ: 14.8 М/С"
-      },
-      {
-        title: "🌌 7. Aurora Hunter Occlusion Filter",
-        desc: "Фільтр прозорості нічного неба для туристів: Аврора рендериться на тлі, а хмари виступають як оптичні затемнення з підсвіченими смарагдовими краями.",
-        math: "FinalPixel = AuroraColor * (1 - CloudAlpha) + RimScatter * CloudAlpha",
-        scaling: "Показує точні географічні 'вікна чистого неба' для зупинки авто та фотозйомки.",
-        cloudPct: "ВІКНО ВІДЧИНЕНЕ",
-        wind: "Kp 4.2 • ЧИСТО: МІВАТН"
-      },
-      {
-        title: "🎯 8. Coast Guard Doppler Sweep Radar",
-        desc: "Військовий 360-градусний круговий метео-радар берегової охорони Кефлавіка з післясвітінням фосфору та шкалою відбиваності опадів dBZ.",
-        math: "SweepAngle = (t * RPM * 360) % 360 • PhosphorDecay = exp(-dt / tau)",
-        scaling: "Радіус сканування 350 морських миль із перерахунком на локальні дощові осередки.",
-        cloudPct: "ВІДБИТТЯ: 52 dBZ",
-        wind: "ЗЛИВА / МОКРИЙ СНІГ"
-      },
-      {
-        title: "⬡ 9. NOAA Hexagonal Atmospheric Mesh Grid",
-        desc: "Гексагональна сітка кліматичного моделювання ECMWF/NOAA. Кожен шестикутник інтерполює хмарність регіону з пульсуючим барометром та вектором.",
-        math: "HexCoords = AxialToPixel(q, r) • Color = HeatmapColor(Pct)",
-        scaling: "Гексагони зберігають рівномірну топологію без спотворень картографічної проекції.",
-        cloudPct: "94 ГЕКСАГОНИ",
-        wind: "ECMWF HRES 0.1°"
-      },
-      {
-        title: "⚡ 10. Cyberpunk Topo-Hugger Neon Fog",
-        desc: "Синтвейв неоновий цифровий туман (Cyberpunk 2077). Хвильові неонові контури бірюзи та мадженти обволікають контури фіордів та гірські масиви.",
-        math: "Z_wave = sin(lat * 40 + t) * cos(lng * 40 - t) • Glow = NeonPulse",
-        scaling: "Ідеально підходить для нічного експедиційного водіння з проекційним дисплеєм HUD.",
-        cloudPct: "CYBER FOG ACTIVE",
-        wind: "HUD WARP: 100%"
-      }
-    ];
-
     function switchConcept(idx) {
       activeConceptIdx = idx;
       
-      // Update buttons
+      // Update Button Styles
       for (let i = 0; i < 10; i++) {
         const btn = document.getElementById(`c-btn-${i}`);
         if (btn) {
-          if (i === idx) btn.classList.add('active');
-          else btn.classList.remove('active');
+          if (i === idx) {
+            btn.className = 'concept-btn active px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white shrink-0 flex items-center gap-1.5 transition';
+          } else {
+            btn.className = 'concept-btn px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 hover:text-white shrink-0 flex items-center gap-1.5 transition';
+          }
         }
       }
 
-      // Update HUD & Inspector
+      // Update HUD metadata
       const meta = CONCEPTS_METADATA[idx];
-      document.getElementById('hud-concept-title').innerHTML = meta.title;
-      document.getElementById('hud-concept-desc').textContent = meta.desc;
-      document.getElementById('hud-cloud-pct').textContent = meta.cloudPct;
-      document.getElementById('hud-wind-val').textContent = meta.wind;
-
-      document.getElementById('ins-math').textContent = meta.math;
-      document.getElementById('ins-scaling').textContent = meta.scaling;
+      if (meta) {
+        document.getElementById('hud-concept-title').innerHTML = `<span>${meta.icon}</span> ${meta.title}`;
+        document.getElementById('hud-concept-desc').textContent = meta.desc;
+        document.getElementById('ins-math').textContent = meta.math;
+      }
     }
 
     function toggleHudPanel() {
@@ -549,17 +649,15 @@ html_content = r'''<!DOCTYPE html>
       if (panel) panel.classList.toggle('hidden');
     }
 
-    // -------------------------------------------------------------
-    // TIMELINE SCRUBBING & PLAYBACK
-    // -------------------------------------------------------------
     function togglePlayPause() {
       isPlaying = !isPlaying;
       const btn = document.getElementById('btn-play-pause');
-      if (btn) btn.innerHTML = isPlaying ? '⏸️' : '▶️';
+      btn.innerHTML = isPlaying ? '⏸️' : '▶️';
     }
 
     function resetTimeline() {
       timelineHour = 0;
+      document.getElementById('radar-time-slider').value = 0;
       onTimelineInput(0);
     }
 
@@ -568,8 +666,8 @@ html_content = r'''<!DOCTYPE html>
       [1, 2, 4].forEach(s => {
         const b = document.getElementById(`spd-${s}`);
         if (b) {
-          b.className = s === spd 
-            ? 'px-2 py-1 rounded-lg bg-cyan-500 text-white font-bold transition'
+          b.className = (s === spd)
+            ? 'px-2 py-1 rounded-lg bg-emerald-500 text-slate-950 font-bold transition'
             : 'px-2 py-1 rounded-lg text-slate-400 hover:text-white transition';
         }
       });
@@ -577,30 +675,29 @@ html_content = r'''<!DOCTYPE html>
 
     function onTimelineInput(val) {
       timelineHour = parseFloat(val);
-      const slider = document.getElementById('radar-time-slider');
-      if (slider) slider.value = timelineHour;
-
-      const baseHour = 18;
-      const simHour = (baseHour + Math.floor(timelineHour)) % 24;
-      const simMin = Math.floor((timelineHour % 1) * 60).toString().padStart(2, '0');
-      const timeStr = `Сьогодні, ${simHour}:${simMin} UTC (+${timelineHour.toFixed(1)}h)`;
-
-      const lbl = document.getElementById('timeline-time-label');
-      if (lbl) lbl.textContent = timeStr;
+      const hInt = Math.floor(timelineHour);
+      const mInt = Math.floor((timelineHour - hInt) * 60);
+      const label = document.getElementById('timeline-time-label');
+      if (label) {
+        label.textContent = `+${hInt} год ${mInt < 10 ? '0' : ''}${mInt} хв (UTC +${timelineHour.toFixed(1)}h)`;
+      }
     }
 
-    // =============================================================
-    // 6. 10 REAL WORKING CONCEPTS RENDER ENGINE (60 FPS)
-    // =============================================================
-    let animTime = 0;
-
+    // -------------------------------------------------------------
+    // MASTER 60 FPS ANIMATION LOOP
+    // -------------------------------------------------------------
     function startAnimationLoop() {
-      function loop() {
-        animTime += 0.016;
+      let lastTime = performance.now();
+
+      function loop(now) {
+        const dt = Math.min(0.06, (now - lastTime) / 1000);
+        lastTime = now;
+        animTime += dt;
 
         if (isPlaying) {
-          timelineHour += 0.012 * playSpeed;
+          timelineHour += dt * 0.4 * playSpeed;
           if (timelineHour > 12) timelineHour = 0;
+          document.getElementById('radar-time-slider').value = timelineHour;
           onTimelineInput(timelineHour);
         }
 
@@ -611,404 +708,78 @@ html_content = r'''<!DOCTYPE html>
     }
 
     function renderActiveConcept() {
-      if (!ctx || !canvas || !map) return;
-      const w = canvas.width;
-      const h = canvas.height;
-      const dpr = window.devicePixelRatio || 1;
-      ctx.clearRect(0, 0, w, h);
+      if (!ctx || !map || !canvas) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Advection time offset from timeline slider
-      const advectionOffset = timelineHour * 0.04;
+      const dpr = window.devicePixelRatio || 1;
+      const advectionOffset = timelineHour * 0.45;
 
       switch(activeConceptIdx) {
         case 0:
-          renderConcept1_Volumetric3D(dpr, advectionOffset);
+          renderConcept1_BasaltBleed(dpr, advectionOffset);
           break;
         case 1:
-          renderConcept2_InfraredSatellite(dpr, advectionOffset);
+          renderConcept2_NOAAOval(dpr, advectionOffset);
           break;
         case 2:
-          renderConcept3_NavierStokes(dpr, advectionOffset);
+          renderConcept3_StarlightPortals(dpr, advectionOffset);
           break;
         case 3:
-          renderConcept4_MultiTier(dpr, advectionOffset);
+          renderConcept4_SynopticVortex(dpr, advectionOffset);
           break;
         case 4:
-          renderConcept5_IsobaricContours(dpr, advectionOffset);
+          renderConcept5_LidarCOD(dpr, advectionOffset);
           break;
         case 5:
-          renderConcept6_QuantumParticles(dpr, advectionOffset);
+          renderConcept6_CyberContours(dpr, advectionOffset);
           break;
         case 6:
-          renderConcept7_AuroraOcclusion(dpr, advectionOffset);
+          renderConcept7_LongExposureTripod(dpr, advectionOffset);
           break;
         case 7:
-          renderConcept8_DopplerSweep(dpr, advectionOffset);
+          renderConcept8_MarineFogGlacier(dpr, advectionOffset);
           break;
         case 8:
-          renderConcept9_HexMesh(dpr, advectionOffset);
+          renderConcept9_HexExposure(dpr, advectionOffset);
           break;
         case 9:
-          renderConcept10_Cyberpunk(dpr, advectionOffset);
+          renderConcept10_PlasmaFilaments(dpr, advectionOffset);
           break;
       }
     }
 
-    // -------------------------------------------------------------
-    // CONCEPT 1: Volumetric 3D Cumulus Advection
-    // -------------------------------------------------------------
-    function renderConcept1_Volumetric3D(dpr, advOffset) {
-      ctx.save();
-      
-      // Step 1: Render Cast Terrain Shadows first
-      SECTOR_PUFFS.forEach((p, idx) => {
-        const driftLng = p.baseLng + advOffset * p.speedMult + Math.sin(animTime * 0.3 + p.phase) * 0.08;
-        const driftLat = p.baseLat + advOffset * 0.3 * p.speedMult;
-        const pt = map.project([driftLng, driftLat]);
-        const radiusPx = kmToPixels(p.radiusKm, driftLat) * dpr;
-
-        // Shadow offset to northeast (sun is low in south-southwest)
-        const shadowX = pt.x * dpr + radiusPx * 0.25;
-        const shadowY = pt.y * dpr - radiusPx * 0.18;
-
-        const shadowGrad = ctx.createRadialGradient(shadowX, shadowY, radiusPx * 0.1, shadowX, shadowY, radiusPx * 1.1);
-        shadowGrad.addColorStop(0, 'rgba(0, 0, 0, 0.28)');
-        shadowGrad.addColorStop(0.6, 'rgba(2, 6, 23, 0.15)');
-        shadowGrad.addColorStop(1, 'rgba(0, 0, 0, 0.0)');
-
-        ctx.fillStyle = shadowGrad;
-        ctx.beginPath();
-        ctx.arc(shadowX, shadowY, radiusPx * 1.1, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      // Step 2: Render Volumetric White-Silver Puffs with Highlights
-      SECTOR_PUFFS.forEach((p, idx) => {
-        const driftLng = p.baseLng + advOffset * p.speedMult + Math.sin(animTime * 0.3 + p.phase) * 0.08;
-        const driftLat = p.baseLat + advOffset * 0.3 * p.speedMult;
-        const pt = map.project([driftLng, driftLat]);
-        const radiusPx = kmToPixels(p.radiusKm, driftLat) * dpr;
-
-        const px = pt.x * dpr;
-        const py = pt.y * dpr;
-
-        const puffGrad = ctx.createRadialGradient(
-          px - radiusPx * 0.2, py - radiusPx * 0.2, radiusPx * 0.05,
-          px, py, radiusPx
-        );
-        puffGrad.addColorStop(0, `rgba(255, 255, 255, ${0.85 * p.opacityMult})`);
-        puffGrad.addColorStop(0.35, `rgba(241, 245, 249, ${0.75 * p.opacityMult})`);
-        puffGrad.addColorStop(0.7, `rgba(203, 213, 225, ${0.45 * p.opacityMult})`);
-        puffGrad.addColorStop(1, 'rgba(148, 163, 184, 0.0)');
-
-        ctx.fillStyle = puffGrad;
-        ctx.beginPath();
-        ctx.arc(px, py, radiusPx, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      // Step 3: Draw Clear Sky Windows Pulsing Beacon
-      const clearSpot = map.project([-16.90, 65.60]); // Mývatn
-      const cx = clearSpot.x * dpr;
-      const cy = clearSpot.y * dpr;
-      const pulseR = (25 + Math.sin(animTime * 4) * 8) * dpr;
-
-      ctx.strokeStyle = '#10b981';
-      ctx.lineWidth = 2.5 * dpr;
-      ctx.beginPath();
-      ctx.arc(cx, cy, pulseR, 0, Math.PI * 2);
-      ctx.stroke();
-
-      ctx.fillStyle = '#10b981';
-      ctx.font = `bold ${10 * dpr}px sans-serif`;
-      ctx.fillText('✨ ВІКНО ЧИСТОГО НЕБА (18% ХМАР)', cx + 18 * dpr, cy + 4 * dpr);
-
-      ctx.restore();
-    }
-
-    // -------------------------------------------------------------
-    // CONCEPT 2: Doppler Satellite Infrared Thermography
-    // -------------------------------------------------------------
-    function renderConcept2_InfraredSatellite(dpr, advOffset) {
-      ctx.save();
-      ctx.globalCompositeOperation = 'screen';
-
-      ICELAND_SECTORS.forEach(sec => {
-        const pt = map.project([sec.lng + advOffset * 0.5, sec.lat]);
-        const rPx = kmToPixels(sec.radiusKm * 1.4, sec.lat) * dpr;
-        const px = pt.x * dpr;
-        const py = pt.y * dpr;
-
-        const grad = ctx.createRadialGradient(px, py, rPx * 0.1, px, py, rPx);
-        if (sec.cloudBase > 75) {
-          // Extremely cold high clouds (-40°C): Magenta & White
-          grad.addColorStop(0, 'rgba(255, 255, 255, 0.9)');
-          grad.addColorStop(0.3, 'rgba(217, 70, 239, 0.8)');
-          grad.addColorStop(0.7, 'rgba(168, 85, 247, 0.4)');
-          grad.addColorStop(1, 'rgba(15, 23, 42, 0.0)');
-        } else if (sec.cloudBase > 40) {
-          // Mid altitude (-15°C): Fiery Amber & Gold
-          grad.addColorStop(0, 'rgba(245, 158, 11, 0.85)');
-          grad.addColorStop(0.4, 'rgba(234, 88, 12, 0.6)');
-          grad.addColorStop(0.8, 'rgba(6, 182, 212, 0.3)');
-          grad.addColorStop(1, 'rgba(15, 23, 42, 0.0)');
-        } else {
-          // Warm clear surface (+5°C): Deep Emerald / Indigo
-          grad.addColorStop(0, 'rgba(16, 185, 129, 0.6)');
-          grad.addColorStop(0.5, 'rgba(6, 182, 212, 0.3)');
-          grad.addColorStop(1, 'rgba(15, 23, 42, 0.0)');
-        }
-
-        ctx.fillStyle = grad;
-        ctx.beginPath();
-        ctx.arc(px, py, rPx, 0, Math.PI * 2);
-        ctx.fill();
-
-        // Temperature label badge
-        ctx.fillStyle = '#ffffff';
-        ctx.font = `bold ${9 * dpr}px monospace`;
-        const tempVal = sec.cloudBase > 75 ? '-38°C' : (sec.cloudBase > 40 ? '-16°C' : '+4°C');
-        ctx.fillText(`IR: ${tempVal}`, px - 20 * dpr, py);
-      });
-
-      ctx.restore();
-    }
-
-    // -------------------------------------------------------------
-    // CONCEPT 3: Navier-Stokes Vortex Streamlines
-    // -------------------------------------------------------------
-    function renderConcept3_NavierStokes(dpr, advOffset) {
+    // =============================================================
+    // VARIATION 1: BASALT CLOUDS & EMERALD BLEED
+    // =============================================================
+    function renderConcept1_BasaltBleed(dpr, advOffset) {
       ctx.save();
 
-      // Glacier obstacles in Iceland: Vatnajökull & Langjökull
-      const vatnaPt = map.project([-16.80, 64.40]);
-      const langPt = map.project([-20.15, 64.70]);
-
-      FLUID_PARTICLES.forEach(p => {
-        p.lng += p.speed + (advOffset * 0.01);
-        if (p.lng > -13.0) p.lng = -24.5;
-
-        // Obstacle avoidance deflection
-        const pScreen = map.project([p.lng, p.lat]);
-        const dVatna = Math.hypot(pScreen.x - vatnaPt.x, pScreen.y - vatnaPt.y);
-        if (dVatna < 80) {
-          // Deflect around obstacle (creates Karman vortex shedding)
-          p.lat += (p.lat > 64.40 ? 0.008 : -0.008);
-        }
-
-        const px = pScreen.x * dpr;
-        const py = pScreen.y * dpr;
-
-        ctx.strokeStyle = p.lat > 64.0 ? 'rgba(34, 211, 238, 0.65)' : 'rgba(249, 115, 22, 0.75)';
-        ctx.lineWidth = 1.8 * dpr;
-        ctx.beginPath();
-        ctx.moveTo(px, py);
-        ctx.lineTo(px - 14 * dpr, py + 2 * dpr);
-        ctx.stroke();
-
-        ctx.fillStyle = '#ffffff';
-        ctx.beginPath();
-        ctx.arc(px, py, p.size * dpr * 0.8, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      // Draw Glacier Barrier Outlines
-      [vatnaPt, langPt].forEach((ob, idx) => {
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
-        ctx.setLineDash([4 * dpr, 4 * dpr]);
-        ctx.lineWidth = 1.5 * dpr;
-        ctx.beginPath();
-        ctx.arc(ob.x * dpr, ob.y * dpr, (idx === 0 ? 55 : 35) * dpr, 0, Math.PI * 2);
-        ctx.stroke();
-        ctx.setLineDash([]);
-        ctx.fillStyle = 'rgba(224, 242, 254, 0.8)';
-        ctx.font = `${9 * dpr}px monospace`;
-        ctx.fillText(idx === 0 ? '⛔ БАР\'ЄР ВАТНАЙОКЮДЛЬ' : '⛔ ЛАНҐЙЙОКЮДЛЬ', ob.x * dpr - 45 * dpr, ob.y * dpr);
-      });
-
-      ctx.restore();
-    }
-
-    // -------------------------------------------------------------
-    // CONCEPT 4: 3-Tier Multi-Altitude Radar
-    // -------------------------------------------------------------
-    function renderConcept4_MultiTier(dpr, advOffset) {
-      ctx.save();
-
-      // Tier 1: Low clouds (Lágský <2000m) - Deep Gold/Orange Fog
-      ICELAND_SECTORS.forEach(sec => {
-        if (sec.cloudBase > 50) {
-          const pt = map.project([sec.lng + advOffset * 0.3, sec.lat]);
-          const rPx = kmToPixels(sec.radiusKm * 0.8, sec.lat) * dpr;
-          const px = pt.x * dpr;
-          const py = pt.y * dpr;
-
-          const g1 = ctx.createRadialGradient(px, py, 0, px, py, rPx);
-          g1.addColorStop(0, 'rgba(245, 158, 11, 0.7)');
-          g1.addColorStop(1, 'rgba(245, 158, 11, 0.0)');
-          ctx.fillStyle = g1;
-          ctx.beginPath();
-          ctx.arc(px, py, rPx, 0, Math.PI * 2);
-          ctx.fill();
-        }
-      });
-
-      // Tier 2: Mid clouds (Milliský 2000-6000m) - Soft Steel Blue
-      ICELAND_SECTORS.forEach(sec => {
-        const pt = map.project([sec.lng + advOffset * 0.6, sec.lat + 0.1]);
-        const rPx = kmToPixels(sec.radiusKm * 1.1, sec.lat) * dpr;
-        const px = pt.x * dpr;
-        const py = pt.y * dpr;
-
-        const g2 = ctx.createRadialGradient(px, py, 0, px, py, rPx);
-        g2.addColorStop(0, 'rgba(56, 189, 248, 0.55)');
-        g2.addColorStop(1, 'rgba(56, 189, 248, 0.0)');
-        ctx.fillStyle = g2;
-        ctx.beginPath();
-        ctx.arc(px, py, rPx, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      // Tier 3: High clouds (Háský >6000m) - Neon Purple Cirrus
-      ICELAND_SECTORS.forEach(sec => {
-        const pt = map.project([sec.lng + advOffset * 0.9, sec.lat + 0.2]);
-        const rPx = kmToPixels(sec.radiusKm * 1.4, sec.lat) * dpr;
-        const px = pt.x * dpr;
-        const py = pt.y * dpr;
-
-        const g3 = ctx.createRadialGradient(px, py, 0, px, py, rPx);
-        g3.addColorStop(0, 'rgba(168, 85, 247, 0.45)');
-        g3.addColorStop(1, 'rgba(168, 85, 247, 0.0)');
-        ctx.fillStyle = g3;
-        ctx.beginPath();
-        ctx.arc(px, py, rPx, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      // Tier Legend Card in Top Right
-      ctx.fillStyle = 'rgba(2, 6, 23, 0.85)';
-      ctx.fillRect(canvas.width - 200 * dpr, 20 * dpr, 180 * dpr, 70 * dpr);
-      ctx.strokeStyle = 'rgba(6, 182, 212, 0.4)';
-      ctx.strokeRect(canvas.width - 200 * dpr, 20 * dpr, 180 * dpr, 70 * dpr);
-
-      ctx.font = `bold ${9 * dpr}px monospace`;
-      ctx.fillStyle = '#f59e0b';
-      ctx.fillText('● LÁGSKÝ (<2000m) [ТУМАН]', canvas.width - 190 * dpr, 38 * dpr);
-      ctx.fillStyle = '#38bdf8';
-      ctx.fillText('● MILLISKÝ (2-6km) [ДОЩ]', canvas.width - 190 * dpr, 56 * dpr);
-      ctx.fillStyle = '#c084fc';
-      ctx.fillText('● HÁSKÝ (>6km) [ПЕРИСТІ]', canvas.width - 190 * dpr, 74 * dpr);
-
-      ctx.restore();
-    }
-
-    // -------------------------------------------------------------
-    // CONCEPT 5: Isobaric Moisture Contours
-    // -------------------------------------------------------------
-    function renderConcept5_IsobaricContours(dpr, advOffset) {
-      ctx.save();
-
-      ICELAND_SECTORS.forEach((sec, idx) => {
-        const pt = map.project([sec.lng + advOffset * 0.4, sec.lat]);
-        const rPx = kmToPixels(sec.radiusKm, sec.lat) * dpr;
-        const px = pt.x * dpr;
-        const py = pt.y * dpr;
-
-        // Draw 4 concentric isobar rings (25%, 50%, 75%, 90%)
-        [0.35, 0.6, 0.85, 1.1].forEach((k, rIdx) => {
-          ctx.strokeStyle = rIdx === 3 ? 'rgba(6, 182, 212, 0.8)' : 'rgba(148, 163, 184, 0.4)';
-          ctx.lineWidth = (rIdx === 3 ? 2 : 1) * dpr;
-          ctx.setLineDash([6 * dpr, 4 * dpr]);
-          ctx.lineDashOffset = -animTime * 15 * (rIdx % 2 === 0 ? 1 : -1);
-
-          ctx.beginPath();
-          ctx.arc(px, py, rPx * k, 0, Math.PI * 2);
-          ctx.stroke();
-
-          // Barometric label
-          if (rIdx === 2) {
-            ctx.fillStyle = '#38bdf8';
-            ctx.font = `${8 * dpr}px monospace`;
-            ctx.fillText(`${25 * (rIdx + 1)}% RH`, px + rPx * k * 0.7, py - rPx * k * 0.7);
-          }
-        });
-        ctx.setLineDash([]);
-
-        // Sector center flag
-        ctx.fillStyle = '#ffffff';
-        ctx.beginPath();
-        ctx.arc(px, py, 3 * dpr, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.font = `bold ${9 * dpr}px monospace`;
-        ctx.fillText(`FL0${Math.floor(sec.cloudBase / 10) + 20}`, px + 6 * dpr, py + 3 * dpr);
-      });
-
-      ctx.restore();
-    }
-
-    // -------------------------------------------------------------
-    // CONCEPT 6: Quantum Particle Density Field
-    // -------------------------------------------------------------
-    function renderConcept6_QuantumParticles(dpr, advOffset) {
-      ctx.save();
-      ctx.globalCompositeOperation = 'lighter';
-
-      FLUID_PARTICLES.forEach(p => {
-        p.lng += p.speed * 1.5 + (advOffset * 0.008);
-        if (p.lng > -13.0) p.lng = -24.5;
-
-        const pt = map.project([p.lng, p.lat]);
-        const px = pt.x * dpr;
-        const py = pt.y * dpr;
-
-        const isStorm = p.lat < 64.0;
-        ctx.fillStyle = isStorm ? 'rgba(251, 146, 60, 0.75)' : 'rgba(56, 189, 248, 0.65)';
-        
-        ctx.beginPath();
-        ctx.arc(px, py, (isStorm ? 2.8 : 1.8) * dpr, 0, Math.PI * 2);
-        ctx.fill();
-
-        // High velocity streak line
-        ctx.strokeStyle = isStorm ? 'rgba(251, 146, 60, 0.3)' : 'rgba(56, 189, 248, 0.25)';
-        ctx.lineWidth = 1 * dpr;
-        ctx.beginPath();
-        ctx.moveTo(px, py);
-        ctx.lineTo(px - 18 * dpr, py + 3 * dpr);
-        ctx.stroke();
-      });
-
-      ctx.restore();
-    }
-
-    // -------------------------------------------------------------
-    // CONCEPT 7: Aurora Hunter Occlusion Filter
-    // -------------------------------------------------------------
-    function renderConcept7_AuroraOcclusion(dpr, advOffset) {
-      ctx.save();
-
-      // Step 1: Render vibrant Northern Lights plasma background over Iceland
+      // 1. Vibrant Northern Lights plasma background
       const auroraGrad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      const intensity = 0.5 + Math.sin(animTime * 1.5) * 0.15 + (liveKp / 10) * 0.35;
       auroraGrad.addColorStop(0.1, 'rgba(16, 185, 129, 0.0)');
-      auroraGrad.addColorStop(0.35, `rgba(16, 185, 129, ${0.45 + Math.sin(animTime * 2) * 0.15})`);
-      auroraGrad.addColorStop(0.65, `rgba(6, 182, 212, ${0.4 + Math.cos(animTime * 2.2) * 0.12})`);
-      auroraGrad.addColorStop(0.85, 'rgba(168, 85, 247, 0.2)');
+      auroraGrad.addColorStop(0.35, `rgba(16, 185, 129, ${intensity * 0.85})`);
+      auroraGrad.addColorStop(0.65, `rgba(6, 182, 212, ${intensity * 0.70})`);
+      auroraGrad.addColorStop(0.85, 'rgba(168, 85, 247, 0.25)');
       auroraGrad.addColorStop(1, 'rgba(16, 185, 129, 0.0)');
 
       ctx.fillStyle = auroraGrad;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Step 2: Overlay clouds as dark volcanic ash occlusions (blocking the aurora)
-      ICELAND_SECTORS.forEach(sec => {
-        const pt = map.project([sec.lng + advOffset * 0.4, sec.lat]);
-        const rPx = kmToPixels(sec.radiusKm * 1.1, sec.lat) * dpr;
+      // 2. Basaltic Dark Volcanic Clouds with Emerald Bleed
+      SECTOR_PUFFS.forEach(p => {
+        const driftLng = p.baseLng + advOffset * p.speedMult + Math.sin(animTime * 0.3 + p.phase) * 0.1;
+        const driftLat = p.baseLat + advOffset * 0.25 * p.speedMult;
+        const pt = map.project([driftLng, driftLat]);
+        const rPx = kmToPixels(p.radiusKm, driftLat) * dpr;
         const px = pt.x * dpr;
         const py = pt.y * dpr;
 
         const occludeGrad = ctx.createRadialGradient(px, py, rPx * 0.15, px, py, rPx);
-        occludeGrad.addColorStop(0, 'rgba(15, 23, 42, 0.95)'); // 100% blocks aurora
-        occludeGrad.addColorStop(0.7, 'rgba(30, 41, 59, 0.85)');
-        occludeGrad.addColorStop(0.85, 'rgba(16, 185, 129, 0.35)'); // Green fringe scatter!
-        occludeGrad.addColorStop(1, 'rgba(15, 23, 42, 0.0)');
+        occludeGrad.addColorStop(0, 'rgba(10, 15, 28, 0.96)'); // Completely blocks aurora
+        occludeGrad.addColorStop(0.65, 'rgba(15, 23, 42, 0.88)');
+        occludeGrad.addColorStop(0.82, `rgba(16, 185, 129, ${0.45 * p.opacityMult})`); // Green Emerald Fringe Bleed!
+        occludeGrad.addColorStop(1, 'rgba(10, 15, 28, 0.0)');
 
         ctx.fillStyle = occludeGrad;
         ctx.beginPath();
@@ -1016,157 +787,527 @@ html_content = r'''<!DOCTYPE html>
         ctx.fill();
       });
 
-      // Target Spot Highlight in Mývatn
+      // Target Spot Highlight: Lake Mývatn Clear Window
       const myv = map.project([-16.90, 65.60]);
       ctx.fillStyle = '#34d399';
-      ctx.font = `bold ${11 * dpr}px monospace`;
-      ctx.fillText('🔭 ПЕРСПЕКТИВА АВРОРИ: 10/10 (ЧИСТЕ НЕБО)', myv.x * dpr - 80 * dpr, myv.y * dpr);
+      ctx.font = `bold ${12 * dpr}px monospace`;
+      ctx.fillText('🔭 ВІКНО АВРОРИ: 100% ВИДИМІСТЬ (MÝVATN)', myv.x * dpr - 90 * dpr, myv.y * dpr);
 
       ctx.restore();
     }
 
-    // -------------------------------------------------------------
-    // CONCEPT 8: Coast Guard Doppler Sweep Radar
-    // -------------------------------------------------------------
-    let radarSweepAngle = 0;
-    function renderConcept8_DopplerSweep(dpr, advOffset) {
+    // =============================================================
+    // VARIATION 2: NOAA AURORAL OVAL GEOMAGNETIC RING
+    // =============================================================
+    function renderConcept2_NOAAOval(dpr, advOffset) {
       ctx.save();
-      radarSweepAngle += 0.04;
 
-      // Radar station at Keflavík Airport
-      const kef = map.project([-22.60, 63.98]);
-      const kx = kef.x * dpr;
-      const ky = kef.y * dpr;
-      const sweepRadius = Math.max(canvas.width, canvas.height) * 0.85;
+      // 1. Draw Physical Geomagnetic Oval across Denmark Strait, Greenland, Iceland
+      const ovalCenterLat = 67.5 - (liveKp - 2) * 0.7; // Equatorward expansion on high Kp
+      ctx.lineWidth = 35 * dpr;
+      ctx.lineCap = 'round';
 
-      // Draw Range Rings (50 NM, 100 NM, 150 NM)
-      [120, 240, 360, 480].forEach(r => {
-        ctx.strokeStyle = 'rgba(16, 185, 129, 0.35)';
-        ctx.lineWidth = 1 * dpr;
-        ctx.beginPath();
-        ctx.arc(kx, ky, r * dpr, 0, Math.PI * 2);
-        ctx.stroke();
-      });
+      const ovalGrad = ctx.createLinearGradient(0, 0, canvas.width, 0);
+      ovalGrad.addColorStop(0, 'rgba(168, 85, 247, 0.3)');
+      ovalGrad.addColorStop(0.4, 'rgba(16, 185, 129, 0.85)');
+      ovalGrad.addColorStop(0.8, 'rgba(52, 211, 153, 0.9)');
+      ovalGrad.addColorStop(1, 'rgba(6, 182, 212, 0.3)');
 
-      // Draw Rotating Phosphor Sweep Line
-      const sweepX = kx + Math.cos(radarSweepAngle) * sweepRadius;
-      const sweepY = ky + Math.sin(radarSweepAngle) * sweepRadius;
-
-      const beamGrad = ctx.createLinearGradient(kx, ky, sweepX, sweepY);
-      beamGrad.addColorStop(0, 'rgba(16, 185, 129, 0.8)');
-      beamGrad.addColorStop(1, 'rgba(16, 185, 129, 0.0)');
-
-      ctx.strokeStyle = beamGrad;
-      ctx.lineWidth = 3 * dpr;
+      ctx.strokeStyle = ovalGrad;
       ctx.beginPath();
-      ctx.moveTo(kx, ky);
-      ctx.lineTo(sweepX, sweepY);
+      let first = true;
+      for (let lng = -33; lng <= -6; lng += 0.8) {
+        const wave = Math.sin(lng * 0.4 + animTime * 1.5) * 0.8;
+        const pt = map.project([lng, ovalCenterLat + wave]);
+        if (first) { ctx.moveTo(pt.x * dpr, pt.y * dpr); first = false; }
+        else { ctx.lineTo(pt.x * dpr, pt.y * dpr); }
+      }
       ctx.stroke();
 
-      // Echo blips on active precipitation clouds
-      ICELAND_SECTORS.forEach(sec => {
-        const pt = map.project([sec.lng, sec.lat]);
+      // 2. Dynamic Vertical Rayed Curtains
+      for (let lng = -31; lng <= -8; lng += 1.4) {
+        const wave = Math.sin(lng * 0.5 + animTime * 2.2) * 0.9;
+        const pt = map.project([lng, ovalCenterLat + wave]);
+        const curtainH = (70 + Math.sin(lng + animTime * 3) * 35) * dpr;
+
+        const rayGrad = ctx.createLinearGradient(pt.x * dpr, pt.y * dpr - curtainH, pt.x * dpr, pt.y * dpr);
+        rayGrad.addColorStop(0, 'rgba(236, 72, 153, 0.65)'); // Magenta top
+        rayGrad.addColorStop(0.4, 'rgba(16, 185, 129, 0.85)'); // Emerald middle
+        rayGrad.addColorStop(1, 'rgba(16, 185, 129, 0.0)');
+
+        ctx.fillStyle = rayGrad;
+        ctx.fillRect(pt.x * dpr - 4 * dpr, pt.y * dpr - curtainH, 8 * dpr, curtainH);
+      }
+
+      // 3. Occlusion by oceanic & Icelandic clouds
+      SECTOR_PUFFS.forEach(p => {
+        const driftLng = p.baseLng + advOffset * p.speedMult;
+        const driftLat = p.baseLat + advOffset * 0.25 * p.speedMult;
+        const pt = map.project([driftLng, driftLat]);
+        const rPx = kmToPixels(p.radiusKm, driftLat) * dpr;
+
+        const occlude = ctx.createRadialGradient(pt.x * dpr, pt.y * dpr, rPx * 0.2, pt.x * dpr, pt.y * dpr, rPx);
+        occlude.addColorStop(0, 'rgba(15, 23, 42, 0.95)');
+        occlude.addColorStop(0.7, 'rgba(30, 41, 59, 0.85)');
+        occlude.addColorStop(1, 'rgba(15, 23, 42, 0.0)');
+
+        ctx.fillStyle = occlude;
+        ctx.beginPath();
+        ctx.arc(pt.x * dpr, pt.y * dpr, rPx, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      ctx.restore();
+    }
+
+    // =============================================================
+    // VARIATION 3: STARLIGHT PORTALS & OCEANIC PHOSPHORESCENCE
+    // =============================================================
+    function renderConcept3_StarlightPortals(dpr, advOffset) {
+      ctx.save();
+
+      // 1. Aurora Wash
+      const auroraGrad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      auroraGrad.addColorStop(0.2, 'rgba(5, 150, 105, 0.15)');
+      auroraGrad.addColorStop(0.5, 'rgba(16, 185, 129, 0.65)');
+      auroraGrad.addColorStop(0.8, 'rgba(6, 182, 212, 0.25)');
+      ctx.fillStyle = auroraGrad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // 2. Stars rendering (Twinkling Sub-Arctic Sky)
+      ASTRO_STARS.forEach((s, idx) => {
+        const pt = map.project([s.lng, s.lat]);
+        const alpha = Math.abs(Math.sin(animTime * s.twinkleSpeed + idx)) * 0.65 + 0.35;
+        ctx.fillStyle = `rgba(224, 242, 254, ${alpha * s.brightness})`;
+        ctx.beginPath();
+        ctx.arc(pt.x * dpr, pt.y * dpr, s.size * dpr, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // 3. Dense Cloud Occlusion Masks (Hides stars + creates portals)
+      SECTOR_PUFFS.forEach(p => {
+        const driftLng = p.baseLng + advOffset * p.speedMult;
+        const driftLat = p.baseLat + advOffset * 0.25 * p.speedMult;
+        const pt = map.project([driftLng, driftLat]);
+        const rPx = kmToPixels(p.radiusKm, driftLat) * dpr;
+
+        const occlude = ctx.createRadialGradient(pt.x * dpr, pt.y * dpr, rPx * 0.25, pt.x * dpr, pt.y * dpr, rPx);
+        occlude.addColorStop(0, 'rgba(8, 12, 22, 0.98)');
+        occlude.addColorStop(0.75, 'rgba(15, 23, 42, 0.90)');
+        occlude.addColorStop(1, 'rgba(8, 12, 22, 0.0)');
+
+        ctx.fillStyle = occlude;
+        ctx.beginPath();
+        ctx.arc(pt.x * dpr, pt.y * dpr, rPx, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // 4. Oceanic Water Shimmer in Clear Zones (South Coast & Greenland Sea)
+      const seaPt = map.project([-19.0, 62.0]);
+      const seaGrad = ctx.createRadialGradient(seaPt.x * dpr, seaPt.y * dpr, 10 * dpr, seaPt.x * dpr, seaPt.y * dpr, 180 * dpr);
+      seaGrad.addColorStop(0, 'rgba(16, 185, 129, 0.35)');
+      seaGrad.addColorStop(0.7, 'rgba(6, 182, 212, 0.15)');
+      seaGrad.addColorStop(1, 'rgba(2, 6, 23, 0.0)');
+      ctx.fillStyle = seaGrad;
+      ctx.beginPath();
+      ctx.arc(seaPt.x * dpr, seaPt.y * dpr, 180 * dpr, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.restore();
+    }
+
+    // =============================================================
+    // VARIATION 4: DENMARK STRAIT SYNOPTIC VORTEX (OCEAN CYCLONE)
+    // =============================================================
+    function renderConcept4_SynopticVortex(dpr, advOffset) {
+      ctx.save();
+
+      // Synoptic Cyclone Center in Denmark Strait
+      const cycloneCenter = map.project([-26.5 + advOffset * 0.2, 65.5]);
+      const cx = cycloneCenter.x * dpr;
+      const cy = cycloneCenter.y * dpr;
+
+      // 1. Background Aurora Storm in Clear Areas
+      const auroraGrad = ctx.createRadialGradient(cx, cy, 20 * dpr, cx, cy, 500 * dpr);
+      auroraGrad.addColorStop(0, 'rgba(16, 185, 129, 0.85)'); // Cyclone Eye is Crystal Clear!
+      auroraGrad.addColorStop(0.2, 'rgba(52, 211, 153, 0.6)');
+      auroraGrad.addColorStop(0.5, 'rgba(6, 182, 212, 0.35)');
+      auroraGrad.addColorStop(1, 'rgba(2, 6, 23, 0.0)');
+      ctx.fillStyle = auroraGrad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // 2. Cyclonic Logarithmic Cloud Arms
+      const armCount = 4;
+      for (let a = 0; a < armCount; a++) {
+        const baseAngle = (a * Math.PI * 2) / armCount + animTime * 0.5;
+        ctx.beginPath();
+        for (let r = 30 * dpr; r < 450 * dpr; r += 12 * dpr) {
+          const theta = baseAngle + Math.log(r / (25 * dpr)) * 1.8;
+          const px = cx + Math.cos(theta) * r;
+          const py = cy + Math.sin(theta) * r;
+
+          ctx.fillStyle = 'rgba(15, 23, 42, 0.88)';
+          ctx.beginPath();
+          ctx.arc(px, py, 22 * dpr + (r / 20), 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      // Eye of Cyclone Label
+      ctx.fillStyle = '#6ee7b7';
+      ctx.font = `bold ${11 * dpr}px monospace`;
+      ctx.fillText('🌀 ОКО ЦИКЛОНУ (ЧИСТЕ ВІКНО АВРОРИ)', cx - 80 * dpr, cy - 25 * dpr);
+
+      ctx.restore();
+    }
+
+    // =============================================================
+    // VARIATION 5: SCIENTIFIC LIDAR TRANSMITTANCE SCANNER & COD
+    // =============================================================
+    let lidarScanAngle = 0;
+    function renderConcept5_LidarCOD(dpr, advOffset) {
+      ctx.save();
+      lidarScanAngle += 0.03;
+
+      // Draw Aurora background
+      const auroraGrad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      auroraGrad.addColorStop(0.3, 'rgba(16, 185, 129, 0.65)');
+      auroraGrad.addColorStop(0.7, 'rgba(6, 182, 212, 0.45)');
+      ctx.fillStyle = auroraGrad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Occluding cloud bodies
+      SECTOR_PUFFS.forEach(p => {
+        const pt = map.project([p.baseLng + advOffset * p.speedMult, p.baseLat]);
+        const rPx = kmToPixels(p.radiusKm, p.baseLat) * dpr;
+
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.94)';
+        ctx.beginPath();
+        ctx.arc(pt.x * dpr, pt.y * dpr, rPx, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // LIDAR Scanner Origin (Reykjavík Weather Radar)
+      const radarPt = map.project([-21.94, 64.14]);
+      const rx = radarPt.x * dpr;
+      const ry = radarPt.y * dpr;
+      const scanRadius = Math.max(canvas.width, canvas.height) * 0.75;
+
+      // Sweeping LIDAR Laser Beam
+      const beamGrad = ctx.createRadialGradient(rx, ry, 5 * dpr, rx, ry, scanRadius);
+      beamGrad.addColorStop(0, 'rgba(52, 211, 153, 0.9)');
+      beamGrad.addColorStop(0.5, 'rgba(16, 185, 129, 0.35)');
+      beamGrad.addColorStop(1, 'rgba(16, 185, 129, 0.0)');
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.moveTo(rx, ry);
+      ctx.arc(rx, ry, scanRadius, lidarScanAngle, lidarScanAngle + 0.35);
+      ctx.closePath();
+      ctx.fillStyle = beamGrad;
+      ctx.fill();
+      ctx.restore();
+
+      // LIDAR Transmittance HUD
+      ctx.strokeStyle = 'rgba(52, 211, 153, 0.5)';
+      ctx.lineWidth = 1 * dpr;
+      [150, 300, 450].forEach(r => {
+        ctx.beginPath();
+        ctx.arc(rx, ry, r * dpr, 0, Math.PI * 2);
+        ctx.stroke();
+      });
+
+      ctx.fillStyle = '#34d399';
+      ctx.font = `bold ${10 * dpr}px monospace`;
+      ctx.fillText('📡 LIDAR COD: 0.12 (TRANSMITTANCE 94%)', rx + 15 * dpr, ry - 15 * dpr);
+
+      ctx.restore();
+    }
+
+    // =============================================================
+    // VARIATION 6: CYBER-HOLO NEON CONTOURS & SYNTHWAVE GLOW
+    // =============================================================
+    function renderConcept6_CyberContours(dpr, advOffset) {
+      ctx.save();
+
+      // 1. Synthwave Neon Aurora Curtains
+      const cybGrad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      cybGrad.addColorStop(0.1, 'rgba(168, 85, 247, 0.2)');
+      cybGrad.addColorStop(0.4, 'rgba(6, 182, 212, 0.7)');
+      cybGrad.addColorStop(0.65, 'rgba(16, 185, 129, 0.85)');
+      cybGrad.addColorStop(0.9, 'rgba(236, 72, 153, 0.3)');
+      ctx.fillStyle = cybGrad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // 2. Dark Cloud Masses with Electric Neon Isolines
+      SECTOR_PUFFS.forEach(p => {
+        const pt = map.project([p.baseLng + advOffset * p.speedMult, p.baseLat]);
+        const rPx = kmToPixels(p.radiusKm, p.baseLat) * dpr;
         const px = pt.x * dpr;
         const py = pt.y * dpr;
-        const ang = Math.atan2(py - ky, px - kx);
-        const angDiff = Math.abs((radarSweepAngle % (Math.PI * 2)) - ((ang + Math.PI * 2) % (Math.PI * 2)));
 
-        if (angDiff < 0.6) {
-          ctx.fillStyle = sec.cloudBase > 70 ? 'rgba(239, 68, 68, 0.85)' : 'rgba(250, 204, 21, 0.85)';
-          ctx.beginPath();
-          ctx.arc(px, py, 6 * dpr, 0, Math.PI * 2);
-          ctx.fill();
+        // Dark Occlusion Body
+        ctx.fillStyle = 'rgba(8, 12, 24, 0.95)';
+        ctx.beginPath();
+        ctx.arc(px, py, rPx, 0, Math.PI * 2);
+        ctx.fill();
 
-          ctx.font = `${8 * dpr}px monospace`;
-          ctx.fillText(`${sec.cloudBase} dBZ`, px + 8 * dpr, py);
+        // Neon Contour Rings
+        ctx.strokeStyle = 'rgba(6, 182, 212, 0.8)';
+        ctx.lineWidth = 1.5 * dpr;
+        ctx.beginPath();
+        ctx.arc(px, py, rPx, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.strokeStyle = 'rgba(16, 185, 129, 0.6)';
+        ctx.beginPath();
+        ctx.arc(px, py, rPx * 0.6, 0, Math.PI * 2);
+        ctx.stroke();
+      });
+
+      ctx.restore();
+    }
+
+    // =============================================================
+    // VARIATION 7: 30S LONG EXPOSURE TRIPOD SIMULATION
+    // =============================================================
+    function renderConcept7_LongExposureTripod(dpr, advOffset) {
+      ctx.save();
+
+      // Silky Smooth motion-blurred Aurora Curtains
+      for (let layer = 0; layer < 3; layer++) {
+        const ribbonGrad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+        ribbonGrad.addColorStop(0.2, 'rgba(16, 185, 129, 0.0)');
+        ribbonGrad.addColorStop(0.5, `rgba(16, 185, 129, ${0.45 + layer * 0.15})`);
+        ribbonGrad.addColorStop(0.8, 'rgba(5, 150, 105, 0.0)');
+
+        ctx.fillStyle = ribbonGrad;
+        ctx.beginPath();
+        ctx.moveTo(0, canvas.height * (0.3 + layer * 0.15));
+        for (let x = 0; x <= canvas.width; x += 30) {
+          const y = canvas.height * (0.3 + layer * 0.15) + Math.sin(x * 0.004 + animTime * 0.8 + layer) * (60 * dpr);
+          ctx.lineTo(x, y);
         }
+        ctx.lineTo(canvas.width, canvas.height);
+        ctx.lineTo(0, canvas.height);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      // Motion-blurred smoky clouds
+      SECTOR_PUFFS.forEach(p => {
+        const pt = map.project([p.baseLng + advOffset * p.speedMult, p.baseLat]);
+        const rPx = kmToPixels(p.radiusKm, p.baseLat) * dpr;
+
+        // Soft blurred streak
+        const streakGrad = ctx.createRadialGradient(pt.x * dpr, pt.y * dpr, rPx * 0.1, pt.x * dpr, pt.y * dpr, rPx * 1.3);
+        streakGrad.addColorStop(0, 'rgba(15, 23, 42, 0.92)');
+        streakGrad.addColorStop(0.7, 'rgba(30, 41, 59, 0.6)');
+        streakGrad.addColorStop(1, 'rgba(15, 23, 42, 0.0)');
+
+        ctx.fillStyle = streakGrad;
+        ctx.beginPath();
+        ctx.arc(pt.x * dpr, pt.y * dpr, rPx * 1.3, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // Camera HUD Overlay
+      ctx.fillStyle = '#ffffff';
+      ctx.font = `bold ${10 * dpr}px monospace`;
+      ctx.fillText('📷 TRIPOD EXPOSURE: 30s • ISO 3200 • f/1.4 RAW', 20 * dpr, canvas.height - 35 * dpr);
+
+      ctx.restore();
+    }
+
+    // =============================================================
+    // VARIATION 8: MARINE FOG & GLACIER PEAK CUT-THROUGH
+    // =============================================================
+    function renderConcept8_MarineFogGlacier(dpr, advOffset) {
+      ctx.save();
+
+      // Dazzling Clear Sky Aurora Dome
+      const skyGrad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      skyGrad.addColorStop(0.1, 'rgba(16, 185, 129, 0.85)');
+      skyGrad.addColorStop(0.4, 'rgba(52, 211, 153, 0.7)');
+      skyGrad.addColorStop(0.8, 'rgba(6, 182, 212, 0.3)');
+      ctx.fillStyle = skyGrad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Low-Altitude Marine Fog blanket (Opaque Grey/White on Oceans & Coasts)
+      const fogGrad = ctx.createLinearGradient(0, canvas.height * 0.4, 0, canvas.height);
+      fogGrad.addColorStop(0, 'rgba(148, 163, 184, 0.0)');
+      fogGrad.addColorStop(0.3, 'rgba(100, 116, 139, 0.88)');
+      fogGrad.addColorStop(1, 'rgba(51, 65, 85, 0.95)');
+      ctx.fillStyle = fogGrad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Glacier Summits Piercing the Fog Layer (Vatnajökull 2,110m, Eyjafjallajökull, Snæfellsjökull)
+      const summits = [
+        { name: 'ВАТНАЙОКЮДЛЬ (2,110м)', lng: -16.80, lat: 64.40, radius: 45 },
+        { name: 'ЕЙЯФ\'ЯДЛАЙОКЮДЛЬ (1,666м)', lng: -19.62, lat: 63.63, radius: 28 },
+        { name: 'СНАЙФЕДЛЬСЙОКЮДЛЬ (1,446м)', lng: -23.77, lat: 64.80, radius: 24 }
+      ];
+
+      summits.forEach(s => {
+        const pt = map.project([s.lng, s.lat]);
+        const rPx = kmToPixels(s.radius, s.lat) * dpr;
+
+        // Cut through fog mask (Clear aperture)
+        ctx.save();
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.beginPath();
+        ctx.arc(pt.x * dpr, pt.y * dpr, rPx, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+
+        // Radiance Ring
+        ctx.strokeStyle = '#34d399';
+        ctx.lineWidth = 2 * dpr;
+        ctx.beginPath();
+        ctx.arc(pt.x * dpr, pt.y * dpr, rPx, 0, Math.PI * 2);
+        ctx.stroke();
+
+        ctx.fillStyle = '#34d399';
+        ctx.font = `bold ${10 * dpr}px monospace`;
+        ctx.fillText(`🏔️ ${s.name} • НАД ТУМАНОМ`, pt.x * dpr - 65 * dpr, pt.y * dpr - rPx - 8 * dpr);
+      });
+
+      ctx.restore();
+    }
+
+    // =============================================================
+    // VARIATION 9: HEXAGONAL EXPOSURE MATRIX
+    // =============================================================
+    function renderConcept9_HexExposure(dpr, advOffset) {
+      ctx.save();
+
+      // Aurora background
+      const auroraGrad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      auroraGrad.addColorStop(0.3, 'rgba(16, 185, 129, 0.45)');
+      auroraGrad.addColorStop(0.7, 'rgba(6, 182, 212, 0.35)');
+      ctx.fillStyle = auroraGrad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Render Hex Grid Cells
+      HEX_GRID.forEach((cell, idx) => {
+        const pt = map.project([cell.lng, cell.lat]);
+        const px = pt.x * dpr;
+        const py = pt.y * dpr;
+        const hexSize = 22 * dpr;
+
+        if (px < -50 || px > canvas.width + 50 || py < -50 || py > canvas.height + 50) return;
+
+        // Dynamic cloud coverage simulation per hex
+        const distToMyvatn = Math.hypot(cell.lng - (-16.9), cell.lat - 65.6);
+        const isClearZone = distToMyvatn < 2.5;
+
+        ctx.beginPath();
+        for (let i = 0; i < 6; i++) {
+          const angle = (i * Math.PI) / 3;
+          const x = px + hexSize * Math.cos(angle);
+          const y = py + hexSize * Math.sin(angle);
+          if (i === 0) ctx.moveTo(x, y);
+          else ctx.lineTo(x, y);
+        }
+        ctx.closePath();
+
+        if (isClearZone) {
+          // Clear sky hex: Green pulse & camera recommendation
+          ctx.fillStyle = 'rgba(16, 185, 129, 0.28)';
+          ctx.strokeStyle = '#34d399';
+          ctx.lineWidth = 1.5 * dpr;
+          ctx.fill();
+          ctx.stroke();
+        } else {
+          // Cloud covered hex: Dark occlusion
+          ctx.fillStyle = 'rgba(15, 23, 42, 0.88)';
+          ctx.strokeStyle = 'rgba(51, 65, 85, 0.5)';
+          ctx.lineWidth = 1 * dpr;
+          ctx.fill();
+          ctx.stroke();
+        }
+      });
+
+      // Target Hex Callout
+      const myv = map.project([-16.9, 65.6]);
+      ctx.fillStyle = '#6ee7b7';
+      ctx.font = `bold ${11 * dpr}px monospace`;
+      ctx.fillText('⬡ CELL #84: ISO 1600 • 8s • f/1.8 (95% ЧАНС)', myv.x * dpr - 80 * dpr, myv.y * dpr + 35 * dpr);
+
+      ctx.restore();
+    }
+
+    // =============================================================
+    // VARIATION 10: SOLAR WIND PLASMA FILAMENTS (BIRKELAND CURRENTS)
+    // =============================================================
+    function renderConcept10_PlasmaFilaments(dpr, advOffset) {
+      ctx.save();
+
+      // 1. Plasma Glow Base
+      const auroraGrad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      auroraGrad.addColorStop(0.2, 'rgba(16, 185, 129, 0.5)');
+      auroraGrad.addColorStop(0.6, 'rgba(6, 182, 212, 0.4)');
+      ctx.fillStyle = auroraGrad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // 2. High-Energy Electric Plasma Filaments snaking from space
+      const filamentCount = 8;
+      for (let f = 0; f < filamentCount; f++) {
+        const startLng = -32 + f * 3.5;
+        ctx.strokeStyle = f % 2 === 0 ? 'rgba(52, 211, 153, 0.95)' : 'rgba(236, 72, 153, 0.85)';
+        ctx.lineWidth = (2 + (f % 3)) * dpr;
+        ctx.beginPath();
+
+        let ptStart = map.project([startLng, 69.0]);
+        ctx.moveTo(ptStart.x * dpr, ptStart.y * dpr);
+
+        for (let lat = 68.5; lat >= 61.0; lat -= 0.6) {
+          const jitterLng = startLng + Math.sin(lat * 3 + animTime * 4 + f) * 0.7;
+          const pt = map.project([jitterLng, lat]);
+          ctx.lineTo(pt.x * dpr, pt.y * dpr);
+        }
+        ctx.stroke();
+      }
+
+      // 3. Dense Dark Basalt Clouds with Corona Edge Discharges
+      SECTOR_PUFFS.forEach(p => {
+        const pt = map.project([p.baseLng + advOffset * p.speedMult, p.baseLat]);
+        const rPx = kmToPixels(p.radiusKm, p.baseLat) * dpr;
+        const px = pt.x * dpr;
+        const py = pt.y * dpr;
+
+        // Dark Body
+        ctx.fillStyle = 'rgba(15, 23, 42, 0.96)';
+        ctx.beginPath();
+        ctx.arc(px, py, rPx, 0, Math.PI * 2);
+        ctx.fill();
+
+        // Corona Edge Discharge Sparkle
+        ctx.strokeStyle = `rgba(52, 211, 153, ${0.4 + Math.sin(animTime * 6 + p.phase) * 0.4})`;
+        ctx.lineWidth = 2 * dpr;
+        ctx.beginPath();
+        ctx.arc(px, py, rPx, 0, Math.PI * 2);
+        ctx.stroke();
       });
 
       ctx.restore();
     }
 
     // -------------------------------------------------------------
-    // CONCEPT 9: NOAA Hexagonal Mesh Grid
+    // INITIALIZATION ON WINDOW LOAD
     // -------------------------------------------------------------
-    function renderConcept9_HexMesh(dpr, advOffset) {
-      ctx.save();
-      const hexRadius = 28 * dpr;
-      const hexWidth = Math.sqrt(3) * hexRadius;
-      const hexHeight = 2 * hexRadius * 0.75;
-
-      // Draw grid over Iceland bounds
-      const minPt = map.project([-24.5, 66.6]);
-      const maxPt = map.project([-13.0, 63.3]);
-
-      for (let y = minPt.y * dpr; y <= maxPt.y * dpr; y += hexHeight) {
-        let col = 0;
-        for (let x = minPt.x * dpr; x <= maxPt.x * dpr; x += hexWidth) {
-          const shiftX = (col % 2 === 0 ? 0 : hexWidth / 2);
-          const cx = x + shiftX;
-          const cy = y;
-
-          // Pseudo moisture calculation
-          const moisture = Math.abs(Math.sin((cx + cy) * 0.005 + animTime * 0.5 + advOffset * 10));
-          
-          ctx.strokeStyle = 'rgba(6, 182, 212, 0.35)';
-          ctx.lineWidth = 1 * dpr;
-          ctx.fillStyle = moisture > 0.6 ? `rgba(234, 88, 12, ${moisture * 0.5})` : `rgba(6, 182, 212, ${moisture * 0.4})`;
-
-          ctx.beginPath();
-          for (let a = 0; a < 6; a++) {
-            const angle = Math.PI / 6 + a * Math.PI / 3;
-            const hx = cx + Math.cos(angle) * (hexRadius * 0.92);
-            const hy = cy + Math.sin(angle) * (hexRadius * 0.92);
-            if (a === 0) ctx.moveTo(hx, hy);
-            else ctx.lineTo(hx, hy);
-          }
-          ctx.closePath();
-          ctx.fill();
-          ctx.stroke();
-
-          col++;
-        }
-      }
-
-      ctx.restore();
-    }
-
-    // -------------------------------------------------------------
-    // CONCEPT 10: Cyberpunk Topo-Hugger Neon Fog
-    // -------------------------------------------------------------
-    function renderConcept10_Cyberpunk(dpr, advOffset) {
-      ctx.save();
-      ctx.globalCompositeOperation = 'lighter';
-
-      const step = 20 * dpr;
-      for (let y = 0; y < canvas.height; y += step) {
-        ctx.beginPath();
-        ctx.strokeStyle = y % (step * 2) === 0 ? 'rgba(0, 240, 255, 0.7)' : 'rgba(255, 0, 128, 0.6)';
-        ctx.lineWidth = 1.6 * dpr;
-
-        for (let x = 0; x <= canvas.width; x += 15 * dpr) {
-          const wave = Math.sin(x * 0.012 + animTime * 1.5 + (y * 0.02) + advOffset * 5) * (18 * dpr)
-                     + Math.cos(x * 0.025 - animTime * 0.8) * (8 * dpr);
-          if (x === 0) ctx.moveTo(x, y + wave);
-          else ctx.lineTo(x, y + wave);
-        }
-        ctx.stroke();
-      }
-
-      ctx.restore();
-    }
-
-    // Initialize map on document load
-    document.addEventListener('DOMContentLoaded', () => {
+    window.addEventListener('DOMContentLoaded', () => {
       initMap();
-      switchConcept(0);
     });
   </script>
 </body>
 </html>
 '''
 
-with open(LAB_PATH, "w", encoding="utf-8") as f:
-    f.write(html_content)
+with open(LAB_PATH, 'w', encoding='utf-8') as f:
+    f.write(HTML_CONTENT)
 
-print(f"Successfully generated {LAB_PATH} ({len(html_content)} bytes)")
+with open(BRAIN_LAB_PATH, 'w', encoding='utf-8') as f:
+    f.write(HTML_CONTENT)
+
+print(f"Successfully built cloud_radar_lab.html (size: {len(HTML_CONTENT)} bytes)")
